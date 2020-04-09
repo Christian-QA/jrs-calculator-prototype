@@ -34,7 +34,7 @@
 {% endblock %}
 
 {% block pageTitle %}
-  GOV.UK Prototype Kit
+Coronavirus Job Retention Scheme Calculator
 {% endblock %}
 
 {% block header %}
@@ -46,6 +46,10 @@
     serviceUrl: "/",
     containerClasses: "govuk-width-container"
   }) }}
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
 {% endblock %}
 
 {% set mainClasses = mainClasses | default("govuk-main-wrapper--auto-spacing") %}

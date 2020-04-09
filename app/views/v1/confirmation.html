@@ -1,0 +1,41 @@
+
+
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Coronavirus Job Retention Scheme
+{% endblock %}
+
+
+
+{% block content %}
+
+
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                <div class="govuk-panel govuk-panel--confirmation">
+                    <div class="govuk-panel__body">
+                        Your employee is entitled to:
+                    </div>
+                    <h1 class="govuk-panel__title">
+                        £300 <span class="govuk-!-font-weight-regular">- tax year 19/20</span>
+                   <br>
+
+                        £320 <span class="govuk-!-font-weight-regular">- tax year 20/21</span>
+                    </h1>
+                </div>
+
+                <p class="govuk-body">These figures are {{data['payPeriod']}}.</p>
+
+
+
+
+
+                <p class="govuk-body">
+                    <a href="index" class="govuk-link">Start again</a>
+                </p>
+            </div>
+        </div>
+
+{% endblock %}

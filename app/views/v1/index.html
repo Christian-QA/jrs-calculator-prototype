@@ -1,0 +1,58 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Coronavirus Job Retention Scheme
+{% endblock %}
+
+
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">
+        How often do you pay the employee?</h1>
+      <form action="route-frequency" method="post">
+      {{ govukRadios({
+      idPrefix: "payFrequency",
+      name: "payFrequency",
+      fieldset: {
+      legend: {
+      text: "",
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--l"
+      }
+      },
+      items: [
+        {
+        value: "weekly",
+        text: "Weekly"
+        },
+        {
+        value: "fortnightly",
+        text: "Every 2 weeks"
+        },
+      {
+      value: "4Weekly",
+      text: "Every 4 weeks"
+      },
+        {
+        value: "monthly",
+        text: "Monthly"
+        }
+
+
+      ]
+      }) }}
+
+        <button class="govuk-button" data-module="govuk-button">
+          Next step
+        </button>
+      </form>
+
+
+    </div>
+</div>
+
+{% endblock %}

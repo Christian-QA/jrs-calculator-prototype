@@ -1,0 +1,45 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Coronavirus Job Retention Scheme
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">
+        How much do they get paid {{data['payPeriod']}}?</h1>
+      <form action="confirmation" method="post">
+
+          <label class="govuk-label" for="amount">
+              Enter an amount
+          </label>
+
+
+
+          <span id="width-10-hint" class="govuk-hint">
+    hint
+  </span>
+        <div class="govuk-currency-input__inner govuk-form-group">
+
+        <span class="govuk-currency-input__inner__unit">£</span>
+        <input type="number" class="govuk-currency-input__inner__input govuk-input govuk-input--width-10" id="amount" value="" pattern="[0-9]*" inputmode="numeric" name="amount" min="1" max="50">
+        </div>
+
+        <button class="govuk-button" data-module="govuk-button">
+            Next step
+        </button>
+      </form>
+
+
+    </div>
+</div>
+
+{% endblock %}
