@@ -12,25 +12,25 @@ Job Retention Scheme Calculator
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form action="route-nic" method="post">
+      <form action="route-pension" method="post">
       {{ govukRadios({
-      idPrefix: "nicCategory",
-      name: "nicCategory",
+      idPrefix: "pension",
+      name: "pension",
       fieldset: {
       legend: {
-      text: "Select the employee's National Insurance Contributions (NIC) category ",
+      text: "Has the employee opted out of the pension auto-enrolment? ",
       isPageHeading: true,
       classes: "govuk-fieldset__legend--xl"
       }
       },
       items: [
         {
-        value: "a",
-        text: "A"
+        value: "yes",
+        text: "Yes"
         },
         {
-        value: "hmz",
-        text: "H / M / Z"
+        value: "no",
+        text: "No"
         }
       ]
       }) }}

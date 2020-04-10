@@ -43,4 +43,10 @@ module.exports = function (router) {
     // var data = req.session.data.payFrequency
     res.redirect('/' + sprint + '/pension')
   })
+
+  // route - pension
+  router.post('/' + sprint + '/route-pension', function (req, res) {
+    // var data = req.session.data.payFrequency
+    res.redirect('/' + sprint + '/confirmation')
+  })
 }
