@@ -19,7 +19,7 @@ module.exports = function (router) {
   // route- salary
   router.post('/' + sprint + '/route-salary', function (req, res) {
     // var data = req.session.data.payFrequency
-    res.redirect('/' + sprint + '/pay-dates')
+    res.redirect('/' + sprint + '/pay-frequency')
   })
 
   // route-pay frequency
