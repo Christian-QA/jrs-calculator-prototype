@@ -1,0 +1,47 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="route-pension" method="post">
+      {{ govukRadios({
+      idPrefix: "pension",
+      name: "pension",
+      fieldset: {
+      legend: {
+      text: "Has the employee opted out of the pension auto-enrolment? ",
+      isPageHeading: true,
+      classes: "govuk-fieldset__legend--xl"
+      }
+      },
+      items: [
+        {
+        value: "yes",
+        text: "Yes"
+        },
+        {
+        value: "no",
+        text: "No"
+        }
+      ]
+      }) }}
+
+        <button class="govuk-button" data-module="govuk-button">
+          Continue
+        </button>
+      </form>
+
+
+    </div>
+</div>
+
+{% endblock %}

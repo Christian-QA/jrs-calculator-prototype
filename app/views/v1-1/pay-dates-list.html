@@ -1,0 +1,90 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">List of pay dates within the claim period</h1>
+
+
+
+
+
+      <table class="govuk-table review-authorisations">
+
+        <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="row">
+            1.
+          </th>
+
+          <td class="govuk-table__cell">
+
+            30/03/2020
+
+          </td>
+
+
+        </tr>
+        {% if data["extraDate"] == "true" %}
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="row">
+           2.
+          </th>
+          <td class="govuk-table__cell">
+
+            30/04/2020
+          </td>
+
+        </tr>
+
+        {% endif %}
+
+        </tbody>
+      </table>
+
+      <form method="post" action="another-pay-date">
+
+        <div class="govuk-form-group">
+
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+              <h1 class="govuk-heading-m">
+                Do you need to add another pay date for this period?
+              </h1>
+            </legend>
+
+            <div class="govuk-radios">
+
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="anotherDate-yes" name="anotherDate" type="radio" value="yes"> <label class="govuk-label govuk-radios__label" for="anotherDate-yes"> Yes </label>
+              </div>
+
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="anotherDate-no" name="anotherDate" type="radio" value="no"> <label class="govuk-label govuk-radios__label" for="anotherDate-no"> No </label>
+              </div>
+
+            </div>
+
+          </fieldset>
+        </div>
+
+        <button type="submit" class="govuk-button">
+          Continue
+        </button>
+
+      </form>
+
+
+    </div>
+</div>
+
+{% endblock %}

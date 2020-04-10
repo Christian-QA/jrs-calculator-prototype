@@ -1,0 +1,86 @@
+
+
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+
+
+{% block content %}
+
+
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-8">
+                    <div class="govuk-panel__body govuk-!-margin-bottom-4 govuk-!-font-size-24">
+                        For the claim period your employee is entitled to:
+                    </div>
+                    <h1 class="govuk-panel__title govuk-!-font-size-36" >
+
+                        £1152.00<span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
+                        <br>
+                        £120.75 <span class="govuk-!-font-weight-regular">- Employer NIC</span>
+                        <br>
+                        £27.42 <span class="govuk-!-font-weight-regular">- Pension contribution</span>
+                    </h1>
+
+
+                </div>
+
+                <h2 class="govuk-heading-m">
+                    How these figure are calculated
+                </h2>
+                <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Claim period
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            01/03/2020 to 30/04/2020
+                        </dd>
+
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            For the tax year 19/20
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            £576.00<span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
+                            <br>
+                            £56.58 <span class="govuk-!-font-weight-regular">- Employer NIC</span>
+                            <br>
+                            £13.74 <span class="govuk-!-font-weight-regular">- Pension contribution</span>
+                        </dd>
+
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            For the tax year 20/21
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            £576.00<span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
+                            <br>
+                            £56.17 <span class="govuk-!-font-weight-regular">- Employer NIC</span>
+                            <br>
+                            £13.68 <span class="govuk-!-font-weight-regular">- Pension contribution</span>
+                        </dd>
+
+                    </div>
+
+                </dl>
+                <!--<p class="govuk-body">These figures are {{data['payPeriod']}}.</p>-->
+
+
+
+
+
+                <p class="govuk-body">
+                    <a href="claim-period.html" class="govuk-link">Start again</a>
+                </p>
+            </div>
+        </div>
+
+{% endblock %}

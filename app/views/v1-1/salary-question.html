@@ -1,0 +1,50 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="route-salary-question" method="post">
+      {{ govukRadios({
+      idPrefix: "salaryQuestion",
+      name: "salaryQuestion",
+      fieldset: {
+        legend: {
+          text: "Is the employee paid a salary?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--xl"
+        }
+      },
+        hint: {
+        text: ""
+        },
+      items: [
+        {
+        value: "yes",
+        text: "Yes"
+        },
+        {
+        value: "no",
+        text: "No"
+        }
+      ]
+      }) }}
+
+        <button class="govuk-button" data-module="govuk-button">
+          Continue
+        </button>
+      </form>
+
+
+    </div>
+</div>
+
+{% endblock %}

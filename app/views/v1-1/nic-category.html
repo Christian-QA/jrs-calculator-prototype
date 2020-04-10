@@ -1,0 +1,52 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="route-nic" method="post">
+      {{ govukRadios({
+      idPrefix: "nicCategory",
+      name: "nicCategory",
+      fieldset: {
+        legend: {
+          text: "Select the employee's National Insurance Contributions (NIC) category ",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--xl"
+        }
+      },
+        hint: {
+        text: "This can be any date during the furlough period. For example, you can align claims with individual payroll runs.
+
+        You can claim in advance as long as the employee will be paid within 14 days of the end date."
+        },
+      items: [
+        {
+        value: "a",
+        text: "A"
+        },
+        {
+        value: "hmz",
+        text: "H / M / Z"
+        }
+      ]
+      }) }}
+
+        <button class="govuk-button" data-module="govuk-button">
+          Continue
+        </button>
+      </form>
+
+
+    </div>
+</div>
+
+{% endblock %}
