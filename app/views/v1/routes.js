@@ -7,6 +7,12 @@ module.exports = function (router) {
   // route-claim date
   router.post('/' + sprint + '/route-claim', function (req, res) {
     // var data = req.session.data.payFrequency
+    res.redirect('/' + sprint + '/salary-question')
+  })
+
+  // route - pay dates
+  router.post('/' + sprint + '/route-salary-question', function (req, res) {
+    // var data = req.session.data.payFrequency
     res.redirect('/' + sprint + '/salary')
   })
 
@@ -34,6 +40,12 @@ module.exports = function (router) {
 
   // route - pay dates
   router.post('/' + sprint + '/route-pay-dates', function (req, res) {
+    // var data = req.session.data.payFrequency
+    res.redirect('/' + sprint + '/furlough-question')
+  })
+
+  // route - fulrough question
+  router.post('/' + sprint + '/route-furlough-question', function (req, res) {
     // var data = req.session.data.payFrequency
     res.redirect('/' + sprint + '/nic-category')
   })
