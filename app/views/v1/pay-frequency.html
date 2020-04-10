@@ -2,7 +2,7 @@
 {% extends "layout.html" %}
 
 {% block pageTitle %}
-Coronavirus Job Retention Scheme
+Job Retention Scheme Calculator
 {% endblock %}
 
 
@@ -11,17 +11,16 @@ Coronavirus Job Retention Scheme
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-xl">
-        How often do you pay the employee?</h1>
+
       <form action="route-frequency" method="post">
       {{ govukRadios({
       idPrefix: "payFrequency",
       name: "payFrequency",
       fieldset: {
       legend: {
-      text: "",
-      isPageHeading: false,
-      classes: "govuk-fieldset__legend--l"
+      text: "How often does the employee get paid?",
+      isPageHeading: true,
+      classes: "govuk-fieldset__legend--xl"
       }
       },
       items: [
@@ -47,7 +46,7 @@ Coronavirus Job Retention Scheme
       }) }}
 
         <button class="govuk-button" data-module="govuk-button">
-          Next step
+          Continue
         </button>
       </form>
 

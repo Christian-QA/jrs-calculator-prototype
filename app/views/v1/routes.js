@@ -1,32 +1,46 @@
-const url = require('url');
+const url = require('url')
 
 module.exports = function (router) {
-    // set the sprint folder name as a variable
-    var sprint = "v1"
+  // set the sprint folder name as a variable
+  var sprint = 'v1'
 
+  // route-claim date
+  router.post('/' + sprint + '/route-claim', function (req, res) {
+    // var data = req.session.data.payFrequency
+    res.redirect('/' + sprint + '/salary')
+  })
 
+  // route- salary
+  router.post('/' + sprint + '/route-salary', function (req, res) {
+    // var data = req.session.data.payFrequency
+    res.redirect('/' + sprint + '/pay-frequency')
+  })
 
-    //route-survey
-    router.post('/' + sprint + '/route-frequency', function (req, res) {
+  // route-pay frequency
+  router.post('/' + sprint + '/route-frequency', function (req, res) {
+    var data = req.session.data.payFrequency
+    if (data === 'monthly') {
+      req.session.data.payPeriod = 'each month'
+    } else if (data === '4Weekly') {
+      req.session.data.payPeriod = 'every 4 weeks'
 
-        var data = req.session.data.payFrequency
+    } else if (data === 'fortnightly') {
+      req.session.data.payPeriod = 'every 2 weeks'
+    } else if (data === 'weekly') {
+      req.session.data.payPeriod = 'each week'
+    }
+    res.redirect('/' + sprint + '/pay-dates')
+  })
 
-        if (data == 'monthly') {
-            req.session.data.payPeriod = 'each month';
+  // route - pay dates
+  router.post('/' + sprint + '/route-pay-dates', function (req, res) {
+    // var data = req.session.data.payFrequency
+    res.redirect('/' + sprint + '/nic-category')
+  })
 
-        } else if (data == '4Weekly') {
-            req.session.data.payPeriod = 'every 4 weeks';
-            //console.log("4Weekly");
-        } else if (data == 'fortnightly') {
-            req.session.data.payPeriod = 'every 2 weeks';
-            //console.log("fortnightly");
-
-        } else if (data == 'weekly') {
-            req.session.data.payPeriod = 'each week';
-           // console.log("");
-
-        }
-        res.redirect('/' + sprint + '/pay');
-
-    })
+  // route - nic category
+  router.post('/' + sprint + '/route-nic', function (req, res) {
+    // var data = req.session.data.payFrequency
+    res.redirect('/' + sprint + '/pension')
+  })
 }
