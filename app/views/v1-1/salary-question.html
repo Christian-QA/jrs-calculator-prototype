@@ -18,7 +18,7 @@ Job Retention Scheme Calculator
       name: "salaryQuestion",
       fieldset: {
         legend: {
-          text: "Is the employee paid a salary?",
+          text: "How is the employee paid?",
           isPageHeading: true,
           classes: "govuk-fieldset__legend--xl"
         }
@@ -28,12 +28,17 @@ Job Retention Scheme Calculator
         },
       items: [
         {
-        value: "yes",
-        text: "Yes"
+        value: "salary",
+        text: "by salary"
         },
         {
-        value: "no",
-        text: "No"
+        value: "other",
+        text: "other"
+        }
+        ,
+        {
+        value: "other",
+        text: "other"
         }
       ]
       }) }}
