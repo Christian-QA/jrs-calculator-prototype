@@ -15,14 +15,10 @@ module.exports = function (router) {
 
   // route - pay dates
   router.post('/' + sprint + '/route-pay-question', function (req, res) {
-    res.redirect('/' + sprint + '/salary')
-  })
-
-  // route- salary
-  router.post('/' + sprint + '/route-salary', function (req, res) {
-    req.session.data.salaryAmount = req.session.data.salary
     res.redirect('/' + sprint + '/pay-frequency')
   })
+
+
 
   // route-pay frequency
   router.post('/' + sprint + '/route-frequency', function (req, res) {
@@ -37,6 +33,12 @@ module.exports = function (router) {
     } else if (data === 'weekly') {
       req.session.data.payFrequency = 'each week'
     }
+    res.redirect('/' + sprint + '/salary')
+  })
+
+  // route- salary
+  router.post('/' + sprint + '/route-salary', function (req, res) {
+    req.session.data.salaryAmount = req.session.data.salary
     res.redirect('/' + sprint + '/pay-dates-1')
   })
 
@@ -108,6 +110,20 @@ module.exports = function (router) {
     } else if (data === 'no') {
       req.session.data.pensionStatus = 'Opted into pension auto-enrolment'
     }
+    // set all the totals
+
+  // multiply for total
+    if (req.session.data.payPeriodOne && req.session.data.payPeriodTwo && req.session.data.payPeriodThree) {
+      req.session.data.furloughTotalCalc = 3;
+    } else if (req.session.data.payPeriodOne && req.session.data.payPeriodTwo ) {
+      req.session.data.furloughTotalCalc = 2;
+    } else {
+      req.session.data.furloughTotalCalc = 1;
+    }
+    req.session.data.totalFurlough = Math.round ((req.session.data.salaryAmount * 0.8) * req.session.data.furloughTotalCalc) ;
+    req.session.data.totalNic = Math.round (req.session.data.totalFurlough * 0.12) ;
+    req.session.data.totalPension = Math.round (req.session.data.totalNic * 0.43);
+
     res.redirect('/' + sprint + '/confirmation')
   })
 }

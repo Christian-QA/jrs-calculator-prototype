@@ -17,13 +17,14 @@ Job Retention Scheme Calculator
           <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
               <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
                   <h1 class="govuk-fieldset__heading">
-                      Enter the employee’s salary on 28.02.20
+                      <!--Enter the employee’s  salary on 28.02.20-->
+                      On the 28/02/20 how much was the employee paid {{data['payFrequency'] | default('Monthly')}}?
 
                   </h1>
               </legend>
 
               <span id="nicCategory-hint" class="govuk-hint">
-    <p>This is their annual salary before tax. They must have been on your PAYE payroll on or before 28 February 2020.
+    <p>They must have been on your PAYE payroll on or before 28 February 2020.
 </p>
 
 
@@ -38,7 +39,7 @@ Job Retention Scheme Calculator
         <div class="govuk-currency-input__inner govuk-form-group">
 
         <span class="govuk-currency-input__inner__unit">£</span>
-        <input type="number" class="govuk-currency-input__inner__input govuk-input govuk-input--width-10" id="salary" value="" pattern="[0-9]*" inputmode="numeric" name="salary" >
+        <input type="text" class="govuk-currency-input__inner__input govuk-input govuk-input--width-10" id="salary" value=""  name="salary" >
         </div>
 
         <button class="govuk-button" data-module="govuk-button">

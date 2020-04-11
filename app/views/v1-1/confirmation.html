@@ -20,11 +20,11 @@ Job Retention Scheme Calculator
                     </div>
                     <h1 class="govuk-panel__title govuk-!-font-size-36" >
 
-                        £1152.00<span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
+                        £{{data['totalFurlough'] | default('1152.00')}} <span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
                         <br>
-                        £120.75 <span class="govuk-!-font-weight-regular">- Employer NIC</span>
+                        £{{data['totalNic'] | default('120.75')}} <span class="govuk-!-font-weight-regular">- Employer NIC</span>
                         <br>
-                        £27.42 <span class="govuk-!-font-weight-regular">- Pension contribution</span>
+                        £{{data['totalPension'] | default('27.42')}} <span class="govuk-!-font-weight-regular">- Pension contribution</span>
                     </h1>
 
 
@@ -34,7 +34,7 @@ Job Retention Scheme Calculator
                     How these figure are calculated
                 </h2>
 
-                <p>Claim start {{data['claimStart']}} and end {{data['claimEnd']}}</p>
+                <p>Claim start {{data['claimStart'] | default('30/03/2020')}} and end {{data['claimEnd'] | default('30/04/2020')}}</p>
 
 
 
@@ -53,7 +53,7 @@ Job Retention Scheme Calculator
                 <p>pay period three {{data['payPeriodThree'] | default('30/05/2020')}}</p>
 
 
-                <p>furlough period {{data['furloughPeriod']}}</p>
+                <p>furlough period {{data['furloughPeriod']| default('Monthly')}}</p>
 
 
                 <p>Nic category {{data['nicCategoryVal'] | default('A')}}</p>
@@ -76,11 +76,11 @@ Job Retention Scheme Calculator
                             For the tax year 19/20
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            £576.00<span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
+                            £{{data['totalFurlough'] | default('1152.00')}} <span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
                             <br>
-                            £56.58 <span class="govuk-!-font-weight-regular">- Employer NIC</span>
+                            £{{data['totalNic'] | default('120.75')}} <span class="govuk-!-font-weight-regular">- Employer NIC</span>
                             <br>
-                            £13.74 <span class="govuk-!-font-weight-regular">- Pension contribution</span>
+                            £{{data['totalPension'] | default('27.42')}} <span class="govuk-!-font-weight-regular">- Pension contribution</span>
                         </dd>
 
                     </div>
