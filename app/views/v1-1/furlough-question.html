@@ -13,34 +13,55 @@ Job Retention Scheme Calculator
     <div class="govuk-grid-column-two-thirds">
 
       <form action="route-furlough-question" method="post">
-      {{ govukRadios({
-      idPrefix: "furloughQuestion",
-      name: "furloughQuestion",
-      fieldset: {
-        legend: {
-          text: "Has the employee been furloughed for the whole claim period?",
-          isPageHeading: true,
-          classes: "govuk-fieldset__legend--xl"
-        }
-      },
-        hint: {
-        text: ""
-        },
-      items: [
-        {
-        value: "yes",
-        text: "Yes"
-        },
-        {
-        value: "no",
-        text: "No"
-        }
-      ]
-      }) }}
+        <div class="govuk-form-group">
 
-        <button class="govuk-button" data-module="govuk-button">
+          <fieldset class="govuk-fieldset" aria-describedby="furloughQuestion-hint">
+
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+
+              <h1 class="govuk-fieldset__heading">
+                For whole claim period was the employee?
+              </h1>
+
+            </legend>
+            <p>Claim period from {{data['claimStart'] | default('30/03/2020')}} to {{data['claimEnd'] | default('30/05/2020')}}</p>
+            <div class="govuk-radios">
+
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="furloughQuestion" name="furloughQuestion" type="radio" value="furloughWhole">
+                <label class="govuk-label govuk-radios__label" for="furloughQuestion">
+                  furloughed for the whole time
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="furloughQuestion-2" name="furloughQuestion" type="radio" value="furloughStart">
+                <label class="govuk-label govuk-radios__label" for="furloughQuestion-2">
+                  began their furlough
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="furloughQuestion-3" name="furloughQuestion" type="radio" value="furloughEnd">
+                <label class="govuk-label govuk-radios__label" for="furloughQuestion-3">
+                  ended their furlough
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="furloughQuestion-3" name="furloughQuestion" type="radio" value="furloughStartEnd">
+                <label class="govuk-label govuk-radios__label" for="furloughQuestion-3">
+                  began and ended their furlough
+                </label>
+              </div>
+
+            </div>
+          </fieldset>
+
+
+        </div>
+        <button class="govuk-button govuk-!-margin-right-2" data-module="govuk-button">
           Continue
         </button>
+
+
       </form>
 
 

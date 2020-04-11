@@ -28,14 +28,14 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-frequency', function (req, res) {
     var data = req.session.data.payFrequency
     if (data === 'monthly') {
-      req.session.data.payPeriod = 'each month'
+      req.session.data.payFrequency = 'each month'
     } else if (data === '4Weekly') {
-      req.session.data.payPeriod = 'every 4 weeks'
+      req.session.data.payFrequency = 'every 4 weeks'
 
     } else if (data === 'fortnightly') {
-      req.session.data.payPeriod = 'every 2 weeks'
+      req.session.data.payFrequency = 'every 2 weeks'
     } else if (data === 'weekly') {
-      req.session.data.payPeriod = 'each week'
+      req.session.data.payFrequency = 'each week'
     }
     res.redirect('/' + sprint + '/pay-dates-1')
   })
@@ -72,12 +72,20 @@ module.exports = function (router) {
     } else {
       res.redirect('/' + sprint + '/furlough-question')
     }
-
   })
 
   // route - fulrough question
   router.post('/' + sprint + '/route-furlough-question', function (req, res) {
-    // var data = req.session.data.payFrequency
+     var data = req.session.data.furloughQuestion
+    if (data === 'furloughWhole') {
+      req.session.data.furloughPeriod = 'furloughed for the whole time'
+    } else if (data === 'furloughStart') {
+      req.session.data.furloughPeriod = 'began their furlough'
+    } else if (data === 'furloughEnd') {
+      req.session.data.furloughPeriod = 'ended their furlough'
+    } else if (data === 'furloughStartEnd') {
+      req.session.data.furloughPeriod = 'began and ended their furlough'
+    }
     res.redirect('/' + sprint + '/nic-category')
   })
 
