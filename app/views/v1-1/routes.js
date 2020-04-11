@@ -80,7 +80,7 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-furlough-question', function (req, res) {
      var data = req.session.data.furloughQuestion
     if (data === 'furloughWhole') {
-      req.session.data.furloughPeriod = 'furloughed for the whole time'
+      req.session.data.furloughPeriod = 'have been furloughed for the whole of the claim period'
     } else if (data === 'furloughStart') {
       req.session.data.furloughPeriod = 'began their furlough'
     } else if (data === 'furloughEnd') {
@@ -110,7 +110,7 @@ module.exports = function (router) {
     } else if (data === 'no') {
       req.session.data.pensionStatus = 'Opted into pension auto-enrolment'
     }
-    // set all the totals
+
 
   // multiply for total
     if (req.session.data.payPeriodOne && req.session.data.payPeriodTwo && req.session.data.payPeriodThree) {
@@ -120,7 +120,13 @@ module.exports = function (router) {
     } else {
       req.session.data.furloughTotalCalc = 1;
     }
-    req.session.data.totalFurlough = Math.round ((req.session.data.salaryAmount * 0.8) * req.session.data.furloughTotalCalc) ;
+    // each pay period calc
+    req.session.data.payPeriodFurloughSalary = Math.round (req.session.data.salaryAmount * 0.8);
+    req.session.data.payPeriodNic = Math.round (req.session.data.payPeriodFurloughSalary * 0.8);
+    req.session.data.payPeriodPension = Math.round (req.session.data.payPeriodNic * 0.8);
+
+    // set all the totals
+    req.session.data.totalFurlough = req.session.data.payPeriodFurloughSalary * req.session.data.furloughTotalCalc ;
     req.session.data.totalNic = Math.round (req.session.data.totalFurlough * 0.12) ;
     req.session.data.totalPension = Math.round (req.session.data.totalNic * 0.43);
 
