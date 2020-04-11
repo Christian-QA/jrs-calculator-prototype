@@ -91,13 +91,23 @@ module.exports = function (router) {
 
   // route - nic category
   router.post('/' + sprint + '/route-nic', function (req, res) {
-    // var data = req.session.data.payFrequency
+    var data = req.session.data.nicCategory
+    if (data === 'a') {
+      req.session.data.nicCategoryVal = 'A'
+    } else if (data === 'hmz') {
+      req.session.data.nicCategoryVal = 'H / M / Z'
+    }
     res.redirect('/' + sprint + '/pension')
   })
 
   // route - pension
   router.post('/' + sprint + '/route-pension', function (req, res) {
-    // var data = req.session.data.payFrequency
+    var data = req.session.data.pension
+    if (data === 'yes') {
+      req.session.data.pensionStatus = 'Opted out of pension auto-enrolment'
+    } else if (data === 'no') {
+      req.session.data.pensionStatus = 'Opted into pension auto-enrolment'
+    }
     res.redirect('/' + sprint + '/confirmation')
   })
 }

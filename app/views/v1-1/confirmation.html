@@ -33,13 +33,41 @@ Job Retention Scheme Calculator
                 <h2 class="govuk-heading-m">
                     How these figure are calculated
                 </h2>
+
+                <p>Claim start {{data['claimStart']}} and end {{data['claimEnd']}}</p>
+
+
+
+                <p>salary £{{data['salaryAmount'] | default('£23445')}}</p>
+
+
+                <p>pay frequency {{data['payFrequency'] | default('Monthly')}}</p>
+
+
+
+
+                <p>pay period one {{data['payPeriodOne'] | default('30/03/2020')}}</p>
+
+                <p>pay period two {{data['payPeriodTwo'] | default('30/04/2020')}}</p>
+
+                <p>pay period three {{data['payPeriodThree'] | default('30/05/2020')}}</p>
+
+
+                <p>furlough period {{data['furloughPeriod']}}</p>
+
+
+                <p>Nic category {{data['nicCategoryVal'] | default('A')}}</p>
+
+
+                <p>Pension {{data['pensionStatus'] | default('Opted into pension auto-enrolment')}}</p>
                 <dl class="govuk-summary-list govuk-!-margin-bottom-9">
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
                             Claim period
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            01/03/2020 to 30/04/2020
+                           From {{data['claimStart']}} to {{data['claimEnd']}}
+
                         </dd>
 
                     </div>
