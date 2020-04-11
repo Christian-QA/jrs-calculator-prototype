@@ -106,9 +106,9 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-pension', function (req, res) {
     var data = req.session.data.pension
     if (data === 'yes') {
-      req.session.data.pensionStatus = 'Opted out of pension auto-enrolment'
+      req.session.data.pensionStatus = 'opted out of pension auto-enrolment'
     } else if (data === 'no') {
-      req.session.data.pensionStatus = 'Opted into pension auto-enrolment'
+      req.session.data.pensionStatus = 'opted into pension auto-enrolment'
     }
 
 
@@ -122,8 +122,8 @@ module.exports = function (router) {
     }
     // each pay period calc
     req.session.data.payPeriodFurloughSalary = Math.round (req.session.data.salaryAmount * 0.8);
-    req.session.data.payPeriodNic = Math.round (req.session.data.payPeriodFurloughSalary * 0.8);
-    req.session.data.payPeriodPension = Math.round (req.session.data.payPeriodNic * 0.8);
+    req.session.data.payPeriodNic = Math.round (req.session.data.payPeriodFurloughSalary * 0.12);
+    req.session.data.payPeriodPension = Math.round (req.session.data.payPeriodNic * 0.43);
 
     // set all the totals
     req.session.data.totalFurlough = req.session.data.payPeriodFurloughSalary * req.session.data.furloughTotalCalc ;
@@ -131,5 +131,12 @@ module.exports = function (router) {
     req.session.data.totalPension = Math.round (req.session.data.totalNic * 0.43);
 
     res.redirect('/' + sprint + '/confirmation')
+  })
+
+  //clear data
+  // Clear all data in session if you open /prototype-admin/clear-data
+  router.get('/claim-period', function (req, res) {
+    req.session.data = {}
+    res.render('/claim-period')
   })
 }
