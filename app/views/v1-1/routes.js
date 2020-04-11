@@ -7,18 +7,20 @@ module.exports = function (router) {
   // route-claim date
   router.post('/' + sprint + '/route-claim', function (req, res) {
     // var data = req.session.data.payFrequency
-    res.redirect('/' + sprint + '/salary-question')
+
+    req.session.data.claimStart = req.session.data.claimPeriodStartDay + "/" + req.session.data.claimPeriodStartMonth + "/" + req.session.data.claimPeriodStartYear;
+    req.session.data.claimEnd = req.session.data.claimPeriodEndDay + "/" + req.session.data.claimPeriodEndMonth + "/" + req.session.data.claimPeriodEndYear;
+    res.redirect('/' + sprint + '/pay-question')
   })
 
   // route - pay dates
-  router.post('/' + sprint + '/route-salary-question', function (req, res) {
-    // var data = req.session.data.payFrequency
+  router.post('/' + sprint + '/route-pay-question', function (req, res) {
     res.redirect('/' + sprint + '/salary')
   })
 
   // route- salary
   router.post('/' + sprint + '/route-salary', function (req, res) {
-    // var data = req.session.data.payFrequency
+    req.session.data.salaryAmount = req.session.data.salary
     res.redirect('/' + sprint + '/pay-frequency')
   })
 
@@ -35,27 +37,41 @@ module.exports = function (router) {
     } else if (data === 'weekly') {
       req.session.data.payPeriod = 'each week'
     }
-    res.redirect('/' + sprint + '/pay-dates')
+    res.redirect('/' + sprint + '/pay-dates-1')
   })
 
-  // route - pay dates
-  router.post('/' + sprint + '/route-pay-dates', function (req, res) {
-    // var data = req.session.data.payFrequency
+  // route - pay dates 1
+  router.post('/' + sprint + '/route-pay-dates-1', function (req, res) {
+    req.session.data.payPeriodOne = req.session.data.payPeriodOneStartDay + "/" + req.session.data.payPeriodOneStartMonth + "/" + req.session.data.payPeriodOneStartYear;
     res.redirect('/' + sprint + '/pay-dates-list')
-    // res.redirect('/' + sprint + '/furlough-question')
+  })
+
+  // route - pay dates 2
+  router.post('/' + sprint + '/route-pay-dates-2', function (req, res) {
+   req.session.data.payPeriodTwo = req.session.data.payPeriodTwoStartDay + "/" + req.session.data.payPeriodTwoStartMonth + "/" + req.session.data.payPeriodTwoStartYear;
+    res.redirect('/' + sprint + '/pay-dates-list')
+  })
+
+  // route - pay dates 3
+  router.post('/' + sprint + '/route-pay-dates-3', function (req, res) {
+    req.session.data.payPeriodThree = req.session.data.payPeriodThreeStartDay + "/" + req.session.data.payPeriodThreeStartMonth + "/" + req.session.data.payPeriodThreeStartYear;
+    res.redirect('/' + sprint + '/pay-dates-list')
   })
 
   // route - another-pay-date
   router.post('/' + sprint + '/another-pay-date', function (req, res) {
     var data = req.session.data.anotherDate
     if (data === 'yes') {
-      req.session.data.extraDate = 'true';
-      res.redirect('/' + sprint + '/pay-dates')
+      if (req.session.data.extraPayPeriodOne === 'true') {
+        req.session.data.extraPayPeriodTwo = 'true';
+        res.redirect('/' + sprint + '/pay-dates-3')
+      } else {
+        req.session.data.extraPayPeriodOne = 'true';
+        res.redirect('/' + sprint + '/pay-dates-2')
+      }
     } else {
       res.redirect('/' + sprint + '/furlough-question')
     }
-
-
 
   })
 

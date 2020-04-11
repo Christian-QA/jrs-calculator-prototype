@@ -12,10 +12,10 @@ Job Retention Scheme Calculator
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form action="route-salary-question" method="post">
+      <form action="route-pay-question" method="post">
       {{ govukRadios({
-      idPrefix: "salaryQuestion",
-      name: "salaryQuestion",
+      idPrefix: "payQuestion",
+      name: "payQuestion",
       fieldset: {
         legend: {
           text: "How is the employee paid?",
@@ -28,18 +28,14 @@ Job Retention Scheme Calculator
         },
       items: [
         {
-        value: "salary",
-        text: "by salary"
+        value: "paySalary",
+        text: "a regulary amount each time"
         },
         {
-        value: "other",
-        text: "other"
+        value: "payVariable",
+        text: "it varies each time"
         }
-        ,
-        {
-        value: "other",
-        text: "other"
-        }
+
       ]
       }) }}
 
