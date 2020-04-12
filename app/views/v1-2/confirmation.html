@@ -29,9 +29,11 @@ Job Retention Scheme Calculator
                 </div>
 
                 <h2 class="govuk-heading-m">
-                    How these figure are calculated
+                    How these figures are calculated
                 </h2>
-                <p>Keep these totals for the claim, you'll need to add these up for all employees. </p>
+                <p>Includes a breakdown for each pay date within the claim period - keep for your records. </p>
+
+
                 <dl class="govuk-summary-list govuk-!-margin-bottom-9">
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
@@ -51,7 +53,7 @@ Job Retention Scheme Calculator
                         </dt>
                         <dd class="govuk-summary-list__value">
                             They are paid {{data['payFrequency'] | default('monthly')}}<br>
-                            Their NIC category is {{data['nicCategoryVal'] | default('A')}}<br>
+                            Their NIC category is {{data['nicCategoryVal'] | default('A, B, C, J')}}<br>
                             They have {{data['pensionStatus'] | default('opted into pension auto-enrolment')}}
                         </dd>
                     </div>
