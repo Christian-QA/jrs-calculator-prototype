@@ -12,34 +12,39 @@ Job Retention Scheme Calculator
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">Pay dates within the claim period </h1>
+      <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">Employee pay dates</h1>
 
       <p>Claim period: {{data['claimStart'] | default('30/03/2020')}} to {{data['claimEnd'] | default('30/05/2020')}}</p>
 
 
-      <h2 class="govuk-heading-m">Pay dates</h2>
+     <!-- <h2 class="govuk-heading-m">Pay dates</h2>-->
       <table class="govuk-table review-authorisations">
 
         <tbody class="govuk-table__body">
         <tr class="govuk-table__row">
 
           <td class="govuk-table__cell">
-            <span class="govuk-!-font-weight-bold">1.</span> {{data['payPeriodOne'] | default('30/03/2020')}}
+            <span class="govuk-!-font-weight-bold">Last pay date before claim period started</span>
           </td>
+          <td class="govuk-table__cell">{{data['payPeriodOne'] | default('30/03/2020')}} </td>
         </tr>
         {% if data["payPeriodTwo"]  %}
         <tr class="govuk-table__row">
-
           <td class="govuk-table__cell">
-            <span class="govuk-!-font-weight-bold">2.</span> {{data['payPeriodTwo'] | default('30/04/2020')}}
+            <span class="govuk-!-font-weight-bold">Next pay date</span>
+          </td>
+          <td class="govuk-table__cell">
+             {{data['payPeriodTwo'] | default('30/04/2020')}}
           </td>
         </tr>
         {% endif %}
         {% if data["payPeriodThree"]  %}
         <tr class="govuk-table__row">
-
           <td class="govuk-table__cell">
-            <span class="govuk-!-font-weight-bold">3.</span> {{data['payPeriodThree'] | default('30/05/2020')}}
+            <span class="govuk-!-font-weight-bold">Next pay date</span>
+          </td>
+          <td class="govuk-table__cell">
+           {{data['payPeriodThree'] | default('30/05/2020')}}
           </td>
         </tr>
         {% endif %}
@@ -54,7 +59,7 @@ Job Retention Scheme Calculator
           <fieldset class="govuk-fieldset">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
               <h1 class="govuk-heading-m">
-                Do you need to add another pay date for this claim period?
+                Are there any another pay dates that overlap this claim period?
               </h1>
             </legend>
 
