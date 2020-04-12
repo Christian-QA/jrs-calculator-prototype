@@ -22,7 +22,14 @@ Job Retention Scheme Calculator
                 What is this employee’s next pay day?
               </h1>
             </legend>
-            <p>Claim period from {{data['claimStart'] | default('30/03/2020')}} to {{data['claimEnd'] | default('30/05/2020')}}</p>
+            <p>
+              Claim period:
+              {% if data['claimPeriodStartDay']%}
+              {{data['claimStart']}} to {{data['claimEnd']}}
+              {% else %}
+              09/03/2020 to 17/04/2020
+              {% endif %}
+            </p>
 
             <label class="govuk-label" for="payPeriod"></label>
             <span id="claimPeriodStart-hint" class="govuk-hint">

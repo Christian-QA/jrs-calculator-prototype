@@ -68,7 +68,7 @@ Job Retention Scheme Calculator
                             Breakdown by pay date
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            Up to 30/03/2020<br><br>
+                            {{data['payPeriodTwo'] | default('30/03/2020')}}<br><br>
                             {{data['payPeriodOneFurloughSalary'] | default('250')}}.22 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
                             <br>
                             {{data['payPeriodOneNic'] | default('120')}}.11 <span class="govuk-!-font-weight-regular">- Employer NIC</span>
@@ -82,7 +82,7 @@ Job Retention Scheme Calculator
                             Breakdown by pay date
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            Up to 30/03/2020<br><br>
+                            {{data['payPeriodThree'] | default('30/04/2020')}}<br><br>
                             {{data['payPeriodTwoFurloughSalary'] | default('250')}}.22 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
                             <br>
                             {{data['payPeriodTwoNic'] | default('120')}}.11 <span class="govuk-!-font-weight-regular">- Employer NIC</span>
@@ -109,9 +109,12 @@ Job Retention Scheme Calculator
                     {% endif %}
                     -->
                 </dl>
-                <p class="govuk-body">
-                    <a href="claim-period.html" class="govuk-link">Start again</a>
-                </p>
+
+                <form class="form" method="post" action="reset">
+                <button class="govuk-link"style="color: #1d70b8; padding: 0; border: 0; text-decoration: underline; font-size: 19px" data-module="govuk-button">
+                    Start calculation again
+                </button>
+                </form>
             </div>
         </div>
 

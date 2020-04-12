@@ -144,9 +144,11 @@ module.exports = function (router) {
   })
 
   //clear data
-  // Clear all data in session if you open /prototype-admin/clear-data
-  router.get('/claim-period', function (req, res) {
-    req.session.data = {}
-    res.render('/claim-period')
-  })
+  router.post('/' + sprint + '/reset', function (req, res) {
+     req.session.data = {};
+     req.session.destroy();
+     res.redirect('/' + sprint + '/claim-period')
+
+   })
 }
+

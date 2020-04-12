@@ -26,7 +26,9 @@ Job Retention Scheme Calculator
           <td class="govuk-table__cell">
             <span class="govuk-!-font-weight-bold">Last pay date before claim period started</span>
           </td>
-          <td class="govuk-table__cell">{{data['payPeriodOne'] | default('30/03/2020')}} </td>
+          <td class="govuk-table__cell">
+            {% if data['payPeriodOneStartDay']%}{{data['payPeriodOne']}} {% else %}28/02/2020{% endif %}
+          </td>
         </tr>
         {% if data["payPeriodTwo"]  %}
         <tr class="govuk-table__row">
@@ -59,7 +61,8 @@ Job Retention Scheme Calculator
           <fieldset class="govuk-fieldset">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
               <h1 class="govuk-heading-m">
-                Are there any another pay dates that overlap the claim period from {{data['claimStart'] | default('30/03/2020')}} to {{data['claimEnd'] | default('30/05/2020')}}?
+                Are there any another pay dates during or just after the claim period ({% if data['claimPeriodStartDay']%}{{data['claimStart']}} to {{data['claimEnd']}}{% else %}09/03/2020 to 17/04/2020{% endif %})?
+              </p>
               </h1>
             </legend>
 
