@@ -95,9 +95,9 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-nic', function (req, res) {
     var data = req.session.data.nicCategory
     if (data === 'a') {
-      req.session.data.nicCategoryVal = 'A'
+      req.session.data.nicCategoryVal = 'A, B, C, J'
     } else if (data === 'hmz') {
-      req.session.data.nicCategoryVal = 'H / M / Z'
+      req.session.data.nicCategoryVal = 'H, M, Z'
     }
     res.redirect('/' + sprint + '/pension')
   })
@@ -111,7 +111,6 @@ module.exports = function (router) {
       req.session.data.pensionStatus = 'opted into pension auto-enrolment'
     }
 
-
   // multiply for total
     if (req.session.data.payPeriodOne && req.session.data.payPeriodTwo && req.session.data.payPeriodThree) {
       req.session.data.furloughTotalCalc = 3;
@@ -120,15 +119,26 @@ module.exports = function (router) {
     } else {
       req.session.data.furloughTotalCalc = 1;
     }
-    // each pay period calc
-    req.session.data.payPeriodFurloughSalary = Math.round (req.session.data.salaryAmount * 0.8);
-    req.session.data.payPeriodNic = Math.round (req.session.data.payPeriodFurloughSalary * 0.12);
-    req.session.data.payPeriodPension = Math.round (req.session.data.payPeriodNic * 0.43);
 
-    // set all the totals
-    req.session.data.totalFurlough = req.session.data.payPeriodFurloughSalary * req.session.data.furloughTotalCalc ;
-    req.session.data.totalNic = Math.round (req.session.data.totalFurlough * 0.12) ;
-    req.session.data.totalPension = Math.round (req.session.data.totalNic * 0.43);
+
+    // Daily pay calc
+    req.session.data.payDaily = Math.round (req.session.data.salaryAmount / 20);
+    // req.session.data.payPeriodNic = Math.round (req.session.data.payPeriodFurloughSalary * 0.12);
+    // req.session.data.payPeriodPension = Math.round (req.session.data.payPeriodNic * 0.43);
+
+    //  pay period one calc
+    req.session.data.payPeriodOneFurloughSalary = Math.round ((req.session.data.payDaily * 17) * 0.8);
+    req.session.data.payPeriodOneNic = Math.round (req.session.data.payPeriodOneFurloughSalary * 0.12);
+    req.session.data.payPeriodOnePension = Math.round (req.session.data.payPeriodOneNic * 0.43);
+    //  pay period two calc
+    req.session.data.payPeriodTwoFurloughSalary = Math.round ((req.session.data.payDaily * 13) * 0.8);
+    req.session.data.payPeriodTwoNic = Math.round (req.session.data.payPeriodTwoFurloughSalary * 0.12);
+    req.session.data.payPeriodTwoPension = Math.round (req.session.data.payPeriodTwoNic * 0.43);
+
+    // set the totals
+    req.session.data.totalFurlough = req.session.data.payPeriodOneFurloughSalary + req.session.data.payPeriodTwoFurloughSalary;
+    req.session.data.totalNic = req.session.data.payPeriodOneNic + req.session.data.payPeriodTwoNic ;
+    req.session.data.totalPension = req.session.data.payPeriodOnePension + req.session.data.payPeriodTwoPension;
 
     res.redirect('/' + sprint + '/confirmation')
   })
