@@ -1,0 +1,86 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">Pay dates within the claim period </h1>
+
+      <p>Claim period: {{data['claimStart'] | default('30/03/2020')}} to {{data['claimEnd'] | default('30/05/2020')}}</p>
+
+
+      <h2 class="govuk-heading-m">Pay dates</h2>
+      <table class="govuk-table review-authorisations">
+
+        <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+
+          <td class="govuk-table__cell">
+            <span class="govuk-!-font-weight-bold">1.</span> {{data['payPeriodOne'] | default('30/03/2020')}}
+          </td>
+        </tr>
+        {% if data["payPeriodTwo"]  %}
+        <tr class="govuk-table__row">
+
+          <td class="govuk-table__cell">
+            <span class="govuk-!-font-weight-bold">2.</span> {{data['payPeriodTwo'] | default('30/04/2020')}}
+          </td>
+        </tr>
+        {% endif %}
+        {% if data["payPeriodThree"]  %}
+        <tr class="govuk-table__row">
+
+          <td class="govuk-table__cell">
+            <span class="govuk-!-font-weight-bold">3.</span> {{data['payPeriodThree'] | default('30/05/2020')}}
+          </td>
+        </tr>
+        {% endif %}
+
+        </tbody>
+      </table>
+
+      <form method="post" action="another-pay-date">
+
+        <div class="govuk-form-group">
+
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+              <h1 class="govuk-heading-m">
+                Do you need to add another pay date for this claim period?
+              </h1>
+            </legend>
+
+            <div class="govuk-radios">
+
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="anotherDate-yes" name="anotherDate" type="radio" value="yes"> <label class="govuk-label govuk-radios__label" for="anotherDate-yes"> Yes </label>
+              </div>
+
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="anotherDate-no" name="anotherDate" type="radio" value="no"> <label class="govuk-label govuk-radios__label" for="anotherDate-no"> No </label>
+              </div>
+
+            </div>
+
+          </fieldset>
+        </div>
+
+        <button type="submit" class="govuk-button">
+          Continue
+        </button>
+
+      </form>
+
+
+    </div>
+</div>
+
+{% endblock %}

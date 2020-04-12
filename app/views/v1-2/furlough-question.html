@@ -1,0 +1,71 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="route-furlough-question" method="post">
+        <div class="govuk-form-group">
+
+          <fieldset class="govuk-fieldset" aria-describedby="furloughQuestion-hint">
+
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+
+              <h1 class="govuk-fieldset__heading">
+                Is this employee furloughed for the entire claim period?
+              </h1>
+
+            </legend>
+            <p>Claim period: {{data['claimStart'] | default('30/03/2020')}} to {{data['claimEnd'] | default('30/05/2020')}}</p>
+            <div class="govuk-radios">
+
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="furloughQuestion" name="furloughQuestion" type="radio" value="furloughWhole">
+                <label class="govuk-label govuk-radios__label" for="furloughQuestion">
+                  yes, for the entire claim period
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="furloughQuestion-2" name="furloughQuestion" type="radio" value="furloughStart">
+                <label class="govuk-label govuk-radios__label" for="furloughQuestion-2">
+                  no, it started within the claim period
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="furloughQuestion-3" name="furloughQuestion" type="radio" value="furloughEnd">
+                <label class="govuk-label govuk-radios__label" for="furloughQuestion-3">
+                  no, it ended within the claim period
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="furloughQuestion-3" name="furloughQuestion" type="radio" value="furloughStartEnd">
+                <label class="govuk-label govuk-radios__label" for="furloughQuestion-3">
+                  no, it started and ended within the claim period
+                </label>
+              </div>
+
+            </div>
+          </fieldset>
+
+
+        </div>
+        <button class="govuk-button govuk-!-margin-right-2" data-module="govuk-button">
+          Continue
+        </button>
+
+
+      </form>
+
+
+    </div>
+</div>
+
+{% endblock %}

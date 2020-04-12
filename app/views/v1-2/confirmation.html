@@ -1,0 +1,158 @@
+
+
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+
+
+{% block content %}
+
+
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-8">
+                    <div class="govuk-panel__body govuk-!-margin-bottom-4 govuk-!-font-size-24">
+                        For this employee you can claim:
+                    </div>
+                    <h1 class="govuk-panel__title govuk-!-font-size-36" >
+
+                        £{{data['totalFurlough'] | default('1152.00')}} <span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
+                        <br>
+                        £{{data['totalNic'] | default('120.75')}} <span class="govuk-!-font-weight-regular">- Employer NIC</span>
+                        <br>
+                        £{{data['totalPension'] | default('27.42')}} <span class="govuk-!-font-weight-regular">- Pension contribution</span>
+                    </h1>
+
+
+                </div>
+
+                <h2 class="govuk-heading-m">
+                    How these figure are calculated
+                </h2>
+
+                <p>Keep these totals for the claim, you'll need to add these up for all employees. </p>
+
+
+                <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Claim period
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{data['claimStart'] | default('30/03/2020')}} to {{data['claimEnd'] | default('30/04/2020')}}
+                        </dd>
+
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Employee details
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            They are paid {{data['payFrequency'] | default('monthly')}}<br>
+                            Their NIC category is {{data['nicCategoryVal'] | default('A')}}<br>
+                            They have {{data['pensionStatus'] | default('opted into pension auto-enrolment')}}
+
+                        </dd>
+
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Employee furlough status
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+
+                            <p>They have {{data['furloughPeriod']| default('have been furloughed for the whole of the claim period')}}</p>
+                        </dd>
+
+                    </div>
+
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Individual pay period total
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            For the period {{data['payPeriodOne'] | default('30/03/2020')}}<br><br>
+                            £{{data['payPeriodFurloughSalary'] | default('250.00')}} <span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
+                            <br>
+                            £{{data['payPeriodNic'] | default('120.75')}} <span class="govuk-!-font-weight-regular">- Employer NIC</span>
+                            <br>
+                            £{{data['payPeriodPension'] | default('27.42')}} <span class="govuk-!-font-weight-regular">- Pension contribution</span>
+                        </dd>
+                    </div>
+                    {% if data['payPeriodTwo']%}
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Individual pay period total
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            For the period {{data['payPeriodTwo'] | default('30/03/2020')}}<br><br>
+                            £{{data['payPeriodFurloughSalary'] | default('250.00')}} <span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
+                            <br>
+                            £{{data['payPeriodNic'] | default('120.75')}} <span class="govuk-!-font-weight-regular">- Employer NIC</span>
+                            <br>
+                            £{{data['payPeriodPension'] | default('27.42')}} <span class="govuk-!-font-weight-regular">- Pension contribution</span>
+                        </dd>
+
+                    </div>
+                    {% endif %}
+                    {% if data['payPeriodThree']%}
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Individual pay period total
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            For the period {{data['payPeriodThree'] | default('30/03/2020')}}<br><br>
+                            £{{data['payPeriodFurloughSalary'] | default('250.00')}} <span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
+                            <br>
+                            £{{data['payPeriodNic'] | default('120.75')}} <span class="govuk-!-font-weight-regular">- Employer NIC</span>
+                            <br>
+                            £{{data['payPeriodPension'] | default('27.42')}} <span class="govuk-!-font-weight-regular">- Pension contribution</span>
+                        </dd>
+
+                    </div>
+                    {% endif %}
+                    <!--<div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            For the tax year 19/20
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            £{{data['totalFurlough'] | default('1152.00')}} <span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
+                            <br>
+                            £{{data['totalNic'] | default('120.75')}} <span class="govuk-!-font-weight-regular">- Employer NIC</span>
+                            <br>
+                            £{{data['totalPension'] | default('27.42')}} <span class="govuk-!-font-weight-regular">- Pension contribution</span>
+                        </dd>
+
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            For the tax year 20/21
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            £576.00<span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
+                            <br>
+                            £56.17 <span class="govuk-!-font-weight-regular">- Employer NIC</span>
+                            <br>
+                            £13.68 <span class="govuk-!-font-weight-regular">- Pension contribution</span>
+                        </dd>
+
+                    </div>-->
+
+                </dl>
+                <!--<p class="govuk-body">These figures are {{data['payPeriod']}}.</p>-->
+
+
+
+
+
+                <p class="govuk-body">
+                    <a href="claim-period.html" class="govuk-link">Start again</a>
+                </p>
+            </div>
+        </div>
+
+{% endblock %}
