@@ -24,7 +24,7 @@ Job Retention Scheme Calculator
                         <br>
                         £{{data['totalNic'] | default('120')}}.22 <span class="govuk-!-font-weight-regular">- Employer NIC</span>
                         <br>
-                        £{{data['totalPension'] | default('27')}}.76 <span class="govuk-!-font-weight-regular">- Pension contribution</span>
+                        £{{data['totalPension'] | default('27')}}.38 <span class="govuk-!-font-weight-regular">- Pension contribution</span>
                     </h1>
                 </div>
 
@@ -68,12 +68,12 @@ Job Retention Scheme Calculator
                             Breakdown by pay date
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{data['payPeriodTwo'] | default('30/03/2020')}}<br><br>
-                            {{data['payPeriodOneFurloughSalary'] | default('250')}}.22 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
+                            Up to {{data['payPeriodTwo'] | default('30/03/2020')}}<br><br>
+                            £{{data['payPeriodOneFurloughSalary'] | default('250')}}.22 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
                             <br>
-                            {{data['payPeriodOneNic'] | default('120')}}.11 <span class="govuk-!-font-weight-regular">- Employer NIC</span>
+                            £{{data['payPeriodOneNic'] | default('120')}}.11 <span class="govuk-!-font-weight-regular">- Employer NIC</span>
                             <br>
-                            {{data['payPeriodOnePension'] | default('27')}}.38 <span class="govuk-!-font-weight-regular">- Pension contribution</span>
+                            £{{data['payPeriodOnePension'] | default('27')}}.19 <span class="govuk-!-font-weight-regular">- Pension contribution</span>
                         </dd>
                     </div>
 
@@ -82,12 +82,12 @@ Job Retention Scheme Calculator
                             Breakdown by pay date
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{data['payPeriodThree'] | default('30/04/2020')}}<br><br>
-                            {{data['payPeriodTwoFurloughSalary'] | default('250')}}.22 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
+                            Up to {{data['payPeriodThree'] | default('30/04/2020')}}<br><br>
+                            £{{data['payPeriodTwoFurloughSalary'] | default('250')}}.22 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
                             <br>
-                            {{data['payPeriodTwoNic'] | default('120')}}.11 <span class="govuk-!-font-weight-regular">- Employer NIC</span>
+                            £{{data['payPeriodTwoNic'] | default('120')}}.11 <span class="govuk-!-font-weight-regular">- Employer NIC</span>
                             <br>
-                            {{data['payPeriodTwoPension'] | default('27')}}.38 <span class="govuk-!-font-weight-regular">- Pension contribution</span>
+                            £{{data['payPeriodTwoPension'] | default('27')}}.19 <span class="govuk-!-font-weight-regular">- Pension contribution</span>
                         </dd>
                     </div>
 
