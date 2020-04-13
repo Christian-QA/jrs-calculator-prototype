@@ -5,6 +5,7 @@ const router = express.Router()
 require('./views/v1/routes')(router);
 require('./views/v1-1/routes')(router);
 require('./views/v1-2/routes')(router);
+require('./views/v1-3/routes')(router);
 
 module.exports = router
 

@@ -1,0 +1,123 @@
+
+
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+
+
+{% block content %}
+
+
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-8">
+                    <div class="govuk-panel__body govuk-!-margin-bottom-4 govuk-!-font-size-24">
+                        For this employee you can claim:
+                    </div>
+                    <h1 class="govuk-panel__title govuk-!-font-size-36" >
+
+                        £{{data['totalFurlough'] | default('1152')}}.44 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
+                        <br>
+                        £{{data['totalNic'] | default('120')}}.22 <span class="govuk-!-font-weight-regular">- Employer NIC</span>
+                        <br>
+                        £{{data['totalPension'] | default('27')}}.38 <span class="govuk-!-font-weight-regular">- Pension contribution</span>
+                    </h1>
+                </div>
+
+                <h2 class="govuk-heading-m">
+                    How these figures are calculated
+                </h2>
+                <p>Includes a breakdown for each pay date within the claim period - keep for your records. </p>
+
+
+                <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Claim period
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {% if data['claimPeriodStartDay']%}
+                                {{data['claimStart'] | default('30/03/2020')}} to {{data['claimEnd'] | default('30/04/2020')}}
+                            {% else %}
+                                12/03/2020 to 05/05/2020
+                            {% endif %}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Employee details
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            They are paid {{data['payFrequency'] | default('monthly')}}<br>
+                            Their NIC category is {{data['nicCategoryVal'] | default('A, B, C, J')}}<br>
+                            They have {{data['pensionStatus'] | default('opted into pension auto-enrolment')}}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Employee furlough status
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            <p>They have {{data['furloughPeriod']| default('have been furloughed for the whole of the claim period')}}</p>
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Breakdown by pay date
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            Up to {{data['payPeriodTwo'] | default('30/03/2020')}}<br><br>
+                            £{{data['payPeriodOneFurloughSalary'] | default('250')}}.22 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
+                            <br>
+                            £{{data['payPeriodOneNic'] | default('120')}}.11 <span class="govuk-!-font-weight-regular">- Employer NIC</span>
+                            <br>
+                            £{{data['payPeriodOnePension'] | default('27')}}.19 <span class="govuk-!-font-weight-regular">- Pension contribution</span>
+                        </dd>
+                    </div>
+
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Breakdown by pay date
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            Up to {{data['payPeriodThree'] | default('30/04/2020')}}<br><br>
+                            £{{data['payPeriodTwoFurloughSalary'] | default('250')}}.22 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
+                            <br>
+                            £{{data['payPeriodTwoNic'] | default('120')}}.11 <span class="govuk-!-font-weight-regular">- Employer NIC</span>
+                            <br>
+                            £{{data['payPeriodTwoPension'] | default('27')}}.19 <span class="govuk-!-font-weight-regular">- Pension contribution</span>
+                        </dd>
+                    </div>
+
+                    <!--
+                    {% if data['payPeriodThree']%}
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Individual pay period total
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            For the period {{data['payPeriodThree'] | default('30/03/2020')}}.22<br><br>
+                            £{{data['payPeriodFurloughSalary'] | default('250.00')}}.22 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span>
+                            <br>
+                            £{{data['payPeriodNic'] | default('120.75')}}.11 <span class="govuk-!-font-weight-regular">- Employer NIC</span>
+                            <br>
+                            £{{data['payPeriodPension'] | default('27.42')}}.38 <span class="govuk-!-font-weight-regular">- Pension contribution</span>
+                        </dd>
+                    </div>
+                    {% endif %}
+                    -->
+                </dl>
+
+                <form class="form" method="post" action="reset">
+                <button class="govuk-link"style="color: #1d70b8; padding: 0; border: 0; text-decoration: underline; font-size: 19px" data-module="govuk-button">
+                    Start calculation again
+                </button>
+                </form>
+            </div>
+        </div>
+
+{% endblock %}

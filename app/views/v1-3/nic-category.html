@@ -1,0 +1,50 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="route-nic" method="post">
+      {{ govukRadios({
+      idPrefix: "nicCategory",
+      name: "nicCategory",
+      fieldset: {
+        legend: {
+          text: "What is the employee's National Insurance category letter?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--xl"
+        }
+      },
+        hint: {
+        text: ""
+        },
+      items: [
+        {
+        value: "a",
+        text: "A, B, C, J"
+        },
+        {
+        value: "hmz",
+        text: "H, M, Z"
+        }
+      ]
+      }) }}
+
+        <button class="govuk-button" data-module="govuk-button">
+          Continue
+        </button>
+      </form>
+
+
+    </div>
+</div>
+
+{% endblock %}
