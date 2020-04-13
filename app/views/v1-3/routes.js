@@ -72,7 +72,7 @@ module.exports = function (router) {
   // route - pay dates 3
   router.post('/' + sprint + '/route-pay-dates-3', function (req, res) {
     req.session.data.payPeriodThree = req.session.data.payPeriodThreeStartDay + "/" + req.session.data.payPeriodThreeStartMonth + "/" + req.session.data.payPeriodThreeStartYear;
-    res.redirect('/' + sprint + '/furlough-question')
+    res.redirect('/' + sprint + '/nic-category')
   })
 
   // route - another-pay-date
