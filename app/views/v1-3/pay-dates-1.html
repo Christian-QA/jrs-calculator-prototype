@@ -19,17 +19,16 @@ Job Retention Scheme Calculator
           <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
               <h1 class="govuk-fieldset__heading">
-                What was this employee’s last pay day before the claim period started?
+                What was this employee’s last pay day before {% if data['claimPeriodStartDay']%}{{data['claimStart']}}{% else %}09/03/2020{% endif %}?
 
               </h1>
             </legend>
-            <p>
 
-            </p>
+
 
             <label class="govuk-label" for="payPeriod"></label>
             <span id="claimPeriodStart-hint" class="govuk-hint">
-                For example, 30 4 2020
+                For example, 28 2 2020
               </span>
 
 
