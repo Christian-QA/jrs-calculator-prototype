@@ -20,12 +20,26 @@ module.exports = function (router) {
 
     req.session.data.payClaimPeriodTitle = Math.round(req.session.data.claimPeriodStartDay) + req.session.data.claimPeriodStartMonthTitle;
 
+
+
     res.redirect('/' + sprint + '/claim-period-1')
   })
 
   // route-claim date
   router.post('/' + sprint + '/route-claim-end', function (req, res) {
     req.session.data.claimEnd = req.session.data.claimPeriodEndDay + "/" + req.session.data.claimPeriodEndMonth + "/" + req.session.data.claimPeriodEndYear;
+    var titleMonth = Math.round(req.session.data.claimPeriodEndMonth);
+    if (titleMonth === 2) {
+      req.session.data.claimPeriodEndMonthTitle = ' February';
+    } else if (titleMonth === 3) {
+      req.session.data.claimPeriodEndMonthTitle = ' March';
+    } else if (titleMonth === 4) {
+      req.session.data.claimPeriodEndMonthTitle = ' April';
+    } else if (titleMonth === 5) {
+      req.session.data.claimPeriodEndMonthTitle = ' May';
+    }
+
+    req.session.data.payClaimPeriodEndTitle = Math.round(req.session.data.claimPeriodEndDay) + req.session.data.claimPeriodEndMonthTitle;
     res.redirect('/' + sprint + '/furlough-question')
   })
 
@@ -134,9 +148,9 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-nic', function (req, res) {
     var data = req.session.data.nicCategory
     if (data === 'a') {
-      req.session.data.nicCategoryVal = 'A, B, C, J'
+      req.session.data.nicCategoryVal = 'A, B, C or J'
     } else if (data === 'hmz') {
-      req.session.data.nicCategoryVal = 'H, M, Z'
+      req.session.data.nicCategoryVal = 'H, M or Z'
     }
     res.redirect('/' + sprint + '/pension')
   })
@@ -185,6 +199,18 @@ module.exports = function (router) {
   // route - nic category
   router.post('/' + sprint + '/route-tax-pay-date', function (req, res) {
     req.session.data.payTaxDate = req.session.data.payDateDay + "/" + req.session.data.payDateMonth + "/" + req.session.data.payDateYear;
+    var titleMonth = Math.round(req.session.data.payDateMonth);
+    if (titleMonth === 2) {
+      req.session.data.payDateMonthTitle = ' February';
+    } else if (titleMonth === 3) {
+      req.session.data.payDateMonthTitle = ' March';
+    } else if (titleMonth === 4) {
+      req.session.data.payDateMonthTitle = ' April';
+    } else if (titleMonth === 5) {
+      req.session.data.payDateMonthTitle = ' May';
+    }
+
+    req.session.data.payTaxDateTitle = Math.round(req.session.data.payDateDay) + req.session.data.payDateMonthTitle;
     res.redirect('/' + sprint + '/confirmation')
   })
 

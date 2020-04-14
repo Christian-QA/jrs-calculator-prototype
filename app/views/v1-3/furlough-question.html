@@ -25,12 +25,7 @@ Job Retention Scheme Calculator
 
             </legend>
             <p>
-              From
-              {% if data['claimPeriodStartDay']%}
-              {{data['claimStart']}} to {{data['claimEnd']}}
-              {% else %}
-              09/03/2020 to 17/04/2020
-              {% endif %}
+              From {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %}
             </p>
             <div class="govuk-radios">
 

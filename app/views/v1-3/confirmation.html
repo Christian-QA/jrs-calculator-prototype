@@ -25,11 +25,14 @@ Job Retention Scheme Calculator
         <p>These calculations we made on the employees information you entered below: </p>
 
         <ul class="govuk-list govuk-list--bullet">
-            <li>Claim period from {% if data['claimPeriodStartDay']%} {{data['claimStart'] | default('30/03/2020')}} to {{data['claimEnd'] | default('30/04/2020')}} {% else %} 12/03/2020 to 05/05/2020 {% endif %}</li>
+            <li>Claim period from {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %}</li>
+
+
             <li>They have {{data['furloughPeriod']| default('have been furloughed for the whole of the claim period')}}</li>
             <li>They are paid {{data['payFrequency'] | default('monthly')}}</li>
             <li>Their NIC category is {{data['nicCategoryVal'] | default('A, B, C, J')}}</li>
             <li>They have {{data['pensionStatus'] | default('opted into pension auto-enrolment')}}</li>
+            <li>The employee's first payday after 6 April was {{data['payTaxDateTitle'] | default('10 April')}}</li>
 
         </ul>
 
