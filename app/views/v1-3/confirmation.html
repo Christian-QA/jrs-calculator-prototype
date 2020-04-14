@@ -20,9 +20,26 @@ Job Retention Scheme Calculator
             </h1>
         </div>
         <h2 class="govuk-heading-m">
+            Next steps
+        </h2>
+
+        <ul class="govuk-list govuk-list--number">
+            
+            <li>Make a note of 3 figures above. <!--You’ll need them when you make a claim.--></li>
+            
+            <li>Run the calculator again for any other employees that are furloughed for all or part of the claim period ({% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %}).</li>
+            <li>Use the combined totals for furloughed pay, Employer NIC and pension contribution for your claim.</li>
+
+        </ul>
+
+        <p><a href="https://www.gov.uk/guidance/claim-for-wage-costs-through-the-coronavirus-job-retention-scheme" target="_blank">Job Retention Scheme online claim form</a></p>
+
+
+
+        <h2 class="govuk-heading-m">
             How these figures are calculated
         </h2>
-        <p>These calculations we made on the employees information you entered below: </p>
+        <p>These calculations we made based on the information you entered below: </p>
 
         <ul class="govuk-list govuk-list--bullet">
             <li>Claim period from {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %}</li>
@@ -69,14 +86,11 @@ Job Retention Scheme Calculator
             </dl>
         </details>
 
-        <h2 class="govuk-heading-m">
-            Next steps
-        </h2>
-        <p>These figures are for a single employee.  To fill in your Job Retention Scheme claim you will need a total for all your employees you are claiming for.</p>
+
 
         <form class="form" method="post" action="reset">
-            <button class="govuk-link" style="color: #1d70b8; padding: 0; border: 0; text-decoration: underline; font-size: 19px" data-module="govuk-button">
-                Start calculation again
+            <button class="govuk-button"  data-module="govuk-button">
+                Start another calculation
             </button>
         </form>
     </div>
