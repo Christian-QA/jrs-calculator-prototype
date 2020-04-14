@@ -37,9 +37,9 @@ Job Retention Scheme Calculator
 
 
         <h2 class="govuk-heading-m">
-            How these figures are calculated
+            How these figures were calculated
         </h2>
-        <p>These calculations we made based on the information you entered below: </p>
+        <p>The calculations were based on the information you entered: </p>
 
         <ul class="govuk-list govuk-list--bullet">
             <li>Claim period from {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %}</li>
@@ -47,7 +47,7 @@ Job Retention Scheme Calculator
 
             <li>They have {{data['furloughPeriod']| default('have been furloughed for the whole of the claim period')}}</li>
             <li>They are paid {{data['payFrequency'] | default('monthly')}}</li>
-            <li>Their National Insurance category is {{data['nicCategoryVal'] | default('A, B, C, J')}}</li>
+            <li>Their National Insurance category is {{data['nicCategoryVal'] | default('A, B, C or J')}}</li>
             <li>They have {{data['pensionStatus'] | default('opted into pension auto-enrolment')}}</li>
             <li>The employee's first payday after 6 April was {{data['payTaxDateTitle'] | default('10 April')}}</li>
 
