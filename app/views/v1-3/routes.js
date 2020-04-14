@@ -142,6 +142,12 @@ module.exports = function (router) {
     req.session.data.totalNic = req.session.data.payPeriodOneNic + req.session.data.payPeriodTwoNic ;
     req.session.data.totalPension = req.session.data.payPeriodOnePension + req.session.data.payPeriodTwoPension;
 
+    res.redirect('/' + sprint + '/tax-year-pay-date')
+  })
+
+  // route - nic category
+  router.post('/' + sprint + '/route-tax-pay-date', function (req, res) {
+    req.session.data.payTaxDate = req.session.data.payDateDay + "/" + req.session.data.payDateMonth + "/" + req.session.data.payDateYear;
     res.redirect('/' + sprint + '/confirmation')
   })
 

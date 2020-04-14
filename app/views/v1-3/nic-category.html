@@ -12,31 +12,89 @@ Job Retention Scheme Calculator
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
+
       <form action="route-nic" method="post">
-      {{ govukRadios({
-      idPrefix: "nicCategory",
-      name: "nicCategory",
-      fieldset: {
-        legend: {
-          text: "What is the employee's National Insurance category letter?",
-          isPageHeading: true,
-          classes: "govuk-fieldset__legend--xl"
-        }
-      },
-        hint: {
-        text: ""
-        },
-      items: [
-        {
-        value: "a",
-        text: "A, B, C, J"
-        },
-        {
-        value: "hmz",
-        text: "H, M, Z"
-        }
-      ]
-      }) }}
+
+
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+           What is the employee's National Insurance category letter?
+          </legend>
+
+          <div class="govuk-inset-text">
+            Most employees have category letter A. Employees can find their category letter on their payslip.
+          </div>
+
+
+
+<div class="govuk-form-group">
+          <div class="govuk-radios">
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="nicCategory-yes" name="nicCategory" type="radio" value="a"> <label class="govuk-label govuk-radios__label" for="nicCategory-yes"> A, B, C, J </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="nicCategory-no" name="nicCategory" type="radio" value="hmz"> <label class="govuk-label govuk-radios__label" for="nicCategory-no"> H, M, Z </label>
+            </div>
+
+          </div>
+</div>
+        </fieldset>
+        <details class="govuk-details">
+          <summary class="govuk-details__summary">
+               <span class="govuk-details__summary-text">
+                More information on categories
+                 </span>
+          </summary>
+          <table class="govuk-table review-authorisations">
+            <thead>
+            <tr class="govuk-table__row">
+
+              <td class="govuk-table__header" scope="col" width="100px">Category letter</th>
+              <td class="govuk-table__header" scope="col">Employee group</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="govuk-table__row">
+
+              <td class="govuk-table__cell">A</td>
+              <td class="govuk-table__cell">All employees apart from those in groups B, C, J, H, M and Z in this table</td>
+            </tr>
+            <tr class="govuk-table__row">
+
+              <td class="govuk-table__cell">B</td>
+              <td class="govuk-table__cell">Married women and widows entitled to pay reduced National Insurance</td>
+            </tr>
+            <tr class="govuk-table__row">
+
+              <td class="govuk-table__cell">C</td>
+              <td class="govuk-table__cell">Employees over the <a href="/state-pension-age">State Pension age</a>
+              </td>
+            </tr>
+            <tr class="govuk-table__row">
+
+              <td class="govuk-table__cell">J</td>
+              <td class="govuk-table__cell">Employees who can defer National Insurance because they’re already paying it in another job</td>
+            </tr>
+            <tr class="govuk-table__row">
+
+              <td class="govuk-table__cell">H</td>
+              <td class="govuk-table__cell">Apprentice under 25</td>
+            </tr>
+            <tr class="govuk-table__row">
+
+              <td class="govuk-table__cell">M</td>
+              <td>Employees under 21</td>
+            </tr>
+            <tr class="govuk-table__row">
+
+              <td class="govuk-table__cell">Z</td>
+              <td class="govuk-table__cell">Employees under 21 who can defer National Insurance because they’re already paying it in another job</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
 
         <button class="govuk-button" data-module="govuk-button">
           Continue
