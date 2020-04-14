@@ -38,7 +38,7 @@ Job Retention Scheme Calculator
         <details class="govuk-details">
             <summary class="govuk-details__summary">
                <span class="govuk-details__summary-text">
-                    Breakdown of the figures for each pay date
+                    Breakdown of the figures for each pay period
                  </span>
             </summary>
             <dl class="govuk-summary-list govuk-!-margin-bottom-9">
@@ -46,7 +46,7 @@ Job Retention Scheme Calculator
 
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Breakdown by pay date
+                        Pay period
                     </dt>
                     <dd class="govuk-summary-list__value">
                         Up to {{data['payPeriodTwo'] | default('30/03/2020')}}<br><br> £{{data['payPeriodOneFurloughSalary'] | default('250')}}.22 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span> <br> £{{data['payPeriodOneNic'] | default('120')}}.11 <span class="govuk-!-font-weight-regular">- Employer NIC</span> <br> £{{data['payPeriodOnePension'] | default('27')}}.19
@@ -56,7 +56,7 @@ Job Retention Scheme Calculator
 
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Breakdown by pay date
+                        Pay period
                     </dt>
                     <dd class="govuk-summary-list__value">
                         Up to {{data['payPeriodThree'] | default('30/04/2020')}}<br><br> £{{data['payPeriodTwoFurloughSalary'] | default('250')}}.22 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span> <br> £{{data['payPeriodTwoNic'] | default('120')}}.11 <span class="govuk-!-font-weight-regular">- Employer NIC</span> <br> £{{data['payPeriodTwoPension'] | default('27')}}.19
@@ -69,7 +69,7 @@ Job Retention Scheme Calculator
         <h2 class="govuk-heading-m">
             Next steps
         </h2>
-        <p>These figures are for a single employee.  To fill in you JRS claim you will needs a total for all your employees you are claiming for.</p>
+        <p>These figures are for a single employee.  To fill in your Job Retention Scheme claim you will need a total for all your employees you are claiming for.</p>
 
         <form class="form" method="post" action="reset">
             <button class="govuk-link" style="color: #1d70b8; padding: 0; border: 0; text-decoration: underline; font-size: 19px" data-module="govuk-button">
