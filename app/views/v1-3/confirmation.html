@@ -16,7 +16,7 @@ Job Retention Scheme Calculator
             </div>
             <h1 class="govuk-panel__title govuk-!-font-size-36">
 
-                £{{data['totalFurlough'] | default('1152')}}.44 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span> <br> £{{data['totalNic'] | default('120')}}.22 <span class="govuk-!-font-weight-regular">- Employer NIC</span> <br> £{{data['totalPension'] | default('27')}}.38 <span class="govuk-!-font-weight-regular">- Pension contribution</span>
+                £{{data['totalFurlough'] | default('1152')}}.44 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span> <br> £{{data['totalNic'] | default('120')}}.22 <span class="govuk-!-font-weight-regular">- Employer's NI</span> <br> £{{data['totalPension'] | default('27')}}.38 <span class="govuk-!-font-weight-regular">- Pension contribution</span>
             </h1>
         </div>
         <h2 class="govuk-heading-m">
@@ -28,7 +28,7 @@ Job Retention Scheme Calculator
             <li>Make a note of 3 figures above. <!--You’ll need them when you make a claim.--></li>
             
             <li>Run the calculator again for any other employees that are furloughed for all or part of the claim period ({% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %}).</li>
-            <li>Use the combined totals for furloughed pay, employer NIC and pension contribution for your claim.</li>
+            <li>Use the combined totals for furloughed pay, employer's NI contribution and pension contribution for your claim.</li>
 
         </ul>
 
@@ -47,7 +47,7 @@ Job Retention Scheme Calculator
 
             <li>They have {{data['furloughPeriod']| default('have been furloughed for the whole of the claim period')}}</li>
             <li>They are paid {{data['payFrequency'] | default('monthly')}}</li>
-            <li>Their NIC category is {{data['nicCategoryVal'] | default('A, B, C, J')}}</li>
+            <li>Their National Insurance category is {{data['nicCategoryVal'] | default('A, B, C, J')}}</li>
             <li>They have {{data['pensionStatus'] | default('opted into pension auto-enrolment')}}</li>
             <li>The employee's first payday after 6 April was {{data['payTaxDateTitle'] | default('10 April')}}</li>
 
@@ -58,7 +58,7 @@ Job Retention Scheme Calculator
         <details class="govuk-details">
             <summary class="govuk-details__summary">
                <span class="govuk-details__summary-text">
-                    Breakdown of the figures for each pay period
+                    Breakdown of the figures for each pay period during the claim
                  </span>
             </summary>
             <dl class="govuk-summary-list govuk-!-margin-bottom-9">
@@ -69,7 +69,7 @@ Job Retention Scheme Calculator
                         Pay period
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        Up to {{data['payPeriodTwo'] | default('30/03/2020')}}<br><br> £{{data['payPeriodOneFurloughSalary'] | default('250')}}.22 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span> <br> £{{data['payPeriodOneNic'] | default('120')}}.11 <span class="govuk-!-font-weight-regular">- Employer NIC</span> <br> £{{data['payPeriodOnePension'] | default('27')}}.19
+                        Up to {{data['payPeriodTwo'] | default('30/03/2020')}}<br><br> £{{data['payPeriodOneFurloughSalary'] | default('250')}}.22 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span> <br> £{{data['payPeriodOneNic'] | default('120')}}.11 <span class="govuk-!-font-weight-regular">- Employer's NI</span> <br> £{{data['payPeriodOnePension'] | default('27')}}.19
                         <span class="govuk-!-font-weight-regular">- Pension contribution</span>
                     </dd>
                 </div>
@@ -79,7 +79,7 @@ Job Retention Scheme Calculator
                         Pay period
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        Up to {{data['payPeriodThree'] | default('30/04/2020')}}<br><br> £{{data['payPeriodTwoFurloughSalary'] | default('250')}}.22 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span> <br> £{{data['payPeriodTwoNic'] | default('120')}}.11 <span class="govuk-!-font-weight-regular">- Employer NIC</span> <br> £{{data['payPeriodTwoPension'] | default('27')}}.19
+                        Up to {{data['payPeriodThree'] | default('30/04/2020')}}<br><br> £{{data['payPeriodTwoFurloughSalary'] | default('250')}}.22 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span> <br> £{{data['payPeriodTwoNic'] | default('120')}}.11 <span class="govuk-!-font-weight-regular">- Employer's NI</span> <br> £{{data['payPeriodTwoPension'] | default('27')}}.19
                         <span class="govuk-!-font-weight-regular">- Pension contribution</span>
                     </dd>
                 </div>
