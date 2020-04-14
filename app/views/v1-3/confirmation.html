@@ -45,7 +45,17 @@ Job Retention Scheme Calculator
             <li>Claim period from {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %}</li>
 
 
-            <li>They have {{data['furloughPeriod']| default('have been furloughed for the whole of the claim period')}}</li>
+            <li>They
+                {% if data['furloughPeriod'] %}
+                    {{data['furloughPeriod']| default('have been furloughed for the whole of the claim period')}}
+                {% elseif data['furloughStartTitle'] %}
+                    began their furlough on {{data['furloughStartTitle']}}
+                {% elseif data['furloughEndTitle'] %}
+                    ended their furlough on {{data['furloughEndTitle']}}
+                {% elseif data['furloughPartialStartTitle'] %}
+                    were furloughed from {{data['furloughPartialStartTitle']}} until {{data['furloughPartialEndTitle']}}
+                {% endif %}
+            </li>
             <li>They are paid {{data['payFrequency'] | default('monthly')}}</li>
             <li>Their National Insurance category is {{data['nicCategoryVal'] | default('A, B, C or J')}}</li>
             <li>They have {{data['pensionStatus'] | default('opted into pension auto-enrolment')}}</li>

@@ -112,7 +112,6 @@ module.exports = function (router) {
     req.session.data.furloughPartialEndTitle = Math.round(req.session.data.furloughPartialEndDay) + req.session.data.furloughPartialEndMonthTitle;
 
     res.redirect('/' + sprint + '/pay-question')
-
   })
 
   // route - pay dates
@@ -230,15 +229,16 @@ module.exports = function (router) {
 
     // Daily pay calc
     req.session.data.payDaily = Math.round(req.session.data.salaryAmount / 20)
-    // req.session.data.payPeriodNic = Math.round (req.session.data.payPeriodFurloughSalary * 0.12);
-    // req.session.data.payPeriodPension = Math.round (req.session.data.payPeriodNic * 0.43);
+    req.session.data.periodOneNoDays = 17
+    req.session.data.periodTwoNoDays = 13
+
 
     //  pay period one calc
-    req.session.data.payPeriodOneFurloughSalary = Math.round((req.session.data.payDaily * 17) * 0.8)
+    req.session.data.payPeriodOneFurloughSalary = Math.round((req.session.data.payDaily * req.session.data.periodOneNoDays) * 0.8)
     req.session.data.payPeriodOneNic = Math.round(req.session.data.payPeriodOneFurloughSalary * 0.12)
     req.session.data.payPeriodOnePension = Math.round(req.session.data.payPeriodOneNic * 0.43)
     //  pay period two calc
-    req.session.data.payPeriodTwoFurloughSalary = Math.round((req.session.data.payDaily * 13) * 0.8)
+    req.session.data.payPeriodTwoFurloughSalary = Math.round((req.session.data.payDaily * req.session.data.periodTwoNoDays) * 0.8)
     req.session.data.payPeriodTwoNic = Math.round(req.session.data.payPeriodTwoFurloughSalary * 0.12)
     req.session.data.payPeriodTwoPension = Math.round(req.session.data.payPeriodTwoNic * 0.43)
 
