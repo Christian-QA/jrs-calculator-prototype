@@ -7,6 +7,19 @@ module.exports = function (router) {
   // route-claim date
   router.post('/' + sprint + '/route-claim-start', function (req, res) {
     req.session.data.claimStart = req.session.data.claimPeriodStartDay + "/" + req.session.data.claimPeriodStartMonth + "/" + req.session.data.claimPeriodStartYear;
+    var titleMonth = Math.round(req.session.data.claimPeriodStartMonth);
+    if (titleMonth === 2) {
+      req.session.data.claimPeriodStartMonthTitle = ' February';
+    } else if (titleMonth === 3) {
+      req.session.data.claimPeriodStartMonthTitle = ' March';
+    } else if (titleMonth === 4) {
+      req.session.data.claimPeriodStartMonthTitle = ' April';
+    } else if (titleMonth === 5) {
+      req.session.data.claimPeriodStartMonthTitle = ' May';
+    }
+
+    req.session.data.payClaimPeriodTitle = Math.round(req.session.data.claimPeriodStartDay) + req.session.data.claimPeriodStartMonthTitle;
+
     res.redirect('/' + sprint + '/claim-period-1')
   })
 
@@ -59,12 +72,36 @@ module.exports = function (router) {
 
   // route - pay dates 1
   router.post('/' + sprint + '/route-pay-dates-1', function (req, res) {
+    var titleMonth = Math.round(req.session.data.payPeriodOneStartMonth);
+    if (titleMonth === 2) {
+      req.session.data.payPeriodOneTitleMonth = ' February';
+    } else if (titleMonth === 3) {
+      req.session.data.payPeriodOneTitleMonth = ' March';
+    } else if (titleMonth === 4) {
+      req.session.data.payPeriodOneTitleMonth = ' April';
+    } else if (titleMonth === 5) {
+      req.session.data.payPeriodOneTitleMonth = ' May';
+    }
+
+    req.session.data.payPeriodOneTitle = Math.round(req.session.data.payPeriodOneStartDay) + req.session.data.payPeriodOneTitleMonth;
     req.session.data.payPeriodOne = req.session.data.payPeriodOneStartDay + "/" + req.session.data.payPeriodOneStartMonth + "/" + req.session.data.payPeriodOneStartYear;
     res.redirect('/' + sprint + '/pay-dates-2')
   })
 
   // route - pay dates 2
   router.post('/' + sprint + '/route-pay-dates-2', function (req, res) {
+    var titleMonth = Math.round(req.session.data.payPeriodTwoStartMonth);
+    if (titleMonth === 2) {
+      req.session.data.payPeriodTwoTitleMonth = ' February';
+    } else if (titleMonth === 3) {
+      req.session.data.payPeriodTwoTitleMonth = ' March';
+    } else if (titleMonth === 4) {
+      req.session.data.payPeriodTwoTitleMonth = ' April';
+    } else if (titleMonth === 5) {
+      req.session.data.payPeriodTwoTitleMonth = ' May';
+    }
+
+    req.session.data.payPeriodTwoTitle = Math.round(req.session.data.payPeriodTwoStartDay) + req.session.data.payPeriodTwoTitleMonth;
    req.session.data.payPeriodTwo = req.session.data.payPeriodTwoStartDay + "/" + req.session.data.payPeriodTwoStartMonth + "/" + req.session.data.payPeriodTwoStartYear;
     res.redirect('/' + sprint + '/pay-dates-3')
   })
