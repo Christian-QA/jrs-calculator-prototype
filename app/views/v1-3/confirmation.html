@@ -40,8 +40,6 @@ Job Retention Scheme Calculator
 
         <ul class="govuk-list govuk-list--bullet">
             <li>Claim period from {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %}</li>
-
-
             <li>They
                 {% if data['furloughPeriod'] %}
                     {{data['furloughPeriod']| default('have been furloughed for the whole of the claim period')}}
@@ -51,6 +49,8 @@ Job Retention Scheme Calculator
                     ended their furlough on {{data['furloughEndTitle']}}
                 {% elseif data['furloughPartialStartTitle'] %}
                     were furloughed from {{data['furloughPartialStartTitle']}} until {{data['furloughPartialEndTitle']}}
+               {% else %}
+                    have been furloughed for the whole of the claim period
                 {% endif %}
             </li>
             <li>They are paid {{data['payFrequency'] | default('monthly')}}</li>
