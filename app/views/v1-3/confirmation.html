@@ -16,7 +16,7 @@ Job Retention Scheme Calculator
             </div>
             <h1 class="govuk-panel__title govuk-!-font-size-36">
 
-                £{{data['totalFurlough'] | default('1152')}}.44 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span> <br> £{{data['totalNic'] | default('120')}}.22 <span class="govuk-!-font-weight-regular">- Employer's NI</span> <br> £{{data['totalPension'] | default('27')}}.38 <span class="govuk-!-font-weight-regular">- Pension contribution</span>
+                £{{data['totalFurlough'] | default('1152')}}.44 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span> <br> £{{data['totalNic'] | default('120')}}.22 <span class="govuk-!-font-weight-regular">- Employer's NI</span> <br> £{{data['totalPension'] | default('27')}}.38 <span class="govuk-!-font-weight-regular">- Employer’s pension contribution</span>
             </h1>
         </div>
         <h2 class="govuk-heading-m">
@@ -57,10 +57,7 @@ Job Retention Scheme Calculator
             <li>Their National Insurance category is {{data['nicCategoryVal'] | default('A, B, C or J')}}</li>
             <li>They have {{data['pensionStatus'] | default('opted into pension auto-enrolment')}}</li>
             <li>The employee's first payday after 6 April was {{data['payTaxDateTitle'] | default('10 April')}}</li>
-
         </ul>
-
-
           
         <details class="govuk-details">
             <summary class="govuk-details__summary">
