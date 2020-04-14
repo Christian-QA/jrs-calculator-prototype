@@ -1,4 +1,3 @@
-
 {% extends "layout.html" %}
 
 {% block pageTitle %}
@@ -6,59 +5,141 @@ Job Retention Scheme Calculator
 {% endblock %}
 
 
-
 {% block content %}
 
-  <div class="govuk-grid-row">
+<div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form action="route-furlough-question" method="post">
-        <div class="govuk-form-group">
+        <form action="route-furlough-question" method="post">
+            <div class="govuk-form-group">
 
-          <fieldset class="govuk-fieldset" aria-describedby="furloughQuestion-hint">
+                <fieldset class="govuk-fieldset" aria-describedby="furloughQuestion-hint">
 
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
 
-              <h1 class="govuk-fieldset__heading">
-                Ask furlough dates?
-              </h1>
+                        <h1 class="govuk-fieldset__heading">
+                            What is the furlough status for this employee?
+                        </h1>
 
-            </legend>
-            <p>
-              From
-              {% if data['claimPeriodStartDay']%}
-              {{data['claimStart']}} to {{data['claimEnd']}}
-              {% else %}
-              09/03/2020 to 17/04/2020
-              {% endif %}
-            </p>
-            <div class="govuk-radios">
+                    </legend>
+                    <!-- <p>
+                       From {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %}
+                     </p>-->
 
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="furloughQuestion" name="furloughWhole" type="radio" value="yes">
-                <label class="govuk-label govuk-radios__label" for="furloughQuestion">
-                  Dates
-                </label>
-              </div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="furloughQuestion-2" name="furloughWhole" type="radio" value="no">
-                <label class="govuk-label govuk-radios__label" for="furloughQuestion-2">
-                  Dates
-                </label>
-              </div>
+                    <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="how-contacted-conditional" name="how-contacted" type="radio" value="email" data-aria-controls="conditional-how-contacted-conditional"> <label class="govuk-label govuk-radios__label" for="how-contacted-conditional"> It started after {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif
+                            %} </label>
+                        </div>
+                        <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-how-contacted-conditional">
+                            <label class="govuk-label" for="payPeriod">Furlough start date</label> <span id="claimPeriodStart-hint" class="govuk-hint">
+                For example, 01 3 2020
+              </span>
+                            <div class="govuk-date-input" id="payPeriod">
+                                <div class="govuk-date-input__item">
+                                    <div class="govuk-form-group">
+                                        <label class="govuk-label govuk-date-input__label" for="furloughStartDay"> Day </label> <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="furloughStartDay" name="furloughStartDay" type="text" pattern="[0-9]*" inputmode="numeric">
+                                    </div>
+                                </div>
+                                <div class="govuk-date-input__item">
+                                    <div class="govuk-form-group">
+                                        <label class="govuk-label govuk-date-input__label" for="furloughStartMonth"> Month </label> <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="furloughStartMonth" name="furloughStartMonth" type="text" pattern="[0-9]*" inputmode="numeric">
+                                    </div>
+                                </div>
+                                <div class="govuk-date-input__item">
+                                    <div class="govuk-form-group">
+                                        <label class="govuk-label govuk-date-input__label" for="furloughStartYear"> Year </label> <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="furloughStartYear" name="furloughStartYear" type="text" pattern="[0-9]*" inputmode="numeric">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="how-contacted-conditional-2" name="how-contacted" type="radio" value="phone" data-aria-controls="conditional-how-contacted-conditional-2"> <label class="govuk-label govuk-radios__label" for="how-contacted-conditional-2"> It ended before {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{%
+                            endif %} </label>
+                        </div>
+                        <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-how-contacted-conditional-2">
+                            <label class="govuk-label" for="payPeriod">Furlough end date</label> <span id="claimPeriodStart-hint" class="govuk-hint">
+                For example, 30 4 2020
+              </span>
+                            <div class="govuk-date-input" id="payPeriod">
+                                <div class="govuk-date-input__item">
+                                    <div class="govuk-form-group">
+                                        <label class="govuk-label govuk-date-input__label" for="furloughStartDay"> Day </label> <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="furloughStartDay" name="furloughStartDay" type="text" pattern="[0-9]*" inputmode="numeric">
+                                    </div>
+                                </div>
+                                <div class="govuk-date-input__item">
+                                    <div class="govuk-form-group">
+                                        <label class="govuk-label govuk-date-input__label" for="furloughStartMonth"> Month </label> <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="furloughStartMonth" name="furloughStartMonth" type="text" pattern="[0-9]*" inputmode="numeric">
+                                    </div>
+                                </div>
+                                <div class="govuk-date-input__item">
+                                    <div class="govuk-form-group">
+                                        <label class="govuk-label govuk-date-input__label" for="furloughStartYear"> Year </label> <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="furloughStartYear" name="furloughStartYear" type="text" pattern="[0-9]*" inputmode="numeric">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="how-contacted-conditional-3" name="how-contacted" type="radio" value="text" data-aria-controls="conditional-how-contacted-conditional-3"> <label class="govuk-label govuk-radios__label" for="how-contacted-conditional-3"> It starts and ends between {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{%
+                            endif %} and {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %} </label>
+                        </div>
+                        <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-how-contacted-conditional-3">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label" for="payPeriod">Furlough start date</label> <span id="claimPeriodStart-hint" class="govuk-hint">For example, 01 3 2020 </span>
+                                <div class="govuk-date-input" id="payPeriod">
+                                    <div class="govuk-date-input__item">
+                                        <div class="govuk-form-group">
+                                            <label class="govuk-label govuk-date-input__label" for="furloughStartDay"> Day </label> <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="furloughStartDay" name="furloughStartDay" type="text" pattern="[0-9]*" inputmode="numeric">
+                                        </div>
+                                    </div>
+                                    <div class="govuk-date-input__item">
+                                        <div class="govuk-form-group">
+                                            <label class="govuk-label govuk-date-input__label" for="furloughStartMonth"> Month </label> <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="furloughStartMonth" name="furloughStartMonth" type="text" pattern="[0-9]*" inputmode="numeric">
+                                        </div>
+                                    </div>
+                                    <div class="govuk-date-input__item">
+                                        <div class="govuk-form-group">
+                                            <label class="govuk-label govuk-date-input__label" for="furloughStartYear"> Year </label> <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="furloughStartYear" name="furloughStartYear" type="text" pattern="[0-9]*" inputmode="numeric">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="govuk-form-group">
+                                    <label class="govuk-label" for="payPeriod">Furlough end date</label> <span id="claimPeriodStart-hint" class="govuk-hint">
+                For example, 30 4 2020
+              </span>
+                                    <div class="govuk-date-input" id="payPeriod">
+                                        <div class="govuk-date-input__item">
+                                            <div class="govuk-form-group">
+                                                <label class="govuk-label govuk-date-input__label" for="furloughStartDay"> Day </label> <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="furloughStartDay" name="furloughStartDay" type="text" pattern="[0-9]*" inputmode="numeric">
+                                            </div>
+                                        </div>
+                                        <div class="govuk-date-input__item">
+                                            <div class="govuk-form-group">
+                                                <label class="govuk-label govuk-date-input__label" for="furloughStartMonth"> Month </label> <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="furloughStartMonth" name="furloughStartMonth" type="text" pattern="[0-9]*" inputmode="numeric">
+                                            </div>
+                                        </div>
+                                        <div class="govuk-date-input__item">
+                                            <div class="govuk-form-group">
+                                                <label class="govuk-label govuk-date-input__label" for="furloughStartYear"> Year </label> <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="furloughStartYear" name="furloughStartYear" type="text" pattern="[0-9]*" inputmode="numeric">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        </div>
+                </fieldset>
 
 
             </div>
-          </fieldset>
+            <button class="govuk-button govuk-!-margin-right-2" data-module="govuk-button">
+                Continue
+            </button>
 
 
-        </div>
-        <button class="govuk-button govuk-!-margin-right-2" data-module="govuk-button">
-          Continue
-        </button>
-
-
-      </form>
+        </form>
 
 
     </div>
