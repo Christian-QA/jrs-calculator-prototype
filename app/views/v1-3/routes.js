@@ -52,6 +52,69 @@ module.exports = function (router) {
     }
   })
 
+  // route furlough dates
+  router.post('/' + sprint + '/route-furlough-dates', function (req, res) {
+    // furlough start
+    req.session.data.furloughStart = req.session.data.furloughStartDay + '/' + req.session.data.furloughStartMonth + '/' + req.session.data.furloughStartYear;
+    var titleMonth = Math.round(req.session.data.furloughStartMonth)
+    if (titleMonth === 2) {
+      req.session.data.furloughStartMonthTitle = ' February'
+    } else if (titleMonth === 3) {
+      req.session.data.furloughStartMonthTitle = ' March'
+    } else if (titleMonth === 4) {
+      req.session.data.furloughStartMonthTitle = ' April'
+    } else if (titleMonth === 5) {
+      req.session.data.furloughStartMonthTitle = ' May'
+    }
+    req.session.data.furloughStartTitle = Math.round(req.session.data.furloughStartDay) + req.session.data.furloughStartMonthTitle;
+
+    // furlough end
+    req.session.data.furloughEnd = req.session.data.furloughEndDay + '/' + req.session.data.furloughEndMonth + '/' + req.session.data.furloughEndYear;
+    var endMonth = Math.round(req.session.data.furloughEndMonth)
+    if (endMonth === 2) {
+      req.session.data.furloughEndMonthTitle = ' February'
+    } else if (endMonth === 3) {
+      req.session.data.furloughEndMonthTitle = ' March'
+    } else if (endMonth === 4) {
+      req.session.data.furloughEndMonthTitle = ' April'
+    } else if (endMonth === 5) {
+      req.session.data.furloughEndMonthTitle = ' May'
+    }
+    req.session.data.furloughEndTitle = Math.round(req.session.data.furloughEndDay) + req.session.data.furloughEndMonthTitle;
+
+    // furlough start to end
+    //  start
+    req.session.data.furloughPartialStart = req.session.data.furloughPartialStartDay + '/' + req.session.data.furloughPartialStartMonth + '/' + req.session.data.furloughPartialStartYear;
+    var startPartialMonth = Math.round(req.session.data.furloughPartialStartMonth)
+    if (startPartialMonth === 2) {
+      req.session.data.furloughPartialStartMonthTitle = ' February'
+    } else if (startPartialMonth === 3) {
+      req.session.data.furloughPartialStartMonthTitle = ' March'
+    } else if (startPartialMonth === 4) {
+      req.session.data.furloughPartialStartMonthTitle = ' April'
+    } else if (startPartialMonth === 5) {
+      req.session.data.furloughPartialStartMonthTitle = ' May'
+    }
+    req.session.data.furloughPartialStartTitle = Math.round(req.session.data.furloughPartialStartDay) + req.session.data.furloughPartialStartMonthTitle;
+
+    //  end
+    req.session.data.furloughPartialEnd = req.session.data.furloughPartialEndDay + '/' + req.session.data.furloughPartialEndMonth + '/' + req.session.data.furloughPartialEndYear;
+    var endPartialMonth = Math.round(req.session.data.furloughPartialEndMonth)
+    if (endPartialMonth === 2) {
+      req.session.data.furloughPartialEndMonthTitle = ' February'
+    } else if (endPartialMonth === 3) {
+      req.session.data.furloughPartialEndMonthTitle = ' March'
+    } else if (endPartialMonth === 4) {
+      req.session.data.furloughPartialEndMonthTitle = ' April'
+    } else if (endPartialMonth === 5) {
+      req.session.data.furloughPartialEndMonthTitle = ' May'
+    }
+    req.session.data.furloughPartialEndTitle = Math.round(req.session.data.furloughPartialEndDay) + req.session.data.furloughPartialEndMonthTitle;
+
+    res.redirect('/' + sprint + '/pay-question')
+
+  })
+
   // route - pay dates
   router.post('/' + sprint + '/route-pay-question', function (req, res) {
     res.redirect('/' + sprint + '/pay-frequency')
