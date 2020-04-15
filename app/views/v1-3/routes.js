@@ -274,11 +274,9 @@ module.exports = function (router) {
     req.session.data.periodsalaryAmount = Math.round(req.session.data.salaryAmount / 30)
     req.session.data.periodOneNoDays = 31 - Math.round(req.session.data.claimPeriodStartDay)
     req.session.data.periodTwoNoDays = 30 - Math.round(req.session.data.claimPeriodEndDay)
-    console.log("Month salary = " +  req.session.data.periodsalaryAmount);
+
     req.session.data.payOne = req.session.data.periodsalaryAmount * req.session.data.periodOneNoDays
     req.session.data.payTwo = req.session.data.periodsalaryAmount * req.session.data.periodTwoNoDays
-    console.log("Period one fig = " + req.session.data.payOne);
-    console.log("Period two fig = " + req.session.data.payTwo);
 
     //  pay period one calc
     req.session.data.payPeriodOneFurloughSalary =  Math.round(req.session.data.payOne * 0.8)
