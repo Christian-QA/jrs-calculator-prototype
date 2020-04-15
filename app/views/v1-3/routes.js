@@ -269,20 +269,26 @@ module.exports = function (router) {
       req.session.data.furloughTotalCalc = 1
     }
 
-    // Daily pay calc
-
-    req.session.data.periodsalaryAmount = Math.round(req.session.data.salaryAmount / 30)
+    // Average Daily pay calc
+    if (req.session.data.variableGrossSalary) {
+      req.session.data.periodsalaryAmount = Math.round(req.session.data.variableGrossSalary / 180)
+      console.log("ave salary = " +  req.session.data.periodsalaryAmount);
+    } else if (req.session.data.salaryAmount){
+      req.session.data.periodsalaryAmount = Math.round(req.session.data.salaryAmount / 30)
+    }
+    // Days in pay period
     req.session.data.periodOneNoDays = 31 - Math.round(req.session.data.claimPeriodStartDay)
     req.session.data.periodTwoNoDays = 30 - Math.round(req.session.data.claimPeriodEndDay)
 
+    // Total pay in each period
     req.session.data.payOne = req.session.data.periodsalaryAmount * req.session.data.periodOneNoDays
     req.session.data.payTwo = req.session.data.periodsalaryAmount * req.session.data.periodTwoNoDays
 
-    //  pay period one calc
+    //  pay period one breakdown
     req.session.data.payPeriodOneFurloughSalary =  Math.round(req.session.data.payOne * 0.8)
     req.session.data.payPeriodOneNic = Math.round(req.session.data.payPeriodOneFurloughSalary * 0.12)
     req.session.data.payPeriodOnePension = Math.round(req.session.data.payPeriodOneNic * 0.43)
-    //  pay period two calc
+    //  pay period two // Days in pay period
     req.session.data.payPeriodTwoFurloughSalary = Math.round(req.session.data.payTwo * 0.8)
     req.session.data.payPeriodTwoNic = Math.round(req.session.data.payPeriodTwoFurloughSalary * 0.12)
     req.session.data.payPeriodTwoPension = Math.round(req.session.data.payPeriodTwoNic * 0.43)
