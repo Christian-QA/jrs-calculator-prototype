@@ -41,13 +41,18 @@ Job Retention Scheme Calculator
                 {% endif %}
             </li>
             <li>They are paid {{data['payFrequency'] | default('monthly')}}</li>
+            <!--
+            {% if data['payVary']  %}
+                <li>They are paid different amounts each time</li>
+            {% endif %}
+            {% if data['employeeStartTitle']  %}
+                <li>They have been employed since {{data['employeeStartTitle'] }}</li>
+            {% endif %}
+            -->
             <li>Their National Insurance category is {{data['nicCategoryVal'] | default('A, B, C or J')}}</li>
-            <li>They have {{data['pensionStatus'] | default('opted into pension auto-enrolment')}}</li>
+            <li>They have {{data['pensionStatus'] | default('not opted out of pension auto-enrolment')}}</li>
             <li>The employee's first payday after 6 April was {{data['payTaxDateTitle'] | default('10 April')}}</li>
         </ul>
-
-
-
 
         <details class="govuk-details">
             <summary class="govuk-details__summary">
@@ -56,8 +61,6 @@ Job Retention Scheme Calculator
                  </span>
             </summary>
             <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-
-
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Pay period
@@ -67,7 +70,6 @@ Job Retention Scheme Calculator
                         <span class="govuk-!-font-weight-regular">- Pension contribution</span>
                     </dd>
                 </div>
-
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Pay period

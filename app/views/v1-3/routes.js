@@ -132,7 +132,7 @@ module.exports = function (router) {
   // route - pay dates
   router.post('/' + sprint + '/route-pay-question', function (req, res) {
     var data = req.session.data.payQuestion
-    if (data === 'paySalary') {
+    if (data === 'payRegular') {
       req.session.data.payRegular = 'The employee is paid the same amount each month'
       res.redirect('/' + sprint + '/regular-pay')
     } else if (data === 'payVariable') {
@@ -157,15 +157,15 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-variable-start-date', function (req, res) {
     var titleMonth = Math.round(req.session.data.employeeStartMonth)
     if (titleMonth === 2) {
-      req.session.data.payPeriodOneTitleMonth = ' February'
+      req.session.data.employeeStartMonth = ' February'
     } else if (titleMonth === 3) {
-      req.session.data.payPeriodOneTitleMonth = ' March'
+      req.session.data.employeeStartMonth = ' March'
     } else if (titleMonth === 4) {
-      req.session.data.payPeriodOneTitleMonth = ' April'
+      req.session.data.employeeStartMonth = ' April'
     } else if (titleMonth === 5) {
-      req.session.data.payPeriodOneTitleMonth = ' May'
+      req.session.data.employeeStartMonth = ' May'
     }
-    req.session.data.employeeStartTitle = Math.round(req.session.data.employeeStartDay) + req.session.data.employeeStartMonth
+    req.session.data.employeeStartTitle = Math.round(req.session.data.employeeStartDay) + req.session.data.employeeStartMonth + ' ' + req.session.data.employeeStartYear
     req.session.data.employeeStart = req.session.data.employeeStartDay + '/' + req.session.data.employeeStartMonth + '/' + req.session.data.employeeStartYear
     res.redirect('/' + sprint + '/variable-gross-salary')
   })
@@ -257,7 +257,7 @@ module.exports = function (router) {
     if (data === 'yes') {
       req.session.data.pensionStatus = 'opted out of pension auto-enrolment'
     } else if (data === 'no') {
-      req.session.data.pensionStatus = 'opted into pension auto-enrolment'
+      req.session.data.pensionStatus = 'not opted out of pension auto-enrolment'
     }
 
     // multiply for total
