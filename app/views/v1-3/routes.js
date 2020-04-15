@@ -285,7 +285,6 @@ module.exports = function (router) {
     req.session.data.periodTwoNoDays = 30 - Math.round(req.session.data.claimPeriodEndDay)
 
     // Total pay in each period
-    console.log("Ave = " + req.session.data.periodsalaryAmount);
     req.session.data.payOne = req.session.data.periodsalaryAmount * req.session.data.periodOneNoDays
     req.session.data.payTwo = req.session.data.periodsalaryAmount * req.session.data.periodTwoNoDays
 
@@ -294,7 +293,6 @@ module.exports = function (router) {
     if (req.session.data.payPeriodOneFurloughSalary > 2500) {
       req.session.data.payPeriodOneFurloughSalary = 2500
     }
-    console.log("one f pay = " + req.session.data.payPeriodOneFurloughSalary);
     req.session.data.payPeriodOneNic = Math.round(req.session.data.payPeriodOneFurloughSalary * 0.12)
     req.session.data.payPeriodOnePension = Math.round(req.session.data.payPeriodOneNic * 0.43)
 
@@ -303,7 +301,6 @@ module.exports = function (router) {
     if (req.session.data.payPeriodTwoFurloughSalary > 2500) {
       req.session.data.payPeriodTwoFurloughSalary = 2500
     }
-    console.log("two f pay = " + req.session.data.payPeriodTwoFurloughSalary);
     req.session.data.payPeriodTwoNic = Math.round(req.session.data.payPeriodTwoFurloughSalary * 0.12)
     req.session.data.payPeriodTwoPension = Math.round(req.session.data.payPeriodTwoNic * 0.43)
 
