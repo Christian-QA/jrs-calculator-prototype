@@ -54,6 +54,18 @@ module.exports = function (router) {
 
   // route furlough dates
   router.post('/' + sprint + '/route-furlough-dates', function (req, res) {
+    var data = req.session.data.furloughStatus
+    if (data === 'start') {
+      res.redirect('/' + sprint + '/furlough-dates-start')
+    } else  if (data === 'end') {
+      res.redirect('/' + sprint + '/furlough-dates-end')
+    } else if (data === 'startEnd') {
+      res.redirect('/' + sprint + '/furlough-dates-start-end')
+    }
+  })
+
+  // route furlough date start
+  router.post('/' + sprint + '/route-furlough-dates-start', function (req, res) {
     // furlough start
     req.session.data.furloughStart = req.session.data.furloughStartDay + '/' + req.session.data.furloughStartMonth + '/' + req.session.data.furloughStartYear;
     var titleMonth = Math.round(req.session.data.furloughStartMonth)
@@ -67,8 +79,11 @@ module.exports = function (router) {
       req.session.data.furloughStartMonthTitle = ' May'
     }
     req.session.data.furloughStartTitle = Math.round(req.session.data.furloughStartDay) + req.session.data.furloughStartMonthTitle;
+    res.redirect('/' + sprint + '/pay-frequency')
+  })
 
-    // furlough end
+  // // furlough end
+  router.post('/' + sprint + '/route-furlough-dates-end', function (req, res) {
     req.session.data.furloughEnd = req.session.data.furloughEndDay + '/' + req.session.data.furloughEndMonth + '/' + req.session.data.furloughEndYear;
     var endMonth = Math.round(req.session.data.furloughEndMonth)
     if (endMonth === 2) {
@@ -81,9 +96,12 @@ module.exports = function (router) {
       req.session.data.furloughEndMonthTitle = ' May'
     }
     req.session.data.furloughEndTitle = Math.round(req.session.data.furloughEndDay) + req.session.data.furloughEndMonthTitle;
+    res.redirect('/' + sprint + '/pay-frequency')
+  })
 
-    // furlough start to end
-    //  start
+  // // furlough  start end
+  router.post('/' + sprint + '/route-furlough-dates-start-end', function (req, res) {
+
     req.session.data.furloughPartialStart = req.session.data.furloughPartialStartDay + '/' + req.session.data.furloughPartialStartMonth + '/' + req.session.data.furloughPartialStartYear;
     var startPartialMonth = Math.round(req.session.data.furloughPartialStartMonth)
     if (startPartialMonth === 2) {
@@ -109,8 +127,7 @@ module.exports = function (router) {
     } else if (endPartialMonth === 5) {
       req.session.data.furloughPartialEndMonthTitle = ' May'
     }
-    req.session.data.furloughPartialEndTitle = Math.round(req.session.data.furloughPartialEndDay) + req.session.data.furloughPartialEndMonthTitle;
-
+    req.session.data.furloughPartialEndTitle = Math.round(req.session.data.furloughPartialEndDay) + req.session.data.furloughPartialEndMonthTitle
     res.redirect('/' + sprint + '/pay-frequency')
   })
 
