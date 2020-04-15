@@ -19,20 +19,7 @@ Job Retention Scheme Calculator
                 £{{data['totalFurlough'] | default('1152')}}.44 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span> <br> £{{data['totalNic'] | default('120')}}.22 <span class="govuk-!-font-weight-regular">- Employer's NI</span> <br> £{{data['totalPension'] | default('27')}}.38 <span class="govuk-!-font-weight-regular">- Employer’s pension contribution</span>
             </h1>
         </div>
-        <h2 class="govuk-heading-m">
-            Next steps
-        </h2>
 
-        <ul class="govuk-list govuk-list--number">
-            
-            <li>Make a note of 3 figures above. <!--You’ll need them when you make a claim.--></li>
-            
-            <li>Run the calculator again for any other employees that are furloughed for all or part of the claim period ({% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %}).</li>
-            <li>Use the combined totals for furloughed pay, employer's NI contribution and pension contribution for your claim.</li>
-
-        </ul>
-
-        <p><a href="https://www.gov.uk/guidance/claim-for-wage-costs-through-the-coronavirus-job-retention-scheme" target="_blank">Job Retention Scheme online claim form</a></p>
         <h2 class="govuk-heading-m">
             How these figures were calculated
         </h2>
@@ -93,7 +80,20 @@ Job Retention Scheme Calculator
             </dl>
         </details>
 
+        <h2 class="govuk-heading-m">
+            Next steps
+        </h2>
 
+        <ul class="govuk-list govuk-list--number">
+
+            <li>Make a note of 3 figures above. <!--You’ll need them when you make a claim.--></li>
+
+            <li>Run the calculator again for any other employees that are furloughed for all or part of the claim period ({% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %}).</li>
+            <li>Use the combined totals for furloughed pay, employer's NI contribution and pension contribution for your claim.</li>
+
+        </ul>
+
+        <p><a href="https://www.gov.uk/guidance/claim-for-wage-costs-through-the-coronavirus-job-retention-scheme" target="_blank">Job Retention Scheme online claim form</a></p>
 
         <form class="form" method="post" action="reset">
             <button class="govuk-button"  data-module="govuk-button">
