@@ -46,7 +46,7 @@ module.exports = function (router) {
     var data = req.session.data.furloughWhole
     if (data === 'yes') {
       req.session.data.furloughPeriod = 'have been furloughed for the whole of the claim period'
-      res.redirect('/' + sprint + '/pay-question')
+      res.redirect('/' + sprint + '/pay-frequency')
     } else {
       res.redirect('/' + sprint + '/furlough-dates')
     }
@@ -111,11 +111,6 @@ module.exports = function (router) {
     }
     req.session.data.furloughPartialEndTitle = Math.round(req.session.data.furloughPartialEndDay) + req.session.data.furloughPartialEndMonthTitle;
 
-    res.redirect('/' + sprint + '/pay-question')
-  })
-
-  // route - pay dates
-  router.post('/' + sprint + '/route-pay-question', function (req, res) {
     res.redirect('/' + sprint + '/pay-frequency')
   })
 
@@ -131,7 +126,54 @@ module.exports = function (router) {
     } else if (data === 'weekly') {
       req.session.data.payFrequency = 'each week'
     }
-    res.redirect('/' + sprint + '/salary')
+    res.redirect('/' + sprint + '/pay-question')
+  })
+
+  // route - pay dates
+  router.post('/' + sprint + '/route-pay-question', function (req, res) {
+    var data = req.session.data.payQuestion
+    if (data === 'paySalary') {
+      req.session.data.payRegular = 'The employee is paid the same amount each month'
+      res.redirect('/' + sprint + '/regular-pay')
+    } else if (data === 'payVariable') {
+      req.session.data.payVary = 'The employees pay varies each time'
+      res.redirect('/' + sprint + '/variable-length-employed')
+    }
+  })
+
+  // route - vairable length time employed
+  router.post('/' + sprint + '/route-employed-length-question', function (req, res) {
+    var data = req.session.data.employLength
+    if (data === 'lessThan12') {
+      //req.session.data.payRegular = 'The employee is paid the same amount each month'
+      res.redirect('/' + sprint + '/variable-length-employed-start-date')
+    } else if (data === 'moreThan12') {
+     // req.session.data.payVary = 'The employees pay varies each time'
+      res.redirect('/' + sprint + '/variable-length-more-than')
+    }
+  })
+
+  // route - vairable lengt start dates
+  router.post('/' + sprint + '/route-variable-start-date', function (req, res) {
+    var titleMonth = Math.round(req.session.data.employeeStartMonth)
+    if (titleMonth === 2) {
+      req.session.data.payPeriodOneTitleMonth = ' February'
+    } else if (titleMonth === 3) {
+      req.session.data.payPeriodOneTitleMonth = ' March'
+    } else if (titleMonth === 4) {
+      req.session.data.payPeriodOneTitleMonth = ' April'
+    } else if (titleMonth === 5) {
+      req.session.data.payPeriodOneTitleMonth = ' May'
+    }
+    req.session.data.employeeStartTitle = Math.round(req.session.data.employeeStartDay) + req.session.data.employeeStartMonth
+    req.session.data.employeeStart = req.session.data.employeeStartDay + '/' + req.session.data.employeeStartMonth + '/' + req.session.data.employeeStartYear
+    res.redirect('/' + sprint + '/variable-gross-salary')
+  })
+
+  // route- variable gross salary
+  router.post('/' + sprint + '/route-variable-gross-salary', function (req, res) {
+    req.session.data.variableGrosSalaryAmount = req.session.data.variableGrossSalary
+    res.redirect('/' + sprint + '/pay-dates-1')
   })
 
   // route- salary

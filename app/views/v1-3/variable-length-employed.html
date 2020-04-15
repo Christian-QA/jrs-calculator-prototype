@@ -12,13 +12,13 @@ Job Retention Scheme Calculator
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form action="route-pay-question" method="post">
+      <form action="route-employed-length-question" method="post">
       {{ govukRadios({
-      idPrefix: "payQuestion",
-      name: "payQuestion",
+      idPrefix: "employLength",
+      name: "employLength",
       fieldset: {
         legend: {
-          text: "How is this employee paid?",
+          text: "How long has this employee been working for the business?",
           isPageHeading: true,
           classes: "govuk-fieldset__legend--xl"
         }
@@ -28,12 +28,12 @@ Job Retention Scheme Calculator
         },
       items: [
         {
-        value: "payRegular",
-        text: "A regular amount each time"
+        value: "lessThan12",
+        text: "Less than 12 months"
         },
         {
-        value: "payVariable",
-        text: "It varies each time"
+        value: "moreThan12",
+        text: "12 months or more"
         }
 
       ]
