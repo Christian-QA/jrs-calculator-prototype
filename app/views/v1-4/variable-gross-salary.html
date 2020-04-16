@@ -24,15 +24,20 @@ Job Retention Scheme Calculator
               </legend>
 
               <span id="nicCategory-hint" class="govuk-hint">
-    <p>This is the gross amount before deductions.</p>
+<p>This is the total gross amount before deductions the employee has been paid from {{data['employeeStartTitle'] | default('11 November')}} up to the earlier of:</p>
+<ul class="govuk-list govuk-list--bullet">
+    <li>5th April 2020 or</li>
+    <li>the day prior to them being furloughed</li>
+</ul>
+
 
 
   </span>
-          <!--<label class="govuk-label" for="amount">
+          <label class="govuk-label" for="amount">
               Enter an amount
           </label>
 
-          <span id="width-10-hint" class="govuk-hint">
+          <!--<span id="width-10-hint" class="govuk-hint">
     hint
   </span>-->
         <div class="govuk-currency-input__inner govuk-form-group">

@@ -170,7 +170,10 @@ module.exports = function (router) {
   // route - vairable lengt start dates
   router.post('/' + sprint + '/route-variable-start-date', function (req, res) {
     var titleMonth = Math.round(req.session.data.employeeStartMonth)
-    if (titleMonth === 2) {
+    req.session.data.employeeStartMonthCalc = titleMonth
+    if (titleMonth === 1) {
+      req.session.data.employeeStartMonth = ' January'
+    } else if (titleMonth === 2) {
       req.session.data.employeeStartMonth = ' February'
     } else if (titleMonth === 3) {
       req.session.data.employeeStartMonth = ' March'
@@ -178,6 +181,20 @@ module.exports = function (router) {
       req.session.data.employeeStartMonth = ' April'
     } else if (titleMonth === 5) {
       req.session.data.employeeStartMonth = ' May'
+    } else if (titleMonth === 6) {
+      req.session.data.employeeStartMonth = ' June'
+    } else if (titleMonth === 7) {
+      req.session.data.employeeStartMonth = ' July'
+    } else if (titleMonth === 8) {
+      req.session.data.employeeStartMonth = ' August'
+    } else if (titleMonth === 9) {
+      req.session.data.employeeStartMonth = ' September'
+    } else if (titleMonth === 10) {
+      req.session.data.employeeStartMonth = ' October'
+    } else if (titleMonth === 11) {
+      req.session.data.employeeStartMonth = ' November'
+    } else if (titleMonth === 12) {
+      req.session.data.employeeStartMonth = ' December'
     }
     req.session.data.employeeStartTitle = Math.round(req.session.data.employeeStartDay) + req.session.data.employeeStartMonth + ' ' + req.session.data.employeeStartYear
     req.session.data.employeeStart = req.session.data.employeeStartDay + '/' + req.session.data.employeeStartMonth + '/' + req.session.data.employeeStartYear
@@ -276,7 +293,10 @@ module.exports = function (router) {
 
     // Average Daily pay calc
     if (req.session.data.variableGrossSalary) {
-      req.session.data.periodsalaryAmount = Math.round(req.session.data.variableGrossSalary / 91)
+      var grossSalary = req.session.data.variableGrossSalary
+      var claimMonthTotal =  Math.round(req.session.data.claimPeriodStartMonth) + 12
+      var MonthStart = Math.round(req.session.data.employeeStartMonthCalc)
+      req.session.data.periodsalaryAmount = Math.round(grossSalary / ((claimMonthTotal - MonthStart) * 30))
     } else if (req.session.data.salaryAmount) {
       req.session.data.periodsalaryAmount = Math.round(req.session.data.salaryAmount / 30)
     }
