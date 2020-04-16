@@ -372,10 +372,8 @@ module.exports = function (router) {
       var grossSalary = req.session.data.variableGrossSalary
       var claimMonthTotal =  Math.round(req.session.data.claimPeriodStartMonth) + 12
       var MonthStart = Math.round(req.session.data.employeeStartMonthCalc)
-      console.log("variable salary amount at end = " + grossSalary)
       req.session.data.periodsalaryAmount = Math.round(grossSalary / ((claimMonthTotal - MonthStart) * 30))
     } else if (req.session.data.salaryAmount) {
-      console.log("salary amount at end = " + req.session.data.salaryAmount)
       req.session.data.periodsalaryAmount = Math.round(req.session.data.salaryAmount / 30)
     }
     // Days in pay period
