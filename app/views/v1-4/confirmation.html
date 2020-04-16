@@ -14,7 +14,7 @@ Job Retention Scheme Calculator
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-8">
-            <div class="govuk-panel__body govuk-!-margin-bottom-4 govuk-!-font-size-27">
+            <div class="govuk-panel__body govuk-!-margin-bottom-4 govuk-!-font-size-36">
                 For this employee you can claim:
             </div>
             <h1 class="govuk-panel__title">
@@ -74,12 +74,12 @@ Job Retention Scheme Calculator
             </summary>
             <dl class="govuk-summary-list govuk-!-margin-bottom-9">
                 <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
+                    <dt class="govuk-summary-list__key" style="width: 15%">
                         Pay period
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        Up to {{data['payPeriodTwo'] | default('30/03/2020')}}<br><br> £{{data['payPeriodOneFurloughSalary'] | default('851')}}.00 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span> <br> £{{data['payPeriodOneNic'] | default('70')}}.11 <span class="govuk-!-font-weight-regular">- Employer's NI contribution</span> <br> £{{data['payPeriodOnePension'] | default('18')}}.19
-                        <span class="govuk-!-font-weight-regular">- Employer’s pension contribution</span>
+                        Ending {{data['payPeriodTwoTitle'] | default('30 March')}} 2020<br>£{{data['payPeriodOneFurloughSalary'] | default('851')}}.00 <span class="govuk-!-font-weight-regular"> - Gross furlough amount</span> <br> £{{data['payPeriodOneNic'] | default('70')}}.11 <span class="govuk-!-font-weight-regular">- Employer's National Insurance contributions</span> <br> £{{data['payPeriodOnePension'] | default('18')}}.19
+                        <span class="govuk-!-font-weight-regular">- Employer minimum auto-enrolment pension costs</span>
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row">
@@ -87,8 +87,8 @@ Job Retention Scheme Calculator
                         Pay period
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        Up to {{data['payPeriodThree'] | default('30/04/2020')}}<br><br> £{{data['payPeriodTwoFurloughSalary'] | default('301')}}.00 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span> <br> £{{data['payPeriodTwoNic'] | default('50')}}.11 <span class="govuk-!-font-weight-regular">- Employer's NI contribution</span> <br> £{{data['payPeriodTwoPension'] | default('9')}}.19
-                        <span class="govuk-!-font-weight-regular">- Employer’s pension contribution</span>
+                        Ending {{data['payPeriodThreeTitle'] | default('30 April')}} 2020<br> £{{data['payPeriodTwoFurloughSalary'] | default('301')}}.00 <span class="govuk-!-font-weight-regular"> - Gross furlough amount</span> <br> £{{data['payPeriodTwoNic'] | default('50')}}.11 <span class="govuk-!-font-weight-regular">- Employer's National Insurance contributions</span> <br> £{{data['payPeriodTwoPension'] | default('9')}}.19
+                        <span class="govuk-!-font-weight-regular">- Employer minimum auto-enrolment pension costs</span>
                     </dd>
                 </div>
             </dl>
