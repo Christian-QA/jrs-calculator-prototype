@@ -1,0 +1,58 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="route-vary-salary-1" method="post">
+
+          <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
+              <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+                  <h1 class="govuk-fieldset__heading">
+                      <!--Enter the employee’s  salary on 28.02.20-->
+In the previous year, how much was this employee paid in the pay period ending {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}27 February{% endif %}  2019?
+                     <!-- {{data['payFrequency'] | default('each month')}}?-->
+                  </h1>
+              </legend>
+
+              <span id="nicCategory-hint" class="govuk-hint">
+
+                   <p>This is needed so we can work out average pay based on last years amount.</p>
+
+  </span>
+          <!--<label class="govuk-label" for="amount">
+              Enter an amount
+          </label>
+
+          <span id="width-10-hint" class="govuk-hint">
+    hint
+  </span>-->
+        <div class="govuk-currency-input__inner govuk-form-group">
+
+        <span class="govuk-currency-input__inner__unit">£</span>
+        <input type="text" class="govuk-currency-input__inner__input govuk-input govuk-input--width-10" id="salary" value=""  name="salary" >
+        </div>
+
+        <button class="govuk-button" data-module="govuk-button">
+            Continue
+        </button>
+          </fieldset>
+      </form>
+        {% include "includes/web-chat.html" %}
+
+
+    </div>
+</div>
+
+{% endblock %}

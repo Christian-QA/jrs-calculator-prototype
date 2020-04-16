@@ -163,7 +163,7 @@ module.exports = function (router) {
     if (data === 'lessThan12') {
       res.redirect('/' + sprint + '/variable-length-employed-start-date')
     } else if (data === 'moreThan12') {
-      res.redirect('/' + sprint + '/variable-length-more-than')
+      res.redirect('/' + sprint + '/vary-pay-dates-1')
     }
   })
 
@@ -205,6 +205,64 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-variable-gross-salary', function (req, res) {
     req.session.data.variableGrosSalaryAmount = req.session.data.variableGrossSalary
     res.redirect('/' + sprint + '/pay-dates-1')
+  })
+
+  // route-vary-pay-dates-1
+  router.post('/' + sprint + '/route-vary-pay-dates-1', function (req, res) {
+    var titleMonth = Math.round(req.session.data.payPeriodOneStartMonth)
+    if (titleMonth === 2) {
+      req.session.data.payPeriodOneTitleMonth = ' February'
+    } else if (titleMonth === 3) {
+      req.session.data.payPeriodOneTitleMonth = ' March'
+    } else if (titleMonth === 4) {
+      req.session.data.payPeriodOneTitleMonth = ' April'
+    } else if (titleMonth === 5) {
+      req.session.data.payPeriodOneTitleMonth = ' May'
+    }
+    req.session.data.payPeriodOneTitle = Math.round(req.session.data.payPeriodOneStartDay) + req.session.data.payPeriodOneTitleMonth
+    req.session.data.prevPayPeriodOneTitle = (Math.round(req.session.data.payPeriodOneStartDay) - 2) + req.session.data.payPeriodOneTitleMonth + " 2019"
+    req.session.data.payPeriodOne = req.session.data.payPeriodOneStartDay + '/' + req.session.data.payPeriodOneStartMonth + '/' + req.session.data.payPeriodOneStartYear
+    res.redirect('/' + sprint + '/vary-pay-dates-2')
+  })
+
+  // route-vary-pay-dates-2
+  router.post('/' + sprint + '/route-vary-pay-dates-2', function (req, res) {
+    var titleMonth = Math.round(req.session.data.payPeriodTwoStartMonth)
+    if (titleMonth === 2) {
+      req.session.data.payPeriodTwoTitleMonth = ' February'
+    } else if (titleMonth === 3) {
+      req.session.data.payPeriodTwoTitleMonth = ' March'
+    } else if (titleMonth === 4) {
+      req.session.data.payPeriodTwoTitleMonth = ' April'
+    } else if (titleMonth === 5) {
+      req.session.data.payPeriodTwoTitleMonth = ' May'
+    }
+
+    req.session.data.payPeriodTwoTitle = Math.round(req.session.data.payPeriodTwoStartDay) + req.session.data.payPeriodTwoTitleMonth
+    req.session.data.prevPayPeriodTwoTitle = (Math.round(req.session.data.payPeriodTwoStartDay) - 2) + req.session.data.payPeriodTwoTitleMonth + " 2019"
+    req.session.data.payPeriodTwo = req.session.data.payPeriodTwoStartDay + '/' + req.session.data.payPeriodTwoStartMonth + '/' + req.session.data.payPeriodTwoStartYear
+    res.redirect('/' + sprint + '/vary-pay-dates-3')
+  })
+
+  // route-vary-pay-dates-3
+  router.post('/' + sprint + '/route-vary-pay-dates-3', function (req, res) {
+    req.session.data.payPeriodThree = req.session.data.payPeriodThreeStartDay + '/' + req.session.data.payPeriodThreeStartMonth + '/' + req.session.data.payPeriodThreeStartYear
+    res.redirect('/' + sprint + '/vary-salary-1')
+  })
+
+  // route-vary-salary-1
+  router.post('/' + sprint + '/route-vary-salary-1', function (req, res) {
+    res.redirect('/' + sprint + '/vary-salary-2')
+  })
+  // route-vary-salary-2
+  router.post('/' + sprint + '/route-vary-salary-2', function (req, res) {
+    res.redirect('/' + sprint + '/vary-salary-3')
+  })
+
+  // route-vary-salary-3
+  router.post('/' + sprint + '/route-vary-salary-3', function (req, res) {
+    req.session.data.salaryAmount = req.session.data.salary
+    res.redirect('/' + sprint + '/nic-category')
   })
 
   // route- salary
