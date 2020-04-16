@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-8">
+            <div class="govuk-panel__body govuk-!-margin-bottom-4 govuk-!-font-size-24">
+                For this employee you can claim:
+            </div>
+            <h1 class="govuk-panel__title govuk-!-font-size-36">
+
+                £{{data['totalFurlough'] | default('1152')}}.00 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span> <br> £{{data['totalNic'] | default('120')}}.22 <span class="govuk-!-font-weight-regular">- Employer's NI</span> <br> £{{data['totalPension'] | default('27')}}.38 <span class="govuk-!-font-weight-regular">- Employer’s pension contribution</span>
+            </h1>
+        </div>
+
+        <h2 class="govuk-heading-m">
+            How these figures were calculated
+        </h2>
+        <p><span class="govuk-!-font-weight-bold">Calculated on:</span> 20 April 2020 (Version v 1.3) </p>
+        <p>The calculations were based on the information you entered: </p>
+
+        <ul class="govuk-list govuk-list--bullet">
+            <li>Claim period: {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %}</li>
+            <li>They
+                {% if data['furloughPeriod'] %}
+                    {{data['furloughPeriod']| default('have been furloughed for the whole of the claim period')}}
+                {% elseif data['furloughStartTitle'] %}
+                    began their furlough on {{data['furloughStartTitle']}}
+                {% elseif data['furloughEndTitle'] %}
+                    ended their furlough on {{data['furloughEndTitle']}}
+                {% elseif data['furloughPartialStartTitle'] %}
+                    were furloughed from {{data['furloughPartialStartTitle']}} until {{data['furloughPartialEndTitle']}}
+               {% else %}
+                    have been furloughed for the whole of the claim period
+                {% endif %}
+            </li>
+            <li>They are paid {{data['payFrequency'] | default('monthly')}}</li>
+            <!--
+            {% if data['payVary']  %}
+                <li>They are paid different amounts each time</li>
+            {% endif %}
+            {% if data['employeeStartTitle']  %}
+                <li>They have been employed since {{data['employeeStartTitle'] }}</li>
+            {% endif %}
+            -->
+            <li>Their National Insurance category is {{data['nicCategoryVal'] | default('A, B, C or J')}}</li>
+            <li>They have {{data['pensionStatus'] | default('not opted out of pension auto-enrolment')}}</li>
+            <li>The employee's first payday after 6 April was {{data['payTaxDateTitle'] | default('10 April')}}</li>
+        </ul>
+
+        <details class="govuk-details">
+            <summary class="govuk-details__summary">
+               <span class="govuk-details__summary-text">
+                    Breakdown of the figures for each pay period during the claim
+                 </span>
+            </summary>
+            <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Pay period
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        Up to {{data['payPeriodTwo'] | default('30/03/2020')}}<br><br> £{{data['payPeriodOneFurloughSalary'] | default('851')}}.00 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span> <br> £{{data['payPeriodOneNic'] | default('70')}}.11 <span class="govuk-!-font-weight-regular">- Employer's NI contribution</span> <br> £{{data['payPeriodOnePension'] | default('18')}}.19
+                        <span class="govuk-!-font-weight-regular">- Employer’s pension contribution</span>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Pay period
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        Up to {{data['payPeriodThree'] | default('30/04/2020')}}<br><br> £{{data['payPeriodTwoFurloughSalary'] | default('301')}}.00 <span class="govuk-!-font-weight-regular"> - Furloughed pay</span> <br> £{{data['payPeriodTwoNic'] | default('50')}}.11 <span class="govuk-!-font-weight-regular">- Employer's NI contribution</span> <br> £{{data['payPeriodTwoPension'] | default('9')}}.19
+                        <span class="govuk-!-font-weight-regular">- Employer’s pension contribution</span>
+                    </dd>
+                </div>
+            </dl>
+        </details>
+
+        <h2 class="govuk-heading-m">
+            Next steps
+        </h2>
+
+        <ul class="govuk-list govuk-list--number">
+
+            <li>Run the calculator for any other employees furloughed for all or part of this claim period  ({% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %}). Make a note of each set of figures.
+            </li>
+            <li>Work out the total amounts to claim for furloughed pay, employer’s NI and employer’s pension contribution for all the employees.</li>
+            <li>Make a claim using the <a href="https://www.gov.uk/guidance/claim-for-wage-costs-through-the-coronavirus-job-retention-scheme" target="_blank">Job Retention Scheme online claim form</a>.</li>
+
+        </ul>
+
+
+
+        <form class="form" method="post" action="reset">
+            <button class="govuk-button"  data-module="govuk-button">
+                Start another calculation
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

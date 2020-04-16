@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <form action="route-furlough-dates" method="post">
+            <div class="govuk-form-group">
+
+                <fieldset class="govuk-fieldset" aria-describedby="furloughQuestion-hint">
+
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+
+                        <h1 class="govuk-fieldset__heading">
+                            What is the furlough period for this employee?
+                        </h1>
+
+                    </legend>
+                    <!-- <p>
+                       From {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %}
+                     </p>-->
+
+                    <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="how-contacted-conditional" name="furloughStatus" type="radio" value="start" data-aria-controls="conditional-how-contacted-conditional"> <label class="govuk-label govuk-radios__label" for="how-contacted-conditional"> Starts after {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif%} </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="how-contacted-conditional-2" name="furloughStatus" type="radio" value="end" data-aria-controls="conditional-how-contacted-conditional-2"> <label class="govuk-label govuk-radios__label" for="how-contacted-conditional-2"> Ends before {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %} </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="how-contacted-conditional-3" name="furloughStatus" type="radio" value="startEnd" data-aria-controls="conditional-how-contacted-conditional-3"> <label class="govuk-label govuk-radios__label" for="how-contacted-conditional-3"> Starts and ends between {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} and {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %} </label>
+                        </div>
+
+                </fieldset>
+
+
+            </div>
+            <button class="govuk-button govuk-!-margin-right-2" data-module="govuk-button">
+                Continue
+            </button>
+
+
+        </form>
+
+
+    </div>
+</div>
+
+{% endblock %}

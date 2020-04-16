@@ -1,0 +1,51 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="route-employed-length-question" method="post">
+      {{ govukRadios({
+      idPrefix: "employLength",
+      name: "employLength",
+      fieldset: {
+        legend: {
+          text: "How long has this employee been working for you?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--xl"
+        }
+      },
+        hint: {
+        text: ""
+        },
+      items: [
+        {
+        value: "lessThan12",
+        text: "Less than 12 months"
+        },
+        {
+        value: "moreThan12",
+        text: "12 months or more"
+        }
+
+      ]
+      }) }}
+
+        <button class="govuk-button" data-module="govuk-button">
+          Continue
+        </button>
+      </form>
+
+
+    </div>
+</div>
+
+{% endblock %}
