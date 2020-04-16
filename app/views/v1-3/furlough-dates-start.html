@@ -22,7 +22,8 @@ Job Retention Scheme Calculator
                When did their furlough start?  <!--{% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif%}-->
               </h1>
             </legend>
-
+            <div class="govuk-inset-text">
+              To claim under the scheme an employee must be furloughed for at least 3 weeks. If it’s less than this by {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %}, you can make a separate claim to cover any remaining furlough period. </div>
 
 
               <label class="govuk-label" for="payPeriod"></label> <span id="claimPeriodStart-hint" class="govuk-hint">
