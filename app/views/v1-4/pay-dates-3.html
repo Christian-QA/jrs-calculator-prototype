@@ -22,7 +22,7 @@ Job Retention Scheme Calculator
           <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
               <h1 class="govuk-fieldset__heading">
-                What’s the end of the pay period after {% if data['payPeriodTwoTitle']%}{{data['payPeriodTwoTitle']}}{% else %}30 April{% endif %}?
+                What’s the end of the next pay period after {% if data['payPeriodTwoTitle']%}{{data['payPeriodTwoTitle']}}{% else %}30 April{% endif %}?
               </h1>
             </legend>
             <p>This is the last day in the pay period, not the date they received their pay.</p>
@@ -73,6 +73,7 @@ Job Retention Scheme Calculator
 
 
       </form>
+        {% include "includes/web-chat.html" %}
 
 
     </div>
