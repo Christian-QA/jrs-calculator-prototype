@@ -276,7 +276,7 @@ module.exports = function (router) {
 
     // Average Daily pay calc
     if (req.session.data.variableGrossSalary) {
-      req.session.data.periodsalaryAmount = Math.round(req.session.data.variableGrossSalary / 180)
+      req.session.data.periodsalaryAmount = Math.round(req.session.data.variableGrossSalary / 91)
     } else if (req.session.data.salaryAmount) {
       req.session.data.periodsalaryAmount = Math.round(req.session.data.salaryAmount / 30)
     }
