@@ -275,6 +275,7 @@ module.exports = function (router) {
   // route-vary-salary-3
   router.post('/' + sprint + '/route-vary-salary-3', function (req, res) {
     req.session.data.salaryAmount = req.session.data.salary
+    console.log("salary amount on submit = " + req.session.data.salaryAmount)
     res.redirect('/' + sprint + '/vary-gross-salary')
   })
 
@@ -374,6 +375,7 @@ module.exports = function (router) {
       var MonthStart = Math.round(req.session.data.employeeStartMonthCalc)
       req.session.data.periodsalaryAmount = Math.round(grossSalary / ((claimMonthTotal - MonthStart) * 30))
     } else if (req.session.data.salaryAmount) {
+      console.log("salary amount at end = " + req.session.data.salaryAmount)
       req.session.data.periodsalaryAmount = Math.round(req.session.data.salaryAmount / 30)
     }
     // Days in pay period
