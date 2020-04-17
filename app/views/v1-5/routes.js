@@ -211,7 +211,12 @@ module.exports = function (router) {
 
   // route- route partial pay period
   router.post('/' + sprint + '/route-part-pay-period', function (req, res) {
-    res.redirect('/' + sprint + '/vary-gross-salary')
+    if (req.session.data.varyMoreThan){
+      res.redirect('/' + sprint + '/pay-dates-2')
+    } else {
+      res.redirect('/' + sprint + '/vary-gross-salary')
+    }
+
   })
 
   // route- variable gross salary
@@ -242,7 +247,8 @@ module.exports = function (router) {
 
     req.session.data.payPeriodOneTitle = Math.round(req.session.data.payPeriodOneStartDay) + req.session.data.payPeriodOneTitleMonth
     req.session.data.payPeriodOne = req.session.data.payPeriodOneStartDay + '/' + req.session.data.payPeriodOneStartMonth + '/' + req.session.data.payPeriodOneStartYear
-    res.redirect('/' + sprint + '/pay-dates-2')
+
+    res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
   })
 
   // route - pay dates 2
