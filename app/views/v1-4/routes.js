@@ -56,26 +56,7 @@ module.exports = function (router) {
     }
     req.session.data.furloughStartTitle = Math.round(req.session.data.furloughStartDay) + req.session.data.furloughStartMonthTitle
     res.redirect('/' + sprint + '/furlough-dates-end-question')
-    // var data = req.session.data.furloughWhole
-    // if (data === 'yes') {
-    //   req.session.data.furloughPeriod = 'have been furloughed for the whole of the claim period'
-    //   res.redirect('/' + sprint + '/pay-frequency')
-    // } else {
-    //   res.redirect('/' + sprint + '/furlough-dates')
-    // }
   })
-
-  // route furlough dates
-  // router.post('/' + sprint + '/route-furlough-dates', function (req, res) {
-  //   var data = req.session.data.furloughStatus
-  //   if (data === 'start') {
-  //     res.redirect('/' + sprint + '/furlough-dates-start')
-  //   } else if (data === 'end') {
-  //     res.redirect('/' + sprint + '/furlough-dates-end')
-  //   } else if (data === 'startEnd') {
-  //     res.redirect('/' + sprint + '/furlough-dates-start-end')
-  //   }
-  // })
 
   // route - furlough end date question
   router.post('/' + sprint + '/route-dates-end-question', function (req, res) {
@@ -307,12 +288,6 @@ module.exports = function (router) {
     res.redirect('/' + sprint + '/vary-gross-salary')
   })
 
-  // route-vary-salary-3
-  // router.post('/' + sprint + '/route-vary-salary-3', function (req, res) {
-  //   req.session.data.salaryAmount = req.session.data.salary
-  //   res.redirect('/' + sprint + '/vary-gross-salary')
-  // })
-
   // route-vary-gross salary
   router.post('/' + sprint + '/route-vary-gross-salary', function (req, res) {
     res.redirect('/' + sprint + '/nic-category')
@@ -363,6 +338,7 @@ module.exports = function (router) {
     } else if (req.session.data.salaryAmount) {
       req.session.data.periodsalaryAmount = Math.round(req.session.data.salaryAmount / 30)
     }
+    console.log('period ave = ' + req.session.data.periodsalaryAmount)
     // Days in pay period
     req.session.data.periodOneNoDays = 31 - Math.round(req.session.data.claimPeriodStartDay)
     req.session.data.periodTwoNoDays = 30 - Math.round(req.session.data.claimPeriodEndDay)
@@ -391,6 +367,7 @@ module.exports = function (router) {
     req.session.data.totalFurlough = req.session.data.payPeriodOneFurloughSalary + req.session.data.payPeriodTwoFurloughSalary
     req.session.data.totalNic = req.session.data.payPeriodOneNic + req.session.data.payPeriodTwoNic
     req.session.data.totalPension = req.session.data.payPeriodOnePension + req.session.data.payPeriodTwoPension
+    console.log('total =' + req.session.data.totalFurlough)
     res.redirect('/' + sprint + '/tax-year-pay-date')
   })
 

@@ -14,8 +14,8 @@ Job Retention Scheme Calculator
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-8">
-            <h1 class="govuk-panel__body govuk-!-margin-bottom-4 govuk-!-margin-top-0 govuk-!-font-size-36">
-                For this employee you can claim:
+            <h1 class="govuk-panel__body govuk-!-margin-bottom-4 govuk-!-margin-top-0 govuk-!-font-size-27">
+                What you can claim for this employee
             </h1>
             <div class="govuk-panel__title">
                 {% if data['totalFurlough'] %}
@@ -24,7 +24,8 @@ Job Retention Scheme Calculator
                     £1152.00
                 {% endif %}
                 <br>
-                <p class="govuk-!-font-weight-regular govuk-!-font-size-24 govuk-!-margin-bottom-4" style="color: white">Gross furlough amount</p>
+                <p class="govuk-!-font-weight-regular govuk-!-font-size-24 govuk-!-margin-bottom-4" style="color: white">Amount paid to this furloughed employee
+                </p>
                 <!--<p class=" govuk-!-font-size-19 govuk-!-font-weight-regular govuk-!-margin-bottom-4" style="color: white">(not including National Insurance contributions and auto-enrolment pension costs)</p>-->
                 {% if data['totalFurlough'] %}
                 £{{data['totalNic']}}.22
@@ -33,7 +34,7 @@ Job Retention Scheme Calculator
                 {% endif %}
 
                 <br>
-                <p class="govuk-!-font-weight-regular govuk-!-font-size-24 govuk-!-margin-bottom-4" style="color: white">Employer's National Insurance contributions</p>
+                <p class="govuk-!-font-weight-regular govuk-!-font-size-24 govuk-!-margin-bottom-4" style="color: white">Employer National Insurance contributions</p>
                 {% if data['totalFurlough'] %}
                 £{{data['totalPension']}}.00
                 {% else %}
@@ -41,7 +42,7 @@ Job Retention Scheme Calculator
                 {% endif %}
 
                 <br>
-                <p class="govuk-!-font-weight-regular govuk-!-font-size-24 govuk-!-margin-bottom-0" style="color: white">Employer minimum auto-enrolment pension costs</p>
+                <p class="govuk-!-font-weight-regular govuk-!-font-size-24 govuk-!-margin-bottom-0" style="color: white">Employer minimum pension contributions</p>
             </div>
         </div>
 
@@ -168,8 +169,13 @@ Job Retention Scheme Calculator
 
             <li>Run the calculator for any other employees furloughed for all or part of this claim period ({% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %}). <span class="govuk-!-font-weight-bold">Make a note of each set of figures.</span>
             </li>
-            <li>Work out the total amounts to claim for (1) furlough amount, (2) employer National Insurance and (3) employer minimum auto-enrolment pension costs for all the employees.</li>
-            <li>Make a claim using the <a href="https://www.gov.uk/guidance/claim-for-wage-costs-through-the-coronavirus-job-retention-scheme" target="_blank">Job Retention Scheme online claim form</a>.</li>
+            <li><p>Work out the total amounts to claim for:</p>
+                <ul class="govuk-list govuk-list--list">
+                    <li>furlough amount</li>
+                    <li>employer National Insurance</li>
+                    <li>employer minimum pension contributions</li>
+            </li>
+            <li>Make a claim using the <a href="https://www.gov.uk/guidance/claim-for-wage-costs-through-the-coronavirus-job-retention-scheme" target="_blank">Job Retention Scheme online claim service</a>.</li>
 
         </ul>
 
@@ -177,7 +183,7 @@ Job Retention Scheme Calculator
 
         <form class="form" method="post" action="reset">
             <button class="govuk-button"  data-module="govuk-button">
-                Start another calculation
+                Run calculator again
             </button>
         </form>
         <p>
