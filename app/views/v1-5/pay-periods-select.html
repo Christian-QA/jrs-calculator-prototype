@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+
+        <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">
+            In which pay periods have you topped up this employee's pay?
+        </h1>
+
+
+        <p><span id="waste-hint" class="govuk-hint">
+      Select all that apply.
+    </span></p>
+
+        <form method="post" action="route-pay-period-select">
+
+            <div class="govuk-form-group">
+
+                <fieldset class="govuk-fieldset">
+
+
+                    <div class="govuk-checkboxes">
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="waste" name="periodSelect" type="checkbox" value="periodOne">
+                            <label class="govuk-label govuk-checkboxes__label" for="waste">
+                                Ending {{data['payPeriodTwoTitle'] | default('30 March')}} 2020 -  {% if data['payPeriodOneFurloughSalary'] %} £{{data['payPeriodOneFurloughSalary']}}.00 {% else %} £851.00 {% endif %}
+                            </label>
+                        </div>
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
+                            <label class="govuk-label govuk-checkboxes__label" for="waste-2">
+                                Ending {{data['payPeriodThreeTitle'] | default('30 April')}} 2020 - {% if data['payPeriodTwoFurloughSalary'] %} £{{data['payPeriodTwoFurloughSalary']}}.00 {% else %} £301.00 {% endif %}
+                            </label>
+                        </div>
+
+                </fieldset>
+            </div>
+
+            <button type="submit" class="govuk-button">
+                Continue
+            </button>
+
+        </form>
+        {% include "includes/web-chat.html" %}
+
+
+    </div>
+</div>
+
+{% endblock %}

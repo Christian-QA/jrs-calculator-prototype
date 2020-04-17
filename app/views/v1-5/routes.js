@@ -404,6 +404,28 @@ module.exports = function (router) {
     }
 
     req.session.data.payTaxDateTitle = Math.round(req.session.data.payDateDay) + req.session.data.payDateMonthTitle
+    res.redirect('/' + sprint + '/furlough-calcs')
+  })
+
+  // route - furlough calcs
+  router.post('/' + sprint + '/route-topup-question', function (req, res) {
+    var data = req.session.data.topUp
+    if (data === 'yes') {
+      req.session.data.topUps = true
+      res.redirect('/' + sprint + '/pay-periods-select')
+    } else if (data === 'no') {
+      res.redirect('/' + sprint + '/confirmation')
+    }
+  })
+
+  // route - select period
+  router.post('/' + sprint + '/route-pay-period-select', function (req, res) {
+    res.redirect('/' + sprint + '/pay-periods-topup')
+  })
+
+  // route - top up select
+  router.post('/' + sprint + '/route-topup', function (req, res) {
+    req.session.data.topupTotal = req.session.data.topupAmount
     res.redirect('/' + sprint + '/confirmation')
   })
 

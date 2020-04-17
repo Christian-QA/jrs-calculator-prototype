@@ -104,6 +104,12 @@ Job Retention Scheme Calculator
 
                         </span>  - Gross furlough amount
                         <br>
+                        {% if data['topupTotal'] %}
+                        <span class="govuk-!-font-weight-bold">
+                        £{{data['topupTotal']}}.00
+                        </span> - Employer top up
+                        <br>
+                        {% endif %}
                         <span class="govuk-!-font-weight-bold">
                              {% if data['payPeriodOneNic'] %}
                                 £{{data['payPeriodOneNic']}}.11
@@ -111,7 +117,7 @@ Job Retention Scheme Calculator
                                 £70.11
                             {% endif %}
 
-                        </span>  - Employer's National Insurance contributions
+                        </span>  - Employer National Insurance contributions
                         <br>
                         <span class="govuk-!-font-weight-bold">
                              {% if data['payPeriodOnePension'] %}
@@ -120,7 +126,9 @@ Job Retention Scheme Calculator
                                 £18.19
                             {% endif %}
 
-                        </span> - Employer minimum auto-enrolment pension costs
+                        </span> - Employer minimum pension contributions
+
+
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row">
@@ -146,7 +154,7 @@ Job Retention Scheme Calculator
                                 £50.11
                             {% endif %}
 
-                        </span>  - Employer's National Insurance contributions
+                        </span>  - Employer National Insurance contributions
                         <br>
                         <span class="govuk-!-font-weight-bold">
                             {% if data['payPeriodTwoPension'] %}
@@ -155,7 +163,7 @@ Job Retention Scheme Calculator
                                 £9.19
                             {% endif %}
 
-                        </span> - Employer minimum auto-enrolment pension costs
+                        </span> - Employer minimum pension contributions
                     </dd>
                 </div>
             </dl>
