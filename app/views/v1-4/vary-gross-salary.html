@@ -1,4 +1,3 @@
-
 {% extends "layout.html" %}
 
 {% block pageTitle %}
@@ -12,47 +11,59 @@ Job Retention Scheme Calculator
 
 {% block content %}
 
-  <div class="govuk-grid-row">
+<div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form action="route-vary-gross-salary" method="post">
+        <form action="route-vary-gross-salary" method="post">
 
-          <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
-              <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
-                  <h1 class="govuk-fieldset__heading">
-                      <!--Enter the employee’s  salary on 28.02.20-->
-                      What is the employee's total pay since 6 April 2019?
-                  </h1>
-              </legend>
-
-              <span id="nicCategory-hint" class="govuk-hint">
-<p>This is the total gross amount before deductions the employee has been paid up to the earlier of:</p>
-<ul class="govuk-list govuk-list--bullet">
-    <li>5th April 2020 or</li>
-    <li>the day before they were furloughed</li>
-</ul>
+            <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+                    <h1 class="govuk-fieldset__heading">
+                        <!--Enter the employee’s  salary on 28.02.20-->{% if data['varyMoreThan'] %} What is the employee's total pay since 6 April 2019? {% else %} What is this employee’s total pay since they started? {% endif %}
 
 
+                    </h1>
+                </legend>
 
-  </span>
-              <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl govuk-visually-hidden">
-                  What is the employee's total pay since 6 April 2019?
-          </legend>
+                <span id="nicCategory-hint" class="govuk-hint">
 
-          <!--<span id="width-10-hint" class="govuk-hint">
-    hint
-  </span>-->
-        <div class="govuk-currency-input__inner govuk-form-group">
+                    {% if data['varyMoreThan'] %}
+                        <p>This is the total gross amount before deductions the employee has been paid up to the earlier of:</p>
+                      {% else %}
+                        <p>This is the total gross amount before deductions the employee has been paid from {{data['employeeStartTitle'] | default('11 November')}} up to the earlier of:</p>
+                      {% endif %}
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>5th April 2020 or</li>
+                    <li>the day before they were furloughed</li>
+                </ul>
 
-        <span class="govuk-currency-input__inner__unit">£</span>
-        <input type="text" class="govuk-currency-input__inner__input govuk-input govuk-input--width-10" id="varySalary" value=""  name="varySalary" >
-        </div>
 
-        <button class="govuk-button" data-module="govuk-button">
-            Continue
-        </button>
-          </fieldset>
-      </form>
+
+                  </span>
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl govuk-visually-hidden">
+                    What is the employee's total pay since 6 April 2019?
+                </legend>
+
+                <!--<span id="width-10-hint" class="govuk-hint">
+          hint
+        </span>-->
+                <div class="govuk-currency-input__inner govuk-form-group">
+                    <span class="govuk-currency-input__inner__unit">£</span>
+                    {% if data['varyMoreThan'] %}
+                    <input type="text" class="govuk-currency-input__inner__input govuk-input govuk-input--width-10" id="varySalary" value="" name="varySalary">
+                    {% else %}
+                    <input type="text" class="govuk-currency-input__inner__input govuk-input govuk-input--width-10" id="variableGrossSalary" value=""  name="variableGrossSalary" >
+                    {% endif %}
+
+
+
+                </div>
+
+                <button class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
+            </fieldset>
+        </form>
         {% include "includes/web-chat.html" %}
 
 
