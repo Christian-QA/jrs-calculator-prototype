@@ -77,7 +77,7 @@ Job Retention Scheme Calculator
             {% endif %}
             -->
             <li>Their National Insurance category is {{data['nicCategoryVal'] | default('A, B, C or J')}}</li>
-            <li>They have {{data['pensionStatus'] | default('not opted out of pension auto-enrolment')}}</li>
+            <li>They {{data['pensionStatus'] | default('receive employer pension contributions')}}</li>
             <li>The employee's first payday after in the current tax year was {{data['payTaxDateTitle'] | default('10 April')}} 2020</li>
         </ul>
 

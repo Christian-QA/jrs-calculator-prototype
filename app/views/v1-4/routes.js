@@ -325,9 +325,9 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-pension', function (req, res) {
     var data = req.session.data.pension
     if (data === 'yes') {
-      req.session.data.pensionStatus = 'receives employer pension contributions'
+      req.session.data.pensionStatus = 'receive employer pension contributions'
     } else if (data === 'no') {
-      req.session.data.pensionStatus = 'does not receive employer pension contributions'
+      req.session.data.pensionStatus = 'do not receive employer pension contributions'
     }
 
     // Average Daily pay calc
