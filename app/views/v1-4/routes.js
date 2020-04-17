@@ -285,6 +285,7 @@ module.exports = function (router) {
   })
   // route-vary-salary-2
   router.post('/' + sprint + '/route-vary-salary-2', function (req, res) {
+    req.session.data.salaryAmount = req.session.data.salary
     res.redirect('/' + sprint + '/vary-gross-salary')
   })
 
@@ -338,7 +339,7 @@ module.exports = function (router) {
     } else if (req.session.data.salaryAmount) {
       req.session.data.periodsalaryAmount = Math.round(req.session.data.salaryAmount / 30)
     }
-    console.log('period ave = ' + req.session.data.periodsalaryAmount)
+    // console.log('period ave = ' + req.session.data.periodsalaryAmount)
     // Days in pay period
     req.session.data.periodOneNoDays = 31 - Math.round(req.session.data.claimPeriodStartDay)
     req.session.data.periodTwoNoDays = 30 - Math.round(req.session.data.claimPeriodEndDay)
@@ -367,7 +368,7 @@ module.exports = function (router) {
     req.session.data.totalFurlough = req.session.data.payPeriodOneFurloughSalary + req.session.data.payPeriodTwoFurloughSalary
     req.session.data.totalNic = req.session.data.payPeriodOneNic + req.session.data.payPeriodTwoNic
     req.session.data.totalPension = req.session.data.payPeriodOnePension + req.session.data.payPeriodTwoPension
-    console.log('total =' + req.session.data.totalFurlough)
+    // console.log('total =' + req.session.data.totalFurlough)
     res.redirect('/' + sprint + '/tax-year-pay-date')
   })
 
