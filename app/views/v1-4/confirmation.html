@@ -14,10 +14,10 @@ Job Retention Scheme Calculator
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-8">
-            <div class="govuk-panel__body govuk-!-margin-bottom-4 govuk-!-font-size-36">
+            <h1 class="govuk-panel__body govuk-!-margin-bottom-4 govuk-!-margin-top-0 govuk-!-font-size-36">
                 For this employee you can claim:
-            </div>
-            <h1 class="govuk-panel__title">
+            </h1>
+            <div class="govuk-panel__title">
                 £{{data['totalFurlough'] | default('1152')}}.00
                 <br>
                 <p class="govuk-!-font-weight-regular govuk-!-font-size-24 govuk-!-margin-bottom-4" style="color: white">Gross furlough amount</p>
@@ -28,7 +28,7 @@ Job Retention Scheme Calculator
                  £{{data['totalPension'] | default('27')}}.38
                 <br>
                 <p class="govuk-!-font-weight-regular govuk-!-font-size-24 govuk-!-margin-bottom-0" style="color: white">Employer minimum auto-enrolment pension costs</p>
-            </h1>
+            </div>
         </div>
 
         <h2 class="govuk-heading-m">

@@ -245,7 +245,6 @@ module.exports = function (router) {
     } else if (titleMonth === 5) {
       req.session.data.payPeriodTwoTitleMonth = ' May'
     }
-
     req.session.data.payPeriodTwoTitle = Math.round(req.session.data.payPeriodTwoStartDay) + req.session.data.payPeriodTwoTitleMonth
     req.session.data.payPeriodTwo = req.session.data.payPeriodTwoStartDay + '/' + req.session.data.payPeriodTwoStartMonth + '/' + req.session.data.payPeriodTwoStartYear
     res.redirect('/' + sprint + '/pay-dates-3')
@@ -265,7 +264,7 @@ module.exports = function (router) {
     }
 
     req.session.data.payPeriodThreeTitle = Math.round(req.session.data.payPeriodThreeStartDay) + req.session.data.payPeriodThreeStartMonth
-    req.session.data.prevPayPeriodThreeTitle = Math.round(req.session.data.payPeriodThreeStartDay) + req.session.data.payPeriodThreeStartMonth + ' 2019'
+    //req.session.data.prevPayPeriodThreeTitle = Math.round(req.session.data.payPeriodThreeStartDay) + req.session.data.payPeriodThreeStartMonth + ' 2019'
     req.session.data.payPeriodThree = req.session.data.payPeriodThreeStartDay + '/' + req.session.data.payPeriodThreeStartMonth + '/' + req.session.data.payPeriodThreeStartYear
     if (req.session.data.varyMoreThan){
       res.redirect('/' + sprint + '/vary-salary-1')

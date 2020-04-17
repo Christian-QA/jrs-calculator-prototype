@@ -20,17 +20,15 @@ Job Retention Scheme Calculator
 
         <div class="govuk-form-group ">
           <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
-              <h1 class="govuk-fieldset__heading">
+
+            <h1 class="govuk-heading-xl govuk-!-margin-bottom-3">
                 What’s the end of the next pay period after {% if data['payPeriodTwoTitle']%}{{data['payPeriodTwoTitle']}}{% else %}30 April{% endif %}?
               </h1>
-            </legend>
+
             <p>This is the last day in the pay period, not the date they received their pay.</p>
 
-            <label class="govuk-label" for="payPeriod"></label>
-           <!-- <span id="claimPeriodStart-hint" class="govuk-hint">
-                For example, 30 4 2020
-              </span>-->
+            {% include "includes/pay-period.html" %}
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl govuk-visually-hidden"> What’s the end of the next pay period after {% if data['payPeriodTwoTitle']%}{{data['payPeriodTwoTitle']}}{% else %}30 April{% endif %}?</legend>
 
 
             <div class="govuk-date-input" id="payPeriod">
@@ -73,7 +71,7 @@ Job Retention Scheme Calculator
 
 
       </form>
-      {% include "includes/pay-period.html" %}
+
 
 
     </div>

@@ -20,14 +20,17 @@ Job Retention Scheme Calculator
 
         <div class="govuk-form-group ">
           <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
-              <h1 class="govuk-fieldset__heading">
+
+              <h1 class="govuk-heading-xl govuk-!-margin-bottom-3">
                 What’s the last day this employee was paid for before {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %}?
 
               </h1>
-            </legend>
+
 
             <p>This is the end of the last pay period before the claim started.</p>
+
+            {% include "includes/pay-period.html" %}
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl govuk-visually-hidden"> What’s the last day this employee was paid for before {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %}?</legend>
 
             <label class="govuk-label" for="payPeriod"></label>
            <!-- <span id="claimPeriodStart-hint" class="govuk-hint">
@@ -77,7 +80,7 @@ Job Retention Scheme Calculator
       </form>
 
 
-        {% include "includes/pay-period.html" %}
+
 
 
     </div>
