@@ -174,6 +174,7 @@ module.exports = function (router) {
     }
   })
 
+
   // route - vairable lengt start dates
   router.post('/' + sprint + '/route-variable-start-date', function (req, res) {
     var titleMonth = Math.round(req.session.data.employeeStartMonth)
@@ -205,6 +206,11 @@ module.exports = function (router) {
     }
     req.session.data.employeeStartTitle = Math.round(req.session.data.employeeStartDay) + req.session.data.employeeStartMonth + ' ' + req.session.data.employeeStartYear
     req.session.data.employeeStart = req.session.data.employeeStartDay + '/' + req.session.data.employeeStartMonth + '/' + req.session.data.employeeStartYear
+    res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
+  })
+
+  // route- route partial pay period
+  router.post('/' + sprint + '/route-part-pay-period', function (req, res) {
     res.redirect('/' + sprint + '/vary-gross-salary')
   })
 
