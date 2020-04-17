@@ -167,6 +167,7 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-employed-length-question', function (req, res) {
     var data = req.session.data.employLength
     if (data === 'lessThan12') {
+      req.session.data.varyMoreThan = false
       res.redirect('/' + sprint + '/variable-length-employed-start-date')
     } else if (data === 'moreThan12') {
       req.session.data.varyMoreThan = true
@@ -248,7 +249,11 @@ module.exports = function (router) {
     req.session.data.payPeriodOneTitle = Math.round(req.session.data.payPeriodOneStartDay) + req.session.data.payPeriodOneTitleMonth
     req.session.data.payPeriodOne = req.session.data.payPeriodOneStartDay + '/' + req.session.data.payPeriodOneStartMonth + '/' + req.session.data.payPeriodOneStartYear
 
-    res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
+    if (req.session.data.payRegular) {
+      res.redirect('/' + sprint + '/pay-dates-2')
+    } else {
+      res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
+    }
   })
 
   // route - pay dates 2
