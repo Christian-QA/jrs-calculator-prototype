@@ -353,7 +353,7 @@ module.exports = function (router) {
     if (req.session.data.payPeriodOneFurloughSalary > 2500) {
       req.session.data.payPeriodOneFurloughSalary = 2500
     }
-    req.session.data.payPeriodOneNic = Math.round(req.session.data.payPeriodOneFurloughSalary * 0.12)
+    req.session.data.payPeriodOneNic = Math.round(req.session.data.payPeriodOneFurloughSalary * 0.138)
     req.session.data.payPeriodOnePension = Math.round(req.session.data.payPeriodOneNic * 0.43)
 
     //  pay period two // Days in pay period
@@ -361,7 +361,7 @@ module.exports = function (router) {
     if (req.session.data.payPeriodTwoFurloughSalary > 2500) {
       req.session.data.payPeriodTwoFurloughSalary = 2500
     }
-    req.session.data.payPeriodTwoNic = Math.round(req.session.data.payPeriodTwoFurloughSalary * 0.12)
+    req.session.data.payPeriodTwoNic = Math.round(req.session.data.payPeriodTwoFurloughSalary * 0.138)
     req.session.data.payPeriodTwoPension = Math.round(req.session.data.payPeriodTwoNic * 0.43)
 
     // set the totals
