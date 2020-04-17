@@ -43,24 +43,49 @@ module.exports = function (router) {
 
   // route - fulrough question
   router.post('/' + sprint + '/route-furlough-question', function (req, res) {
-    var data = req.session.data.furloughWhole
-    if (data === 'yes') {
-      req.session.data.furloughPeriod = 'have been furloughed for the whole of the claim period'
-      res.redirect('/' + sprint + '/pay-frequency')
-    } else {
-      res.redirect('/' + sprint + '/furlough-dates')
+    req.session.data.furloughStart = req.session.data.furloughStartDay + '/' + req.session.data.furloughStartMonth + '/' + req.session.data.furloughStartYear
+    var titleMonth = Math.round(req.session.data.furloughStartMonth)
+    if (titleMonth === 2) {
+      req.session.data.furloughStartMonthTitle = ' February'
+    } else if (titleMonth === 3) {
+      req.session.data.furloughStartMonthTitle = ' March'
+    } else if (titleMonth === 4) {
+      req.session.data.furloughStartMonthTitle = ' April'
+    } else if (titleMonth === 5) {
+      req.session.data.furloughStartMonthTitle = ' May'
     }
+    req.session.data.furloughStartTitle = Math.round(req.session.data.furloughStartDay) + req.session.data.furloughStartMonthTitle
+    res.redirect('/' + sprint + '/furlough-dates-end-question')
+    // var data = req.session.data.furloughWhole
+    // if (data === 'yes') {
+    //   req.session.data.furloughPeriod = 'have been furloughed for the whole of the claim period'
+    //   res.redirect('/' + sprint + '/pay-frequency')
+    // } else {
+    //   res.redirect('/' + sprint + '/furlough-dates')
+    // }
   })
 
   // route furlough dates
-  router.post('/' + sprint + '/route-furlough-dates', function (req, res) {
-    var data = req.session.data.furloughStatus
-    if (data === 'start') {
-      res.redirect('/' + sprint + '/furlough-dates-start')
-    } else if (data === 'end') {
+  // router.post('/' + sprint + '/route-furlough-dates', function (req, res) {
+  //   var data = req.session.data.furloughStatus
+  //   if (data === 'start') {
+  //     res.redirect('/' + sprint + '/furlough-dates-start')
+  //   } else if (data === 'end') {
+  //     res.redirect('/' + sprint + '/furlough-dates-end')
+  //   } else if (data === 'startEnd') {
+  //     res.redirect('/' + sprint + '/furlough-dates-start-end')
+  //   }
+  // })
+
+  // route - furlough end date question
+  router.post('/' + sprint + '/route-dates-end-question', function (req, res) {
+    var data = req.session.data.furloughEndQuestion
+    if (data === 'yes') {
+      // req.session.data.payRegular = 'The employee is paid the same amount each month'
       res.redirect('/' + sprint + '/furlough-dates-end')
-    } else if (data === 'startEnd') {
-      res.redirect('/' + sprint + '/furlough-dates-start-end')
+    } else if (data === 'no') {
+      // req.session.data.payVary = 'The employees pay varies each time'
+      res.redirect('/' + sprint + '/pay-frequency')
     }
   })
 
