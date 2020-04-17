@@ -224,7 +224,7 @@ module.exports = function (router) {
     }
     req.session.data.employeeStartTitle = Math.round(req.session.data.employeeStartDay) + req.session.data.employeeStartMonth + ' ' + req.session.data.employeeStartYear
     req.session.data.employeeStart = req.session.data.employeeStartDay + '/' + req.session.data.employeeStartMonth + '/' + req.session.data.employeeStartYear
-    res.redirect('/' + sprint + '/variable-gross-salary')
+    res.redirect('/' + sprint + '/vary-gross-salary')
   })
 
   // route- variable gross salary
