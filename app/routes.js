@@ -7,6 +7,7 @@ require('./views/v1-1/routes')(router)
 require('./views/v1-2/routes')(router)
 require('./views/v1-3/routes')(router)
 require('./views/v1-4/routes')(router)
+require('./views/v1-5/routes')(router)
 
 module.exports = router
 

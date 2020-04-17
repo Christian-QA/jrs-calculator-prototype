@@ -1,0 +1,61 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="route-frequency" method="post">
+      {{ govukRadios({
+      idPrefix: "payFrequency",
+      name: "payFrequency",
+      fieldset: {
+      legend: {
+      text: "How often do you pay this employee?",
+      isPageHeading: true,
+      classes: "govuk-fieldset__legend--xl"
+      }
+      },
+      items: [
+        {
+        value: "weekly",
+        text: "Weekly"
+        },
+        {
+        value: "fortnightly",
+        text: "Every 2 weeks"
+        },
+      {
+      value: "4Weekly",
+      text: "Every 4 weeks"
+      },
+        {
+        value: "monthly",
+        text: "Monthly"
+        }
+
+
+      ]
+      }) }}
+
+        <button class="govuk-button" data-module="govuk-button">
+          Continue
+        </button>
+      </form>
+        {% include "includes/web-chat.html" %}
+
+
+    </div>
+</div>
+
+{% endblock %}
