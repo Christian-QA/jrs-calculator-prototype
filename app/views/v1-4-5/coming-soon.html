@@ -1,0 +1,51 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="reset" method="post">
+
+
+        <fieldset class="govuk-fieldset" aria-describedby="furloughQuestion-hint">
+
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+
+            <h1 class="govuk-fieldset__heading">
+              We are unable to do this calculation at the moment
+            </h1>
+
+          </legend>
+          <p>
+              This will be available in a future version.
+          </p>
+
+        </fieldset>
+
+          {% if data['topUps'] %} 
+          <p><a href="confirmation.html">Calculate with out topups</a></p>
+          {% endif %}
+
+
+        <button class="govuk-button" data-module="govuk-button">
+          Start another calculation
+        </button>
+      </form>
+        {% include "includes/web-chat.html" %}
+
+
+    </div>
+</div>
+
+{% endblock %}
