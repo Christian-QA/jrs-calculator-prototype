@@ -16,7 +16,8 @@ Job Retention Scheme Calculator
 
 
         <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">
-            Which pay periods does a top up apply?
+            Which of these are you topping up?
+
         </h1>
 
 
@@ -35,13 +36,17 @@ Job Retention Scheme Calculator
                         <div class="govuk-checkboxes__item">
                             <input class="govuk-checkboxes__input" id="waste" name="periodSelect" type="checkbox" value="periodOne">
                             <label class="govuk-label govuk-checkboxes__label" for="waste">
-                                Ending {{data['payPeriodTwoTitle'] | default('30 March')}} 2020 - ({% if data['payPeriodOneFurloughSalary'] %} £{{data['payPeriodOneFurloughSalary']}}.00 {% else %} £851.00 {% endif %} furlough amount)
+                                Pay period end: {{data['payPeriodTwoTitle'] | default('30 March')}} 2020
+                                <br>
+                                <span class="govuk-hint">Amount before top-up: {% if data['payPeriodOneFurloughSalary'] %} £{{data['payPeriodOneFurloughSalary']}}.00 {% else %} £851.00 {% endif %}</span>
                             </label>
                         </div>
                         <div class="govuk-checkboxes__item">
                             <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
                             <label class="govuk-label govuk-checkboxes__label" for="waste-2">
-                                Ending {{data['payPeriodThreeTitle'] | default('30 April')}} 2020 - ({% if data['payPeriodTwoFurloughSalary'] %} £{{data['payPeriodTwoFurloughSalary']}}.00 {% else %} £301.00 {% endif %} furlough amount)
+                                Pay period end: {{data['payPeriodThreeTitle'] | default('30 April')}} 2020
+                                <br>
+                                <span class="govuk-hint">Amount before top-up: {% if data['payPeriodTwoFurloughSalary'] %} £{{data['payPeriodTwoFurloughSalary']}}.00 {% else %} £301.00 {% endif %}</span>
                             </label>
                         </div>
 

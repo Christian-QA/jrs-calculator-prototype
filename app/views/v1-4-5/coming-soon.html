@@ -23,7 +23,11 @@ Job Retention Scheme Calculator
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
 
             <h1 class="govuk-fieldset__heading">
+              {% if data['topUps'] %}
+              We’re unable to calculate claims when pay is topped up
+              {% else %}
               We are unable to do this calculation at the moment
+              {% endif %}
             </h1>
 
           </legend>

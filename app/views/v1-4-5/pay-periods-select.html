@@ -16,7 +16,8 @@ Job Retention Scheme Calculator
 
 
         <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">
-            Which pay periods does a top up apply?
+            Which of these are you topping up?
+
         </h1>
 
 
@@ -35,7 +36,8 @@ Job Retention Scheme Calculator
                         <div class="govuk-checkboxes__item">
                             <input class="govuk-checkboxes__input" id="waste" name="periodSelect" type="checkbox" value="periodOne">
                             <label class="govuk-label govuk-checkboxes__label" for="waste">
-                                Ending {{data['payPeriodTwoTitle'] | default('30 March')}} 2020 - ({% if data['payPeriodOneFurloughSalary'] %} £{{data['payPeriodOneFurloughSalary']}}.00 {% else %} £851.00 {% endif %} furlough amount)
+                                Pay period end: {{data['payPeriodTwoTitle'] | default('30 March')}} 2020<br>
+                                Amount before top-up:({% if data['payPeriodOneFurloughSalary'] %} £{{data['payPeriodOneFurloughSalary']}}.00 {% else %} £851.00 {% endif %} furlough amount)
                             </label>
                         </div>
                         <div class="govuk-checkboxes__item">
