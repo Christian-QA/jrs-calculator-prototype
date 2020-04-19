@@ -393,7 +393,6 @@ module.exports = function (router) {
     } else {
       res.redirect('/' + sprint + '/nic-category')
     }
-
   })
 
   // route - furlough calcs
