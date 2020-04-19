@@ -53,7 +53,7 @@ Job Retention Scheme Calculator
         <p>The results of the calculation rely on the accuracy of the information you entered, for which you are responsible. These calculations were based on: </p>
 
         <ul class="govuk-list govuk-list--bullet">
-            <li>Claim period: {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %}</li>
+            <li>Claim period: {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} 2020 to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %} 2020</li>
             <li>They
                 {% if data['furloughPeriod'] %}
                     {{data['furloughPeriod']| default('have been furloughed for the whole of the claim period')}}
