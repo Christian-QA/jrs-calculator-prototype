@@ -286,11 +286,12 @@ module.exports = function (router) {
     req.session.data.payPeriodThreeTitle = Math.round(req.session.data.payPeriodThreeStartDay) + req.session.data.payPeriodThreeStartMonth
     //req.session.data.prevPayPeriodThreeTitle = Math.round(req.session.data.payPeriodThreeStartDay) + req.session.data.payPeriodThreeStartMonth + ' 2019'
     req.session.data.payPeriodThree = req.session.data.payPeriodThreeStartDay + '/' + req.session.data.payPeriodThreeStartMonth + '/' + req.session.data.payPeriodThreeStartYear
-    if (req.session.data.payVary){
-      res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
-    } else {
-      res.redirect('/' + sprint + '/pay-date')
-    }
+    res.redirect('/' + sprint + '/pay-date')
+    // if (req.session.data.payVary){
+    //   res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
+    // } else {
+    //   res.redirect('/' + sprint + '/pay-date')
+    // }
   })
 
   // route-vary-salary-1
@@ -403,7 +404,12 @@ module.exports = function (router) {
     }
 
     req.session.data.payTaxDateTitle = Math.round(req.session.data.payDateDay) + req.session.data.payDateMonthTitle
-    res.redirect('/' + sprint + '/nic-category')
+    if (req.session.data.payVary){
+      res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
+    } else {
+      res.redirect('/' + sprint + '/nic-category')
+    }
+
   })
 
   // route - furlough calcs
