@@ -22,13 +22,12 @@ Job Retention Scheme Calculator
           <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
               <h1 class="govuk-fieldset__heading">
-                  What’s the first pay date in the current tax year (starting 6 April 2020)?
-
+                  On what day did the employee get paid in the pay period ending {% if data['payPeriodTwoTitle']%}{{data['payPeriodTwoTitle']}}{% else %}30 April{% endif %} 2020?
               </h1>
             </legend>
             <span id="nicCategory-hint" class="govuk-hint">
                 <p>This is the date this employee got paid. It may not be the same as the pay period end date.</p>
-                <p>This date is needed because there are different National Insurance and pension calculations for different tax years.</p>
+                <p>This is needed to calculate National Insurance contributions.</p>
   </span>
               {% include "includes/pay-date.html" %}
 

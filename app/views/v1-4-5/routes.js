@@ -289,7 +289,7 @@ module.exports = function (router) {
     if (req.session.data.payVary){
       res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
     } else {
-      res.redirect('/' + sprint + '/nic-category')
+      res.redirect('/' + sprint + '/pay-date')
     }
   })
 
@@ -385,7 +385,7 @@ module.exports = function (router) {
     req.session.data.totalNic = req.session.data.payPeriodOneNic + req.session.data.payPeriodTwoNic
     req.session.data.totalPension = req.session.data.payPeriodOnePension + req.session.data.payPeriodTwoPension
     // console.log('total =' + req.session.data.totalFurlough)
-    res.redirect('/' + sprint + '/tax-year-pay-date')
+    res.redirect('/' + sprint + '/furlough-calcs')
   })
 
   // route - nic category
@@ -403,7 +403,7 @@ module.exports = function (router) {
     }
 
     req.session.data.payTaxDateTitle = Math.round(req.session.data.payDateDay) + req.session.data.payDateMonthTitle
-    res.redirect('/' + sprint + '/furlough-calcs')
+    res.redirect('/' + sprint + '/nic-category')
   })
 
   // route - furlough calcs
