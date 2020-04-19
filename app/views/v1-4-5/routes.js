@@ -207,25 +207,21 @@ module.exports = function (router) {
     }
     req.session.data.employeeStartTitle = Math.round(req.session.data.employeeStartDay) + req.session.data.employeeStartMonth + ' ' + req.session.data.employeeStartYear
     req.session.data.employeeStart = req.session.data.employeeStartDay + '/' + req.session.data.employeeStartMonth + '/' + req.session.data.employeeStartYear
-    res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
+    // res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
+    res.redirect('/' + sprint + '/vary-gross-salary')
+
   })
 
   // route- route partial pay period
   router.post('/' + sprint + '/route-part-pay-period', function (req, res) {
-    if (req.session.data.varyMoreThan){
+    res.redirect('/' + sprint + '/nic-category')
+    /*if (req.session.data.varyMoreThan){
       res.redirect('/' + sprint + '/pay-dates-2')
     } else {
       res.redirect('/' + sprint + '/vary-gross-salary')
-    }
+    }*/
 
   })
-
-  // route- variable gross salary
-  router.post('/' + sprint + '/route-variable-gross-salary', function (req, res) {
-    req.session.data.variableGrosSalaryAmount = req.session.data.variableGrossSalary
-    res.redirect('/' + sprint + '/pay-dates-1')
-  })
-
 
   // route- salary
   router.post('/' + sprint + '/route-salary', function (req, res) {
@@ -249,11 +245,12 @@ module.exports = function (router) {
     req.session.data.payPeriodOneTitle = Math.round(req.session.data.payPeriodOneStartDay) + req.session.data.payPeriodOneTitleMonth
     req.session.data.payPeriodOne = req.session.data.payPeriodOneStartDay + '/' + req.session.data.payPeriodOneStartMonth + '/' + req.session.data.payPeriodOneStartYear
 
-    if (req.session.data.payRegular) {
+    res.redirect('/' + sprint + '/pay-dates-2')
+    /*if (req.session.data.payRegular) {
       res.redirect('/' + sprint + '/pay-dates-2')
     } else {
       res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
-    }
+    }*/
   })
 
   // route - pay dates 2
@@ -289,8 +286,8 @@ module.exports = function (router) {
     req.session.data.payPeriodThreeTitle = Math.round(req.session.data.payPeriodThreeStartDay) + req.session.data.payPeriodThreeStartMonth
     //req.session.data.prevPayPeriodThreeTitle = Math.round(req.session.data.payPeriodThreeStartDay) + req.session.data.payPeriodThreeStartMonth + ' 2019'
     req.session.data.payPeriodThree = req.session.data.payPeriodThreeStartDay + '/' + req.session.data.payPeriodThreeStartMonth + '/' + req.session.data.payPeriodThreeStartYear
-    if (req.session.data.varyMoreThan){
-      res.redirect('/' + sprint + '/vary-salary-1')
+    if (req.session.data.payVary){
+      res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
     } else {
       res.redirect('/' + sprint + '/nic-category')
     }
@@ -308,7 +305,9 @@ module.exports = function (router) {
 
   // route-vary-gross salary
   router.post('/' + sprint + '/route-vary-gross-salary', function (req, res) {
-    res.redirect('/' + sprint + '/nic-category')
+    //res.redirect('/' + sprint + '/nic-category')
+    req.session.data.variableGrosSalaryAmount = req.session.data.variableGrossSalary
+    res.redirect('/' + sprint + '/pay-dates-1');
   })
 
   // route - another-pay-date
