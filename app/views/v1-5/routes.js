@@ -387,8 +387,9 @@ module.exports = function (router) {
     }
 
     req.session.data.payTaxDateTitle = Math.round(req.session.data.payDateDay) + req.session.data.payDateMonthTitle
-    if (req.session.data.payVary){
-      // res.redirect('/' + sprint + '/vary-salary-1')
+    if (req.session.data.varyMoreThan = true) {
+      res.redirect('/' + sprint + '/vary-salary-1')
+    } else if (req.session.data.varyMoreThan = false) {
       res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
     } else {
       res.redirect('/' + sprint + '/nic-category')
