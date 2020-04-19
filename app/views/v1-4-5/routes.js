@@ -155,7 +155,7 @@ module.exports = function (router) {
       res.redirect('/' + sprint + '/regular-pay')
     } else if (data === 'payVariable') {
       req.session.data.payVary = 'The employees pay varies each time'
-      res.redirect('/' + sprint + '/variable-length-employed')
+      res.redirect('/' + sprint + '/coming-soon')
     }
   })
 
