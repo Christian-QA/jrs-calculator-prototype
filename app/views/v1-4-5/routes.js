@@ -17,9 +17,7 @@ module.exports = function (router) {
     } else if (titleMonth === 5) {
       req.session.data.claimPeriodStartMonthTitle = ' May'
     }
-
     req.session.data.payClaimPeriodTitle = Math.round(req.session.data.claimPeriodStartDay) + req.session.data.claimPeriodStartMonthTitle
-
     res.redirect('/' + sprint + '/claim-period-1')
   })
 
@@ -62,10 +60,8 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-dates-end-question', function (req, res) {
     var data = req.session.data.furloughEndQuestion
     if (data === 'yes') {
-      // req.session.data.payRegular = 'The employee is paid the same amount each month'
       res.redirect('/' + sprint + '/furlough-dates-end')
     } else if (data === 'no') {
-      // req.session.data.payVary = 'The employees pay varies each time'
       res.redirect('/' + sprint + '/pay-frequency')
     }
   })
@@ -207,7 +203,7 @@ module.exports = function (router) {
     }
     req.session.data.employeeStartTitle = Math.round(req.session.data.employeeStartDay) + req.session.data.employeeStartMonth + ' ' + req.session.data.employeeStartYear
     req.session.data.employeeStart = req.session.data.employeeStartDay + '/' + req.session.data.employeeStartMonth + '/' + req.session.data.employeeStartYear
-    // res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
+
     res.redirect('/' + sprint + '/vary-gross-salary')
 
   })
@@ -215,12 +211,6 @@ module.exports = function (router) {
   // route- route partial pay period
   router.post('/' + sprint + '/route-part-pay-period', function (req, res) {
     res.redirect('/' + sprint + '/nic-category')
-    /*if (req.session.data.varyMoreThan){
-      res.redirect('/' + sprint + '/pay-dates-2')
-    } else {
-      res.redirect('/' + sprint + '/vary-gross-salary')
-    }*/
-
   })
 
   // route- salary
@@ -284,14 +274,9 @@ module.exports = function (router) {
     }
 
     req.session.data.payPeriodThreeTitle = Math.round(req.session.data.payPeriodThreeStartDay) + req.session.data.payPeriodThreeStartMonth
-    //req.session.data.prevPayPeriodThreeTitle = Math.round(req.session.data.payPeriodThreeStartDay) + req.session.data.payPeriodThreeStartMonth + ' 2019'
+
     req.session.data.payPeriodThree = req.session.data.payPeriodThreeStartDay + '/' + req.session.data.payPeriodThreeStartMonth + '/' + req.session.data.payPeriodThreeStartYear
     res.redirect('/' + sprint + '/pay-date')
-    // if (req.session.data.payVary){
-    //   res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
-    // } else {
-    //   res.redirect('/' + sprint + '/pay-date')
-    // }
   })
 
   // route-vary-salary-1
@@ -306,7 +291,6 @@ module.exports = function (router) {
 
   // route-vary-gross salary
   router.post('/' + sprint + '/route-vary-gross-salary', function (req, res) {
-    //res.redirect('/' + sprint + '/nic-category')
     req.session.data.variableGrosSalaryAmount = req.session.data.variableGrossSalary
     res.redirect('/' + sprint + '/pay-dates-1');
   })
