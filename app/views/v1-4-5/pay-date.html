@@ -22,14 +22,15 @@ Job Retention Scheme Calculator
           <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
               <h1 class="govuk-fieldset__heading">
-                  What was the employee's pay date in the pay period ending {% if data['payPeriodThreeTitle']%}{{data['payPeriodThreeTitle']}}{% else %}30 April{% endif %} 2020?
+                  What's this employee's pay date for the pay period ending {% if data['payPeriodThreeTitle']%}{{data['payPeriodThreeTitle']}}{% else %}30 April{% endif %} 2020?
               </h1>
             </legend>
             <span id="nicCategory-hint" class="govuk-hint">
-                <p>This is the date this employee got paid. It may not be the same as the pay period end date.</p>
+                <p>This is the date this employee got paid. We are asking this because it may not be the same as the pay period end date.</p>
                 <p>This is needed to calculate National Insurance and pension contributions.</p>
   </span>
               {% include "includes/pay-date.html" %}
+
 
             <label class="govuk-label" for="payPeriod"></label>
             <!--<span id="claimPeriodStart-hint" class="govuk-hint">
