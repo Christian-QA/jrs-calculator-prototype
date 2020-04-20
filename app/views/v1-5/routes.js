@@ -389,6 +389,7 @@ module.exports = function (router) {
     }
 
     req.session.data.payTaxDateTitle = Math.round(req.session.data.payDateDay) + req.session.data.payDateMonthTitle
+
     if (req.session.data.varyMoreThan === 'true') {
       res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
     } else if (req.session.data.lessThan12 === 'true') {
