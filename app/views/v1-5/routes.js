@@ -282,6 +282,7 @@ module.exports = function (router) {
 
   // route-vary-salary-1
   router.post('/' + sprint + '/route-vary-salary-1', function (req, res) {
+    req.session.data.salaryAmount = req.session.data.salary
     res.redirect('/' + sprint + '/vary-salary-2')
   })
   // route-vary-salary-2
@@ -359,6 +360,9 @@ module.exports = function (router) {
     req.session.data.payPeriodOnePension = Math.round(req.session.data.payPeriodOneNic * 0.43)
 
     //  pay period two // Days in pay period
+    if (req.session.data.payTwo < 1) {
+      req.session.data.payTwo = 2365
+    }
     req.session.data.payPeriodTwoFurloughSalary = Math.round(req.session.data.payTwo * 0.8)
     if (req.session.data.payPeriodTwoFurloughSalary > 2500) {
       req.session.data.payPeriodTwoFurloughSalary = 2500
