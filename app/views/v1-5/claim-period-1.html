@@ -30,15 +30,13 @@ Job Retention Scheme Calculator
             </legend>
 
               <span id="nicCategory-hint" class="govuk-hint">
-<p>Choose a suitable date, for example one that aligns with your payroll run.</p>
+<p>This should be a date that’s shortly before or during a payroll run. It cannot be more than 14 days after today's date.</p>
 
-<p>This date cannot be more than 14 days after today's date.</p>
-
-<p>You can make subsequent claims if the employees remain on furlough after the end date of this claim.</p>
+<p>If furlough is ongoing when the claim period ends, make another claim later to cover this time.</p>
 
   </span>
 
-
+              {% include "includes/claim-period.html" %}
 
 
               <legend class="govuk-label govuk-visually-hidden" for="claimPeriodStart">
