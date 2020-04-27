@@ -1,0 +1,103 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form class="form" method="post" action="route-furlough-dates-start-end">
+
+
+        <div class="govuk-form-group ">
+          <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+              <h1 class="govuk-fieldset__heading">
+               What are the furlough dates<!--between {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} and {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %}-->?
+              </h1>
+            </legend>
+
+
+            <div class="govuk-inset-text">
+              To claim under the scheme an employee must be furloughed for at least 3 weeks.</div>
+
+
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="payPeriod">Furlough start date</label>
+                <span id="claimPeriodStart-hint" class="govuk-hint">For example, 01 3 2020 </span>
+                <div class="govuk-date-input" id="payPeriod">
+                  <div class="govuk-date-input__item">
+                    <div class="govuk-form-group">
+                      <label class="govuk-label govuk-date-input__label" for="furloughPartialStartDay"> Day </label> <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="furloughPartialStartDay" name="furloughPartialStartDay" type="text" pattern="[0-9]*" inputmode="numeric">
+                    </div>
+                  </div>
+                  <div class="govuk-date-input__item">
+                    <div class="govuk-form-group">
+                      <label class="govuk-label govuk-date-input__label" for="furloughPartialStartMonth"> Month </label> <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="furloughPartialStartMonth" name="furloughPartialStartMonth" type="text" pattern="[0-9]*" inputmode="numeric">
+                    </div>
+                  </div>
+                  <div class="govuk-date-input__item">
+                    <div class="govuk-form-group">
+                      <label class="govuk-label govuk-date-input__label" for="furloughPartialStartYear"> Year </label> <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="furloughPartialStartYear" name="furloughPartialStartYear" type="text" pattern="[0-9]*" inputmode="numeric">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="payPeriod">Furlough end date</label> <span id="claimPeriodStart-hint" class="govuk-hint">
+                For example, 30 4 2020
+              </span>
+                <div class="govuk-date-input" id="payPeriod">
+                  <div class="govuk-date-input__item">
+                    <div class="govuk-form-group">
+                      <label class="govuk-label govuk-date-input__label" for="furloughPartialEndDay"> Day </label> <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="furloughPartialEndDay" name="furloughPartialEndDay" type="text" pattern="[0-9]*" inputmode="numeric">
+                    </div>
+                  </div>
+                  <div class="govuk-date-input__item">
+                    <div class="govuk-form-group">
+                      <label class="govuk-label govuk-date-input__label" for="furloughPartialEndMonth"> Month </label> <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="furloughPartialEndMonth" name="furloughPartialEndMonth" type="text" pattern="[0-9]*" inputmode="numeric">
+                    </div>
+                  </div>
+                  <div class="govuk-date-input__item">
+                    <div class="govuk-form-group">
+                      <label class="govuk-label govuk-date-input__label" for="furloughPartialEndYear"> Year </label> <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="furloughPartialEndYear" name="furloughPartialEndYear" type="text" pattern="[0-9]*" inputmode="numeric">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+          </fieldset>
+        </div>
+
+
+        <button class="govuk-button govuk-!-margin-right-2" data-module="govuk-button">
+          Continue
+        </button>
+
+
+      </form>
+        {% include "includes/web-chat.html" %}
+
+
+    </div>
+</div>
+
+{% endblock %}

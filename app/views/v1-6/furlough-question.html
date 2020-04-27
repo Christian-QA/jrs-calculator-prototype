@@ -1,0 +1,66 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="route-furlough-question" method="post">
+        <div class="govuk-form-group">
+
+          <fieldset class="govuk-fieldset" aria-describedby="furloughQuestion-hint">
+
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+
+              <h1 class="govuk-fieldset__heading">
+                When was this employee furloughed?
+              </h1>
+
+            </legend>
+            <p>
+              This is the date that the employee started their furlough.  This may be before or after the the start date of your current claim.
+            </p>
+            <div class="govuk-date-input" id="payPeriod">
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="furloughStartDay"> Day </label> <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="furloughStartDay" name="furloughStartDay" type="text" pattern="[0-9]*" inputmode="numeric">
+                </div>
+              </div>
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="furloughStartMonth"> Month </label> <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="furloughStartMonth" name="furloughStartMonth" type="text" pattern="[0-9]*" inputmode="numeric">
+                </div>
+              </div>
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="furloughStartYear"> Year </label> <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="furloughStartYear" name="furloughStartYear" type="text" pattern="[0-9]*" inputmode="numeric">
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+
+        </div>
+        <button class="govuk-button govuk-!-margin-right-2" data-module="govuk-button">
+          Continue
+        </button>
+
+
+      </form>
+        {% include "includes/web-chat.html" %}
+
+
+    </div>
+</div>
+
+{% endblock %}

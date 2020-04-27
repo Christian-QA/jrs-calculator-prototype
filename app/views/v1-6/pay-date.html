@@ -1,0 +1,86 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form class="form" method="post" action="route-tax-pay-date">
+
+
+        <div class="govuk-form-group ">
+          <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+              <h1 class="govuk-fieldset__heading">
+                  What's this employee's pay date for the pay period ending {% if data['payPeriodThreeTitle']%}{{data['payPeriodThreeTitle']}}{% else %}30 April{% endif %} 2020?
+              </h1>
+            </legend>
+            <span id="nicCategory-hint" class="govuk-hint">
+                <p>This is the date this employee got paid. We are asking this because it may not be the same as the pay period end date.</p>
+                <p>This is needed to calculate National Insurance and pension contributions.</p>
+  </span>
+              {% include "includes/pay-date.html" %}
+
+
+            <label class="govuk-label" for="payPeriod"></label>
+            <!--<span id="claimPeriodStart-hint" class="govuk-hint">
+                For example, 30 4 2020
+              </span>-->
+
+            <div class="govuk-date-input" id="payPeriod">
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="payDateDay">
+                    Day
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="payDateDay" name="payDateDay" type="text" pattern="[0-9]*" inputmode="numeric">
+                </div>
+              </div>
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="payDateMonth">
+                    Month
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="payDateMonth" name="payDateMonth" type="text" pattern="[0-9]*" inputmode="numeric">
+                </div>
+              </div>
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="payDateYear">
+                    Year
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="payDateYear" name="payDateYear" type="text" pattern="[0-9]*" inputmode="numeric">
+                </div>
+              </div>
+            </div>
+
+
+
+
+          </fieldset>
+        </div>
+
+
+        <button class="govuk-button govuk-!-margin-right-2" data-module="govuk-button">
+          Continue
+        </button>
+
+
+      </form>
+
+
+
+    </div>
+</div>
+
+{% endblock %}
