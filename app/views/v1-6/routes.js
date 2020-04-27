@@ -375,7 +375,8 @@ module.exports = function (router) {
     req.session.data.totalNic = req.session.data.payPeriodOneNic + req.session.data.payPeriodTwoNic
     req.session.data.totalPension = req.session.data.payPeriodOnePension + req.session.data.payPeriodTwoPension
     // console.log('total =' + req.session.data.totalFurlough)
-    res.redirect('/' + sprint + '/furlough-calcs')
+    // res.redirect('/' + sprint + '/furlough-calcs')
+    res.redirect('/' + sprint + '/discretionary-question')
   })
 
   // route - nic category
@@ -401,6 +402,28 @@ module.exports = function (router) {
     } else {
       res.redirect('/' + sprint + '/nic-category')
     }
+  })
+
+  // route - discretionary
+  router.post('/' + sprint + '/route-discretionary-question', function (req, res) {
+    var data = req.session.data.discretionary
+    if (data === 'yes') {
+      req.session.data.discretionary = true
+      res.redirect('/' + sprint + '/discretionary-pay-periods-select')
+    } else if (data === 'no') {
+      res.redirect('/' + sprint + '/furlough-calcs')
+    }
+  })
+
+  // route-discretionary-period-select
+  router.post('/' + sprint + '/route-discretionary-period-select', function (req, res) {
+    res.redirect('/' + sprint + '/discretionary-amount')
+  })
+
+  // route - top up select
+  router.post('/' + sprint + '/route-discretionary-amount', function (req, res) {
+    req.session.data.discretionaryPay = req.session.data.discretionaryPay
+    res.redirect('/' + sprint + '/furlough-calcs')
   })
 
   // route - furlough calcs

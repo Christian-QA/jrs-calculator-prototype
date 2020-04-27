@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+
+        <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">
+            Which of these pay periods did they receive discretionary payments?
+
+        </h1>
+
+
+        <p><span id="waste-hint" class="govuk-hint">
+      Select all that apply.
+    </span></p>
+
+        <form method="post" action="route-discretionary-period-select">
+
+            <div class="govuk-form-group">
+
+                <fieldset class="govuk-fieldset">
+
+
+                    <div class="govuk-checkboxes">
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="waste" name="periodSelect" type="checkbox" value="periodOne">
+                            <label class="govuk-label govuk-checkboxes__label" for="waste">
+                                Pay period end: {{data['payPeriodTwoTitle'] | default('30 March')}} 2020
+
+
+                            </label>
+                        </div>
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
+                            <label class="govuk-label govuk-checkboxes__label" for="waste-2">
+                                Pay period end: {{data['payPeriodThreeTitle'] | default('30 April')}} 2020
+
+                            </label>
+                        </div>
+
+                </fieldset>
+            </div>
+
+            <button type="submit" class="govuk-button">
+                Continue
+            </button>
+
+        </form>
+        {% include "includes/web-chat.html" %}
+
+
+    </div>
+</div>
+
+{% endblock %}
