@@ -278,7 +278,7 @@ module.exports = function (router) {
     if (req.session.data.varyMoreThan === 'true') {
       res.redirect('/' + sprint + '/vary-salary-1')
     } else if (req.session.data.lessThan12 === 'true') {
-      res.redirect('/' + sprint + '/vary-salary-1')
+      res.redirect('/' + sprint + '/vary-gross-salary')
     } else {
       res.redirect('/' + sprint + '/pay-date')
     }
@@ -299,7 +299,11 @@ module.exports = function (router) {
   // route-vary-gross salary
   router.post('/' + sprint + '/route-vary-gross-salary', function (req, res) {
     req.session.data.variableGrosSalaryAmount = req.session.data.variableGrossSalary
-    res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
+    if (req.session.data.payClaimPeriodTitle === req.session.data.furloughStartTitle) {
+      res.redirect('/' + sprint + '/topup-question')
+    } else {
+      res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
+    }
   })
 
   // route - another-pay-date
@@ -401,7 +405,11 @@ module.exports = function (router) {
     req.session.data.payTaxDateTitle = Math.round(req.session.data.payDateDay) + req.session.data.payDateMonthTitle
 
     if (req.session.data.payVary) {
-      res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
+      if (req.session.data.payClaimPeriodTitle === req.session.data.furloughStartTitle) {
+        res.redirect('/' + sprint + '/topup-question')
+      } else {
+        res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
+      }
     } else {
       res.redirect('/' + sprint + '/regular-pay')
     }
