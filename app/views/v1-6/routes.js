@@ -167,7 +167,8 @@ module.exports = function (router) {
       res.redirect('/' + sprint + '/variable-length-employed-start-date')
     } else if (data === 'moreThan12') {
       req.session.data.varyMoreThan = 'true'
-      res.redirect('/' + sprint + '/vary-gross-salary')
+      // res.redirect('/' + sprint + '/vary-gross-salary')
+      res.redirect('/' + sprint + '/pay-dates-1')
     }
   })
 
@@ -207,11 +208,12 @@ module.exports = function (router) {
 
   // route- route partial pay period
   router.post('/' + sprint + '/route-part-pay-period', function (req, res) {
-    if (req.session.data.varyMoreThan === 'true') {
-      res.redirect('/' + sprint + '/vary-salary-1')
-    } else {
-      res.redirect('/' + sprint + '/discretionary-question')
-    }
+    // if (req.session.data.varyMoreThan === 'true') {
+    //   res.redirect('/' + sprint + '/vary-salary-1')
+    // } else {
+    //   res.redirect('/' + sprint + '/discretionary-question')
+    // }
+    res.redirect('/' + sprint + '/topup-question')
   })
 
   // route- salary
@@ -271,9 +273,10 @@ module.exports = function (router) {
 
     req.session.data.payPeriodThreeTitle = Math.round(req.session.data.payPeriodThreeStartDay) + req.session.data.payPeriodThreeStartMonth
     req.session.data.payPeriodThree = req.session.data.payPeriodThreeStartDay + '/' + req.session.data.payPeriodThreeStartMonth + '/' + req.session.data.payPeriodThreeStartYear
-    res.redirect('/' + sprint + '/pay-date')
+    res.redirect('/' + sprint + '/vary-salary-1')
+    // res.redirect('/' + sprint + '/pay-date')
     // if (req.session.data.varyMoreThan){
-    //   res.redirect('/' + sprint + '/vary-salary-1')
+    //
     //   res.redirect('/' + sprint + '/pay-date')
     // } else {
     //   res.redirect('/' + sprint + '/pay-date')
@@ -288,13 +291,14 @@ module.exports = function (router) {
   // route-vary-salary-2
   router.post('/' + sprint + '/route-vary-salary-2', function (req, res) {
     req.session.data.salaryAmount = req.session.data.salary
-    res.redirect('/' + sprint + '/discretionary-question')
+
+    res.redirect('/' + sprint + '/vary-gross-salary')
   })
 
   // route-vary-gross salary
   router.post('/' + sprint + '/route-vary-gross-salary', function (req, res) {
     req.session.data.variableGrosSalaryAmount = req.session.data.variableGrossSalary
-    res.redirect('/' + sprint + '/pay-dates-1')
+    res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
   })
 
   // route - another-pay-date
@@ -375,7 +379,7 @@ module.exports = function (router) {
     req.session.data.totalNic = req.session.data.payPeriodOneNic + req.session.data.payPeriodTwoNic
     req.session.data.totalPension = req.session.data.payPeriodOnePension + req.session.data.payPeriodTwoPension
     // console.log('total =' + req.session.data.totalFurlough)
-    res.redirect('/' + sprint + '/furlough-calcs')
+    res.redirect('/' + sprint + '/confirmation')
     // res.redirect('/' + sprint + '/discretionary-question')
   })
 
@@ -426,26 +430,26 @@ module.exports = function (router) {
     res.redirect('/' + sprint + '/nic-category')
   })
 
-  // route - furlough calcs
+  // route - top up question
   router.post('/' + sprint + '/route-topup-question', function (req, res) {
     var data = req.session.data.topUp
     if (data === 'yes') {
       req.session.data.topUps = true
-      res.redirect('/' + sprint + '/pay-periods-select')
+      res.redirect('/' + sprint + '/topup-select')
     } else if (data === 'no') {
-      res.redirect('/' + sprint + '/confirmation')
+      res.redirect('/' + sprint + '/discretionary-question')
     }
   })
 
   // route - select period
   router.post('/' + sprint + '/route-pay-period-select', function (req, res) {
-    res.redirect('/' + sprint + '/pay-periods-topup')
+    res.redirect('/' + sprint + '/topup-amount')
   })
 
   // route - top up select
   router.post('/' + sprint + '/route-topup', function (req, res) {
     req.session.data.topupTotal = req.session.data.topupAmount
-    res.redirect('/' + sprint + '/confirmation')
+    res.redirect('/' + sprint + '/nic-category')
   })
 
   // clear data
