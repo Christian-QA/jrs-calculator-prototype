@@ -36,17 +36,17 @@ Job Retention Scheme Calculator
                         <div class="govuk-checkboxes__item">
                             <input class="govuk-checkboxes__input" id="waste" name="periodSelect" type="checkbox" value="periodOne">
                             <label class="govuk-label govuk-checkboxes__label" for="waste">
-                                Pay period end: {{data['payPeriodTwoTitle'] | default('30 March')}} 2020
-                                <br>
-                                <span class="govuk-hint">Amount before top-up: {% if data['payPeriodOneFurloughSalary'] %} £{{data['payPeriodOneFurloughSalary']}}.00 {% else %} £851.00 {% endif %}</span>
+                                Pay period end: {% if data['payPeriodTwoTitle']%}{{data['payPeriodTwoTitle']}}{% else %}30 March{% endif %} 2020?
+                                <!--<br>
+                                <span class="govuk-hint">Amount before top-up: {% if data['payPeriodOneFurloughSalary'] %} £{{data['payPeriodOneFurloughSalary']}}.00 {% else %} £851.00 {% endif %}</span>-->
                             </label>
                         </div>
                         <div class="govuk-checkboxes__item">
                             <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
                             <label class="govuk-label govuk-checkboxes__label" for="waste-2">
-                                Pay period end: {{data['payPeriodThreeTitle'] | default('30 April')}} 2020
-                                <br>
-                                <span class="govuk-hint">Amount before top-up: {% if data['payPeriodTwoFurloughSalary'] %} £{{data['payPeriodTwoFurloughSalary']}}.00 {% else %} £301.00 {% endif %}</span>
+                                Pay period end: {% if data['payPeriodThreeTitle']%}{{data['payPeriodThreeTitle']}}{% else %}30 April{% endif %} 2020?
+                                <!--<br>
+                                <span class="govuk-hint">Amount before top-up: {% if data['payPeriodTwoFurloughSalary'] %} £{{data['payPeriodTwoFurloughSalary']}}.00 {% else %} £301.00 {% endif %}</span>-->
                             </label>
                         </div>
 
