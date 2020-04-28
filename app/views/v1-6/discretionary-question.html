@@ -16,16 +16,12 @@ Job Retention Scheme Calculator
 
 
     <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">
-      Has this employee received any discretionary payments in any of the pay periods?
+      <!--Does this employee get any additional payments?-->
+      Did this employee get any additional payments?
     </h1>
 
-
+    <p>Additional payments include payments you’re not contractually obliged to pay, non-cash payments and non-monetary benefits</p>
     <p>We need it to calculate National Insurance contributions.</p>
-
-    <ul class="govuk-list govuk-list--bullet ">
-      <li>Pay period end: {{data['payperiodtwotitle'] | default('30 march')}} 2020 </li>
-      <li>Pay period end: {{data['payperiodthreetitle'] | default('30 april')}} 2020</li>
-    </ul>
 
     {% include "includes/discretionary-payment.html" %}
 
