@@ -15,7 +15,7 @@ Job Retention Scheme Calculator
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form action="route-salary" method="post">
+      <form action="route-reg-salary" method="post">
 
           <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
               <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
@@ -27,10 +27,11 @@ Job Retention Scheme Calculator
               </legend>
 
               <span id="nicCategory-hint" class="govuk-hint">
- <p>This is the gross amount before deductions.</p>
+ <p>This is the gross amount before deductions. Do not include discretionary payments, non-cash payments or non-monetary benefits. </p>
                   <div class="govuk-inset-text">If this employee started work between 1 and 18 March 2020, enter the amount they’ll get paid from now on.</div>
 
   </span>
+              {% include "includes/include-in-salary.html" %}
           <!--<label class="govuk-label" for="amount">
               Enter an amount
           </label>

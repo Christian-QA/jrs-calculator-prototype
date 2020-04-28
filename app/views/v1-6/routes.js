@@ -152,7 +152,8 @@ module.exports = function (router) {
     var data = req.session.data.payQuestion
     if (data === 'payRegular') {
       req.session.data.payRegular = 'The employee is paid the same amount each month'
-      res.redirect('/' + sprint + '/regular-pay')
+      // res.redirect('/' + sprint + '/regular-pay')
+      res.redirect('/' + sprint + '/pay-dates-1')
     } else if (data === 'payVariable') {
       req.session.data.payVary = 'The employees pay varies each time'
       res.redirect('/' + sprint + '/variable-length-employed')
@@ -217,9 +218,9 @@ module.exports = function (router) {
   })
 
   // route- salary
-  router.post('/' + sprint + '/route-salary', function (req, res) {
+  router.post('/' + sprint + '/route-reg-salary', function (req, res) {
     req.session.data.salaryAmount = req.session.data.salary
-    res.redirect('/' + sprint + '/pay-dates-1')
+    res.redirect('/' + sprint + '/topup-question')
   })
 
   // route - pay dates 1
@@ -273,12 +274,13 @@ module.exports = function (router) {
 
     req.session.data.payPeriodThreeTitle = Math.round(req.session.data.payPeriodThreeStartDay) + req.session.data.payPeriodThreeStartMonth
     req.session.data.payPeriodThree = req.session.data.payPeriodThreeStartDay + '/' + req.session.data.payPeriodThreeStartMonth + '/' + req.session.data.payPeriodThreeStartYear
-  console.log(req.session.data.varyMoreThan)
 
-    if (req.session.data.varyMoreThan === 'true'){
+    if (req.session.data.varyMoreThan === 'true') {
+      res.redirect('/' + sprint + '/vary-salary-1')
+    } else if (req.session.data.lessThan12 === 'true') {
       res.redirect('/' + sprint + '/vary-salary-1')
     } else {
-      res.redirect('/' + sprint + '/vary-gross-salary')
+      res.redirect('/' + sprint + '/pay-date')
     }
   })
 
@@ -339,7 +341,7 @@ module.exports = function (router) {
     // Average Daily pay calc
     if (req.session.data.variableGrossSalary) {
       var grossSalary = req.session.data.variableGrossSalary
-      var claimMonthTotal =  Math.round(req.session.data.claimPeriodStartMonth) + 12
+      var claimMonthTotal = Math.round(req.session.data.claimPeriodStartMonth) + 12
       var MonthStart = Math.round(req.session.data.employeeStartMonthCalc)
       req.session.data.periodsalaryAmount = Math.round(grossSalary / ((claimMonthTotal - MonthStart) * 30))
     } else if (req.session.data.salaryAmount) {
@@ -401,7 +403,7 @@ module.exports = function (router) {
     if (req.session.data.payVary) {
       res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
     } else {
-      res.redirect('/' + sprint + '/nic-category')
+      res.redirect('/' + sprint + '/regular-pay')
     }
   })
 
@@ -446,7 +448,7 @@ module.exports = function (router) {
   // route - top up select
   router.post('/' + sprint + '/route-topup', function (req, res) {
     req.session.data.topupTotal = req.session.data.topupAmount
-    res.redirect('/' + sprint + '/nic-category')
+    res.redirect('/' + sprint + '/discretionary-question')
   })
 
   // clear data
