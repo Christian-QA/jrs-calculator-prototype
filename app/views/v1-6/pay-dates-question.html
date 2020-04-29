@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+
+    <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">
+      <!--Does this employee get any additional payments?-->
+      Does this employee's pay period end on the last day of each calendar month?
+    </h1>
+
+    <p>Additional payments include payments you’re not contractually obliged to pay, non-cash payments and non-monetary benefits</p>
+
+
+    {% include "includes/pay-period.html" %}
+
+
+
+    <form method="post" action="route-pay-date-question">
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m govuk-!-margin-bottom-1 govuk-visually-hidden">
+            <h2 class="govuk-heading-m govuk-!-margin-bottom-1">
+              has this employee received any discretionary payments in any of the pay periods?
+            </h2>
+          </legend>
+          <div class="govuk-radios">
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="discretionary-yes" name="discretionary" type="radio" value="yes"> <label class="govuk-label govuk-radios__label" for="discretionary-yes">Yes </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="discretionary-no" name="discretionary" type="radio" value="no"> <label class="govuk-label govuk-radios__label" for="discretionary-no">No, it is on a different day </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <button type="submit" class="govuk-button">
+        continue
+      </button>
+
+    </form>
+    {% include "includes/web-chat.html" %}
+
+
+  </div>
+</div>
+
+{% endblock %}
