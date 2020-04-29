@@ -18,28 +18,14 @@ Job Retention Scheme Calculator
                 What you can claim for this employee
             </h1>
             <div class="govuk-panel__title">
-                {% if data['totalFurlough'] %}
-                £{{data['totalFurlough']}}.00
-                {% else %}
-                £1152.00
-                {% endif %}
-                <br>
+                {% if data['totalFurlough'] %} £{{data['totalFurlough']}}.00 {% else %} £1152.00 {% endif %} <br>
                 <p class="govuk-!-font-weight-regular govuk-!-font-size-24 govuk-!-margin-bottom-4" style="color: white">Amount paid to this furloughed employee
                 </p>
-                <!--<p class=" govuk-!-font-size-19 govuk-!-font-weight-regular govuk-!-margin-bottom-4" style="color: white">(not including National Insurance contributions and auto-enrolment pension costs)</p>-->
-                {% if data['totalFurlough'] %}
-                £{{data['totalNic']}}.22
-                {% else %}
-                £120.22
-                {% endif %}
+                <!--<p class=" govuk-!-font-size-19 govuk-!-font-weight-regular govuk-!-margin-bottom-4" style="color: white">(not including National Insurance contributions and auto-enrolment pension costs)</p>-->{% if data['totalFurlough'] %} £{{data['totalNic']}}.22 {% else %} £120.22 {% endif %}
 
                 <br>
                 <p class="govuk-!-font-weight-regular govuk-!-font-size-24 govuk-!-margin-bottom-4" style="color: white">Employer National Insurance contributions</p>
-                {% if data['totalFurlough'] %}
-                £{{data['totalPension']}}.38
-                {% else %}
-                £27.38
-                {% endif %}
+                {% if data['totalFurlough'] %} £{{data['totalPension']}}.38 {% else %} £27.38 {% endif %}
 
                 <br>
                 <p class="govuk-!-font-weight-regular govuk-!-font-size-24 govuk-!-margin-bottom-0" style="color: white">Employer minimum pension contributions</p>
@@ -54,22 +40,12 @@ Job Retention Scheme Calculator
 
         <ul class="govuk-list govuk-list--bullet">
             <li>Claim period: {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} 2020 to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %} 2020</li>
-            <li>They
-                {% if data['furloughPeriod'] %}
-                {{data['furloughPeriod']| default('have been furloughed for the whole of the claim period')}}
-                {% elseif data['furloughStartTitle'] %}
-                began their furlough on {{data['furloughStartTitle']}}
-                {% elseif data['furloughEndTitle'] %}
-                ended their furlough on {{data['furloughEndTitle']}}
-                {% elseif data['furloughPartialStartTitle'] %}
-                were furloughed from {{data['furloughPartialStartTitle']}} until {{data['furloughPartialEndTitle']}}
-                {% else %}
-                have been furloughed for the whole of the claim period
-                {% endif %}
+            <li>They {% if data['furloughPeriod'] %} {{data['furloughPeriod']| default('have been furloughed for the whole of the claim period')}} {% elseif data['furloughStartTitle'] %} began their furlough on {{data['furloughStartTitle']}} {% elseif data['furloughEndTitle'] %} ended their furlough on {{data['furloughEndTitle']}} {% elseif data['furloughPartialStartTitle'] %} were furloughed from
+                {{data['furloughPartialStartTitle']}} until {{data['furloughPartialEndTitle']}} {% else %} have been furloughed for the whole of the claim period {% endif %}
             </li>
             <li>They are paid {{data['payFrequencyDisplay'] | default('monthly')}}</li>
 
-            {% if data['payVary']  %}
+            {% if data['payVary'] %}
             <li>They are paid different amounts each time</li>
             {% endif %}
             <!--{% if data['employeeStartTitle']  %}
@@ -92,86 +68,79 @@ Job Retention Scheme Calculator
                     Figures for each pay period during the claim
                  </span>
             </summary>
-            <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key" style="width: 15%">
-                        Pay period
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        Ending {{data['payPeriodTwoTitle'] | default('30 March')}} 2020
-                        <br>
-                        <span class="govuk-!-font-weight-bold">
+            <div class="govuk-details__text">
+                <h3 class="govuk-heading-s">
+                    Pay period ending {{data['payPeriodTwoTitle'] | default('30 March')}} 2020
+                </h3>
+
+                <p> Gross furlough amount
+                    <br>
+                    <span class="govuk-!-font-weight-bold">
                              {% if data['payPeriodOneFurloughSalary'] %}
                                 £{{data['payPeriodOneFurloughSalary']}}.00
                             {% else %}
                                 £851.00
                             {% endif %}
+                    </span>
+                </p>
 
-                        </span>  - Gross furlough amount
-                        <br>
-                        {% if data['topupTotal'] %}
-                        <span class="govuk-!-font-weight-bold">
-                        £{{data['topupTotal']}}.00
-                        </span> - Employer top up
-                        <br>
-                        {% endif %}
-                        <span class="govuk-!-font-weight-bold">
+                <p>Employer NI contributions
+                    <br>
+                    <span class="govuk-!-font-weight-bold">
                              {% if data['payPeriodOneNic'] %}
                                 £{{data['payPeriodOneNic']}}.11
                             {% else %}
                                 £70.11
                             {% endif %}
-
-                        </span>  - Employer National Insurance contributions
-                        <br>
-                        <span class="govuk-!-font-weight-bold">
+                    </span>
+                </p>
+                <p> Employer minimum pension contributions
+                    <br>
+                    <span class="govuk-!-font-weight-bold">
                              {% if data['payPeriodOnePension'] %}
                                 £{{data['payPeriodOnePension']}}.11
                             {% else %}
                                 £18.19
                             {% endif %}
+                    </span>
+                </p>
 
-                        </span> - Employer minimum pension contributions
 
-
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Pay period
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        Ending {{data['payPeriodThreeTitle'] | default('30 April')}} 2020
-                        <br>
-                        <span class="govuk-!-font-weight-bold">
+                    <h3 class="govuk-heading-s">
+                        Pay period ending {{data['payPeriodThreeTitle'] | default('30 April')}} 2020
+                    </h3>
+                <p> Gross furlough amount
+                    <br>
+                    <span class="govuk-!-font-weight-bold">
                              {% if data['payPeriodTwoFurloughSalary'] %}
                                 £{{data['payPeriodTwoFurloughSalary']}}.00
                             {% else %}
                                 £301.00
                             {% endif %}
+                    </span>
+                </p>
 
-                        </span>   - Gross furlough amount
-                        <br>
-                        <span class="govuk-!-font-weight-bold">
-                            {% if data['payPeriodTwoNic'] %}
+                <p>Employer NI contributions
+                    <br>
+                    <span class="govuk-!-font-weight-bold">
+                             {% if data['payPeriodTwoNic'] %}
                                 £{{data['payPeriodTwoNic']}}.11
                             {% else %}
                                 £50.11
                             {% endif %}
-
-                        </span>  - Employer National Insurance contributions
-                        <br>
-                        <span class="govuk-!-font-weight-bold">
-                            {% if data['payPeriodTwoPension'] %}
-                                £{{data['payPeriodTwoPension']}}.19
+                    </span>
+                </p>
+                <p> Employer minimum pension contributions
+                    <br>
+                    <span class="govuk-!-font-weight-bold">
+                             {% if data['payPeriodTwoPension'] %}
+                                £{{data['payPeriodTwoPension']}}.11
                             {% else %}
                                 £9.19
                             {% endif %}
-
-                        </span> - Employer minimum pension contributions
-                    </dd>
-                </div>
-            </dl>
+                    </span>
+                </p>
+            </div>
         </details>
 
         <h2 class="govuk-heading-m">
@@ -187,9 +156,11 @@ Job Retention Scheme Calculator
                     <li>furlough amount</li>
                     <li>employer National Insurance</li>
                     <li>employer minimum pension contributions</li>
-                    
-                </ul></li>
-            <li>Adjust the total amount of employer National Insurance contributions by subtracting any Employment Allowance used in each pay period.<br> <a href="https://www.gov.uk/guidance/work-out-80-of-your-employees-wages-to-claim-through-the-coronavirus-job-retention-scheme#work-out-how-much-you-can-claim-for-employer-national-insurance-contributions" target="_blank">Work out how much you can claim in total for employer National Insurance contributions (opens in a new tab or window)</a></li>
+
+                </ul>
+            </li>
+            <li>Adjust the total amount of employer National Insurance contributions by subtracting any Employment Allowance used in each pay period.<br> <a href="https://www.gov.uk/guidance/work-out-80-of-your-employees-wages-to-claim-through-the-coronavirus-job-retention-scheme#work-out-how-much-you-can-claim-for-employer-national-insurance-contributions" target="_blank">Work out how much you
+                can claim in total for employer National Insurance contributions (opens in a new tab or window)</a></li>
             <li>Make a claim using <a href="https://www.gov.uk/guidance/claim-for-wages-through-the-coronavirus-job-retention-scheme" target="_blank">Job Retention Scheme online claim service (opens in a new tab or window)</a>.</li>
 
         </ul>
@@ -197,9 +168,8 @@ Job Retention Scheme Calculator
         <br>
 
 
-
         <form class="form" method="post" action="reset">
-            <button class="govuk-button"  data-module="govuk-button">
+            <button class="govuk-button" data-module="govuk-button">
                 Start another calculation
             </button>
         </form>

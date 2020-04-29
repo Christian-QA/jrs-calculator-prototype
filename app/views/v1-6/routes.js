@@ -156,11 +156,6 @@ module.exports = function (router) {
 
   // route- route partial pay period
   router.post('/' + sprint + '/route-part-pay-period', function (req, res) {
-    // if (req.session.data.varyMoreThan === 'true') {
-    //   res.redirect('/' + sprint + '/vary-salary-1')
-    // } else {
-    //   res.redirect('/' + sprint + '/discretionary-question')
-    // }
     res.redirect('/' + sprint + '/topup-question')
   })
 
@@ -217,15 +212,13 @@ module.exports = function (router) {
   // route-vary-salary-2
   router.post('/' + sprint + '/route-vary-salary-2', function (req, res) {
     req.session.data.salaryAmount = req.session.data.salary
-
     res.redirect('/' + sprint + '/vary-gross-salary')
   })
 
   // route-vary-gross salary
   router.post('/' + sprint + '/route-vary-gross-salary', function (req, res) {
     req.session.data.variableGrosSalaryAmount = req.session.data.variableGrossSalary
-
-    if (req.session.data.claimStart === req.session.data.furloughStart) {
+    if (req.session.data.furloughStart <= req.session.data.claimStart) {
       res.redirect('/' + sprint + '/topup-question')
     } else {
       res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
