@@ -123,7 +123,6 @@ module.exports = function (router) {
     var data = req.session.data.payQuestion
     if (data === 'payRegular') {
       req.session.data.payRegular = 'The employee is paid the same amount each month'
-      // res.redirect('/' + sprint + '/regular-pay')
       res.redirect('/' + sprint + '/pay-dates-1')
     } else if (data === 'payVariable') {
       req.session.data.payVary = 'The employees pay varies each time'
@@ -139,7 +138,6 @@ module.exports = function (router) {
       res.redirect('/' + sprint + '/variable-length-employed-start-date')
     } else if (data === 'moreThan12') {
       req.session.data.varyMoreThan = 'true'
-      // res.redirect('/' + sprint + '/vary-gross-salary')
       res.redirect('/' + sprint + '/pay-dates-1')
     }
   })
