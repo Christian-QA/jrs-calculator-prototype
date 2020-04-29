@@ -265,22 +265,22 @@ module.exports = function (router) {
     if (req.session.data.variableGrossSalary) {
       var grossSalary = req.session.data.variableGrossSalary
       var claimMonthTotal = Math.round(req.session.data.claimPeriodStartMonth) + 12
-      var MonthStart = Math.round(req.session.data.employeeStartMonthCalc)
-      req.session.data.periodsalaryAmount = Math.round(grossSalary / ((claimMonthTotal - MonthStart) * 30))
+      var monthStart = Math.round(req.session.data.employeeStartMonthCalc)
+      req.session.data.periodsalaryAmount = Math.round(grossSalary / ((claimMonthTotal - monthStart) * 30))
     } else if (req.session.data.salaryAmount) {
       req.session.data.periodsalaryAmount = Math.round(req.session.data.salaryAmount / 30)
     }
     // console.log('period ave = ' + req.session.data.periodsalaryAmount)
     // Days in pay period
-    req.session.data.periodOneNoDays = 31 - Math.round(req.session.data.claimPeriodStartDay)
-    req.session.data.periodTwoNoDays = 30 - Math.round(req.session.data.claimPeriodEndDay)
+    //req.session.data.periodOneNoDays = 31 - Math.round(req.session.data.claimPeriodStartDay)
+    // req.session.data.periodTwoNoDays = 30 - Math.round(req.session.data.claimPeriodEndDay)
 
     // Total pay in each period
-    req.session.data.payOne = req.session.data.periodsalaryAmount * req.session.data.periodOneNoDays
-    req.session.data.payTwo = req.session.data.periodsalaryAmount * req.session.data.periodTwoNoDays
+    // req.session.data.payOne = req.session.data.periodsalaryAmount * req.session.data.periodOneNoDays
+    // req.session.data.payTwo = req.session.data.periodsalaryAmount * req.session.data.periodTwoNoDays
 
     //  pay period one breakdown
-    req.session.data.payPeriodOneFurloughSalary = Math.round(req.session.data.payOne * 0.8)
+    req.session.data.payPeriodOneFurloughSalary = Math.round((req.session.data.periodsalaryAmount * (31 - req.session.data.claimPeriodStartDay)) * 0.8)
     if (req.session.data.payPeriodOneFurloughSalary > 2500) {
       req.session.data.payPeriodOneFurloughSalary = 2500
     }
@@ -291,7 +291,7 @@ module.exports = function (router) {
     if (req.session.data.payTwo < 1) {
       req.session.data.payTwo = 2365
     }
-    req.session.data.payPeriodTwoFurloughSalary = Math.round(req.session.data.payTwo * 0.8)
+    req.session.data.payPeriodTwoFurloughSalary = Math.round((req.session.data.periodsalaryAmount * (30 - req.session.data.claimPeriodStartDay)) * 0.8)
     if (req.session.data.payPeriodTwoFurloughSalary > 2500) {
       req.session.data.payPeriodTwoFurloughSalary = 2500
     }
