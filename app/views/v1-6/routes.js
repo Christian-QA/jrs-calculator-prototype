@@ -173,7 +173,8 @@ module.exports = function (router) {
     req.session.data.payPeriodOneTitle = Math.round(req.session.data.payPeriodOneStartDay) + req.session.data.payPeriodOneTitleMonth
     req.session.data.payPeriodOne = titleMonth + '' + Math.round(req.session.data.payPeriodOneStartDay)
     if (req.session.data.payFrequency === 'monthly') {
-      res.redirect('/' + sprint + '/pay-dates-2')
+      // res.redirect('/' + sprint + '/pay-dates-2')
+      res.redirect('/' + sprint + '/pay-dates-question')
     } else {
       res.redirect('/' + sprint + '/pay-date')
     }
@@ -194,14 +195,26 @@ module.exports = function (router) {
     req.session.data.payPeriodThreeStartMonth = getMonthName(titleMonth)
     req.session.data.payPeriodThreeTitle = Math.round(req.session.data.payPeriodThreeStartDay) + req.session.data.payPeriodThreeStartMonth
     req.session.data.payPeriodThree = titleMonth + '' + Math.round(req.session.data.payPeriodThreeStartDay)
+    res.redirect('/' + sprint + '/pay-date')
+  })
 
-    if (req.session.data.varyMoreThan === 'true') {
-      res.redirect('/' + sprint + '/vary-salary-1')
-    } else if (req.session.data.lessThan12 === 'true') {
-      res.redirect('/' + sprint + '/vary-gross-salary')
-    } else {
+  // route-pay-date-question
+  router.post('/' + sprint + '/route-pay-date-question', function (req, res) {
+    var data = req.session.data.regMonthDate
+    if (data === 'yes') {
       res.redirect('/' + sprint + '/pay-date')
+    } else {
+      res.redirect('/' + sprint + '/pay-date-reg-month-date')
     }
+  })
+
+  // route-pay-date-reg"
+  router.post('/' + sprint + '/route-pay-date-reg', function (req, res) {
+    var titleMonth = Math.round(req.session.data.payPeriodTwoStartMonth)
+    req.session.data.payPeriodTwoTitleMonth = getMonthName(titleMonth)
+    req.session.data.payPeriodTwoTitle = Math.round(req.session.data.payPeriodTwoStartDay) + req.session.data.payPeriodTwoTitleMonth
+    req.session.data.payPeriodTwo = titleMonth + '' + Math.round(req.session.data.payPeriodTwoStartDay)
+    res.redirect('/' + sprint + '/pay-date')
   })
 
   // route-vary-salary-1
@@ -308,10 +321,10 @@ module.exports = function (router) {
     req.session.data.payTaxDateTitle = Math.round(req.session.data.payDateDay) + req.session.data.payDateMonthTitle
 
     if (req.session.data.payVary) {
-      if (req.session.data.payClaimPeriodTitle === req.session.data.furloughStartTitle) {
-        res.redirect('/' + sprint + '/topup-question')
-      } else {
-        res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
+      if (req.session.data.varyMoreThan === 'true') {
+        res.redirect('/' + sprint + '/vary-salary-1')
+      } else if (req.session.data.lessThan12 === 'true') {
+        res.redirect('/' + sprint + '/vary-gross-salary')
       }
     } else {
       res.redirect('/' + sprint + '/regular-pay')
