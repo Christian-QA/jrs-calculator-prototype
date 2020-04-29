@@ -33,36 +33,29 @@ module.exports = function (router) {
 
   // route-claim date
   router.post('/' + sprint + '/route-claim-start', function (req, res) {
-    req.session.data.claimStart = req.session.data.claimPeriodStartDay + '/' + req.session.data.claimPeriodStartMonth + '/' + req.session.data.claimPeriodStartYear
     var titleMonth = Math.round(req.session.data.claimPeriodStartMonth)
-    if (titleMonth === 2) {
-      req.session.data.claimPeriodStartMonthTitle = ' February'
-    } else if (titleMonth === 3) {
-      req.session.data.claimPeriodStartMonthTitle = ' March'
-    } else if (titleMonth === 4) {
-      req.session.data.claimPeriodStartMonthTitle = ' April'
-    } else if (titleMonth === 5) {
-      req.session.data.claimPeriodStartMonthTitle = ' May'
-    }
+    req.session.data.claimPeriodStartMonthTitle = getMonthName(titleMonth)
     req.session.data.payClaimPeriodTitle = Math.round(req.session.data.claimPeriodStartDay) + req.session.data.claimPeriodStartMonthTitle
+    req.session.data.claimStart = titleMonth + '' + Math.round(req.session.data.claimPeriodStartDay)
+    //console.log(req.session.data.claimStart)
     res.redirect('/' + sprint + '/claim-period-1')
   })
 
   // route-claim date
   router.post('/' + sprint + '/route-claim-end', function (req, res) {
-    req.session.data.claimEnd = req.session.data.claimPeriodEndDay + '/' + req.session.data.claimPeriodEndMonth + '/' + req.session.data.claimPeriodEndYear
     var titleMonth = Math.round(req.session.data.claimPeriodEndMonth)
     req.session.data.claimPeriodEndMonthTitle = getMonthName(titleMonth)
     req.session.data.payClaimPeriodEndTitle = Math.round(req.session.data.claimPeriodEndDay) + req.session.data.claimPeriodEndMonthTitle
+    req.session.data.claimEnd = titleMonth + '' + Math.round(req.session.data.claimPeriodEndDay)
     res.redirect('/' + sprint + '/furlough-question')
   })
 
   // route - fulrough question
   router.post('/' + sprint + '/route-furlough-question', function (req, res) {
-    req.session.data.furloughStart = req.session.data.furloughStartDay + '/' + req.session.data.furloughStartMonth + '/' + req.session.data.furloughStartYear
     var titleMonth = Math.round(req.session.data.furloughStartMonth)
     req.session.data.furloughStartMonthTitle = getMonthName(titleMonth)
     req.session.data.furloughStartTitle = Math.round(req.session.data.furloughStartDay) + req.session.data.furloughStartMonthTitle
+    req.session.data.furloughStart = titleMonth + '' + Math.round(req.session.data.furloughStartDay)
     res.redirect('/' + sprint + '/furlough-dates-end-question')
   })
 
@@ -78,20 +71,19 @@ module.exports = function (router) {
 
   // route furlough date start
   router.post('/' + sprint + '/route-furlough-dates-start', function (req, res) {
-    // furlough start
-    req.session.data.furloughStart = req.session.data.furloughStartDay + '/' + req.session.data.furloughStartMonth + '/' + req.session.data.furloughStartYear
     var titleMonth = Math.round(req.session.data.furloughStartMonth)
     req.session.data.furloughStartMonthTitle = getMonthName(titleMonth)
     req.session.data.furloughStartTitle = Math.round(req.session.data.furloughStartDay) + req.session.data.furloughStartMonthTitle
+    req.session.data.furloughStart = titleMonth + '' + Math.round(req.session.data.furloughStartDay)
     res.redirect('/' + sprint + '/pay-frequency')
   })
 
   // // furlough end
   router.post('/' + sprint + '/route-furlough-dates-end', function (req, res) {
-    req.session.data.furloughEnd = req.session.data.furloughEndDay + '/' + req.session.data.furloughEndMonth + '/' + req.session.data.furloughEndYear
-    var endMonth = Math.round(req.session.data.furloughEndMonth)
+    var titleMonth = Math.round(req.session.data.furloughEndMonth)
     req.session.data.furloughEndMonthTitle = getMonthName(titleMonth)
     req.session.data.furloughEndTitle = Math.round(req.session.data.furloughEndDay) + req.session.data.furloughEndMonthTitle
+    req.session.data.furloughEnd = titleMonth + '' + Math.round(req.session.data.furloughEndDay)
     res.redirect('/' + sprint + '/pay-frequency')
   })
 
@@ -158,7 +150,7 @@ module.exports = function (router) {
     req.session.data.employeeStartMonthCalc = titleMonth
     req.session.data.employeeStartMonth = getMonthName(titleMonth)
     req.session.data.employeeStartTitle = Math.round(req.session.data.employeeStartDay) + req.session.data.employeeStartMonth + ' ' + req.session.data.employeeStartYear
-    req.session.data.employeeStart = req.session.data.employeeStartDay + '/' + req.session.data.employeeStartMonth + '/' + req.session.data.employeeStartYear
+    req.session.data.employeeStart = titleMonth + '' + Math.round(req.session.data.employeeStartDay)
     res.redirect('/' + sprint + '/pay-dates-1')
   })
 
@@ -184,8 +176,7 @@ module.exports = function (router) {
     var titleMonth = Math.round(req.session.data.payPeriodOneStartMonth)
     req.session.data.payPeriodOneTitleMonth = getMonthName(titleMonth)
     req.session.data.payPeriodOneTitle = Math.round(req.session.data.payPeriodOneStartDay) + req.session.data.payPeriodOneTitleMonth
-    req.session.data.payPeriodOne = req.session.data.payPeriodOneStartDay + '/' + req.session.data.payPeriodOneStartMonth + '/' + req.session.data.payPeriodOneStartYear
-
+    req.session.data.payPeriodOne = titleMonth + '' + Math.round(req.session.data.payPeriodOneStartDay)
     if (req.session.data.payFrequency === 'monthly') {
       res.redirect('/' + sprint + '/pay-dates-2')
     } else {
@@ -198,7 +189,7 @@ module.exports = function (router) {
     var titleMonth = Math.round(req.session.data.payPeriodTwoStartMonth)
     req.session.data.payPeriodTwoTitleMonth = getMonthName(titleMonth)
     req.session.data.payPeriodTwoTitle = Math.round(req.session.data.payPeriodTwoStartDay) + req.session.data.payPeriodTwoTitleMonth
-    req.session.data.payPeriodTwo = req.session.data.payPeriodTwoStartDay + '/' + req.session.data.payPeriodTwoStartMonth + '/' + req.session.data.payPeriodTwoStartYear
+    req.session.data.payPeriodTwo = titleMonth + '' + Math.round(req.session.data.payPeriodTwoStartDay)
     res.redirect('/' + sprint + '/pay-dates-3')
   })
 
@@ -207,7 +198,7 @@ module.exports = function (router) {
     var titleMonth = Math.round(req.session.data.payPeriodThreeStartMonth)
     req.session.data.payPeriodThreeStartMonth = getMonthName(titleMonth)
     req.session.data.payPeriodThreeTitle = Math.round(req.session.data.payPeriodThreeStartDay) + req.session.data.payPeriodThreeStartMonth
-    req.session.data.payPeriodThree = req.session.data.payPeriodThreeStartDay + '/' + req.session.data.payPeriodThreeStartMonth + '/' + req.session.data.payPeriodThreeStartYear
+    req.session.data.payPeriodThree = titleMonth + '' + Math.round(req.session.data.payPeriodThreeStartDay)
 
     if (req.session.data.varyMoreThan === 'true') {
       res.redirect('/' + sprint + '/vary-salary-1')
@@ -233,7 +224,8 @@ module.exports = function (router) {
   // route-vary-gross salary
   router.post('/' + sprint + '/route-vary-gross-salary', function (req, res) {
     req.session.data.variableGrosSalaryAmount = req.session.data.variableGrossSalary
-    if (req.session.data.payClaimPeriodTitle === req.session.data.furloughStartTitle) {
+
+    if (req.session.data.claimStart === req.session.data.furloughStart) {
       res.redirect('/' + sprint + '/topup-question')
     } else {
       res.redirect('/' + sprint + '/variable-length-employed-partial-pay-amount')
