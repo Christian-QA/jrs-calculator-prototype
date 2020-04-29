@@ -67,7 +67,7 @@ Job Retention Scheme Calculator
                 have been furloughed for the whole of the claim period
                 {% endif %}
             </li>
-            <li>They are paid {{data['payFrequency'] | default('monthly')}}</li>
+            <li>They are paid {{data['payFrequencyDisplay'] | default('monthly')}}</li>
 
             {% if data['payVary']  %}
             <li>They are paid different amounts each time</li>
