@@ -106,9 +106,9 @@ module.exports = function (router) {
     if (data === 'monthly') {
       req.session.data.payFrequencyDisplay = 'each month'
     } else if (data === '4Weekly') {
-      req.session.data.payFrequencyDisplay = 'every 4 weeks'
+      req.session.data.payFrequencyDisplay = 'every four weeks'
     } else if (data === 'fortnightly') {
-      req.session.data.payFrequencyDisplay = 'every 2 weeks'
+      req.session.data.payFrequencyDisplay = 'every two weeks'
     } else if (data === 'weekly') {
       req.session.data.payFrequencyDisplay = 'each week'
     }
@@ -166,6 +166,14 @@ module.exports = function (router) {
     req.session.data.payPeriodOneTitleMonth = getMonthName(titleMonth)
     req.session.data.payPeriodOneTitle = Math.round(req.session.data.payPeriodOneStartDay) + req.session.data.payPeriodOneTitleMonth
     req.session.data.payPeriodOne = titleMonth + '' + Math.round(req.session.data.payPeriodOneStartDay)
+    // values for diff pay periods
+    req.session.data.twoWeekOne =   30 - (Math.round(req.session.data.payPeriodOneStartDay) + 14)
+    req.session.data.twoWeekTwo =   req.session.data.twoWeekOne + 14
+    req.session.data.oneWeekOne =   30 - (Math.round(req.session.data.payPeriodOneStartDay) + 7)
+    req.session.data.oneWeekTwo =   req.session.data.oneWeekOne + 7
+    req.session.data.oneWeekThree =  req.session.data.oneWeekTwo + 7
+
+
     if (req.session.data.payFrequency === 'monthly') {
       res.redirect('/' + sprint + '/pay-dates-2')
     } else {

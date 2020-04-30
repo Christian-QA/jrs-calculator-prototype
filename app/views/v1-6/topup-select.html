@@ -32,24 +32,70 @@ Job Retention Scheme Calculator
                 <fieldset class="govuk-fieldset">
 
 
+                    {% if data['payFrequency'] === 'fortnightly'  %}
                     <div class="govuk-checkboxes">
                         <div class="govuk-checkboxes__item">
                             <input class="govuk-checkboxes__input" id="waste" name="periodSelect" type="checkbox" value="periodOne">
                             <label class="govuk-label govuk-checkboxes__label" for="waste">
-                                Pay period end: {% if data['payPeriodTwoTitle']%}{{data['payPeriodTwoTitle']}}{% else %}30 March{% endif %} 2020
-                                <!--<br>
-                                <span class="govuk-hint">Amount before top-up: {% if data['payPeriodOneFurloughSalary'] %} £{{data['payPeriodOneFurloughSalary']}}.00 {% else %} £851.00 {% endif %}</span>-->
+                                Pay period end: {% if data['pastOneMonthTitle']%}{{data['payPeriodOneStartDay']}} {{data['pastOneMonthTitle']}}{% else %}30 March{% endif %} 2020
                             </label>
                         </div>
                         <div class="govuk-checkboxes__item">
                             <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
                             <label class="govuk-label govuk-checkboxes__label" for="waste-2">
-                                Pay period end: {% if data['payPeriodThreeTitle']%}{{data['payPeriodThreeTitle']}}{% else %}30 April{% endif %} 2020
-                                <!--<br>
-                                <span class="govuk-hint">Amount before top-up: {% if data['payPeriodTwoFurloughSalary'] %} £{{data['payPeriodTwoFurloughSalary']}}.00 {% else %} £301.00 {% endif %}</span>-->
+                                Pay period end: {% if data['pastOneMonthTitle']%}{{data['twoWeekOne']}} {{data['pastTwoMonthTitle']}}{% else %}13 April{% endif %} 2020
                             </label>
                         </div>
-
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
+                            <label class="govuk-label govuk-checkboxes__label" for="waste-2">
+                                Pay period end: {% if data['pastOneMonthTitle']%}{{data['twoWeekTwo']}} {{data['pastTwoMonthTitle']}}{% else %}27 April{% endif %} 2020
+                            </label>
+                        </div>
+                    </div>
+                    {% elseif data['payFrequency'] === 'weekly'  %}
+                    <div class="govuk-checkboxes">
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="waste" name="periodSelect" type="checkbox" value="periodOne">
+                            <label class="govuk-label govuk-checkboxes__label" for="waste">
+                                Pay period end: {% if data['pastOneMonthTitle']%}{{data['payPeriodOneStartDay']}} {{data['pastOneMonthTitle']}}{% else %}30 March{% endif %} 2020
+                            </label>
+                        </div>
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
+                            <label class="govuk-label govuk-checkboxes__label" for="waste-2">
+                                Pay period end: {% if data['pastOneMonthTitle']%}{{data['oneWeekOne']}} {{data['pastTwoMonthTitle']}}{% else %}6 April{% endif %} 2020
+                            </label>
+                        </div>
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
+                            <label class="govuk-label govuk-checkboxes__label" for="waste-2">
+                                Pay period end: {% if data['pastOneMonthTitle']%}{{data['oneWeekTwo']}} {{data['pastTwoMonthTitle']}}{% else %}13 April{% endif %} 2020
+                            </label>
+                        </div>
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
+                            <label class="govuk-label govuk-checkboxes__label" for="waste-2">
+                                Pay period end: {% if data['pastOneMonthTitle']%}{{data['oneWeekThree']}} {{data['pastTwoMonthTitle']}}{% else %}20 April{% endif %} 2020
+                            </label>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="govuk-checkboxes">
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="waste" name="periodSelect" type="checkbox" value="periodOne">
+                            <label class="govuk-label govuk-checkboxes__label" for="waste">
+                                Pay period end: {% if data['pastOneMonthTitle']%}{{data['payPeriodOneStartDay']}} {{data['pastOneMonthTitle']}}{% else %}30 March{% endif %} 2020
+                            </label>
+                        </div>
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
+                            <label class="govuk-label govuk-checkboxes__label" for="waste-2">
+                                Pay period end: {% if data['pastTwoMonthTitle']%}{{data['payPeriodOneStartDay']}} {{data['pastTwoMonthTitle']}}{% else %}30 April{% endif %} 2020
+                            </label>
+                        </div>
+                    </div>
+                    {% endif %}
                 </fieldset>
             </div>
 
