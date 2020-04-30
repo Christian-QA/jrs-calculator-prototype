@@ -233,6 +233,8 @@ module.exports = function (router) {
       req.session.data.pensionStatus = 'do not receive employer pension contributions'
     }
 
+
+
     // Average Daily pay calc
     if (req.session.data.variableGrossSalary) {
       var grossSalary = req.session.data.variableGrossSalary
@@ -242,6 +244,8 @@ module.exports = function (router) {
     } else if (req.session.data.salaryAmount) {
       req.session.data.periodsalaryAmount = Math.round(req.session.data.salaryAmount / 30)
     }
+    // console.log('vary gross salary = ' + req.session.data.variableGrossSalary)
+    // console.log('claimMonthTotal = ' + claimMonthTotal)
     // console.log('period ave = ' + req.session.data.periodsalaryAmount)
 
     //  pay period one breakdown
