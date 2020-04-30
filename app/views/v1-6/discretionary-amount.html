@@ -21,8 +21,15 @@ Job Retention Scheme Calculator
               <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
                   <h1 class="govuk-fieldset__heading">
                       <!--Enter the employee’s  salary on 28.02.20-->
-                      What additional payments did this employee get in the pay period ending {% if data['payPeriodTwoTitle']%}{{data['payPeriodTwoTitle']}}{% else %}30 March{% endif %} 2020?
+                      What additional payments did this employee get in the pay period ending
+                      {% if data['payFrequency'] === 'fortnightly' or  data['payFrequency'] === 'weekly'  %}
+                      {% if data['weekOne']%}{{data['weekOne']}}{% else %}30 March{% endif %} 2020
+                      {% else %}
+                      {% if data['payPeriodTwoTitle']%}
+                                {{data['payPeriodTwoTitle']}}
+                            {% else %}30 March{% endif %} 2020?
 
+                      {% endif %}
 
                      <!-- {{data['payFrequency'] | default('each month')}}?-->
                   </h1>

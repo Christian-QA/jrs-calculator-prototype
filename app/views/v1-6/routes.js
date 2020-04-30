@@ -260,7 +260,7 @@ module.exports = function (router) {
   })
   // route-vary-salary-2
   router.post('/' + sprint + '/route-vary-salary-2', function (req, res) {
-    req.session.data.salaryAmount = req.session.data.salary
+    req.session.data.salaryAmount2 = req.session.data.salary2
     res.redirect('/' + sprint + '/vary-gross-salary')
   })
 
@@ -358,20 +358,25 @@ module.exports = function (router) {
     }
 
     // Average Daily pay calc
-    if (req.session.data.variableGrossSalary) {
+    if (req.session.data.salaryAmount) {
+      req.session.data.periodsalaryAmount = Math.round(req.session.data.salaryAmount * 0.8)
+      if (req.session.data.salaryAmount2){
+        req.session.data.periodsalaryAmountTwo = Math.round(req.session.data.salaryAmount2 * 0.8)
+      } else {
+        req.session.data.periodsalaryAmountTwo = req.session.data.periodsalaryAmount
+      }
+    } else if (req.session.data.variableGrossSalary) {
       var grossSalary = req.session.data.variableGrossSalary
       var claimMonthTotal = Math.round(req.session.data.claimPeriodStartMonth) + 12
       var monthStart = Math.round(req.session.data.employeeStartMonthCalc)
       req.session.data.periodsalaryAmount = Math.round(grossSalary / ((claimMonthTotal - monthStart) * 30))
-    } else if (req.session.data.salaryAmount) {
-      req.session.data.periodsalaryAmount = Math.round(req.session.data.salaryAmount / 30)
     }
-    // console.log('vary gross salary = ' + req.session.data.variableGrossSalary)
+     console.log('vary gross salary = ' + req.session.data.variableGrossSalary)
     // console.log('claimMonthTotal = ' + claimMonthTotal)
     // console.log('period ave = ' + req.session.data.periodsalaryAmount)
 
     //  pay period one breakdown
-    req.session.data.payPeriodOneFurloughSalary = Math.round((req.session.data.periodsalaryAmount * (31 - req.session.data.claimPeriodStartDay)) * 0.8)
+    req.session.data.payPeriodOneFurloughSalary = req.session.data.periodsalaryAmount
     if (req.session.data.payPeriodOneFurloughSalary > 2500) {
       req.session.data.payPeriodOneFurloughSalary = 2500
     }
@@ -379,10 +384,10 @@ module.exports = function (router) {
     req.session.data.payPeriodOnePension = Math.round(req.session.data.payPeriodOneNic * 0.43)
 
     //  pay period two // Days in pay period
-    if (req.session.data.payTwo < 1) {
-      req.session.data.payTwo = 2365
-    }
-    req.session.data.payPeriodTwoFurloughSalary = Math.round((req.session.data.periodsalaryAmount * (30 - req.session.data.claimPeriodStartDay)) * 0.8)
+    // if (req.session.data.payTwo < 1) {
+    //   req.session.data.payTwo = 2365
+    // }
+    req.session.data.payPeriodTwoFurloughSalary = req.session.data.periodsalaryAmountTwo
     if (req.session.data.payPeriodTwoFurloughSalary > 2500) {
       req.session.data.payPeriodTwoFurloughSalary = 2500
     }
@@ -392,9 +397,21 @@ module.exports = function (router) {
 
     // set the totals
     req.session.data.totalFurlough = req.session.data.payPeriodOneFurloughSalary + req.session.data.payPeriodTwoFurloughSalary
+
     req.session.data.totalNic = req.session.data.payPeriodOneNic + req.session.data.payPeriodTwoNic
     req.session.data.totalPension = req.session.data.payPeriodOnePension + req.session.data.payPeriodTwoPension
-    // console.log('total =' + req.session.data.totalFurlough)
+
+    var data = req.session.data.payFrequency
+    if  (data === 'fortnightly') {
+      req.session.data.totalFurlough = Math.round(req.session.data.totalFurlough + (req.session.data.totalFurlough * 0.333333333))
+    } else if (data === 'weekly') {
+      // console.log('total here')
+      req.session.data.totalFurlough = req.session.data.totalFurlough * 2
+      if (req.session.data.totalFurlough > 2500) {
+        req.session.data.totalFurlough = 2500
+      }
+    }
+    console.log('total = ' + req.session.data.totalFurlough)
     res.redirect('/' + sprint + '/confirmation')
   })
 
