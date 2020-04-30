@@ -1,0 +1,66 @@
+<h3 class="govuk-heading-s">
+    Pay period ending {{data['payPeriodTwoTitle'] | default('30 March')}} 2020
+</h3>
+<p> Gross furlough amount
+    <br>
+    <span class="govuk-!-font-weight-bold">
+         {% if data['payPeriodOneFurloughSalary'] %}
+            £{{data['payPeriodOneFurloughSalary']}}.00
+        {% else %}
+            £851.00
+        {% endif %}
+     </span>
+</p>
+<p>Employer NI contributions
+    <br>
+    <span class="govuk-!-font-weight-bold">
+         {% if data['payPeriodOneNic'] %}
+            £{{data['payPeriodOneNic']}}.11
+        {% else %}
+            £70.11
+        {% endif %}
+    </span>
+</p>
+<p> Employer minimum pension contributions
+    <br>
+    <span class="govuk-!-font-weight-bold">
+         {% if data['payPeriodOnePension'] %}
+            £{{data['payPeriodOnePension']}}.11
+        {% else %}
+            £18.19
+        {% endif %}
+    </span>
+</p>
+<h3 class="govuk-heading-s">
+    Pay period ending {{data['payPeriodThreeTitle'] | default('30 April')}} 2020
+</h3>
+<p> Gross furlough amount
+    <br>
+    <span class="govuk-!-font-weight-bold">
+         {% if data['payPeriodTwoFurloughSalary'] %}
+            £{{data['payPeriodTwoFurloughSalary']}}.00
+        {% else %}
+            £301.00
+        {% endif %}
+    </span>
+</p>
+<p>Employer NI contributions
+    <br>
+    <span class="govuk-!-font-weight-bold">
+         {% if data['payPeriodTwoNic'] %}
+            £{{data['payPeriodTwoNic']}}.11
+        {% else %}
+            £50.11
+        {% endif %}
+    </span>
+</p>
+<p> Employer minimum pension contributions
+    <br>
+    <span class="govuk-!-font-weight-bold">
+         {% if data['payPeriodTwoPension'] %}
+            £{{data['payPeriodTwoPension']}}.11
+        {% else %}
+            £9.19
+        {% endif %}
+    </span>
+</p>

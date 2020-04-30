@@ -1,5 +1,4 @@
 
-
 .govuk-currency-input__inner {
   position: relative;
 }
@@ -13,17 +12,14 @@
   border-right: 2px solid;
   background: #f3f2f1;
   font-weight: bold;
-
-    font-family: "GDS Transport", Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-
+  font-family: "GDS Transport", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-size: 19px;
   line-height: 1.31579;
-    display: block;
+  display: block;
   text-align: center;
   padding-top: 6px;
-
 }
 
 .govuk-currency-input__inner__input {
