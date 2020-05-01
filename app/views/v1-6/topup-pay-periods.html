@@ -36,18 +36,24 @@ Job Retention Scheme Calculator
                             <input class="govuk-checkboxes__input" id="waste" name="periodSelect" type="checkbox" value="periodOne">
                             <label class="govuk-label govuk-checkboxes__label" for="waste">
                                 Pay period end: {% if data['weekOne']%}{{data['weekOne']}}{% else %}30 March{% endif %} 2020
+                                <br>
+                                <span class="govuk-hint">Amount before top-up: {% if data['salaryFurlough'] %} £{{data['salaryFurlough']}}.00 {% else %} £550.00 {% endif %}</span>
                             </label>
                         </div>
                         <div class="govuk-checkboxes__item">
                             <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
                             <label class="govuk-label govuk-checkboxes__label" for="waste-2">
                                 Pay period end: {% if data['weekTwo']%}{{data['weekTwo']}}{% else %}13 April{% endif %} 2020
+                                <br>
+                                <span class="govuk-hint">Amount before top-up: {% if data['salaryFurlough'] %} £{{data['salaryFurlough']}}.00 {% else %} £550.00 {% endif %}</span>
                             </label>
                         </div>
                         <div class="govuk-checkboxes__item">
                             <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
                             <label class="govuk-label govuk-checkboxes__label" for="waste-2">
                                 Pay period end: {% if data['weekThree']%}{{data['weekThree']}}{% else %}27 April{% endif %} 2020
+                                <br>
+                                <span class="govuk-hint">Amount before top-up: {% if data['salaryFurlough'] %} £{{data['salaryFurlough']}}.00 {% else %} £550.00 {% endif %}</span>
                             </label>
                         </div>
                     </div>
@@ -57,24 +63,32 @@ Job Retention Scheme Calculator
                             <input class="govuk-checkboxes__input" id="waste" name="periodSelect" type="checkbox" value="periodOne">
                             <label class="govuk-label govuk-checkboxes__label" for="waste">
                                 Pay period end: {% if data['weekOne']%}{{data['weekOne']}}{% else %}30 March{% endif %} 2020
+                                <br>
+                                <span class="govuk-hint">Amount before top-up: {% if data['salaryFurlough'] %} £{{data['salaryFurlough']}}.00 {% else %} £550.00 {% endif %}</span>
                             </label>
                         </div>
                         <div class="govuk-checkboxes__item">
                             <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
                             <label class="govuk-label govuk-checkboxes__label" for="waste-2">
                                 Pay period end: {% if data['weekTwo']%}{{data['weekTwo']}}{% else %}6 April{% endif %} 2020
+                                <br>
+                                <span class="govuk-hint">Amount before top-up: {% if data['salaryFurlough'] %} £{{data['salaryFurlough']}}.00 {% else %} £550.00 {% endif %}</span>
                             </label>
                         </div>
                         <div class="govuk-checkboxes__item">
                             <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
                             <label class="govuk-label govuk-checkboxes__label" for="waste-2">
                                 Pay period end: {% if data['weekThree']%}{{data['weekThree']}}{% else %}13 April{% endif %} 2020
+                                <br>
+                                <span class="govuk-hint">Amount before top-up: {% if data['salaryFurlough'] %} £{{data['salaryFurlough']}}.00 {% else %} £550.00 {% endif %}</span>
                             </label>
                         </div>
                         <div class="govuk-checkboxes__item">
                             <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
                             <label class="govuk-label govuk-checkboxes__label" for="waste-2">
                                 Pay period end: {% if data['weekFour']%}{{data['weekFour']}}{% else %}20 April{% endif %} 2020
+                                <br>
+                                <span class="govuk-hint">Amount before top-up: {% if data['salaryFurlough'] %} £{{data['salaryFurlough']}}.00 {% else %} £550.00 {% endif %}</span>
                             </label>
                         </div>
                     </div>
@@ -90,7 +104,8 @@ Job Retention Scheme Calculator
                         <div class="govuk-checkboxes__item">
                             <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
                             <label class="govuk-label govuk-checkboxes__label" for="waste-2">
-                                Pay period end: {% if data['pastTwoMonthTitle']%}{{data['payPeriodOneStartDay']}} {{data['pastTwoMonthTitle']}}{% else %}30 April{% endif %} 2020
+                                Pay period end: {% if data['pastTwoMonthTitle']%}{{data['payPeriodOneStartDay']}} {{data['pastTwoMonthTitle']}}{% else %}30 April{% endif %} 2020<br>
+                                <span class="govuk-hint">Amount before top-up: {% if data['payPeriodOneFurloughSalary'] %} £{{data['payPeriodOneFurloughSalary']}}.00 {% else %} £851.00 {% endif %}</span>
                             </label>
                         </div>
                     </div>
