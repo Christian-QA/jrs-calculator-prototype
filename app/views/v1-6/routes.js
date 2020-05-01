@@ -260,8 +260,8 @@ module.exports = function (router) {
     var titleMonth = Math.round(req.session.data.payDateMonth)
     req.session.data.payDateMonthTitle = getMonthName(titleMonth)
     req.session.data.payTaxDateTitle = Math.round(req.session.data.payDateDay) + req.session.data.payDateMonthTitle
-    req.session.data.pastOneMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth) + 1)
-    req.session.data.pastTwoMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth) + 2)
+    req.session.data.pastOneMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth) - 1)
+    req.session.data.pastTwoMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth))
     if (req.session.data.payVary) {
       if (req.session.data.varyMoreThan === 'true') {
         res.redirect('/' + sprint + '/last-year-pay-1')
@@ -276,17 +276,24 @@ module.exports = function (router) {
   // route-vary-salary-1
   router.post('/' + sprint + '/route-vary-salary-1', function (req, res) {
     req.session.data.salaryAmount = req.session.data.salary
+    req.session.data.salaryFurlough = Math.round(req.session.data.salary * 0.8)
     res.redirect('/' + sprint + '/last-year-pay-2')
   })
   // route-vary-salary-2
   router.post('/' + sprint + '/route-vary-salary-2', function (req, res) {
     req.session.data.salaryAmount2 = req.session.data.salary2
+    req.session.data.salaryFurlough2 = Math.round(req.session.data.salary2 * 0.8)
     res.redirect('/' + sprint + '/annual-pay-amount')
   })
 
   // route-vary-gross salary
   router.post('/' + sprint + '/route-vary-gross-salary', function (req, res) {
     // req.session.data.variableGrosSalaryAmount = req.session.data.variableGrossSalary
+    var grossSalary = req.session.data.variableGrossSalary
+    var claimMonthTotal = Math.round(req.session.data.claimPeriodStartMonth) + 12
+    var monthStart = Math.round(req.session.data.employeeStartMonthCalc)
+    req.session.data.salaryFurlough = Math.round((grossSalary / 30) * (claimMonthTotal - monthStart))
+    req.session.data.salaryFurlough2 = req.session.data.salaryFurlough - 27
     if (req.session.data.furloughStart <= req.session.data.claimStart) {
       res.redirect('/' + sprint + '/topup-question')
     } else {
@@ -370,7 +377,7 @@ module.exports = function (router) {
       var grossSalary = req.session.data.variableGrossSalary
       var claimMonthTotal = Math.round(req.session.data.claimPeriodStartMonth) + 12
       var monthStart = Math.round(req.session.data.employeeStartMonthCalc)
-      req.session.data.periodsalaryAmount = Math.round(grossSalary / ((claimMonthTotal - monthStart) * 30))
+      req.session.data.salaryFurlough = Math.round((grossSalary / 30) * (claimMonthTotal - monthStart))
     }
     console.log('vary gross salary = ' + req.session.data.variableGrossSalary)
     console.log(' salary = ' + req.session.data.salaryAmount)
