@@ -283,6 +283,24 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-vary-salary-2', function (req, res) {
     req.session.data.salaryAmount2 = req.session.data.salary2
     req.session.data.salaryFurlough2 = Math.round(req.session.data.salary2 * 0.8)
+    var dataFreq = req.session.data.payFrequency
+    if (dataFreq === 'fortnightly' || dataFreq === 'weekly') {
+      res.redirect('/' + sprint + '/last-year-pay-3')
+    } else  {
+      res.redirect('/' + sprint + '/annual-pay-amount')
+    }
+  })
+  // route-vary-salary-3
+  router.post('/' + sprint + '/route-vary-salary-3', function (req, res) {
+    var dataFreq = req.session.data.payFrequency
+    if (dataFreq === 'weekly') {
+      res.redirect('/' + sprint + '/last-year-pay-4')
+    } else  {
+      res.redirect('/' + sprint + '/annual-pay-amount')
+    }
+  })
+  // route-vary-salary-4
+  router.post('/' + sprint + '/route-vary-salary-4', function (req, res) {
     res.redirect('/' + sprint + '/annual-pay-amount')
   })
 
