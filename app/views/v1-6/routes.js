@@ -300,7 +300,7 @@ module.exports = function (router) {
         res.redirect('/' + sprint + '/vary-gross-salary')
       }
     } else {
-      res.redirect('/' + sprint + '/regular-pay')
+      res.redirect('/' + sprint + '/regular-pay-amount')
     }
   })
 
