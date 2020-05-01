@@ -307,11 +307,20 @@ module.exports = function (router) {
   // route-vary-gross salary
   router.post('/' + sprint + '/route-vary-gross-salary', function (req, res) {
     // req.session.data.variableGrosSalaryAmount = req.session.data.variableGrossSalary
-    var grossSalary = req.session.data.variableGrossSalary
-    var claimMonthTotal = Math.round(req.session.data.claimPeriodStartMonth) + 12
-    var monthStart = Math.round(req.session.data.employeeStartMonthCalc)
-    req.session.data.salaryFurlough = Math.round((grossSalary / 30) * (claimMonthTotal - monthStart))
-    req.session.data.salaryFurlough2 = req.session.data.salaryFurlough - 27
+    var data = req.session.data.employLength
+    if (data === 'lessThan12') {
+      var grossSalary = req.session.data.variableGrossSalary
+      var claimMonthTotal = Math.round(req.session.data.claimPeriodStartMonth) + 12
+      var monthStart = Math.round(req.session.data.employeeStartMonthCalc)
+      req.session.data.salaryFurlough = Math.round((grossSalary / 30) * (claimMonthTotal - monthStart))
+      req.session.data.salaryFurlough2 = req.session.data.salaryFurlough - 27
+      var dataFreq = req.session.data.payFrequency
+      if (dataFreq === 'weekly') {
+        req.session.data.salaryFurlough = Math.round(req.session.data.salaryFurlough /4)
+      } else if (dataFreq === 'fortnightly') {
+        req.session.data.salaryFurlough = Math.round(req.session.data.salaryFurlough /3)
+      }
+    }
     if (req.session.data.furloughStart <= req.session.data.claimStart) {
       res.redirect('/' + sprint + '/topup-question')
     } else {
@@ -383,6 +392,7 @@ module.exports = function (router) {
     } else if (data === 'no') {
       req.session.data.pensionStatus = 'do not receive employer pension contributions'
     }
+
     // Average Daily pay calc
     if (req.session.data.salaryAmount) {
       req.session.data.periodsalaryAmount = Math.round(req.session.data.salaryAmount * 0.8)
@@ -395,7 +405,7 @@ module.exports = function (router) {
       var grossSalary = req.session.data.variableGrossSalary
       var claimMonthTotal = Math.round(req.session.data.claimPeriodStartMonth) + 12
       var monthStart = Math.round(req.session.data.employeeStartMonthCalc)
-      req.session.data.salaryFurlough = Math.round((grossSalary / 30) * (claimMonthTotal - monthStart))
+      req.session.data.periodsalaryAmount = Math.round((grossSalary / 30) * (claimMonthTotal - monthStart))
     }
     console.log('vary gross salary = ' + req.session.data.variableGrossSalary)
     console.log(' salary = ' + req.session.data.salaryAmount)
