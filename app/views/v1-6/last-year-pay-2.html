@@ -22,11 +22,24 @@ Job Retention Scheme Calculator
                   <h1 class="govuk-fieldset__heading">
                       <!--Enter the employee’s  salary on 28.02.20-->
                       In 2019, what did this employee get paid on
-                      {% if data['payDateDay']%}
-                        {{data['payDateDay']}} {{data['pastTwoMonthTitle']}}
+                      {% if data['payFrequency'] === 'fortnightly' or data['payFrequency'] === 'weekly' %}
+                      {% if data['weekTwo']%}
+                      {{data['weekTwo']}}
                       {% else %}
-                        17 May
+                      8 March
+                      {% endif %} 2020
+
+                      {% else %}
+                      {% if data['payDateDay']%}
+                      {{data['payDateDay']}} {{data['pastTwoMonthTitle']}}
+                      {% else %}
+                      17 May
                       {% endif %}?
+                      {% endif %}?
+
+
+
+
                      <!-- {{data['payFrequency'] | default('each month')}}?-->
                   </h1>
               </legend>
