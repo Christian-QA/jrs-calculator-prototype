@@ -83,7 +83,8 @@ Job Retention Scheme Calculator
                         <div class="govuk-checkboxes__item">
                             <input class="govuk-checkboxes__input" id="waste" name="periodSelect" type="checkbox" value="periodOne">
                             <label class="govuk-label govuk-checkboxes__label" for="waste">
-                                Pay period end: {% if data['pastOneMonthTitle']%}{{data['payPeriodOneStartDay']}} {{data['pastOneMonthTitle']}}{% else %}30 March{% endif %} 2020
+                                Pay period end: {% if data['pastOneMonthTitle']%}{{data['payPeriodOneStartDay']}} {{data['pastOneMonthTitle']}}{% else %}30 March{% endif %} 2020 <br>
+                                <span class="govuk-hint">Amount before top-up: {% if data['payPeriodOneFurloughSalary'] %} £{{data['payPeriodOneFurloughSalary']}}.00 {% else %} £851.00 {% endif %}</span>
                             </label>
                         </div>
                         <div class="govuk-checkboxes__item">
