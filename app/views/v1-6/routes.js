@@ -149,8 +149,13 @@ module.exports = function (router) {
     req.session.data.employeeStartMonthCalc = titleMonth
     req.session.data.employeeStartMonth = getMonthName(titleMonth)
     req.session.data.employeeStartTitle = Math.round(req.session.data.employeeStartDay) + req.session.data.employeeStartMonth + ' ' + req.session.data.employeeStartYear
-    req.session.data.employeeStart = titleMonth + '' + Math.round(req.session.data.employeeStartDay)
+    req.session.data.employeeStart = titleMonth + '0' + req.session.data.employeeStartDay
+    if (req.session.data.employeeStart <= 45) {
+      req.session.data.varyMoreThan = 'true'
+    }
+    // console.log(req.session.data.employeeStart)
     res.redirect('/' + sprint + '/pay-dates-1')
+
   })
 
   // route- route partial pay period
@@ -228,11 +233,12 @@ module.exports = function (router) {
     // console.log('3 date = ' + req.session.data.weekThree)
     // console.log('4 date = ' + req.session.data.weekFour)
 
-    if (req.session.data.payFrequency === 'monthly') {
-      res.redirect('/' + sprint + '/pay-dates-2')
-    } else {
-      res.redirect('/' + sprint + '/last-pay-date')
-    }
+    // if (req.session.data.payFrequency === 'monthly') {
+    //   res.redirect('/' + sprint + '/pay-dates-2')
+    // } else {
+    //   res.redirect('/' + sprint + '/last-pay-date')
+    // }
+    res.redirect('/' + sprint + '/pay-dates-2')
   })
 
   // route - pay dates 2
@@ -241,6 +247,7 @@ module.exports = function (router) {
     req.session.data.payPeriodTwoTitleMonth = getMonthName(titleMonth)
     req.session.data.payPeriodTwoTitle = Math.round(req.session.data.payPeriodTwoStartDay) + req.session.data.payPeriodTwoTitleMonth
     req.session.data.payPeriodTwo = titleMonth + '' + Math.round(req.session.data.payPeriodTwoStartDay)
+
     res.redirect('/' + sprint + '/pay-dates-3')
   })
 
@@ -250,8 +257,35 @@ module.exports = function (router) {
     req.session.data.payPeriodThreeStartMonth = getMonthName(titleMonth)
     req.session.data.payPeriodThreeTitle = Math.round(req.session.data.payPeriodThreeStartDay) + req.session.data.payPeriodThreeStartMonth
     req.session.data.payPeriodThree = titleMonth + '' + Math.round(req.session.data.payPeriodThreeStartDay)
+    var dataFreq = req.session.data.payFrequency
+    if (dataFreq === 'fortnightly' || dataFreq === 'weekly') {
+      res.redirect('/' + sprint + '/pay-dates-4')
+    } else  {
+      res.redirect('/' + sprint + '/last-pay-date')
+    }
+  })
 
-    res.redirect('/' + sprint + '/last-pay-date')
+  // route - pay dates 4
+  router.post('/' + sprint + '/route-pay-dates-4', function (req, res) {
+    var titleMonth = Math.round(req.session.data.payPeriodFourStartMonth)
+    req.session.data.payPeriodFourStartMonth = getMonthName(titleMonth)
+    req.session.data.payPeriodFourTitle = Math.round(req.session.data.payPeriodFourStartDay) + req.session.data.payPeriodFourStartMonth
+    req.session.data.payPeriodFour = titleMonth + '' + Math.round(req.session.data.payPeriodFourStartDay)
+    var dataFreq = req.session.data.payFrequency
+    if ( dataFreq === 'weekly') {
+      res.redirect('/' + sprint + '/pay-dates-5')
+    } else  {
+      res.redirect('/' + sprint + '/last-pay-date')
+    }
+  })
+
+  // route - pay dates 5
+  router.post('/' + sprint + '/route-pay-dates-5', function (req, res) {
+    var titleMonth = Math.round(req.session.data.payPeriodFiveStartMonth)
+    req.session.data.payPeriodFiveStartMonth = getMonthName(titleMonth)
+    req.session.data.payPeriodFiveTitle = Math.round(req.session.data.payPeriodFiveStartDay) + req.session.data.payPeriodFiveStartMonth
+    req.session.data.payPeriodFive = titleMonth + '' + Math.round(req.session.data.payPeriodFiveStartDay)
+      res.redirect('/' + sprint + '/last-pay-date')
   })
 
   // route - pay date
