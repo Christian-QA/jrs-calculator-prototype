@@ -272,11 +272,12 @@ module.exports = function (router) {
     req.session.data.payPeriodFourTitle = Math.round(req.session.data.payPeriodFourStartDay) + req.session.data.payPeriodFourStartMonth
     req.session.data.payPeriodFour = titleMonth + '' + Math.round(req.session.data.payPeriodFourStartDay)
     var dataFreq = req.session.data.payFrequency
-    if ( dataFreq === 'weekly') {
+    if (dataFreq === 'weekly') {
       res.redirect('/' + sprint + '/pay-dates-5')
     } else  {
       res.redirect('/' + sprint + '/last-pay-date')
     }
+
   })
 
   // route - pay dates 5
@@ -285,11 +286,7 @@ module.exports = function (router) {
     req.session.data.payPeriodFiveStartMonth = getMonthName(titleMonth)
     req.session.data.payPeriodFiveTitle = Math.round(req.session.data.payPeriodFiveStartDay) + req.session.data.payPeriodFiveStartMonth
     req.session.data.payPeriodFive = titleMonth + '' + Math.round(req.session.data.payPeriodFiveStartDay)
-    if ( dataFreq === 'weekly') {
-      res.redirect('/' + sprint + '/pay-dates-6')
-    } else  {
-      res.redirect('/' + sprint + '/last-pay-date')
-    }
+  res.redirect('/' + sprint + '/pay-dates-6')
   })
   // route - pay dates 6
   router.post('/' + sprint + '/route-pay-dates-6', function (req, res) {
