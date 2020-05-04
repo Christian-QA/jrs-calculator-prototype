@@ -347,6 +347,15 @@ module.exports = function (router) {
   })
   // route-vary-salary-4
   router.post('/' + sprint + '/route-vary-salary-4', function (req, res) {
+    res.redirect('/' + sprint + '/last-year-pay-5')
+  })
+
+  // route-vary-salary-5
+  router.post('/' + sprint + '/route-vary-salary-5', function (req, res) {
+    res.redirect('/' + sprint + '/last-year-pay-6')
+  })
+  // route-vary-salary-6
+  router.post('/' + sprint + '/route-vary-salary-6', function (req, res) {
     res.redirect('/' + sprint + '/annual-pay-amount')
   })
 
