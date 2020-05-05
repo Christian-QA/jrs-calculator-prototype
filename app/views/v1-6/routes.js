@@ -47,7 +47,7 @@ module.exports = function (router) {
     req.session.data.claimPeriodEndMonthTitle = getMonthName(titleMonth)
     req.session.data.payClaimPeriodEndTitle = Math.round(req.session.data.claimPeriodEndDay) + req.session.data.claimPeriodEndMonthTitle
     req.session.data.claimEnd = titleMonth + '' + Math.round(req.session.data.claimPeriodEndDay)
-    res.redirect('/' + sprint + '/furlough-question')
+    res.redirect('/' + sprint + '/furlough-start')
   })
 
   // route - fulrough question
@@ -510,7 +510,7 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-start-again', function (req, res) {
     var data = req.session.data.restartClaim
     if (data === 'yes') {
-      res.redirect('/' + sprint + '/furlough-question')
+      res.redirect('/' + sprint + '/furlough-start')
     } else if (data === 'no') {
       req.session.data = {}
       req.session.destroy()
