@@ -146,12 +146,14 @@ module.exports = function (router) {
   // route - vairable lengt start dates
   router.post('/' + sprint + '/route-variable-start-date', function (req, res) {
     var titleMonth = Math.round(req.session.data.employeeStartMonth)
+    var titleDay = Math.round(req.session.data.employeeStartDay)
     req.session.data.employeeStartMonthCalc = titleMonth
     req.session.data.employeeStartMonth = getMonthName(titleMonth)
-    req.session.data.employeeStartTitle = Math.round(req.session.data.employeeStartDay) + req.session.data.employeeStartMonth + ' ' + req.session.data.employeeStartYear
+    req.session.data.employeeStartTitle = titleDay + req.session.data.employeeStartMonth + ' ' + req.session.data.employeeStartYear
     req.session.data.employeeStart = titleMonth + '0' + req.session.data.employeeStartDay
-    if (req.session.data.employeeStart <= 45) {
+    if (titleMonth === 4 && titleDay <= 5) {
       req.session.data.varyMoreThan = 'true'
+      // console.log('more than journey')
     }
     // console.log(req.session.data.employeeStart)
     res.redirect('/' + sprint + '/pay-dates-1')
