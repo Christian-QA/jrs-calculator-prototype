@@ -508,7 +508,7 @@ module.exports = function (router) {
 
   // another calculation
   router.post('/' + sprint + '/another-calculation', function (req, res) {
-      res.redirect('/' + sprint + '/claim-period-question')
+      res.redirect('/' + sprint + '/claim-period-start')
   })
 
   // clear data and start again
