@@ -65,7 +65,11 @@ module.exports = function (router) {
     if (data === 'yes') {
       res.redirect('/' + sprint + '/furlough-end')
     } else if (data === 'no') {
-      res.redirect('/' + sprint + '/pay-frequency')
+      if (req.session.data.usePayPeriodsAgain) {
+        res.redirect('/' + sprint + '/pay-method')
+      } else  {
+        res.redirect('/' + sprint + '/pay-frequency')
+      }
     }
   })
 
@@ -124,7 +128,11 @@ module.exports = function (router) {
     var data = req.session.data.payQuestion
     if (data === 'payRegular') {
       req.session.data.payRegular = 'The employee is paid the same amount each month'
-      res.redirect('/' + sprint + '/pay-dates-1')
+      if (req.session.data.usePayPeriodsAgain) {
+        res.redirect('/' + sprint + '/regular-pay-amount')
+      } else  {
+        res.redirect('/' + sprint + '/pay-dates-1')
+      }
     } else if (data === 'payVariable') {
       req.session.data.payVary = 'The employees pay varies each time'
       res.redirect('/' + sprint + '/variable-pay-how-long-working')
@@ -139,7 +147,11 @@ module.exports = function (router) {
       res.redirect('/' + sprint + '/variable-pay-start-date')
     } else if (data === 'moreThan12') {
       req.session.data.varyMoreThan = 'true'
-      res.redirect('/' + sprint + '/pay-dates-1')
+      if (req.session.data.usePayPeriodsAgain) {
+        res.redirect('/' + sprint + '/last-year-pay-1')
+      } else  {
+        res.redirect('/' + sprint + '/pay-dates-1')
+      }
     }
   })
 
@@ -153,11 +165,19 @@ module.exports = function (router) {
     req.session.data.employeeStart = titleMonth + '0' + req.session.data.employeeStartDay
     if (titleMonth === 4 && titleDay <= 5) {
       req.session.data.varyMoreThan = 'true'
+      req.session.data.lessThan12 = 'false'
       // console.log('more than journey')
     }
     // console.log(req.session.data.employeeStart)
-    res.redirect('/' + sprint + '/pay-dates-1')
-
+    if (req.session.data.usePayPeriodsAgain) {
+      if (req.session.data.varyMoreThan === 'true') {
+        res.redirect('/' + sprint + '/last-year-pay-1')
+      } else {
+        res.redirect('/' + sprint + '/annual-pay-amount')
+      }
+    } else {
+      res.redirect('/' + sprint + '/pay-dates-1')
+    }
   })
 
   // route- route partial pay period
@@ -307,12 +327,11 @@ module.exports = function (router) {
     req.session.data.payTaxDateTitle = Math.round(req.session.data.payDateDay) + req.session.data.payDateMonthTitle
     req.session.data.pastOneMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth) - 1)
     req.session.data.pastTwoMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth))
-    if (req.session.data.payVary) {
-      if (req.session.data.varyMoreThan === 'true') {
-        res.redirect('/' + sprint + '/last-year-pay-1')
-      } else if (req.session.data.lessThan12 === 'true') {
-        res.redirect('/' + sprint + '/annual-pay-amount')
-      }
+
+    if (req.session.data.varyMoreThan === 'true') {
+      res.redirect('/' + sprint + '/last-year-pay-1')
+    } else if (req.session.data.lessThan12 === 'true') {
+      res.redirect('/' + sprint + '/annual-pay-amount')
     } else {
       res.redirect('/' + sprint + '/regular-pay-amount')
     }
@@ -528,8 +547,8 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-pay-periods', function (req, res) {
     var data = req.session.data.usePayPeriods
     if (data === 'yes') {
-      res.redirect('/' + sprint + '/furlough-start')
       req.session.data.usePayPeriodsAgain = true
+      res.redirect('/' + sprint + '/furlough-start')
     } else if (data === 'no') {
       req.session.data.usePayPeriodsAgain = false
       req.session.data = {}
