@@ -506,15 +506,35 @@ module.exports = function (router) {
     res.redirect('/' + sprint + '/confirmation')
   })
 
-  // clear data
+  // another calculation
+  router.post('/' + sprint + '/another-calculation', function (req, res) {
+      res.redirect('/' + sprint + '/claim-period-question')
+  })
+
+  // clear data and start again
   router.post('/' + sprint + '/route-start-again', function (req, res) {
     var data = req.session.data.restartClaim
     if (data === 'yes') {
-      res.redirect('/' + sprint + '/furlough-start')
+      // res.redirect('/' + sprint + '/furlough-start')
+      res.redirect('/' + sprint + '/pay-period-question')
     } else if (data === 'no') {
       req.session.data = {}
       req.session.destroy()
       res.redirect('/' + sprint + '/claim-period-start')
+    }
+  })
+
+  // use pay periods
+  router.post('/' + sprint + '/route-pay-periods', function (req, res) {
+    var data = req.session.data.usePayPeriods
+    if (data === 'yes') {
+      res.redirect('/' + sprint + '/furlough-start')
+      req.session.data.usePayPeriodsAgain = true
+    } else if (data === 'no') {
+      req.session.data.usePayPeriodsAgain = false
+      req.session.data = {}
+      req.session.destroy()
+      res.redirect('/' + sprint + '/furlough-start')
     }
   })
 }
