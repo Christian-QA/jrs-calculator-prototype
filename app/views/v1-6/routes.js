@@ -548,9 +548,22 @@ module.exports = function (router) {
     var data = req.session.data.usePayPeriods
     if (data === 'yes') {
       req.session.data.usePayPeriodsAgain = true
-      res.redirect('/' + sprint + '/furlough-start')
+      res.redirect('/' + sprint + '/furlough-period-question')
     } else if (data === 'no') {
       req.session.data.usePayPeriodsAgain = false
+      req.session.data = {}
+      req.session.destroy()
+      res.redirect('/' + sprint + '/furlough-start')
+    }
+  })
+  // use pay periods
+  router.post('/' + sprint + '/route-furlough-periods', function (req, res) {
+    var data = req.session.data.useFurloughPeriods
+    if (data === 'yes') {
+      req.session.data.useFurloughPeriodsAgain = true
+      res.redirect('/' + sprint + '/pay-method')
+    } else if (data === 'no') {
+      req.session.data.useFurloughPeriodsAgain = false
       req.session.data = {}
       req.session.destroy()
       res.redirect('/' + sprint + '/furlough-start')
