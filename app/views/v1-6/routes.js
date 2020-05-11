@@ -260,7 +260,7 @@ module.exports = function (router) {
     } else {
       res.redirect('/' + sprint + '/last-pay-date')
     }
-    res.redirect('/' + sprint + '/pay-dates-2')
+    // res.redirect('/' + sprint + '/pay-dates-2')
   })
 
   // route - pay dates 2
