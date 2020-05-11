@@ -255,11 +255,11 @@ module.exports = function (router) {
     // console.log('3 date = ' + req.session.data.weekThree)
     // console.log('4 date = ' + req.session.data.weekFour)
 
-    // if (req.session.data.payFrequency === 'monthly') {
-    //   res.redirect('/' + sprint + '/pay-dates-2')
-    // } else {
-    //   res.redirect('/' + sprint + '/last-pay-date')
-    // }
+    if (req.session.data.payFrequency === 'monthly') {
+      res.redirect('/' + sprint + '/pay-dates-2')
+    } else {
+      res.redirect('/' + sprint + '/last-pay-date')
+    }
     res.redirect('/' + sprint + '/pay-dates-2')
   })
 
