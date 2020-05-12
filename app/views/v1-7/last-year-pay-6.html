@@ -1,0 +1,71 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <form action="route-vary-salary-6" method="post">
+
+            <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+                    <h1 class="govuk-fieldset__heading">
+                        <!--Enter the employee’s  salary on 28.02.20-->
+                        In 2019, what did this employee get paid on
+
+                        {% if data['weekSix']%}
+                        {{data['weekSix']}}
+                        {% else %}
+                        22 March
+                        {% endif %} 2020?
+
+
+
+
+
+
+                        <!-- {{data['payFrequency'] | default('each month')}}?-->
+                    </h1>
+                </legend>
+
+                <span id="nicCategory-hint" class="govuk-hint">
+<p>Do not include discretionary payments, non-cash payments or non-monetary benefits. </p>
+                   <p>We need this to work out their average pay based on last year's amount.</p>
+
+  </span>
+                {% include "includes/include-in-salary.html" %}
+                <!--<label class="govuk-label" for="amount">
+                    Enter an amount
+                </label>
+
+                <span id="width-10-hint" class="govuk-hint">
+          hint
+        </span>-->
+                <div class="govuk-currency-input__inner govuk-form-group">
+
+                    <span class="govuk-currency-input__inner__unit">£</span>
+                    <input type="text" class="govuk-currency-input__inner__input govuk-input govuk-input--width-10" id="salary" value=""  name="salary2" >
+                </div>
+
+                <button class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
+            </fieldset>
+        </form>
+        {% include "includes/web-chat.html" %}
+
+
+    </div>
+</div>
+
+{% endblock %}
