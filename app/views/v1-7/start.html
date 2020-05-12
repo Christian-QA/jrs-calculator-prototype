@@ -1,0 +1,70 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">Coronavirus Job Retention Scheme calculator</h1>
+
+    <p>Use this calculator to work out the figures you’ll need when you complete a claim through the scheme. It also gives a breakdown of calculations for each pay period for your records.</p>
+
+    <p>The figures are for one employee, for the claim period you specify. Run the calculator again for any other employees you’re claiming for and add up the results.</p>
+
+    <p> The calculator works for most employees paid weekly, 2 weekly, 4 weekly or monthly.</p>
+
+    <p>It doesn’t yet work for employees who:</p>
+    <ul class="govuk-list govuk-list--bullet">
+
+      <li>returned from statutory leave such as maternity leave in the last 3 months</li>
+      <li>get director’s payments</li>
+      <li>have been transferred under TUPE</li>
+      <li>have been employed at separate times throughout the year </li>
+      <li>receive employer pension contributions outside of an auto-enrolment pension scheme</li>
+    </ul>
+
+
+    <p>In these cases, work out what you can claim manually using the <a href="https://www.gov.uk/guidance/work-out-80-of-your-employees-wages-to-claim-through-the-coronavirus-job-retention-scheme">calculation guidance</a> or seek professional advice.</p>
+    <p>It’s your responsibility to check that the amount you’re claiming for is correct.</p>
+
+
+
+    <a href="claim-period-start" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button">
+      Start now
+      <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+        <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+      </svg>
+    </a>
+
+    <h2 class="govuk-heading-m">Before you start</h2>
+    <p>You will need:</p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>claim start date (for your first claim, it’s when the first employee started furlough)</li>
+      <li>claim end date (align it with your next payroll run)</li>
+      <li>pay dates (when the employee gets their pay)</li>
+      <li>dates of pay periods (the time periods their pay covers)</li>
+      <li>regular payment amounts</li>
+      <li>additional payments (such as tips, discretionary bonuses, non-cash payments)</li>
+      <li>employee <a href="https://www.gov.uk/national-insurance-rates-letters/category-letters" target="_blank">National Insurance category letter</a></li>
+      <li>date furlough ended, if not ongoing</li>
+    </ul>
+
+  </div>
+
+  <div class="govuk-grid-column-one-third">
+
+    <!-- The Related items component is not part of GOV.UK Frontend but will be styled if used in the Prototype Kit -->
+
+
+
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="route-dates-end-question" method="post">
+
+
+        <fieldset class="govuk-fieldset" aria-describedby="furloughQuestion-hint">
+
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+
+            <h1 class="govuk-fieldset__heading">
+              Has the employee's furlough ended?
+            </h1>
+
+          </legend>
+          <!--<p>
+            From {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} 2020 to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %} 2020
+          </p>-->
+          <div class="govuk-radios">
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="furloughQuestion" name="furloughEndQuestion" type="radio" value="yes">
+              <label class="govuk-label govuk-radios__label" for="furloughQuestion">
+                Yes
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="furloughQuestion-2" name="furloughEndQuestion" type="radio" value="no">
+              <label class="govuk-label govuk-radios__label" for="furloughQuestion-2">
+                No, it is ongoing
+              </label>
+            </div>
+<br><br>
+
+          </div>
+        </fieldset>
+
+        <button class="govuk-button" data-module="govuk-button">
+          Continue
+        </button>
+      </form>
+        {% include "includes/web-chat.html" %}
+
+
+    </div>
+</div>
+
+{% endblock %}
