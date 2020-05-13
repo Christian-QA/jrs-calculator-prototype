@@ -26,28 +26,31 @@ Job Retention Scheme Calculator
 
 
     <ul class="govuk-list govuk-list--bullet">
-      {% if data['payFrequency'] === 'weekly' %}
-
-      <li>Ending: {% if data['dateOne']%}{{data['dateOne']}}{% else %}30 April{% endif %} 2020</li>
-      <li>Ending: {% if data['dateTwo']%}{{data['dateTwo']}}{% else %}6 May{% endif %} 2020</li>
-      <li>Ending: {% if data['dateThree']%}{{data['dateThree']}}{% else %}13 May{% endif %} 2020</li>
-      <li>Ending: {% if data['dateFour']%}{{data['dateFour']}}{% else %}20 May{% endif %} 2020</li>
-
-      {% elseif data['payFrequency'] === 'fortnightly' %}
-
-      <li>Ending: {% if data['dateOne']%}{{data['dateOne']}}{% else %}30 April{% endif %} 2020</li>
-      <li>Ending: {% if data['dateTwo']%}{{data['dateTwo']}}{% else %}13 May{% endif %} 2020</li>
-      <li>Ending: {% if data['dateThree']%}{{data['dateThree']}}{% else %}27 May{% endif %} 2020</li>
-
-      {% elseif data['payFrequency'] === '4Weekly' %}
-
-      <li>Ending: {% if data['dateOne']%}{{data['dateOne']}}{% else %}30 April{% endif %} 2020</li>
-      <li>Ending: {% if data['dateTwo']%}{{data['dateTwo']}}{% else %}27 May{% endif %} 2020</li>
-
-    {% else %}
+      {% if data['payFrequency'] === 'monthly' %}
 
       <li>Ending: {% if data['pastOneMonthTitle']%}{{data['payPeriodOneStartDay']}} {{data['pastOneMonthTitle']}}{% else %}30 April{% endif %} 2020</li>
       <li>Ending: {% if data['pastTwoMonthTitle']%}{{data['payPeriodTwoStartDay']}} {{data['pastTwoMonthTitle']}}{% else %}30 May{% endif %} 2020</li>
+
+    {% else %}
+<!--      <li>Ending: {% if data['dateOne']%}{{data['dateOne']}}{% else %}30 April{% endif %} 2020</li>-->
+      {% if data['dateTwo']%}
+      <li>From {{data['dateTwoStart']}} to {{data['dateTwo']}} 2020</li>
+      {% else %}
+      <li>From 20 April to 13 May 2020</li>
+      {% endif %}
+      {% if data['dateThree']%}
+      <li>From {{data['dateThreeStart']}} to {{data['dateThree']}} 2020</li>
+      {% endif %}
+      {% if data['dateFour']%}
+      <li>From {{data['dateFourStart']}} to {{data['dateFour']}} 2020</li>
+      {% endif %}
+      {% if data['dateFive']%}
+      <li>From {{data['dateFiveStart']}} to {{data['dateFive']}} 2020</li>
+      {% endif %}
+      {% if data['dateSix']%}
+      <li>From {{data['dateSixStart']}} to {{data['dateSix']}} 2020</li>
+      {% endif %}
+
 
 
     {% endif %}
