@@ -244,10 +244,10 @@ module.exports = function (router) {
     } else {
       var newMonth4 = newMonth3
     }
-    req.session.data.weekOne = date1 + '' + newMonth1
-    req.session.data.weekTwo = date2 + '' + newMonth2
-    req.session.data.weekThree = date3 + '' + newMonth3
-    req.session.data.weekFour = date4 + '' + newMonth4
+    req.session.data.dateOne = date1 + '' + newMonth1
+    req.session.data.dateTwo = date2 + '' + newMonth2
+    req.session.data.dateThree = date3 + '' + newMonth3
+    req.session.data.dateFour = date4 + '' + newMonth4
 
     // console.log('frequency = ' + req.session.data.payFrequencyDays)
     // console.log('1 date = ' + req.session.data.weekOne)
@@ -330,13 +330,23 @@ module.exports = function (router) {
 
     res.redirect('/' + sprint + '/list-pay-periods')
 
-    // if (req.session.data.varyMoreThan === 'true') {
-    //   res.redirect('/' + sprint + '/last-year-pay-1')
-    // } else if (req.session.data.lessThan12 === 'true') {
-    //   res.redirect('/' + sprint + '/annual-pay-amount')
-    // } else {
-    //   res.redirect('/' + sprint + '/regular-pay-amount')
-    // }
+
+  })
+
+  // route-list-periods
+  router.post('/' + sprint + '/route-list-periods', function (req, res) {
+    var data = req.session.data.listPeriods
+    if (data === 'yes') {
+      if (req.session.data.varyMoreThan === 'true') {
+        res.redirect('/' + sprint + '/last-year-pay-1')
+      } else if (req.session.data.lessThan12 === 'true') {
+        res.redirect('/' + sprint + '/annual-pay-amount')
+      } else {
+        res.redirect('/' + sprint + '/regular-pay-amount')
+      }
+    } else  {
+      res.redirect('/' + sprint + '/pay-dates-1')
+    }
   })
 
   // route-vary-salary-1

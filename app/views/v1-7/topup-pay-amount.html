@@ -22,7 +22,7 @@ Job Retention Scheme Calculator
                   <h1 class="govuk-fieldset__heading">
                       What’s the top up amount for the pay period ending
                       {% if data['payFrequency'] === 'fortnightly' or  data['payFrequency'] === 'weekly'  %}
-                      {% if data['weekOne']%}{{data['weekOne']}}{% else %}30 April{% endif %} 2020
+                      {% if data['dateOne']%}{{data['dateOne']}}{% else %}30 April{% endif %} 2020
                       {% else %}
                       {% if data['payPeriodTwoTitle']%}
                       {{data['payPeriodTwoTitle']}}

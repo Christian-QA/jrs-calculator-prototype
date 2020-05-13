@@ -24,8 +24,8 @@ Job Retention Scheme Calculator
                         In 2019, what did this employee get paid on
 
                       {% if data['payFrequency'] === 'fortnightly' or data['payFrequency'] === 'weekly' %}
-                        {% if data['weekOne']%}
-                            {{data['weekOne']}}
+                        {% if data['dateOne']%}
+                            {{data['dateOne']}}
                         {% else %}
                             1 April
                         {% endif %} 2020

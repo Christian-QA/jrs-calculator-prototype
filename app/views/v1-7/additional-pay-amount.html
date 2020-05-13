@@ -23,7 +23,7 @@ Job Retention Scheme Calculator
                       <!--Enter the employee’s  salary on 28.02.20-->
                       What additional payments did this employee get in the pay period ending
                       {% if data['payFrequency'] === 'fortnightly' or  data['payFrequency'] === 'weekly'  %}
-                      {% if data['weekOne']%}{{data['weekOne']}}{% else %}30 April{% endif %} 2020
+                      {% if data['dateOne']%}{{data['dateOne']}}{% else %}30 April{% endif %} 2020
                       {% else %}
                       {% if data['payPeriodTwoTitle']%}
                                 {{data['payPeriodTwoTitle']}}
