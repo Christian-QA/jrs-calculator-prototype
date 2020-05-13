@@ -234,7 +234,11 @@ module.exports = function (router) {
     var date3 = date2 + frequency
     if (date3 > 30) {
       date3 = date3 - 30
-      var compareMonth3 = titleMonth + 1
+      if (compareMonth2 === titleMonth + 1) {
+        var compareMonth3 = titleMonth + 2
+      } else{
+        var compareMonth3 = titleMonth + 1
+      }
       var newMonth3 = getMonthName(compareMonth3)
       var increment = true
     } else {
@@ -331,7 +335,11 @@ module.exports = function (router) {
     if (compareMonth2 > claimEndMonth || compareMonth2 === claimEndMonth && date2 > claimEndDay){
       req.session.data.dateThree = false
     } else {
-      req.session.data.dateTwoStart = (date1 + 1)  + '' + newMonth2
+      if ((date1 + 1) > date2) {
+        req.session.data.dateTwoStart = (date1 + 1)  + '' + newMonth1
+      } else {
+        req.session.data.dateTwoStart = (date1 + 1)  + '' + newMonth2
+      }
       req.session.data.dateTwo = date2 + '' + newMonth2
 
     }
@@ -339,8 +347,8 @@ module.exports = function (router) {
     // console.log('dateFive = ' + req.session.data.dateFive)
     // console.log('dateFour = ' + req.session.data.dateFour)
     // console.log('datethree = ' + req.session.data.dateThree)
-    // console.log('dateTwo = ' + req.session.data.dateTwo)
-    // console.log('dateOne = ' + req.session.data.dateOne)
+    //  console.log('dateTwo = ' + req.session.data.dateTwo)
+    //  console.log('dateOne = ' + req.session.data.dateOne)
 
     // console.log('frequency = ' + req.session.data.payFrequencyDays)
     // console.log('1 date = ' + req.session.data.weekOne)
@@ -362,8 +370,11 @@ module.exports = function (router) {
     req.session.data.payPeriodTwoTitleMonth = getMonthName(titleMonth)
     req.session.data.payPeriodTwoTitle = Math.round(req.session.data.payPeriodTwoStartDay) + req.session.data.payPeriodTwoTitleMonth
     req.session.data.payPeriodTwo = titleMonth + '' + Math.round(req.session.data.payPeriodTwoStartDay)
-
-    res.redirect('/' + sprint + '/pay-dates-3')
+    if (req.session.data.dateTwo){
+      res.redirect('/' + sprint + '/pay-dates-3')
+    } else {
+      res.redirect('/' + sprint + '/last-pay-date')
+    }
   })
 
   // route - pay dates 3
@@ -446,36 +457,48 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-vary-salary-1', function (req, res) {
     req.session.data.salaryAmount = req.session.data.salary
     req.session.data.salaryFurlough = Math.round(req.session.data.salary * 0.8)
-    res.redirect('/' + sprint + '/last-year-pay-2')
+    if (req.session.data.dateTwo){
+      res.redirect('/' + sprint + '/last-year-pay-2')
+    } else {
+      res.redirect('/' + sprint + '/annual-pay-amount')
+    }
+
   })
   // route-vary-salary-2
   router.post('/' + sprint + '/route-vary-salary-2', function (req, res) {
     req.session.data.salaryAmount2 = req.session.data.salary2
     req.session.data.salaryFurlough2 = Math.round(req.session.data.salary2 * 0.8)
-    var dataFreq = req.session.data.payFrequency
-    if (dataFreq === 'fortnightly' || dataFreq === 'weekly') {
+    if (req.session.data.dateThree){
       res.redirect('/' + sprint + '/last-year-pay-3')
-    } else  {
+    } else {
       res.redirect('/' + sprint + '/annual-pay-amount')
     }
   })
   // route-vary-salary-3
   router.post('/' + sprint + '/route-vary-salary-3', function (req, res) {
     var dataFreq = req.session.data.payFrequency
-    if (dataFreq === 'weekly') {
+    if (req.session.data.dateFour){
       res.redirect('/' + sprint + '/last-year-pay-4')
-    } else  {
+    } else {
       res.redirect('/' + sprint + '/annual-pay-amount')
     }
   })
   // route-vary-salary-4
   router.post('/' + sprint + '/route-vary-salary-4', function (req, res) {
-    res.redirect('/' + sprint + '/last-year-pay-5')
+    if (req.session.data.dateFive){
+      res.redirect('/' + sprint + '/last-year-pay-5')
+    } else {
+      res.redirect('/' + sprint + '/annual-pay-amount')
+    }
   })
 
   // route-vary-salary-5
   router.post('/' + sprint + '/route-vary-salary-5', function (req, res) {
-    res.redirect('/' + sprint + '/last-year-pay-6')
+    if (req.session.data.dateSix){
+      res.redirect('/' + sprint + '/last-year-pay-6')
+    } else {
+      res.redirect('/' + sprint + '/annual-pay-amount')
+    }
   })
   // route-vary-salary-6
   router.post('/' + sprint + '/route-vary-salary-6', function (req, res) {
