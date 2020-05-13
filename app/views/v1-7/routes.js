@@ -434,7 +434,7 @@ module.exports = function (router) {
     req.session.data.pastOneMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth) - 1)
     req.session.data.pastTwoMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth))
 
-    res.redirect('/' + sprint + '/list-pay-periods')
+    res.redirect('/' + sprint + '/pay-periods-list')
 
 
   })
