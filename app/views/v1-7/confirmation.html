@@ -67,12 +67,11 @@ Job Retention Scheme Calculator
                  </span>
             </summary>
             <div class="govuk-details__text">
-                {% if data['payFrequency'] === 'fortnightly'  %}
-                    {% include "includes/break-down-fortnight.html" %}
-                {% elseif data['payFrequency'] === 'weekly'  %}
-                    {% include "includes/break-down-week.html" %}
+                {% if data['payFrequency'] === 'monthly'  %}
+                {% include "includes/break-down-month.html" %}
                 {% else %}
-                    {% include "includes/break-down-month.html" %}
+                    {% include "includes/break-down-week.html" %}
+
                 {% endif %}
             </div>
         </details>
