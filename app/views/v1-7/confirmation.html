@@ -33,11 +33,11 @@ Job Retention Scheme Calculator
         <h2 class="govuk-heading-m">
             How these figures were calculated
         </h2>
-        <p><span class="govuk-!-font-weight-bold">Calculated on:</span> 20 April 2020 (Calculator Version v1.0) </p>
+        <p><span class="govuk-!-font-weight-bold">Calculated on:</span> 20 May 2020 (Calculator Version v1.0) </p>
         <p>The results of the calculation rely on the accuracy of the information you entered, for which you are responsible. You cannot claim for more money than you are going to pay out under the scheme.</p><p> These calculations are based on:</p>
 
         <ul class="govuk-list govuk-list--bullet">
-            <li>Claim period: {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} 2020 to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %} 2020</li>
+            <li>Claim period: {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 April{% endif %} 2020 to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 May{% endif %} 2020</li>
             <li>They {% if data['furloughPeriod'] %} {{data['furloughPeriod']| default('have been furloughed for the whole of the claim period')}} {% elseif data['furloughStartTitle'] %} began their furlough on {{data['furloughStartTitle']}} {% elseif data['furloughEndTitle'] %} ended their furlough on {{data['furloughEndTitle']}} {% elseif data['furloughPartialStartTitle'] %} were furloughed from
                 {{data['furloughPartialStartTitle']}} until {{data['furloughPartialEndTitle']}} {% else %} have been furloughed for the whole of the claim period {% endif %}
             </li>
@@ -52,7 +52,7 @@ Job Retention Scheme Calculator
             -->
             <li>Their National Insurance category is {{data['nicCategoryVal'] | default('A, B, C or J')}}</li>
             <li>They {{data['pensionStatus'] | default('receive employer pension contributions')}}</li>
-<!--            <li>The employee's first payday after in the current tax year was {{data['payTaxDateTitle'] | default('10 April')}} 2020</li>-->
+<!--            <li>The employee's first payday after in the current tax year was {{data['payTaxDateTitle'] | default('10 May')}} 2020</li>-->
         </ul>
 
         <h2 class="govuk-heading-m">
@@ -83,7 +83,7 @@ Job Retention Scheme Calculator
 
         <ul class="govuk-list govuk-list--number">
 
-            <li>Make a calculation for any other employee furloughed for all or part of this claim period ({% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %}). <span class="govuk-!-font-weight-bold">Make a note of each set of figures.</span>
+            <li>Make a calculation for any other employee furloughed for all or part of this claim period ({% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 April{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 May{% endif %}). <span class="govuk-!-font-weight-bold">Make a note of each set of figures.</span>
             </li>
             <li>Work out the total amounts to claim for:<br>
                 <ul class="govuk-list--list">

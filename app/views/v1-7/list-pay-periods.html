@@ -17,20 +17,47 @@ Job Retention Scheme Calculator
 
     <h1 class="govuk-heading-xl">
       <!--Does this employee get any additional payments?-->
-      Has this employee furloughed for the same time?
+      Pay periods
     </h1>
 
+    <p>We are going to use these pay periods for our calculations in this claim</p>
+    <h2 class="govuk-heading-m">Pay periods</h2>
 
-    <h2 class="govuk-heading-m">Furlough dates</h2>
     <ul class="govuk-list govuk-list--bullet">
+    {% if data['payFrequency'] === 'fortnightly'  %}
 
-      <li>Ongoing from {{data['furloughStartTitle'] | default('2 April')}} 2020</li>
+      <li>Pay period end: {% if data['weekOne']%}{{data['weekOne']}}{% else %}30 April{% endif %} 2020</li>
 
-     
+      <li>Pay period end: {% if data['weekTwo']%}{{data['weekTwo']}}{% else %}13 May{% endif %} 2020</li>
+
+      <li>Pay period end: {% if data['weekThree']%}{{data['weekThree']}}{% else %}27 May{% endif %} 2020</li>
+
+    {% elseif data['payFrequency'] === 'weekly'  %}
+
+      <li>Pay period end: {% if data['weekOne']%}{{data['weekOne']}}{% else %}30 April{% endif %} 2020</li>
+
+      <li>Pay period end: {% if data['weekTwo']%}{{data['weekTwo']}}{% else %}6 May{% endif %} 2020</li>
+
+      <li>Pay period end: {% if data['weekThree']%}{{data['weekThree']}}{% else %}13 May{% endif %} 2020</li>
+
+      <li>Pay period end: {% if data['weekFour']%}{{data['weekFour']}}{% else %}20 May{% endif %} 2020</li>
+
+    {% else %}
+
+      <li>Pay period end: {% if data['pastOneMonthTitle']%}{{data['payPeriodOneStartDay']}} {{data['pastOneMonthTitle']}}{% else %}30 April{% endif %} 2020</li>
+
+      <li>Pay period end: {% if data['pastTwoMonthTitle']%}{{data['payPeriodTwoStartDay']}} {{data['pastTwoMonthTitle']}}{% else %}30 May{% endif %} 2020</li>
+
+
+    {% endif %}
+
+
+
+
     </ul>
 
 
-
+    {% include "includes/pay-period.html" %}
 
 
 

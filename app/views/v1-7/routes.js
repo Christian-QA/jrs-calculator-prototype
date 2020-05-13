@@ -320,7 +320,7 @@ module.exports = function (router) {
   })
 
   // route - pay date
-  router.post('/' + sprint + '/route-tax-pay-date', function (req, res) {
+  router.post('/' + sprint + '/route-last-pay-date', function (req, res) {
     req.session.data.payTaxDate = req.session.data.payDateDay + '/' + req.session.data.payDateMonth + '/' + req.session.data.payDateYear
     var titleMonth = Math.round(req.session.data.payDateMonth)
     req.session.data.payDateMonthTitle = getMonthName(titleMonth)
@@ -328,13 +328,15 @@ module.exports = function (router) {
     req.session.data.pastOneMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth) - 1)
     req.session.data.pastTwoMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth))
 
-    if (req.session.data.varyMoreThan === 'true') {
-      res.redirect('/' + sprint + '/last-year-pay-1')
-    } else if (req.session.data.lessThan12 === 'true') {
-      res.redirect('/' + sprint + '/annual-pay-amount')
-    } else {
-      res.redirect('/' + sprint + '/regular-pay-amount')
-    }
+    res.redirect('/' + sprint + '/list-pay-periods')
+
+    // if (req.session.data.varyMoreThan === 'true') {
+    //   res.redirect('/' + sprint + '/last-year-pay-1')
+    // } else if (req.session.data.lessThan12 === 'true') {
+    //   res.redirect('/' + sprint + '/annual-pay-amount')
+    // } else {
+    //   res.redirect('/' + sprint + '/regular-pay-amount')
+    // }
   })
 
   // route-vary-salary-1
@@ -535,7 +537,7 @@ module.exports = function (router) {
     var data = req.session.data.restartClaim
     if (data === 'yes') {
       // res.redirect('/' + sprint + '/furlough-start')
-      res.redirect('/' + sprint + '/pay-period-question')
+      res.redirect('/' + sprint + '/furlough-period-question')
     } else if (data === 'no') {
       req.session.data = {}
       req.session.destroy()
@@ -548,12 +550,12 @@ module.exports = function (router) {
     var data = req.session.data.usePayPeriods
     if (data === 'yes') {
       req.session.data.usePayPeriodsAgain = true
-      res.redirect('/' + sprint + '/furlough-period-question')
+      res.redirect('/' + sprint + '/pay-method')
     } else if (data === 'no') {
       req.session.data.usePayPeriodsAgain = false
       req.session.data = {}
       req.session.destroy()
-      res.redirect('/' + sprint + '/furlough-start')
+      res.redirect('/' + sprint + '/pay-frequency')
     }
   })
   // use pay periods
@@ -561,7 +563,7 @@ module.exports = function (router) {
     var data = req.session.data.useFurloughPeriods
     if (data === 'yes') {
       req.session.data.useFurloughPeriodsAgain = true
-      res.redirect('/' + sprint + '/pay-method')
+      res.redirect('/' + sprint + '/pay-period-question')
     } else if (data === 'no') {
       req.session.data.useFurloughPeriodsAgain = false
       req.session.data = {}

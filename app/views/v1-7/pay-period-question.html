@@ -6,7 +6,7 @@ Job Retention Scheme Calculator
 
 {% block beforeContent %}
 {% include "includes/phase-banner.html" %}
-<!--<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>-->
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
@@ -24,9 +24,9 @@ Job Retention Scheme Calculator
     <h2 class="govuk-heading-m">Pay periods ending</h2>
     <ul class="govuk-list govuk-list--bullet">
 
-      <li>{% if data['payPeriodTwoTitle']%}{{data['payPeriodTwoTitle']}}{% else %}30 March{% endif %} 2020</li>
+      <li>{% if data['payPeriodTwoTitle']%}{{data['payPeriodTwoTitle']}}{% else %}30 April{% endif %} 2020</li>
 
-      <li>{% if data['payPeriodThreeTitle']%}{{data['payPeriodThreeTitle']}}{% else %}30 April{% endif %} 2020</li>
+      <li>{% if data['payPeriodThreeTitle']%}{{data['payPeriodThreeTitle']}}{% else %}30 May{% endif %} 2020</li>
 
       {% if data['payPeriodFourTitle']%}
         <li>{{data['payPeriodFourTitle']}} 2020</li>
