@@ -457,7 +457,7 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-vary-salary-1', function (req, res) {
     req.session.data.salaryAmount = req.session.data.salary
     req.session.data.salaryFurlough = Math.round(req.session.data.salary * 0.8)
-    if (req.session.data.dateTwo){
+    if (req.session.data.dateThree){
       res.redirect('/' + sprint + '/last-year-pay-2')
     } else {
       res.redirect('/' + sprint + '/annual-pay-amount')
@@ -468,7 +468,7 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-vary-salary-2', function (req, res) {
     req.session.data.salaryAmount2 = req.session.data.salary2
     req.session.data.salaryFurlough2 = Math.round(req.session.data.salary2 * 0.8)
-    if (req.session.data.dateThree){
+    if (req.session.data.dateFour){
       res.redirect('/' + sprint + '/last-year-pay-3')
     } else {
       res.redirect('/' + sprint + '/annual-pay-amount')
@@ -477,7 +477,7 @@ module.exports = function (router) {
   // route-vary-salary-3
   router.post('/' + sprint + '/route-vary-salary-3', function (req, res) {
     var dataFreq = req.session.data.payFrequency
-    if (req.session.data.dateFour){
+    if (req.session.data.dateFive){
       res.redirect('/' + sprint + '/last-year-pay-4')
     } else {
       res.redirect('/' + sprint + '/annual-pay-amount')
@@ -485,7 +485,7 @@ module.exports = function (router) {
   })
   // route-vary-salary-4
   router.post('/' + sprint + '/route-vary-salary-4', function (req, res) {
-    if (req.session.data.dateFive){
+    if (req.session.data.dateSix){
       res.redirect('/' + sprint + '/last-year-pay-5')
     } else {
       res.redirect('/' + sprint + '/annual-pay-amount')
@@ -494,16 +494,16 @@ module.exports = function (router) {
 
   // route-vary-salary-5
   router.post('/' + sprint + '/route-vary-salary-5', function (req, res) {
-    if (req.session.data.dateSix){
+    if (req.session.data.dateSeven){
       res.redirect('/' + sprint + '/last-year-pay-6')
     } else {
       res.redirect('/' + sprint + '/annual-pay-amount')
     }
   })
   // route-vary-salary-6
-  router.post('/' + sprint + '/route-vary-salary-6', function (req, res) {
-    res.redirect('/' + sprint + '/annual-pay-amount')
-  })
+  // router.post('/' + sprint + '/route-vary-salary-6', function (req, res) {
+  //   res.redirect('/' + sprint + '/annual-pay-amount')
+  // })
 
   // route-vary-gross salary
   router.post('/' + sprint + '/route-vary-gross-salary', function (req, res) {
