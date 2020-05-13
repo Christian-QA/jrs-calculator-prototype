@@ -290,6 +290,7 @@ module.exports = function (router) {
     var claimEndMonth = Math.round(req.session.data.claimPeriodEndMonth)
 
     req.session.data.dateOne = date1 + '' + newMonth1
+    req.session.data.dateOneStart = (date1 + 1)  + '' + newMonth1
 
     if ((date5 + 1) > date6) {
       req.session.data.dateSixStart = (date5 + 1)  + '' + newMonth5
@@ -370,6 +371,7 @@ module.exports = function (router) {
     req.session.data.payPeriodTwoTitleMonth = getMonthName(titleMonth)
     req.session.data.payPeriodTwoTitle = Math.round(req.session.data.payPeriodTwoStartDay) + req.session.data.payPeriodTwoTitleMonth
     req.session.data.payPeriodTwo = titleMonth + '' + Math.round(req.session.data.payPeriodTwoStartDay)
+    req.session.data.payPeriodThreeTitleStart = (Math.round(req.session.data.payPeriodTwoStartDay) + 1) + '' + getMonthName(titleMonth)
     if (req.session.data.dateTwo){
       res.redirect('/' + sprint + '/pay-dates-3')
     } else {
