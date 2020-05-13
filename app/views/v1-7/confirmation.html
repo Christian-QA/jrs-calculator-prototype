@@ -24,7 +24,7 @@ Job Retention Scheme Calculator
                 {% if data['totalFurlough'] %} £{{data['totalNic']}}.22 {% else %} £91.49 {% endif %}
                 <br>
                 <p class="govuk-!-font-weight-regular govuk-!-font-size-24 govuk-!-margin-bottom-4" style="color: white">Employer National Insurance contributions</p>
-                {% if data['totalFurlough'] %} £{{data['totalPension']}}.38 {% else %} £41.46 {% endif %}
+                {% if data['totalFurlough'] %} £{{data['totalPension']}}.38 {% else %} £33.17 {% endif %}
                 <br>
                 <p class="govuk-!-font-weight-regular govuk-!-font-size-24 govuk-!-margin-bottom-0" style="color: white">Employer minimum pension contributions</p>
             </div>
@@ -41,64 +41,87 @@ Job Retention Scheme Calculator
 
         <table class="govuk-table">
             <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">
-                        Furlough pay
+                <th scope="row" class="govuk-table__header govuk-!-width-one-quarter" >
+                        Furlough grant
                 </th>
-                <th scope="row" class="govuk-table__header">Total</th>
+                <td class="govuk-table__cell">
+                (Average daily pay (£81.31) x Furlough days (17)) x 80%
+            </td>
+
             </tr>
             <tr class="govuk-table__row">
-                <td class="govuk-table__cell">
-                    (Average daily pay (£81.31) x Furlough days (17)) x 80%
-                </td>
+                <th scope="row" class="govuk-table__header">Total</th>
                 <td class="govuk-table__cell">
                     £1105.81
                 </td>
             </tr>
-        </table>
-            <table class="govuk-table">
+            <tr>
+                <td colspan="2">
+                    <br>
+                    <details class="govuk-details">
+                        <summary class="govuk-details__summary">
+               <span class="govuk-details__summary-text">
+                    How the daily average figure was calculated
+                 </span>
+                        </summary>
+                        <div class="govuk-details__text">
+                            <table class="govuk-table">
+                                <tr class="govuk-table__row">
+                                    <th scope="row" class="govuk-table__header govuk-!-width-one-quarter" >
+                                        April 2019
+                                    </th>
+                                    <td class="govuk-table__cell">
+                                        Total pay £2439.30 ÷ 30 days
+                                    </td>
+
+                                </tr>
+                                <tr class="govuk-table__row">
+                                    <th scope="row" class="govuk-table__header">Total</th>
+                                    <td class="govuk-table__cell">
+                                        £1105.81
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </details>
+                </td>
+            </tr>
+
             <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header">
-                    Employer National Insurance contributions
+                    NI grant
                 </th>
-                <th scope="row" class="govuk-table__header"> </th>
-            </tr>
-            <tr class="govuk-table__row">
                 <td class="govuk-table__cell">
                     (Total pay (£1382.27) - NI Threshold (£719)) x 13.8%
                 </td>
+
+            </tr>
+            <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Total </th>
                 <td class="govuk-table__cell">
                     £91.49
                 </td>
             </tr>
-            </table>
-        <table class="govuk-table">
+
             <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header">
-                    Employer minimum pension contributions
+                    Pension grant
                 </th>
-                <th scope="row" class="govuk-table__header"> </th>
+                <td class="govuk-table__cell">
+                    Eligible furlough amount (£1105.81) x 3%
+                </td>
             </tr>
             <tr class="govuk-table__row">
+
+                <th scope="row" class="govuk-table__header">Total </th>
                 <td class="govuk-table__cell">
-                    Eligible furlough amount (£1382.27) x 3%
-                </td>
-                <td class="govuk-table__cell">
-                    £41.46
+                    £33.17
                 </td>
             </tr>
 
         </table>
 
-        <details class="govuk-details">
-            <summary class="govuk-details__summary">
-               <span class="govuk-details__summary-text">
-                    Detailed breakdown
-                 </span>
-            </summary>
-            <div class="govuk-details__text">
-                Lots of figures here
-            </div>
-        </details>
+
 
         <!--<ul class="govuk-list govuk-list&#45;&#45;bullet">
             <li>Claim period: {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 April{% endif %} 2020 to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 May{% endif %} 2020</li>
