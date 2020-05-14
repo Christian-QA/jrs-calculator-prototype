@@ -19,7 +19,13 @@ Job Retention Scheme Calculator
             <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
                     <h1 class="govuk-fieldset__heading">
-                        What did the employee get paid in total from 6 April 2019 to {% if data['furloughStartTitle'] %}{{data['furloughStartTitle']}} 2020{% else %}12 April 2020{% endif %}?
+                        {% if data['varyMoreThan'] %}
+                        What did the employee get paid in total from 6 April 2019 to {% if data['furloughStartTitle'] %}{{data['furloughStartTitle']}} 2020{% else %}12 March 2020{% endif %}?
+                        {% else %}
+                        What did the employee get paid in total since they started until {% if data['furloughStartTitle'] %}{{data['furloughStartTitle']}} 2020{% else %}12 March 2020{% endif %}?
+                        {% endif %}
+
+
                     </h1>
                 </legend>
 
