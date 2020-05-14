@@ -20,7 +20,9 @@ Job Retention Scheme Calculator
       Do you want to use the same claim period?
     </h1>
 
-    <p>Claim period: {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 April{% endif %} 2020 to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 May{% endif %} 2020</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>{% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 April{% endif %} 2020 to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 May{% endif %} 2020</li>
+    </ul>
 
 
     {% include "includes/claim-period.html" %}

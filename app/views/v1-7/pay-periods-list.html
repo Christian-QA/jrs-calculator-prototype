@@ -17,13 +17,13 @@ Job Retention Scheme Calculator
 
     <h1 class="govuk-heading-xl">
       <!--Does this employee get any additional payments?-->
-      Pay periods
+      Are these pay periods correct?
     </h1>
 
 
-    <p>We can not calculate furlough pay if this employee has irregular pay periods. </p>
-    <p>We are going to use these pay periods that cover this claim in our calculations.</p>
 
+    <p>These are all the pay periods wholly or partly in your claim
+    ({% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} 2020 to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %} 2020).</p>
 
     <ul class="govuk-list govuk-list--bullet">
       {% if data['payFrequency'] === 'monthly' %}
@@ -66,12 +66,10 @@ Job Retention Scheme Calculator
 
     </ul>
 
+    <p>We cannot calculate furlough pay if this employee has irregular pay periods. </p>
+<!--    {% include "includes/pay-period.html" %}-->
 
-    {% include "includes/pay-period.html" %}
 
-    <h2 class="govuk-heading-m g3">
-     Are these pay periods correct for this claim?
-    </h2>
 
 
     <form method="post" action="route-list-periods">
@@ -87,7 +85,7 @@ Job Retention Scheme Calculator
             </div>
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="discretionary-no" name="listPeriods" type="radio" value="no"> <label class="govuk-label govuk-radios__label" for="discretionary-no">No, I need to enter them again </label>
+              <input class="govuk-radios__input" id="discretionary-no" name="listPeriods" type="radio" value="no"> <label class="govuk-label govuk-radios__label" for="discretionary-no">No - change details </label>
             </div>
           </div>
         </fieldset>
