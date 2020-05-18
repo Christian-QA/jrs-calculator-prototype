@@ -201,7 +201,7 @@ module.exports = function (router) {
 
     // calc dates for diff pay periods
     var frequency = req.session.data.payFrequencyDays
-    var date1 =   Math.round(req.session.data.payPeriodOneStartDay)
+    var date1 = Math.round(req.session.data.payPeriodOneStartDay)
     if (date1 > 30) {
       date1 = date1 - 30
       var compareMonth1 = titleMonth + 1
@@ -290,7 +290,13 @@ module.exports = function (router) {
     var claimEndMonth = Math.round(req.session.data.claimPeriodEndMonth)
 
     req.session.data.dateOne = date1 + '' + newMonth1
-    req.session.data.dateOneStart = (date1 + 1)  + '' + newMonth1
+    var datecheck1 = date1 + 1
+    if (compareMonth1 === 2 && datecheck1 > 29 || compareMonth1 === 3 && datecheck1 > 31 || compareMonth1 === 4 && datecheck1 > 30){
+      req.session.data.dateOneStart = 1  + '' + newMonth2
+    } else {
+      req.session.data.dateOneStart = datecheck1  + '' + newMonth1
+    }
+
 
     if ((date5 + 1) > date6) {
       req.session.data.dateSixStart = (date5 + 1)  + '' + newMonth5
@@ -336,8 +342,10 @@ module.exports = function (router) {
     if (compareMonth2 > claimEndMonth || compareMonth2 === claimEndMonth && date2 > claimEndDay){
       req.session.data.dateThree = false
     } else {
+
       if ((date1 + 1) > date2) {
         req.session.data.dateTwoStart = (date1 + 1)  + '' + newMonth1
+        console.log('date 2a ')
       } else {
         req.session.data.dateTwoStart = (date1 + 1)  + '' + newMonth2
       }
