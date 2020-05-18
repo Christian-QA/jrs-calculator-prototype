@@ -202,89 +202,117 @@ module.exports = function (router) {
     // calc dates for diff pay periods
     var frequency = req.session.data.payFrequencyDays
     var date1 =   Math.round(req.session.data.payPeriodOneStartDay)
-    if (date1 > 30) {
-      date1 = date1 - 30
-      var compareMonth1 = titleMonth + 1
-      var newMonth1 = getMonthName(compareMonth1)
-      var increment = true
-    } else {
-      if (increment){
-        var compareMonth1 = titleMonth + 1
-        var newMonth1 = getMonthName(compareMonth1)
+    for (i = 1; i < 7; i++) {
+      var date = "date" + i
+      var compareMonth = "compareMonth" + i
+      var newMonth = "newMonth" + i
+      console.log("date = " + date)
+      console.log("compareMonth = " + compareMonth)
+      console.log("newMonth = " + newMonth)
+      if (eval(date) > 30) {
+        date = eval(date) - 30
+        compareMonth = titleMonth + 1
+        newMonth = getMonthName(eval(compareMonth))
+        var increment = true
       } else {
-        var compareMonth1 = titleMonth
-        var newMonth1 = getMonthName(compareMonth1)
+        if (increment){
+          compareMonth = titleMonth + 1
+          compareMonth = getMonthName(eval(compareMonth))
+        } else {
+          compareMonth = titleMonth
+          newMonth = getMonthName(eval(compareMonth))
+        }
       }
+      var newDate = "date" + eval(i++)
+      newDate = eval(date) + frequency
+      console.log("newDate = " + newDate)
     }
-    var date2 = date1 + frequency
-    if (date2 > 30) {
-      date2 = date2 - 30
-      var compareMonth2 = titleMonth + 1
-      var newMonth2 = getMonthName(compareMonth2)
-      var increment = true
-    } else {
-      if (increment){
-        var compareMonth2 = titleMonth + 1
-        var newMonth2 = getMonthName(compareMonth2)
-      } else {
-        var compareMonth2 = titleMonth
-        var newMonth2 = getMonthName(compareMonth2)
-      }
-    }
-    var date3 = date2 + frequency
-    if (date3 > 30) {
-      date3 = date3 - 30
-      if (compareMonth2 === titleMonth + 1) {
-        var compareMonth3 = titleMonth + 2
-      } else{
-        var compareMonth3 = titleMonth + 1
-      }
-      var newMonth3 = getMonthName(compareMonth3)
-      var increment = true
-    } else {
-      if (increment){
-        var compareMonth3 = titleMonth + 1
-        var newMonth3 = getMonthName(compareMonth3)
-      } else {
-        var compareMonth3 = titleMonth
-        var newMonth3 = getMonthName(compareMonth3)
-      }
-    }
-    var date4 = date3 + frequency
-    if (date4 > 30) {
-      date4 = date4 - 30
-      if (compareMonth3 === titleMonth + 1) {
-        var compareMonth4 = titleMonth + 2
-      } else{
-        var compareMonth4 = titleMonth + 1
-      }
-      var newMonth4 = getMonthName(compareMonth4)
-    } else {
-      if (compareMonth3 === titleMonth + 1) {
-        var compareMonth4 = titleMonth + 1
-      } else{
-        var compareMonth4 = titleMonth
-      }
-      var newMonth4 = getMonthName(compareMonth4)
-    }
-    var date5 = date4 + frequency
-    if (date5 > 30) {
-      date5 = date5 - 30
-      var compareMonth5 = titleMonth + 2
-      var newMonth5 = getMonthName(compareMonth5)
-    } else {
-      var compareMonth5 = titleMonth + 1
-      var newMonth5 = getMonthName(compareMonth5)
-    }
-    var date6 = date5 + frequency
-    if (date6 > 30) {
-      date6 = date6 - 30
-      var compareMonth6 = titleMonth + 2
-      var newMonth6 = getMonthName(compareMonth6)
-    } else {
-      var compareMonth6 = titleMonth + 1
-      var newMonth6 = getMonthName(compareMonth6)
-    }
+
+    //
+    //
+    // if (date1 > 30) {
+    //   date1 = date1 - 30
+    //   var compareMonth1 = titleMonth + 1
+    //   var newMonth1 = getMonthName(compareMonth1)
+    //   var increment = true
+    // } else {
+    //   if (increment){
+    //     var compareMonth1 = titleMonth + 1
+    //     var newMonth1 = getMonthName(compareMonth1)
+    //   } else {
+    //     var compareMonth1 = titleMonth
+    //     var newMonth1 = getMonthName(compareMonth1)
+    //   }
+    // }
+    // var date2 = date1 + frequency
+    // if (date2 > 30) {
+    //   date2 = date2 - 30
+    //   var compareMonth2 = titleMonth + 1
+    //   var newMonth2 = getMonthName(compareMonth2)
+    //   var increment = true
+    // } else {
+    //   if (increment){
+    //     var compareMonth2 = titleMonth + 1
+    //     var newMonth2 = getMonthName(compareMonth2)
+    //   } else {
+    //     var compareMonth2 = titleMonth
+    //     var newMonth2 = getMonthName(compareMonth2)
+    //   }
+    // }
+    // var date3 = date2 + frequency
+    // if (date3 > 30) {
+    //   date3 = date3 - 30
+    //   if (compareMonth2 === titleMonth + 1) {
+    //     var compareMonth3 = titleMonth + 2
+    //   } else{
+    //     var compareMonth3 = titleMonth + 1
+    //   }
+    //   var newMonth3 = getMonthName(compareMonth3)
+    //   var increment = true
+    // } else {
+    //   if (increment){
+    //     var compareMonth3 = titleMonth + 1
+    //     var newMonth3 = getMonthName(compareMonth3)
+    //   } else {
+    //     var compareMonth3 = titleMonth
+    //     var newMonth3 = getMonthName(compareMonth3)
+    //   }
+    // }
+    // var date4 = date3 + frequency
+    // if (date4 > 30) {
+    //   date4 = date4 - 30
+    //   if (compareMonth3 === titleMonth + 1) {
+    //     var compareMonth4 = titleMonth + 2
+    //   } else{
+    //     var compareMonth4 = titleMonth + 1
+    //   }
+    //   var newMonth4 = getMonthName(compareMonth4)
+    // } else {
+    //   if (compareMonth3 === titleMonth + 1) {
+    //     var compareMonth4 = titleMonth + 1
+    //   } else{
+    //     var compareMonth4 = titleMonth
+    //   }
+    //   var newMonth4 = getMonthName(compareMonth4)
+    // }
+    // var date5 = date4 + frequency
+    // if (date5 > 30) {
+    //   date5 = date5 - 30
+    //   var compareMonth5 = titleMonth + 2
+    //   var newMonth5 = getMonthName(compareMonth5)
+    // } else {
+    //   var compareMonth5 = titleMonth + 1
+    //   var newMonth5 = getMonthName(compareMonth5)
+    // }
+    // var date6 = date5 + frequency
+    // if (date6 > 30) {
+    //   date6 = date6 - 30
+    //   var compareMonth6 = titleMonth + 2
+    //   var newMonth6 = getMonthName(compareMonth6)
+    // } else {
+    //   var compareMonth6 = titleMonth + 1
+    //   var newMonth6 = getMonthName(compareMonth6)
+    // }
 
     var claimEndDay = Math.round(req.session.data.claimPeriodEndDay) + frequency
     var claimEndMonth = Math.round(req.session.data.claimPeriodEndMonth)
