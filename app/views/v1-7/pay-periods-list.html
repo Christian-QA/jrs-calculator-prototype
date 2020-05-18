@@ -21,7 +21,7 @@ Job Retention Scheme Calculator
     </h1>
 
 
-
+    <p>If this employee has irregular pay periods we cannot calculate furlough pay. </p>
     <p>These are all the pay periods wholly or partly in your claim
     ({% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} 2020 to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %} 2020).</p>
 
@@ -34,6 +34,7 @@ Job Retention Scheme Calculator
       {% if data['payPeriodThreeTitle']%}
       <li>From {{data['payPeriodThreeTitleStart']}} to {{data['payPeriodThreeTitle']}} 2020</li>
       {% endif %}
+
       <!--<li>Ending: {% if data['pastOneMonthTitle']%}{{data['payPeriodOneStartDay']}} {{data['pastOneMonthTitle']}}{% else %}30 April{% endif %} 2020</li>
       <li>Ending: {% if data['pastTwoMonthTitle']%}{{data['payPeriodTwoStartDay']}} {{data['pastTwoMonthTitle']}}{% else %}30 May{% endif %} 2020</li>-->
 
@@ -66,7 +67,7 @@ Job Retention Scheme Calculator
 
     </ul>
 
-    <p>We cannot calculate furlough pay if this employee has irregular pay periods. </p>
+
 <!--    {% include "includes/pay-period.html" %}-->
 
 
