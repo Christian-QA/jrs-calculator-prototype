@@ -1,6 +1,7 @@
 // const url = require('url')
-
+var moment = require('moment')
 module.exports = function (router) {
+
   // set the sprint folder name as a variable
   var sprint = 'v1-7'
 
@@ -202,31 +203,46 @@ module.exports = function (router) {
     // calc dates for diff pay periods
     var frequency = req.session.data.payFrequencyDays
     var date1 =   Math.round(req.session.data.payPeriodOneStartDay)
-    for (i = 1; i < 7; i++) {
-      var date = "date" + i
-      var compareMonth = "compareMonth" + i
-      var newMonth = "newMonth" + i
-      console.log("date = " + date)
-      console.log("compareMonth = " + compareMonth)
-      console.log("newMonth = " + newMonth)
-      if (eval(date) > 30) {
-        date = eval(date) - 30
-        compareMonth = titleMonth + 1
-        newMonth = getMonthName(eval(compareMonth))
-        var increment = true
-      } else {
-        if (increment){
-          compareMonth = titleMonth + 1
-          compareMonth = getMonthName(eval(compareMonth))
-        } else {
-          compareMonth = titleMonth
-          newMonth = getMonthName(eval(compareMonth))
-        }
-      }
-      var newDate = "date" + eval(i++)
-      newDate = eval(date) + frequency
-      console.log("newDate = " + newDate)
+    var startDate = moment(`2020-${req.session.data.payPeriodOneTitleMonth}-${Math.round(req.session.data.payPeriodOneStartDay)}`)
+    var endDate = moment(`2020-${req.session.data.claimPeriodEndMonthTitle}-${Math.round(req.session.data.claimPeriodEndDay)}`)
+    let dates = [];
+
+    while (startDate < endDate) {
+      dates.push(startDate)
+      startDate = startDate.add(frequency, 'days').calendar();
+
     }
+    console.log(dates)
+  //console.log(endDate)
+
+// expected output: 3
+
+
+    // for (i = 1; i < 7; i++) {
+    //   var date = "date" + i
+    //   var compareMonth = "compareMonth" + i
+    //   var newMonth = "newMonth" + i
+    //   console.log("date = " + date)
+    //   console.log("compareMonth = " + compareMonth)
+    //   console.log("newMonth = " + newMonth)
+    //   if (eval(date) > 30) {
+    //     date = eval(date) - 30
+    //     compareMonth = titleMonth + 1
+    //     newMonth = getMonthName(eval(compareMonth))
+    //     var increment = true
+    //   } else {
+    //     if (increment){
+    //       compareMonth = titleMonth + 1
+    //       compareMonth = getMonthName(eval(compareMonth))
+    //     } else {
+    //       compareMonth = titleMonth
+    //       newMonth = getMonthName(eval(compareMonth))
+    //     }
+    //   }
+    //   var newDate = "date" + eval(i++)
+    //   newDate = eval(date) + frequency
+    //   console.log("newDate = " + newDate)
+    // }
 
     //
     //
@@ -314,64 +330,64 @@ module.exports = function (router) {
     //   var newMonth6 = getMonthName(compareMonth6)
     // }
 
-    var claimEndDay = Math.round(req.session.data.claimPeriodEndDay) + frequency
-    var claimEndMonth = Math.round(req.session.data.claimPeriodEndMonth)
-
-    req.session.data.dateOne = date1 + '' + newMonth1
-    req.session.data.dateOneStart = (date1 + 1)  + '' + newMonth1
-
-    if ((date5 + 1) > date6) {
-      req.session.data.dateSixStart = (date5 + 1)  + '' + newMonth5
-    } else {
-      req.session.data.dateSixStart = (date5 + 1)  + '' + newMonth6
-    }
-
-    req.session.data.dateSix = date6 + '' + newMonth6
-
-
-    if (compareMonth5 > claimEndMonth || compareMonth5 === claimEndMonth && date5 > claimEndDay){
-      req.session.data.dateSix =  false
-    } else {
-      if ((date4 + 1) > date5) {
-        req.session.data.dateFiveStart = (date4 + 1)  + '' + newMonth4
-      } else {
-        req.session.data.dateFiveStart = (date4 + 1)  + '' + newMonth5
-      }
-      req.session.data.dateFive = date5 + '' + newMonth5
-
-    }
-    if (compareMonth4 > claimEndMonth || compareMonth4 === claimEndMonth && date4 > claimEndDay){
-      req.session.data.dateFive =  false
-    } else {
-      if ((date3 + 1) > date4) {
-        req.session.data.dateFourStart = (date3 + 1)  + '' + newMonth3
-      } else {
-        req.session.data.dateFourStart = (date3 + 1)  + '' + newMonth4
-      }
-      req.session.data.dateFour = date4 + '' + newMonth4
-    }
-    if (compareMonth3 > claimEndMonth || compareMonth3 === claimEndMonth && date3 > claimEndDay){
-      req.session.data.dateFour =  false
-    } else {
-      if ((date2 + 1) > date3) {
-        req.session.data.dateThreeStart = (date2 + 1)  + '' + newMonth2
-      } else {
-        req.session.data.dateThreeStart = (date2 + 1)  + '' + newMonth3
-      }
-      req.session.data.dateThree = date3 + '' + newMonth3
-
-    }
-    if (compareMonth2 > claimEndMonth || compareMonth2 === claimEndMonth && date2 > claimEndDay){
-      req.session.data.dateThree = false
-    } else {
-      if ((date1 + 1) > date2) {
-        req.session.data.dateTwoStart = (date1 + 1)  + '' + newMonth1
-      } else {
-        req.session.data.dateTwoStart = (date1 + 1)  + '' + newMonth2
-      }
-      req.session.data.dateTwo = date2 + '' + newMonth2
-
-    }
+    // var claimEndDay = Math.round(req.session.data.claimPeriodEndDay) + frequency
+    // var claimEndMonth = Math.round(req.session.data.claimPeriodEndMonth)
+    //
+    // req.session.data.dateOne = date1 + '' + newMonth1
+    // req.session.data.dateOneStart = (date1 + 1)  + '' + newMonth1
+    //
+    // if ((date5 + 1) > date6) {
+    //   req.session.data.dateSixStart = (date5 + 1)  + '' + newMonth5
+    // } else {
+    //   req.session.data.dateSixStart = (date5 + 1)  + '' + newMonth6
+    // }
+    //
+    // req.session.data.dateSix = date6 + '' + newMonth6
+    //
+    //
+    // if (compareMonth5 > claimEndMonth || compareMonth5 === claimEndMonth && date5 > claimEndDay){
+    //   req.session.data.dateSix =  false
+    // } else {
+    //   if ((date4 + 1) > date5) {
+    //     req.session.data.dateFiveStart = (date4 + 1)  + '' + newMonth4
+    //   } else {
+    //     req.session.data.dateFiveStart = (date4 + 1)  + '' + newMonth5
+    //   }
+    //   req.session.data.dateFive = date5 + '' + newMonth5
+    //
+    // }
+    // if (compareMonth4 > claimEndMonth || compareMonth4 === claimEndMonth && date4 > claimEndDay){
+    //   req.session.data.dateFive =  false
+    // } else {
+    //   if ((date3 + 1) > date4) {
+    //     req.session.data.dateFourStart = (date3 + 1)  + '' + newMonth3
+    //   } else {
+    //     req.session.data.dateFourStart = (date3 + 1)  + '' + newMonth4
+    //   }
+    //   req.session.data.dateFour = date4 + '' + newMonth4
+    // }
+    // if (compareMonth3 > claimEndMonth || compareMonth3 === claimEndMonth && date3 > claimEndDay){
+    //   req.session.data.dateFour =  false
+    // } else {
+    //   if ((date2 + 1) > date3) {
+    //     req.session.data.dateThreeStart = (date2 + 1)  + '' + newMonth2
+    //   } else {
+    //     req.session.data.dateThreeStart = (date2 + 1)  + '' + newMonth3
+    //   }
+    //   req.session.data.dateThree = date3 + '' + newMonth3
+    //
+    // }
+    // if (compareMonth2 > claimEndMonth || compareMonth2 === claimEndMonth && date2 > claimEndDay){
+    //   req.session.data.dateThree = false
+    // } else {
+    //   if ((date1 + 1) > date2) {
+    //     req.session.data.dateTwoStart = (date1 + 1)  + '' + newMonth1
+    //   } else {
+    //     req.session.data.dateTwoStart = (date1 + 1)  + '' + newMonth2
+    //   }
+    //   req.session.data.dateTwo = date2 + '' + newMonth2
+    //
+    // }
     // console.log('dateSix = ' + req.session.data.dateSix)
     // console.log('dateFive = ' + req.session.data.dateFive)
     // console.log('dateFour = ' + req.session.data.dateFour)
