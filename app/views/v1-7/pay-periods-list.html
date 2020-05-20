@@ -21,9 +21,8 @@ Job Retention Scheme Calculator
     </h1>
 
 
-    <p>If this employee has irregular pay periods we cannot calculate furlough pay. </p>
-    <p>These are all the pay periods wholly or partly in your claim
-    ({% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} 2020 to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %} 2020).</p>
+    <p>We’ve worked them out based on your answers. </p>
+
 
     <ul class="govuk-list govuk-list--bullet">
       {% if data['payFrequency'] === 'monthly' %}
@@ -61,14 +60,14 @@ Job Retention Scheme Calculator
       {% endif %}
 
 
-
-
-
-
     </ul>
 
+    <p>Together they should cover your claim
+      ({% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} 2020 to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %} 2020). They may be partly outside it.
+    </p>
 
-<!--    {% include "includes/pay-period.html" %}-->
+    <p>We’ve assumed the pay periods are regular. The calculator cannot be used for irregular pay periods.</p>
+    <!--    {% include "includes/pay-period.html" %}-->
 
 
 
@@ -86,7 +85,7 @@ Job Retention Scheme Calculator
             </div>
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="discretionary-no" name="listPeriods" type="radio" value="no"> <label class="govuk-label govuk-radios__label" for="discretionary-no">No - change details </label>
+              <input class="govuk-radios__input" id="discretionary-no" name="listPeriods" type="radio" value="no"> <label class="govuk-label govuk-radios__label" for="discretionary-no">No - change dates </label>
             </div>
           </div>
         </fieldset>
