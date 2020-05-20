@@ -20,14 +20,11 @@ Job Retention Scheme Calculator
       Has this employee furloughed for the same time?
     </h1>
 
+    <p><span class="govuk-!-font-weight-bold">Start:</span> {% if data['furloughStartTitle'] %}{{data['furloughStartTitle'] }} {% else %} 23 March {% endif %}2020
+      <br>
+      <span class="govuk-!-font-weight-bold">End:</span> Ongoing
+    </p>
 
-<!--    <h2 class="govuk-heading-m">Furlough dates</h2>-->
-    <ul class="govuk-list govuk-list--bullet">
-
-      <li>Ongoing from  {% if data['furloughStartTitle'] %}{{data['furloughStartTitle'] }} {% else %} 23 March {% endif %}2020</li>
-
-     
-    </ul>
 
 
 
