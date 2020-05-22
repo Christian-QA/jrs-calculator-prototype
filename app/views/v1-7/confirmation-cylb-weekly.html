@@ -16,12 +16,7 @@ Job Retention Scheme Calculator
 
         <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-8">
             <div class="govuk-panel__body">
-
-
-
                 <h1 class="">What you can claim for this employee</h1>
-
-
                 <div class="furlough-heading">
                     <p class="">Amount paid to this furloughed employee</p>
                     <p class="govuk-panel__title">{% if data['totalFurlough'] %} £{{data['totalFurlough']}}.00 {% else %} £1105.81 {% endif %}</p>
@@ -36,8 +31,6 @@ Job Retention Scheme Calculator
                     <p class="">Employer minimum pension contributions</p>
                     <p class="govuk-panel__title">  {% if data['totalFurlough'] %} £{{data['totalPension']}}.38 {% else %} £33.17 {% endif %}</p>
                 </div>
-
-
             </div>
         </div>
 

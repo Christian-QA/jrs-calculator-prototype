@@ -14,17 +14,22 @@ Job Retention Scheme Calculator
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-8">
-            <h1 class="govuk-panel__body govuk-!-margin-bottom-4 govuk-!-margin-top-0 govuk-!-font-size-27">
-                What you can claim for this employee
-            </h1>
-            <div class="govuk-panel__title">
-                {% if data['totalFurlough'] %} £{{data['totalFurlough']}}.00 {% else %} £1105.81 {% endif %} <br>
-                <p class="govuk-!-font-weight-regular govuk-!-font-size-24 govuk-!-margin-bottom-4" style="color: white">Amount paid to this furloughed employee
-                </p>
-                {% if data['totalFurlough'] %} £{{data['totalNic']}}.22 {% else %} £91.49 {% endif %} <br>
-                <p class="govuk-!-font-weight-regular govuk-!-font-size-24 govuk-!-margin-bottom-4" style="color: white">Employer National Insurance contributions</p>
-                {% if data['totalFurlough'] %} £{{data['totalPension']}}.38 {% else %} £33.17 {% endif %} <br>
-                <p class="govuk-!-font-weight-regular govuk-!-font-size-24 govuk-!-margin-bottom-0" style="color: white">Employer minimum pension contributions</p>
+            <div class="govuk-panel__body">
+                <h1 class="">What you can claim for this employee</h1>
+                <div class="furlough-heading">
+                    <p class="">Amount paid to this furloughed employee</p>
+                    <p class="govuk-panel__title">{% if data['totalFurlough'] %} £{{data['totalFurlough']}}.00 {% else %} £1105.81 {% endif %}</p>
+                </div>
+
+                <div class="furlough-heading">
+                    <p class="">Employer National Insurance contributions</p>
+                    <p class="govuk-panel__title">{% if data['totalFurlough'] %} £{{data['totalNic']}}.22 {% else %} £91.49 {% endif %}</p>
+                </div>
+
+                <div class="furlough-heading">
+                    <p class="">Employer minimum pension contributions</p>
+                    <p class="govuk-panel__title">  {% if data['totalFurlough'] %} £{{data['totalPension']}}.38 {% else %} £33.17 {% endif %}</p>
+                </div>
             </div>
         </div>
 
