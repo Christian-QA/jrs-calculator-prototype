@@ -200,20 +200,7 @@ module.exports = function (router) {
     req.session.data.payPeriodOneTitle = Math.round(req.session.data.payPeriodOneStartDay) + req.session.data.payPeriodOneTitleMonth
     req.session.data.payPeriodOne = titleMonth + '' + Math.round(req.session.data.payPeriodOneStartDay)
 
-    // calc dates for diff pay periods
-    // var frequency = req.session.data.payFrequencyDays
-    // var date1 =   Math.round(req.session.data.payPeriodOneStartDay)
-    // var startDate = moment(`2020-${req.session.data.payPeriodOneTitleMonth}-${Math.round(req.session.data.payPeriodOneStartDay)}`)
-    // var endDate = moment(`2020-${req.session.data.claimPeriodEndMonthTitle}-${Math.round(req.session.data.claimPeriodEndDay)}`)
-    // let dates = [];
-    //
-    // while (startDate < endDate) {
-    //   dates.push(startDate)
-    //   startDate = startDate.add(frequency, 'days').calendar();
-    //
-    // }
-    // console.log(dates)
-  //console.log(endDate)
+
 
 
     //
@@ -455,27 +442,28 @@ module.exports = function (router) {
     const start = moment(`2020-${req.session.data.payPeriodOneTitleMonth}-${Math.round(req.session.data.payPeriodOneStartDay)}`)
     const end = moment(`2020-${req.session.data.claimPeriodEndMonthTitle}-${Math.round(req.session.data.claimPeriodEndDay)}`)
     const frequency = req.session.data.payFrequencyDays
-    const periodListAll = [];
+    const timeFrame = 'days'
+    const periodList = []
     function returnDates(start, end) {
-      const f = 'D MMM'
+      const f = 'D MMMM'
       if (start > end) {
         return;
       } else {
         let periodStart = start.format(f)
-        let periodEnd = moment(start).add(frequency - 1, 'days').format(f)
-        let periodList = {
+        let periodEnd = moment(start).add(frequency - 1, timeFrame).format(f)
+        let periodDate = {
           periodStart,
           periodEnd
         }
-        periodListAll.push(periodList)
-        returnDates(start.add(frequency, 'days'), end)
+        periodList.push(periodDate)
+        returnDates(start.add(frequency, timeFrame), end)
       }
     }
     returnDates(start,end)
-    console.log(periodListAll)
+    req.session.data.periodList = periodList
+    console.log(periodList)
 
     res.redirect('/' + sprint + '/pay-periods-list')
-
 
   })
 

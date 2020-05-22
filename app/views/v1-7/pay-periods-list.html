@@ -21,59 +21,35 @@ Job Retention Scheme Calculator
     </h1>
 
 
+    <p>We’ve worked them out based on your answers.</p>
 
-    <p>These are all the pay periods wholly or partly in your claim
-    ({% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} 2020 to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %} 2020).</p>
 
     <ul class="govuk-list govuk-list--bullet">
-      {% for week in weeks %}
-      <li>{{ week.weekStart }}</li>
+      {% if data['payFrequency'] === 'monthly' %}
+
+        {% if data['dateOne']%}
+          <li>From {{data['dateOneStart']}} to {{data['payPeriodTwoTitle']}} 2020</li>
+        {% else %}
+          <li>From 20 April to 20 May 2020</li>
+        {% endif %}
+        {% if data['dateTwo']%}
+          <li>From {{data['payPeriodThreeTitleStart']}} to {{data['payPeriodThreeTitle']}} 2020</li>
+        {% endif %}
       {% else %}
-      <li>This would display if the 'item' collection were empty</li>
-      {% endfor %}
-
-      <!--{% if data['payFrequency'] === 'monthly' %}
-
-      {% if data['dateOne']%}
-      <li>From {{data['dateOneStart']}} to {{data['payPeriodTwoTitle']}} 2020</li>
+      {% if data.periodList.length %}
+        {% for periodDate in data.periodList %}
+          <li>From {{ periodDate.periodStart }} to {{ periodDate.periodEnd }} 2020</li>
+        {% endfor %}
+        {% else %}
+          <li>From 20 April to 27 April 2020</li>
+          <li>From 28 April to 5 May 2020</li>
+        {% endif %}
       {% endif %}
-      {% if data['dateTwo']%}
-      <li>From {{data['payPeriodThreeTitleStart']}} to {{data['payPeriodThreeTitle']}} 2020</li>
-      {% endif %}
-      &lt;!&ndash;<li>Ending: {% if data['pastOneMonthTitle']%}{{data['payPeriodOneStartDay']}} {{data['pastOneMonthTitle']}}{% else %}30 April{% endif %} 2020</li>
-      <li>Ending: {% if data['pastTwoMonthTitle']%}{{data['payPeriodTwoStartDay']}} {{data['pastTwoMonthTitle']}}{% else %}30 May{% endif %} 2020</li>&ndash;&gt;
-
-    {% else %}
-&lt;!&ndash;      <li>Ending: {% if data['dateOne']%}{{data['dateOne']}}{% else %}30 April{% endif %} 2020</li>&ndash;&gt;
-      {% if data['dateTwo']%}
-      <li>From {{data['dateTwoStart']}} to {{data['dateTwo']}} 2020</li>
-      {% else %}
-      <li>From 20 April to 13 May 2020</li>
-      {% endif %}
-      {% if data['dateThree']%}
-      <li>From {{data['dateThreeStart']}} to {{data['dateThree']}} 2020</li>
-      {% endif %}
-      {% if data['dateFour']%}
-      <li>From {{data['dateFourStart']}} to {{data['dateFour']}} 2020</li>
-      {% endif %}
-      {% if data['dateFive']%}
-      <li>From {{data['dateFiveStart']}} to {{data['dateFive']}} 2020</li>
-      {% endif %}
-      {% if data['dateSix']%}
-      <li>From {{data['dateSixStart']}} to {{data['dateSix']}} 2020</li>
-      {% endif %}
-
-      {% endif %}-->
-
-
-
-
-
-
     </ul>
 
-    <p>We cannot calculate furlough pay if this employee has irregular pay periods. </p>
-<!--    {% include "includes/pay-period.html" %}-->
+    <p>Together they should cover your claim ({% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 March{% endif %} 2020 to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 April{% endif %} 2020). They may be partly outside it.</p>
+
+    <p>We’ve assumed the pay periods are regular. The calculator cannot be used for irregular pay periods. </p>
 
 
 
