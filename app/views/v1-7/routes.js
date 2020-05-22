@@ -1,6 +1,7 @@
 // const url = require('url')
-
+var moment = require('moment')
 module.exports = function (router) {
+
   // set the sprint folder name as a variable
   var sprint = 'v1-7'
 
@@ -109,16 +110,20 @@ module.exports = function (router) {
     var data = req.session.data.payFrequency
     if (data === 'monthly') {
       req.session.data.payFrequencyDisplay = 'each month'
-      req.session.data.payFrequencyDays = 28
+      req.session.data.payFrequencyPeriod = 'month'
+      req.session.data.payFrequencyTime = 1
     } else if (data === '4Weekly') {
       req.session.data.payFrequencyDisplay = 'every four weeks'
-      req.session.data.payFrequencyDays = 28
+      req.session.data.payFrequencyPeriod = 'days'
+      req.session.data.payFrequencyTime = 28
     } else if (data === 'fortnightly') {
       req.session.data.payFrequencyDisplay = 'every two weeks'
-      req.session.data.payFrequencyDays = 14
+      req.session.data.payFrequencyPeriod = 'days'
+      req.session.data.payFrequencyTime = 14
     } else if (data === 'weekly') {
       req.session.data.payFrequencyDisplay = 'each week'
-      req.session.data.payFrequencyDays = 7
+      req.session.data.payFrequencyPeriod = 'days'
+      req.session.data.payFrequencyTime = 7
     }
     res.redirect('/' + sprint + '/pay-method')
   })
@@ -198,172 +203,6 @@ module.exports = function (router) {
     req.session.data.payPeriodOneTitleMonth = getMonthName(titleMonth)
     req.session.data.payPeriodOneTitle = Math.round(req.session.data.payPeriodOneStartDay) + req.session.data.payPeriodOneTitleMonth
     req.session.data.payPeriodOne = titleMonth + '' + Math.round(req.session.data.payPeriodOneStartDay)
-
-    // calc dates for diff pay periods
-    var frequency = req.session.data.payFrequencyDays
-    var date1 = Math.round(req.session.data.payPeriodOneStartDay)
-    if (date1 > 30) {
-      date1 = date1 - 30
-      var compareMonth1 = titleMonth + 1
-      var newMonth1 = getMonthName(compareMonth1)
-      var increment = true
-    } else {
-      if (increment){
-        var compareMonth1 = titleMonth + 1
-        var newMonth1 = getMonthName(compareMonth1)
-      } else {
-        var compareMonth1 = titleMonth
-        var newMonth1 = getMonthName(compareMonth1)
-      }
-    }
-    var date2 = date1 + frequency
-    if (date2 > 30) {
-      date2 = date2 - 30
-      var compareMonth2 = titleMonth + 1
-      var newMonth2 = getMonthName(compareMonth2)
-      var increment = true
-    } else {
-      if (increment){
-        var compareMonth2 = titleMonth + 1
-        var newMonth2 = getMonthName(compareMonth2)
-      } else {
-        var compareMonth2 = titleMonth
-        var newMonth2 = getMonthName(compareMonth2)
-      }
-    }
-    var date3 = date2 + frequency
-    if (date3 > 30) {
-      date3 = date3 - 30
-      if (compareMonth2 === titleMonth + 1) {
-        var compareMonth3 = titleMonth + 2
-      } else{
-        var compareMonth3 = titleMonth + 1
-      }
-      var newMonth3 = getMonthName(compareMonth3)
-      var increment = true
-    } else {
-      if (increment){
-        var compareMonth3 = titleMonth + 1
-        var newMonth3 = getMonthName(compareMonth3)
-      } else {
-        var compareMonth3 = titleMonth
-        var newMonth3 = getMonthName(compareMonth3)
-      }
-    }
-    var date4 = date3 + frequency
-    if (date4 > 30) {
-      date4 = date4 - 30
-      if (compareMonth3 === titleMonth + 1) {
-        var compareMonth4 = titleMonth + 2
-      } else{
-        var compareMonth4 = titleMonth + 1
-      }
-      var newMonth4 = getMonthName(compareMonth4)
-    } else {
-      if (compareMonth3 === titleMonth + 1) {
-        var compareMonth4 = titleMonth + 1
-      } else{
-        var compareMonth4 = titleMonth
-      }
-      var newMonth4 = getMonthName(compareMonth4)
-    }
-    var date5 = date4 + frequency
-    if (date5 > 30) {
-      date5 = date5 - 30
-      var compareMonth5 = titleMonth + 2
-      var newMonth5 = getMonthName(compareMonth5)
-    } else {
-      var compareMonth5 = titleMonth + 1
-      var newMonth5 = getMonthName(compareMonth5)
-    }
-    var date6 = date5 + frequency
-    if (date6 > 30) {
-      date6 = date6 - 30
-      var compareMonth6 = titleMonth + 2
-      var newMonth6 = getMonthName(compareMonth6)
-    } else {
-      var compareMonth6 = titleMonth + 1
-      var newMonth6 = getMonthName(compareMonth6)
-    }
-
-    var claimEndDay = Math.round(req.session.data.claimPeriodEndDay) + frequency
-    var claimEndMonth = Math.round(req.session.data.claimPeriodEndMonth)
-
-    req.session.data.dateOne = date1 + '' + newMonth1
-    var datecheck1 = date1 + 1
-    if (compareMonth1 === 2 && datecheck1 > 29 || compareMonth1 === 3 && datecheck1 > 31 || compareMonth1 === 4 && datecheck1 > 30){
-      req.session.data.dateOneStart = 1  + '' + newMonth2
-    } else {
-      req.session.data.dateOneStart = datecheck1  + '' + newMonth1
-    }
-
-
-    if ((date5 + 1) > date6) {
-      req.session.data.dateSixStart = (date5 + 1)  + '' + newMonth5
-    } else {
-      req.session.data.dateSixStart = (date5 + 1)  + '' + newMonth6
-    }
-
-    req.session.data.dateSix = date6 + '' + newMonth6
-
-
-    if (compareMonth5 > claimEndMonth || compareMonth5 === claimEndMonth && date5 > claimEndDay){
-      req.session.data.dateSix =  false
-    } else {
-      if ((date4 + 1) > date5) {
-        req.session.data.dateFiveStart = (date4 + 1)  + '' + newMonth4
-      } else {
-        req.session.data.dateFiveStart = (date4 + 1)  + '' + newMonth5
-      }
-      req.session.data.dateFive = date5 + '' + newMonth5
-
-    }
-    if (compareMonth4 > claimEndMonth || compareMonth4 === claimEndMonth && date4 > claimEndDay){
-      req.session.data.dateFive =  false
-    } else {
-      if ((date3 + 1) > date4) {
-        req.session.data.dateFourStart = (date3 + 1)  + '' + newMonth3
-      } else {
-        req.session.data.dateFourStart = (date3 + 1)  + '' + newMonth4
-      }
-      req.session.data.dateFour = date4 + '' + newMonth4
-    }
-    if (compareMonth3 > claimEndMonth || compareMonth3 === claimEndMonth && date3 > claimEndDay){
-      req.session.data.dateFour =  false
-    } else {
-      if ((date2 + 1) > date3) {
-        req.session.data.dateThreeStart = (date2 + 1)  + '' + newMonth2
-      } else {
-        req.session.data.dateThreeStart = (date2 + 1)  + '' + newMonth3
-      }
-      req.session.data.dateThree = date3 + '' + newMonth3
-
-    }
-    if (compareMonth2 > claimEndMonth || compareMonth2 === claimEndMonth && date2 > claimEndDay){
-      req.session.data.dateThree = false
-    } else {
-
-      if ((date1 + 1) > date2) {
-        req.session.data.dateTwoStart = (date1 + 1)  + '' + newMonth1
-        console.log('date 2a ')
-      } else {
-        req.session.data.dateTwoStart = (date1 + 1)  + '' + newMonth2
-      }
-      req.session.data.dateTwo = date2 + '' + newMonth2
-
-    }
-    // console.log('dateSix = ' + req.session.data.dateSix)
-    // console.log('dateFive = ' + req.session.data.dateFive)
-    // console.log('dateFour = ' + req.session.data.dateFour)
-    // console.log('datethree = ' + req.session.data.dateThree)
-    //  console.log('dateTwo = ' + req.session.data.dateTwo)
-    //  console.log('dateOne = ' + req.session.data.dateOne)
-
-    // console.log('frequency = ' + req.session.data.payFrequencyDays)
-    // console.log('1 date = ' + req.session.data.weekOne)
-    // console.log('2 date = ' + req.session.data.weekTwo)
-    // console.log('3 date = ' + req.session.data.weekThree)
-    // console.log('4 date = ' + req.session.data.weekFour)
 
     if (req.session.data.payFrequency === 'monthly') {
       res.redirect('/' + sprint + '/pay-dates-2')
@@ -445,8 +284,40 @@ module.exports = function (router) {
     req.session.data.pastOneMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth) - 1)
     req.session.data.pastTwoMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth))
 
-    res.redirect('/' + sprint + '/pay-periods-list')
+    // periods list
+    // correct
+    const start = moment(`2020-${req.session.data.payPeriodOneTitleMonth}-${Math.round(req.session.data.payPeriodOneStartDay)}`)
+    const end = moment(`2020-${req.session.data.claimPeriodEndMonthTitle}-${Math.round(req.session.data.claimPeriodEndDay)}`)
+    const frequency = req.session.data.payFrequencyTime
+    const timeFrame = req.session.data.payFrequencyPeriod
+    const periodList = []
+    function returnDates(start, end) {
+      const f = 'D MMMM'
+      if (start >= end) {
+        return;
+      } else {
 
+        if (timeFrame === 'month') {
+            var periodStart = moment(start).add(1, 'day').format(f)
+           var periodEnd = moment(start).add(1, timeFrame).format(f)
+        } else {
+            var periodStart = start.format(f)
+            var periodEnd = moment(start).add(frequency - 1, timeFrame).format(f)
+        }
+
+        let periodDate = {
+          periodStart,
+          periodEnd
+        }
+        periodList.push(periodDate)
+        returnDates(start.add(frequency, timeFrame), end)
+      }
+    }
+    returnDates(start,end)
+    req.session.data.periodList = periodList
+    // console.log(periodList)
+
+    res.redirect('/' + sprint + '/pay-periods-list')
 
   })
 

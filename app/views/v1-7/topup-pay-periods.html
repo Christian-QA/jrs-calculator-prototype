@@ -30,78 +30,30 @@ Job Retention Scheme Calculator
             <div class="govuk-form-group">
 
                 <fieldset class="govuk-fieldset">
-
-
-                    {% if data['payFrequency'] === 'monthly' %}
                     <div class="govuk-checkboxes">
+                    {% if data.periodList.length %}
+                    {% for periodDate in data.periodList %}
+<!--                    <li>From {{ periodDate.periodStart }} to {{ periodDate.periodEnd }} 2020</li>-->
                         <div class="govuk-checkboxes__item">
                             <input class="govuk-checkboxes__input" id="waste" name="periodSelect" type="checkbox" value="periodOne">
                             <label class="govuk-label govuk-checkboxes__label" for="waste">
-                                Pay period end: {% if data['pastOneMonthTitle']%}{{data['payPeriodOneStartDay']}} {{data['pastOneMonthTitle']}}{% else %}30 April{% endif %} 2020 <br>
+                                Pay period end: {{ periodDate.periodEnd }} 2020 <br>
                                 <span class="govuk-hint">Amount before top-up: {% if data['salaryFurlough'] %} £{{data['salaryFurlough']}}.00 {% else %} £851.00 {% endif %}</span>
                             </label>
                         </div>
-                        <div class="govuk-checkboxes__item">
-                            <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
-                            <label class="govuk-label govuk-checkboxes__label" for="waste-2">
-                                Pay period end: {% if data['pastTwoMonthTitle']%}{{data['payPeriodOneStartDay']}} {{data['pastTwoMonthTitle']}}{% else %}30 May{% endif %} 2020<br>
-                                <span class="govuk-hint">Amount before top-up: {% if data['salaryFurlough2'] %} £{{data['salaryFurlough2']}}.00 {% else %} £851.00 {% endif %}</span>
-                            </label>
-                        </div>
-                    </div>
+                    {% endfor %}
                     {% else %}
-                    <div class="govuk-checkboxes">
-
                         <div class="govuk-checkboxes__item">
-                            <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
-                            <label class="govuk-label govuk-checkboxes__label" for="waste-2">
-                                Pay period end: {% if data['dateTwo']%}{{data['dateTwo']}}{% else %}6 May{% endif %} 2020
-                                <br>
-                                <span class="govuk-hint">Amount before top-up: {% if data['salaryFurlough'] %} £{{data['salaryFurlough']}}.00 {% else %} £550.00 {% endif %}</span>
+                            <input class="govuk-checkboxes__input" id="waste" name="periodSelect" type="checkbox" value="periodOne">
+                            <label class="govuk-label govuk-checkboxes__label" for="waste">
+                                Pay period end: 30 April 2020 <br>
+                                <span class="govuk-hint">Amount before top-up: {% if data['salaryFurlough'] %} £{{data['salaryFurlough']}}.00 {% else %} £851.00 {% endif %}</span>
                             </label>
                         </div>
-                        {% if data['dateThree']%}
-                        <div class="govuk-checkboxes__item">
-                            <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
-                            <label class="govuk-label govuk-checkboxes__label" for="waste-2">
-                                Pay period end: {% if data['dateThree']%}{{data['dateThree']}}{% else %}13 May{% endif %} 2020
-                                <br>
-                                <span class="govuk-hint">Amount before top-up: {% if data['salaryFurlough'] %} £{{data['salaryFurlough']}}.00 {% else %} £550.00 {% endif %}</span>
-                            </label>
-                        </div>
-                        {% endif %}
-                        {% if data['dateFour']%}
-                        <div class="govuk-checkboxes__item">
-                            <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
-                            <label class="govuk-label govuk-checkboxes__label" for="waste-2">
-                                Pay period end: {% if data['dateFour']%}{{data['dateFour']}}{% else %}20 May{% endif %} 2020
-                                <br>
-                                <span class="govuk-hint">Amount before top-up: {% if data['salaryFurlough'] %} £{{data['salaryFurlough']}}.00 {% else %} £550.00 {% endif %}</span>
-                            </label>
-                        </div>
-                        {% endif %}
-                        {% if data['dateFive']%}
-                        <div class="govuk-checkboxes__item">
-                            <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
-                            <label class="govuk-label govuk-checkboxes__label" for="waste-2">
-                                Pay period end: {% if data['dateFive']%}{{data['dateFive']}}{% else %}20 May{% endif %} 2020
-                                <br>
-                                <span class="govuk-hint">Amount before top-up: {% if data['salaryFurlough'] %} £{{data['salaryFurlough']}}.00 {% else %} £550.00 {% endif %}</span>
-                            </label>
-                        </div>
-                        {% endif %}
-                        {% if data['dateSix']%}
-                        <div class="govuk-checkboxes__item">
-                            <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
-                            <label class="govuk-label govuk-checkboxes__label" for="waste-2">
-                                Pay period end: {% if data['dateSix']%}{{data['dateSix']}}{% else %}20 May{% endif %} 2020
-                                <br>
-                                <span class="govuk-hint">Amount before top-up: {% if data['salaryFurlough'] %} £{{data['salaryFurlough']}}.00 {% else %} £550.00 {% endif %}</span>
-                            </label>
-                        </div>
-                        {% endif %}
-                    </div>
                     {% endif %}
+                    </div>
+
+
                 </fieldset>
             </div>
 

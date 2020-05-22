@@ -30,64 +30,29 @@ Job Retention Scheme Calculator
             <div class="govuk-form-group">
 
                 <fieldset class="govuk-fieldset">
-
-                    {% if data['payFrequency'] === 'monthly' %}
                     <div class="govuk-checkboxes">
+                        {% if data.periodList.length %}
+                        {% for periodDate in data.periodList %}
+                        <!--                    <li>From {{ periodDate.periodStart }} to {{ periodDate.periodEnd }} 2020</li>-->
                         <div class="govuk-checkboxes__item">
                             <input class="govuk-checkboxes__input" id="waste" name="periodSelect" type="checkbox" value="periodOne">
                             <label class="govuk-label govuk-checkboxes__label" for="waste">
-                                Pay period end: {% if data['pastOneMonthTitle']%}{{data['payPeriodOneStartDay']}} {{data['pastOneMonthTitle']}}{% else %}30 April{% endif %} 2020
+                                Pay period end: {{ periodDate.periodEnd }} 2020 <br>
+
                             </label>
                         </div>
+                        {% endfor %}
+                        {% else %}
                         <div class="govuk-checkboxes__item">
-                            <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
-                            <label class="govuk-label govuk-checkboxes__label" for="waste-2">
-                                Pay period end: {% if data['pastTwoMonthTitle']%}{{data['payPeriodTwoStartDay']}} {{data['pastTwoMonthTitle']}}{% else %}30 May{% endif %} 2020
+                            <input class="govuk-checkboxes__input" id="waste" name="periodSelect" type="checkbox" value="periodOne">
+                            <label class="govuk-label govuk-checkboxes__label" for="waste">
+                                Pay period end: 30 April 2020 <br>
+
                             </label>
                         </div>
+                        {% endif %}
                     </div>
-                    {% else %}
-                    {% if data['dateTwo']%}
-                    <div class="govuk-checkboxes__item">
-                        <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
-                        <label class="govuk-label govuk-checkboxes__label" for="waste-2">
-                            Pay period end: {% if data['dateTwo']%}{{data['dateTwo']}}{% else %}13 May{% endif %} 2020
-                        </label>
-                    </div>
-                    {% endif %}
-                    {% if data['dateThree']%}
-                    <div class="govuk-checkboxes__item">
-                        <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
-                        <label class="govuk-label govuk-checkboxes__label" for="waste-2">
-                            Pay period end: {% if data['dateThree']%}{{data['dateThree']}}{% else %}27 May{% endif %} 2020
-                        </label>
-                    </div>
-                    {% endif %}
-                    {% if data['dateFour']%}
-                    <div class="govuk-checkboxes__item">
-                        <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
-                        <label class="govuk-label govuk-checkboxes__label" for="waste-2">
-                            Pay period end: {% if data['dateFour']%}{{data['dateFour']}}{% else %}20 May{% endif %} 2020
-                        </label>
-                    </div>
-                    {% endif %}
-                    {% if data['dateFive']%}
-                    <div class="govuk-checkboxes__item">
-                        <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
-                        <label class="govuk-label govuk-checkboxes__label" for="waste-2">
-                            Pay period end: {% if data['dateFive']%}{{data['dateFive']}}{% else %}20 May{% endif %} 2020
-                        </label>
-                    </div>
-                    {% endif %}
-                    {% if data['dateSix']%}
-                    <div class="govuk-checkboxes__item">
-                        <input class="govuk-checkboxes__input" id="waste-2" name="periodSelect" type="checkbox" value="periodTwo">
-                        <label class="govuk-label govuk-checkboxes__label" for="waste-2">
-                            Pay period end: {% if data['dateSix']%}{{data['dateSix']}}{% else %}20 May{% endif %} 2020
-                        </label>
-                    </div>
-                    {% endif %}
-                    {% endif %}
+
                 </fieldset>
             </div>
 
