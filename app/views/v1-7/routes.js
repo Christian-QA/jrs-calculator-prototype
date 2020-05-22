@@ -201,48 +201,20 @@ module.exports = function (router) {
     req.session.data.payPeriodOne = titleMonth + '' + Math.round(req.session.data.payPeriodOneStartDay)
 
     // calc dates for diff pay periods
-    var frequency = req.session.data.payFrequencyDays
-    var date1 =   Math.round(req.session.data.payPeriodOneStartDay)
-    var startDate = moment(`2020-${req.session.data.payPeriodOneTitleMonth}-${Math.round(req.session.data.payPeriodOneStartDay)}`)
-    var endDate = moment(`2020-${req.session.data.claimPeriodEndMonthTitle}-${Math.round(req.session.data.claimPeriodEndDay)}`)
-    let dates = [];
-
-    while (startDate < endDate) {
-      dates.push(startDate)
-      startDate = startDate.add(frequency, 'days').calendar();
-
-    }
-    console.log(dates)
+    // var frequency = req.session.data.payFrequencyDays
+    // var date1 =   Math.round(req.session.data.payPeriodOneStartDay)
+    // var startDate = moment(`2020-${req.session.data.payPeriodOneTitleMonth}-${Math.round(req.session.data.payPeriodOneStartDay)}`)
+    // var endDate = moment(`2020-${req.session.data.claimPeriodEndMonthTitle}-${Math.round(req.session.data.claimPeriodEndDay)}`)
+    // let dates = [];
+    //
+    // while (startDate < endDate) {
+    //   dates.push(startDate)
+    //   startDate = startDate.add(frequency, 'days').calendar();
+    //
+    // }
+    // console.log(dates)
   //console.log(endDate)
 
-// expected output: 3
-
-
-    // for (i = 1; i < 7; i++) {
-    //   var date = "date" + i
-    //   var compareMonth = "compareMonth" + i
-    //   var newMonth = "newMonth" + i
-    //   console.log("date = " + date)
-    //   console.log("compareMonth = " + compareMonth)
-    //   console.log("newMonth = " + newMonth)
-    //   if (eval(date) > 30) {
-    //     date = eval(date) - 30
-    //     compareMonth = titleMonth + 1
-    //     newMonth = getMonthName(eval(compareMonth))
-    //     var increment = true
-    //   } else {
-    //     if (increment){
-    //       compareMonth = titleMonth + 1
-    //       compareMonth = getMonthName(eval(compareMonth))
-    //     } else {
-    //       compareMonth = titleMonth
-    //       newMonth = getMonthName(eval(compareMonth))
-    //     }
-    //   }
-    //   var newDate = "date" + eval(i++)
-    //   newDate = eval(date) + frequency
-    //   console.log("newDate = " + newDate)
-    // }
 
     //
     //
@@ -477,6 +449,30 @@ module.exports = function (router) {
     req.session.data.payTaxDateTitle = Math.round(req.session.data.payDateDay) + req.session.data.payDateMonthTitle
     req.session.data.pastOneMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth) - 1)
     req.session.data.pastTwoMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth))
+
+    // periods list
+    // correct
+    const start = moment(`2020-${req.session.data.payPeriodOneTitleMonth}-${Math.round(req.session.data.payPeriodOneStartDay)}`)
+    const end = moment(`2020-${req.session.data.claimPeriodEndMonthTitle}-${Math.round(req.session.data.claimPeriodEndDay)}`)
+    const frequency = req.session.data.payFrequencyDays
+    const periodListAll = [];
+    function returnDates(start, end) {
+      const f = 'D MMM'
+      if (start > end) {
+        return;
+      } else {
+        let periodStart = start.format(f)
+        let periodEnd = moment(start).add(frequency - 1, 'days').format(f)
+        let periodList = {
+          periodStart,
+          periodEnd
+        }
+        periodListAll.push(periodList)
+        returnDates(start.add(frequency, 'days'), end)
+      }
+    }
+    returnDates(start,end)
+    console.log(periodListAll)
 
     res.redirect('/' + sprint + '/pay-periods-list')
 
