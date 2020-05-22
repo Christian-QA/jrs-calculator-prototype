@@ -199,10 +199,11 @@ module.exports = function (router) {
 
   // route - pay dates 1
   router.post('/' + sprint + '/route-pay-dates-1', function (req, res) {
-    var titleMonth = Math.round(req.session.data.payPeriodOneStartMonth)
-    req.session.data.payPeriodOneTitleMonth = getMonthName(titleMonth)
-    req.session.data.payPeriodOneTitle = Math.round(req.session.data.payPeriodOneStartDay) + req.session.data.payPeriodOneTitleMonth
-    req.session.data.payPeriodOne = titleMonth + '' + Math.round(req.session.data.payPeriodOneStartDay)
+    // var titleMonth = Math.round(req.session.data.payPeriodOneStartMonth)
+    // req.session.data.payPeriodOneTitleMonth = getMonthName(titleMonth)
+    //req.session.data.payPeriodOneTitle = Math.round(req.session.data.payPeriodOneStartDay) + req.session.data.payPeriodOneTitleMonth
+    req.session.data.payPeriodOneTitle = moment(`2020-${Math.round(req.session.data.payPeriodOneStartMonth)}-${Math.round(req.session.data.payPeriodOneStartDay)}`).format("D MMMM YYYY")
+    // req.session.data.payPeriodOne = titleMonth + '' + Math.round(req.session.data.payPeriodOneStartDay)
 
     if (req.session.data.payFrequency === 'monthly') {
       res.redirect('/' + sprint + '/pay-dates-2')
@@ -284,8 +285,7 @@ module.exports = function (router) {
     req.session.data.pastOneMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth) - 1)
     req.session.data.pastTwoMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth))
 
-    // periods list
-    // correct
+    // periods list - user moment.js
     const start = moment(`2020-${req.session.data.payPeriodOneTitleMonth}-${Math.round(req.session.data.payPeriodOneStartDay)}`)
     const end = moment(`2020-${req.session.data.claimPeriodEndMonthTitle}-${Math.round(req.session.data.claimPeriodEndDay)}`)
     const frequency = req.session.data.payFrequencyTime
@@ -296,7 +296,6 @@ module.exports = function (router) {
       if (start >= end) {
         return;
       } else {
-
         if (timeFrame === 'month') {
             var periodStart = moment(start).add(1, 'day').format(f)
            var periodEnd = moment(start).add(1, timeFrame).format(f)
@@ -304,7 +303,6 @@ module.exports = function (router) {
             var periodStart = start.format(f)
             var periodEnd = moment(start).add(frequency - 1, timeFrame).format(f)
         }
-
         let periodDate = {
           periodStart,
           periodEnd
@@ -316,9 +314,7 @@ module.exports = function (router) {
     returnDates(start,end)
     req.session.data.periodList = periodList
     // console.log(periodList)
-
     res.redirect('/' + sprint + '/pay-periods-list')
-
   })
 
   // route-list-periods
@@ -477,6 +473,9 @@ module.exports = function (router) {
     } else if (data === 'no') {
       req.session.data.pensionStatus = 'do not receive employer pension contributions'
     }
+
+    // set date
+    req.session.data.Today = moment().format("D MMMM YYYY")
 
     // Average Daily pay calc
     if (req.session.data.salaryAmount) {
