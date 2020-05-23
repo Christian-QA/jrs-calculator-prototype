@@ -199,11 +199,11 @@ module.exports = function (router) {
 
   // route - pay dates 1
   router.post('/' + sprint + '/route-pay-dates-1', function (req, res) {
-    // var titleMonth = Math.round(req.session.data.payPeriodOneStartMonth)
-    // req.session.data.payPeriodOneTitleMonth = getMonthName(titleMonth)
-    //req.session.data.payPeriodOneTitle = Math.round(req.session.data.payPeriodOneStartDay) + req.session.data.payPeriodOneTitleMonth
-    req.session.data.payPeriodOneTitle = moment(`2020-${Math.round(req.session.data.payPeriodOneStartMonth)}-${Math.round(req.session.data.payPeriodOneStartDay)}`).format("D MMMM YYYY")
-    // req.session.data.payPeriodOne = titleMonth + '' + Math.round(req.session.data.payPeriodOneStartDay)
+    var titleMonth = Math.round(req.session.data.payPeriodOneStartMonth)
+    req.session.data.payPeriodOneTitleMonth = getMonthName(titleMonth)
+    req.session.data.payPeriodOneTitle = Math.round(req.session.data.payPeriodOneStartDay) + req.session.data.payPeriodOneTitleMonth
+    //req.session.data.payPeriodOneTitle = moment(`2020-${Math.round(req.session.data.payPeriodOneStartMonth)}-${Math.round(req.session.data.payPeriodOneStartDay)}`).format("D MMMM YYYY")
+    req.session.data.payPeriodOne = titleMonth + '' + Math.round(req.session.data.payPeriodOneStartDay)
 
     if (req.session.data.payFrequency === 'monthly') {
       res.redirect('/' + sprint + '/pay-dates-2')
