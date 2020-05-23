@@ -23,19 +23,28 @@ Job Retention Scheme Calculator
 
 
     <ul class="govuk-list govuk-list--bullet">
-      {% if data['payFrequency'] === 'monthly' %}
+
+      {% if data.periodList.length %}
+      {% for periodDate in data.periodList %}
+      <li>From {{ periodDate.periodStart }} to {{ periodDate.periodEnd }} 2020</li>
+      {% endfor %}
+      {% else %}
+      <li>From 20 April to 27 April 2020</li>
+      <li>From 28 April to 5 May 2020</li>
+      {% endif %}
+      <!--{% if data['payFrequency'] === 'monthly' %}
 
       {% if data['dateOne']%}
       <li>From {{data['dateOneStart']}} to {{data['payPeriodTwoTitle']}} 2020</li>
       {% endif %}
       {% if data['dateTwo']%}
       <li>From {{data['payPeriodThreeTitleStart']}} to {{data['payPeriodThreeTitle']}} 2020</li>
-      {% endif %}
+      {% endif %}-->
       <!--<li>Ending: {% if data['pastOneMonthTitle']%}{{data['payPeriodOneStartDay']}} {{data['pastOneMonthTitle']}}{% else %}30 April{% endif %} 2020</li>
       <li>Ending: {% if data['pastTwoMonthTitle']%}{{data['payPeriodTwoStartDay']}} {{data['pastTwoMonthTitle']}}{% else %}30 May{% endif %} 2020</li>-->
 
-      {% else %}
-      <!--      <li>Ending: {% if data['dateOne']%}{{data['dateOne']}}{% else %}30 April{% endif %} 2020</li>-->
+     <!-- {% else %}
+      &lt;!&ndash;      <li>Ending: {% if data['dateOne']%}{{data['dateOne']}}{% else %}30 April{% endif %} 2020</li>&ndash;&gt;
       {% if data['dateTwo']%}
       <li>From {{data['dateTwoStart']}} to {{data['dateTwo']}} 2020</li>
       {% else %}
@@ -54,7 +63,7 @@ Job Retention Scheme Calculator
       <li>From {{data['dateSixStart']}} to {{data['dateSix']}} 2020</li>
       {% endif %}
 
-      {% endif %}
+      {% endif %}-->
 
 
 

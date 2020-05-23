@@ -215,13 +215,14 @@ module.exports = function (router) {
 
   // route - pay dates 2
   router.post('/' + sprint + '/route-pay-dates-2', function (req, res) {
-    var titleMonth = Math.round(req.session.data.payPeriodTwoStartMonth)
-    req.session.data.payPeriodTwoTitleMonth = getMonthName(titleMonth)
-    req.session.data.payPeriodTwoTitle = Math.round(req.session.data.payPeriodTwoStartDay) + req.session.data.payPeriodTwoTitleMonth
-    req.session.data.payPeriodTwo = titleMonth + '' + Math.round(req.session.data.payPeriodTwoStartDay)
+    // var titleMonth = Math.round(req.session.data.payPeriodTwoStartMonth)
+    // req.session.data.payPeriodTwoTitleMonth = getMonthName(titleMonth)
+    // req.session.data.payPeriodTwoTitle = Math.round(req.session.data.payPeriodTwoStartDay) + req.session.data.payPeriodTwoTitleMonth
+    // req.session.data.payPeriodTwo = titleMonth + '' + Math.round(req.session.data.payPeriodTwoStartDay)
+    req.session.data.payPeriodTwoTitle = moment(`2020-${Math.round(req.session.data.payPeriodTwoStartMonth)}-${Math.round(req.session.data.payPeriodTwoStartDay)}`).format("D MMMM YYYY")
 
-    req.session.data.payPeriodThreeTitleStart = (Math.round(req.session.data.payPeriodTwoStartDay) + 1) + '' + getMonthName(titleMonth)
-    if (titleMonth > Math.round(req.session.data.claimPeriodEndMonth) || titleMonth === Math.round(req.session.data.claimPeriodEndMonth) && Math.round(req.session.data.payPeriodTwoStartDay) >= Math.round(req.session.data.claimPeriodEndDay)) {
+    //req.session.data.payPeriodThreeTitleStart = (Math.round(req.session.data.payPeriodTwoStartDay) + 1) + '' + getMonthName(titleMonth)
+    if (Math.round(req.session.data.payPeriodTwoStartMonth) > Math.round(req.session.data.claimPeriodEndMonth) || Math.round(req.session.data.payPeriodTwoStartMonth) === Math.round(req.session.data.claimPeriodEndMonth) && Math.round(req.session.data.payPeriodTwoStartDay) >= Math.round(req.session.data.claimPeriodEndDay)) {
       res.redirect('/' + sprint + '/last-pay-date')
     } else {
       res.redirect('/' + sprint + '/pay-dates-3')
@@ -231,9 +232,11 @@ module.exports = function (router) {
   // route - pay dates 3
   router.post('/' + sprint + '/route-pay-dates-3', function (req, res) {
     var titleMonth = Math.round(req.session.data.payPeriodThreeStartMonth)
-    req.session.data.payPeriodThreeStartMonth = getMonthName(titleMonth)
-    req.session.data.payPeriodThreeTitle = Math.round(req.session.data.payPeriodThreeStartDay) + req.session.data.payPeriodThreeStartMonth
-    req.session.data.payPeriodThree = titleMonth + '' + Math.round(req.session.data.payPeriodThreeStartDay)
+    // req.session.data.payPeriodThreeStartMonth = getMonthName(titleMonth)
+    // req.session.data.payPeriodThreeTitle = Math.round(req.session.data.payPeriodThreeStartDay) + req.session.data.payPeriodThreeStartMonth
+    // req.session.data.payPeriodThree = titleMonth + '' + Math.round(req.session.data.payPeriodThreeStartDay)
+    req.session.data.payPeriodThreeTitle = moment(`2020-${Math.round(req.session.data.payPeriodThreeStartMonth)}-${Math.round(req.session.data.payPeriodThreeStartDay)}`).format("D MMMM YYYY")
+
     if (titleMonth > Math.round(req.session.data.claimPeriodEndMonth) || titleMonth === Math.round(req.session.data.claimPeriodEndMonth) && Math.round(req.session.data.payPeriodThreeStartDay) >= Math.round(req.session.data.claimPeriodEndDay)) {
       res.redirect('/' + sprint + '/last-pay-date')
     } else {
@@ -244,9 +247,11 @@ module.exports = function (router) {
   // route - pay dates 4
   router.post('/' + sprint + '/route-pay-dates-4', function (req, res) {
     var titleMonth = Math.round(req.session.data.payPeriodFourStartMonth)
-    req.session.data.payPeriodFourStartMonth = getMonthName(titleMonth)
-    req.session.data.payPeriodFourTitle = Math.round(req.session.data.payPeriodFourStartDay) + req.session.data.payPeriodFourStartMonth
-    req.session.data.payPeriodFour = titleMonth + '' + Math.round(req.session.data.payPeriodFourStartDay)
+    // req.session.data.payPeriodFourStartMonth = getMonthName(titleMonth)
+    // req.session.data.payPeriodFourTitle = Math.round(req.session.data.payPeriodFourStartDay) + req.session.data.payPeriodFourStartMonth
+    // req.session.data.payPeriodFour = titleMonth + '' + Math.round(req.session.data.payPeriodFourStartDay)
+    req.session.data.payPeriodOneTitle = moment(`2020-${Math.round(req.session.data.payPeriodFourStartMonth)}-${Math.round(req.session.data.payPeriodFourStartDay)}`).format("D MMMM YYYY")
+
     if (titleMonth > Math.round(req.session.data.claimPeriodEndMonth) || titleMonth === Math.round(req.session.data.claimPeriodEndMonth) && Math.round(req.session.data.payPeriodFourStartDay) >= Math.round(req.session.data.claimPeriodEndDay)) {
       res.redirect('/' + sprint + '/last-pay-date')
     } else {
@@ -258,9 +263,12 @@ module.exports = function (router) {
   // route - pay dates 5
   router.post('/' + sprint + '/route-pay-dates-5', function (req, res) {
     var titleMonth = Math.round(req.session.data.payPeriodFiveStartMonth)
-    req.session.data.payPeriodFiveStartMonth = getMonthName(titleMonth)
-    req.session.data.payPeriodFiveTitle = Math.round(req.session.data.payPeriodFiveStartDay) + req.session.data.payPeriodFiveStartMonth
-    req.session.data.payPeriodFive = titleMonth + '' + Math.round(req.session.data.payPeriodFiveStartDay)
+    // req.session.data.payPeriodFiveStartMonth = getMonthName(titleMonth)
+    // req.session.data.payPeriodFiveTitle = Math.round(req.session.data.payPeriodFiveStartDay) + req.session.data.payPeriodFiveStartMonth
+    // req.session.data.payPeriodFive = titleMonth + '' + Math.round(req.session.data.payPeriodFiveStartDay)
+
+    req.session.data.payPeriodFiveTitle = moment(`2020-${Math.round(req.session.data.payPeriodFiveStartMonth)}-${Math.round(req.session.data.payPeriodFiveStartDay)}`).format("D MMMM YYYY")
+
     if (titleMonth > Math.round(req.session.data.claimPeriodEndMonth) || titleMonth === Math.round(req.session.data.claimPeriodEndMonth) && Math.round(req.session.data.payPeriodFiveStartDay) >= Math.round(req.session.data.claimPeriodEndDay)) {
       res.redirect('/' + sprint + '/last-pay-date')
     } else {
@@ -269,21 +277,26 @@ module.exports = function (router) {
   })
   // route - pay dates 6
   router.post('/' + sprint + '/route-pay-dates-6', function (req, res) {
-    var titleMonth = Math.round(req.session.data.payPeriodSixStartMonth)
-    req.session.data.payPeriodSixStartMonth = getMonthName(titleMonth)
-    req.session.data.payPeriodSixTitle = Math.round(req.session.data.payPeriodSixStartDay) + req.session.data.payPeriodSixStartMonth
-    req.session.data.payPeriodSix = titleMonth + '' + Math.round(req.session.data.payPeriodSixStartDay)
+    // var titleMonth = Math.round(req.session.data.payPeriodSixStartMonth)
+    // req.session.data.payPeriodSixStartMonth = getMonthName(titleMonth)
+    // req.session.data.payPeriodSixTitle = Math.round(req.session.data.payPeriodSixStartDay) + req.session.data.payPeriodSixStartMonth
+    // req.session.data.payPeriodSix = titleMonth + '' + Math.round(req.session.data.payPeriodSixStartDay)
+    req.session.data.payPeriodSixTitle = moment(`2020-${Math.round(req.session.data.payPeriodSixStartMonth)}-${Math.round(req.session.data.payPeriodSixStartDay)}`).format("D MMMM YYYY")
+
     res.redirect('/' + sprint + '/last-pay-date')
   })
 
   // route - pay date
   router.post('/' + sprint + '/route-last-pay-date', function (req, res) {
-    req.session.data.payTaxDate = req.session.data.payDateDay + '/' + req.session.data.payDateMonth + '/' + req.session.data.payDateYear
-    var titleMonth = Math.round(req.session.data.payDateMonth)
-    req.session.data.payDateMonthTitle = getMonthName(titleMonth)
-    req.session.data.payTaxDateTitle = Math.round(req.session.data.payDateDay) + req.session.data.payDateMonthTitle
-    req.session.data.pastOneMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth) - 1)
-    req.session.data.pastTwoMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth))
+    // req.session.data.payTaxDate = req.session.data.payDateDay + '/' + req.session.data.payDateMonth + '/' + req.session.data.payDateYear
+    // var titleMonth = Math.round(req.session.data.payDateMonth)
+    // req.session.data.payDateMonthTitle = getMonthName(titleMonth)
+    // req.session.data.payTaxDateTitle = Math.round(req.session.data.payDateDay) + req.session.data.payDateMonthTitle
+
+    req.session.data.payTaxDateTitle = moment(`2020-${Math.round(req.session.data.payDateMonth)}-${Math.round(req.session.data.payDateDay)}`).format("D MMMM YYYY")
+
+    // req.session.data.pastOneMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth) - 1)
+    // req.session.data.pastTwoMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth))
 
     // periods list - user moment.js
     const start = moment(`2020-${req.session.data.payPeriodOneTitleMonth}-${Math.round(req.session.data.payPeriodOneStartDay)}`)
