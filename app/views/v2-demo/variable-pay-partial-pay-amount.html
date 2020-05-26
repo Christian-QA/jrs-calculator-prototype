@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <form action="route-part-pay-period" method="post">
+
+      <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+          <h1 class="govuk-fieldset__heading">
+            What did the employee get paid between {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 April{% endif %} 2020 and {% if data['furloughStartTitle'] %}{{data['furloughStartTitle']}} 2020{% else %}15 April 2020{% endif %}?
+          </h1>
+        </legend>
+
+        <p>This is the gross amount for the time this employee was paid when they were not furloughed.</p>
+        <p>We need it to calculate National Insurance contributions.</p>
+
+
+        {% include "includes/include-in-salary.html" %}
+
+
+
+                  </p>
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl govuk-visually-hidden">
+          What is the employee's total pay since 6 April 2019?
+        </legend>
+
+        <!--<span id="width-10-hint" class="govuk-hint">
+  hint
+</span>-->
+        <div class="govuk-currency-input__inner govuk-form-group">
+          <span class="govuk-currency-input__inner__unit">£</span>
+
+          <input type="text" class="govuk-currency-input__inner__input govuk-input govuk-input--width-10" id="partPayAmount" value=""  name="partPayAmount" >
+
+
+
+
+        </div>
+
+        <button class="govuk-button" data-module="govuk-button">
+          Continue
+        </button>
+      </fieldset>
+    </form>
+    {% include "includes/web-chat.html" %}
+
+
+  </div>
+</div>
+
+{% endblock %}

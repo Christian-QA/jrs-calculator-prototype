@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+
+        <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">
+            Have you topped up this employee’s pay?
+        </h1>
+
+
+       <!-- <table class="govuk-table review-authorisations govuk-!-margin-bottom-7">
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+
+                <th class="govuk-table__header">
+                    Pay period end date
+                </th>
+                <th class="govuk-table__header">
+                    <span class="govuk-!-font-weight-bold">Furlough amount (80% of pay)</span>
+                </th>
+
+            </tr>
+            <tr class="govuk-table__row">
+                <td class="govuk-table__cell">{{data['payPeriodTwoTitle'] | default('30 April')}} 2020</td>
+                <td class="govuk-table__cell">
+                    {% if data['payPeriodOneFurloughSalary'] %} £{{data['payPeriodOneFurloughSalary']}}.00 {% else %} £851.00 {% endif %}
+                </td>
+            </tr>
+            <tr class="govuk-table__row">
+                <td class="govuk-table__cell">{{data['payPeriodThreeTitle'] | default('30 May')}} 2020</td>
+                <td class="govuk-table__cell">
+                    {% if data['payPeriodTwoFurloughSalary'] %} £{{data['payPeriodTwoFurloughSalary']}}.00 {% else %} £301.00 {% endif %}
+                </td>
+            </tr>
+
+            </tbody>
+        </table>-->
+
+        <form method="post" action="route-topup-question">
+
+            <div class="govuk-form-group">
+
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m govuk-!-margin-bottom-1 govuk-visually-hidden">
+                        <h2 class="govuk-heading-m govuk-!-margin-bottom-1">
+                            Are you paying the employee more than this?
+                        </h2>
+                    </legend>
+
+
+                    <p>You can top up the remaining 20% of your employees’ pay while they’re furloughed.</p>
+                    <p>We’re asking because it affects National Insurance contributions.</p>
+
+                    <div class="govuk-radios">
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="anotherDate-yes" name="topUp" type="radio" value="yes"> <label class="govuk-label govuk-radios__label" for="anotherDate-yes"> Yes </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="anotherDate-no" name="topUp" type="radio" value="no"> <label class="govuk-label govuk-radios__label" for="anotherDate-no"> No </label>
+                        </div>
+
+                    </div>
+
+                </fieldset>
+            </div>
+
+            <button type="submit" class="govuk-button">
+                Continue
+            </button>
+
+        </form>
+        {% include "includes/web-chat.html" %}
+
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+
+    <h1 class="govuk-heading-xl">
+      <!--Does this employee get any additional payments?-->
+      Do you want to use the same pay periods?
+    </h1>
+
+
+
+    <ul class="govuk-list govuk-list--bullet">
+
+      {% if data.periodList.length %}
+      {% for periodDate in data.periodList %}
+      <li>From {{ periodDate.periodStart }} to {{ periodDate.periodEnd }} 2020</li>
+      {% endfor %}
+      {% else %}
+      <li>From 20 April to 27 April 2020</li>
+      <li>From 28 April to 5 May 2020</li>
+      {% endif %}
+    </ul>
+
+
+    {% include "includes/pay-period.html" %}
+
+
+
+    <form method="post" action="route-pay-periods">
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset">
+
+          <div class="govuk-radios">
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="discretionary-yes" name="usePayPeriods" type="radio" value="yes"> <label class="govuk-label govuk-radios__label" for="discretionary-yes">Yes </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="discretionary-no" name="usePayPeriods" type="radio" value="no"> <label class="govuk-label govuk-radios__label" for="discretionary-no">No </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <button type="submit" class="govuk-button">
+        continue
+      </button>
+
+    </form>
+    {% include "includes/web-chat.html" %}
+
+
+  </div>
+</div>
+
+{% endblock %}
