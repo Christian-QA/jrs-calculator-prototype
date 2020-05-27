@@ -72,7 +72,8 @@ module.exports = function (router) {
         res.redirect('/' + sprint + '/pay-frequency')
       }
     } else if (data == 'return')
-      res.redirect('/' + sprint + '/furlough-partime')
+      req.session.data.partTime = true
+      res.redirect('/' + sprint + '/pay-frequency')
   })
 
   // route-partime
@@ -200,6 +201,12 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-reg-salary', function (req, res) {
     req.session.data.salaryAmount = req.session.data.salary
     req.session.data.salaryFurlough = Math.round(req.session.data.salary * 0.8)
+    res.redirect('/' + sprint + '/hours')
+    //res.redirect('/' + sprint + '/topup-question')
+  })
+
+  // route- hours
+  router.post('/' + sprint + '/route-hours', function (req, res) {
     res.redirect('/' + sprint + '/topup-question')
   })
 

@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <form action="route-hours" method="post">
+
+            <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+                    <h1 class="govuk-fieldset__heading">
+                        Part-time hours for pay period 30 March to 30 April 2020
+                    </h1>
+                </legend>
+                <p>As this employee has returned to work part time we need to know how many hours they have worked in the pay period.</p>
+                <div class="govuk-form-group">
+                    <label class="govuk-label" for="partTimeHours">Part-time hours worked in this pay period</label>
+                    <span id="width-10-hint" class="govuk-hint">The actual time the employee worked </span>
+                    <input type="text" class="govuk-input govuk-input--width-5" id="partTimeHours" value="" name="partTimeHours">
+                </div>
+                <div class="govuk-form-group">
+                    <label class="govuk-label" for="partTimeHours">Normal working hours in this pay period</label>
+                    <span id="width-10-hint" class="govuk-hint">The normal hours this employee would work</span>
+                    <input type="text" class="govuk-input govuk-input--width-5" id="partTimeHours" value="" name="partTimeHours">
+                </div>
+
+                <button class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
+            </fieldset>
+        </form>
+        {% include "includes/web-chat.html" %}
+
+
+    </div>
+</div>
+
+{% endblock %}
