@@ -201,8 +201,12 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-reg-salary', function (req, res) {
     req.session.data.salaryAmount = req.session.data.salary
     req.session.data.salaryFurlough = Math.round(req.session.data.salary * 0.8)
-    res.redirect('/' + sprint + '/hours')
-    //res.redirect('/' + sprint + '/topup-question')
+    if (req.session.data.partTime) {
+      res.redirect('/' + sprint + '/hours')
+    } else {
+      res.redirect('/' + sprint + '/topup-question')
+    }
+
   })
 
   // route- hours
