@@ -288,6 +288,16 @@ module.exports = function (router) {
     req.session.data.pastOneMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth) - 1)
     req.session.data.pastTwoMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth))
 
+    // dummy data if doesn't exist
+    if (req.session.data.claimPeriodEndDay === 'undefined' ){
+      req.session.data.payPeriodOneStartDay = '12'
+      req.session.data.payPeriodOneTitleMonth = '5'
+      req.session.data.claimPeriodEndDay = '20'
+      req.session.data.claimPeriodEndMonthTitle = '6'
+    }
+
+    //console.log(req.session.data.claimPeriodEndDay)
+
     // periods list - user moment.js
     const start = moment(`2020-${req.session.data.payPeriodOneTitleMonth}-${Math.round(req.session.data.payPeriodOneStartDay)}`)
     const end = moment(`2020-${req.session.data.claimPeriodEndMonthTitle}-${Math.round(req.session.data.claimPeriodEndDay)}`)
