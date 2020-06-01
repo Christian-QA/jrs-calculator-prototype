@@ -3,7 +3,7 @@ var moment = require('moment')
 module.exports = function (router) {
 
   // set the sprint folder name as a variable
-  var sprint = 'v2-demo'
+  var sprint = 'v2-0'
 
   // helpers - month converter
   const getMonthName = (titleMonth) => {
@@ -48,6 +48,7 @@ module.exports = function (router) {
     req.session.data.claimPeriodEndMonthTitle = getMonthName(titleMonth)
     req.session.data.payClaimPeriodEndTitle = Math.round(req.session.data.claimPeriodEndDay) + req.session.data.claimPeriodEndMonthTitle
     req.session.data.claimEnd = titleMonth + '' + Math.round(req.session.data.claimPeriodEndDay)
+    //console.log(req.session.data.payClaimPeriodEndTitle)
     res.redirect('/' + sprint + '/furlough-start')
   })
 
@@ -71,14 +72,7 @@ module.exports = function (router) {
       } else  {
         res.redirect('/' + sprint + '/pay-frequency')
       }
-    } else if (data == 'return')
-      req.session.data.partTime = true
-      res.redirect('/' + sprint + '/pay-frequency')
-  })
-
-  // route-partime
-  router.post('/' + sprint + '/route-partime', function (req, res) {
-        res.redirect('/' + sprint + '/pay-frequency')
+    }
   })
 
   // route furlough date start
@@ -194,23 +188,38 @@ module.exports = function (router) {
 
   // route- route partial pay period
   router.post('/' + sprint + '/route-part-pay-period', function (req, res) {
-    res.redirect('/' + sprint + '/topup-question')
+    // res.redirect('/' + sprint + '/topup-question')
+    res.redirect('/' + sprint + '/part-time-periods')
   })
 
   // route- salary
   router.post('/' + sprint + '/route-reg-salary', function (req, res) {
     req.session.data.salaryAmount = req.session.data.salary
     req.session.data.salaryFurlough = Math.round(req.session.data.salary * 0.8)
-    if (req.session.data.partTime) {
-      res.redirect('/' + sprint + '/hours')
-    } else {
-      res.redirect('/' + sprint + '/topup-question')
-    }
-
+    res.redirect('/' + sprint + '/part-time-periods')
+    // res.redirect('/' + sprint + '/topup-question')
   })
 
-  // route- hours
-  router.post('/' + sprint + '/route-hours', function (req, res) {
+  // route - route-parttime-period-select
+  router.post('/' + sprint + '/route-parttime-period-select', function (req, res) {
+    res.redirect('/' + sprint + '/part-time-hours')
+    // res.redirect('/' + sprint + '/topup-question')
+  })
+
+  // route - route-parttime-hours
+  router.post('/' + sprint + '/route-part-time-hours', function (req, res) {
+    res.redirect('/' + sprint + '/part-time-normal-hours')
+    // res.redirect('/' + sprint + '/topup-question')
+  })
+
+  // route - route-normal-hours
+  router.post('/' + sprint + '/route-normal-hours', function (req, res) {
+    res.redirect('/' + sprint + '/part-time-pay')
+    // res.redirect('/' + sprint + '/topup-question')
+  })
+
+  // "route-part-time-pay
+  router.post('/' + sprint + '/route-part-time-pay', function (req, res) {
     res.redirect('/' + sprint + '/topup-question')
   })
 
@@ -222,12 +231,15 @@ module.exports = function (router) {
     //req.session.data.payPeriodOneTitle = moment(`2020-${Math.round(req.session.data.payPeriodOneStartMonth)}-${Math.round(req.session.data.payPeriodOneStartDay)}`).format("D MMMM YYYY")
     req.session.data.payPeriodOne = titleMonth + '' + Math.round(req.session.data.payPeriodOneStartDay)
 
-    if (req.session.data.payFrequency === 'monthly') {
-      res.redirect('/' + sprint + '/pay-dates-2')
-    } else {
-      res.redirect('/' + sprint + '/last-pay-date')
-    }
-    // res.redirect('/' + sprint + '/pay-dates-2')
+    // used when predicting dates
+    // if (req.session.data.payFrequency === 'monthly') {
+    //   res.redirect('/' + sprint + '/pay-dates-2')
+    // } else {
+    //   res.redirect('/' + sprint + '/last-pay-date')
+    // }
+
+    // old method - remove if using pay period list
+     res.redirect('/' + sprint + '/pay-dates-2')
   })
 
   // route - pay dates 2
@@ -302,6 +314,16 @@ module.exports = function (router) {
     req.session.data.pastOneMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth) - 1)
     req.session.data.pastTwoMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth))
 
+    // dummy data if doesn't exist
+    if (!req.session.data.claimPeriodEndDay){
+      req.session.data.payPeriodOneStartDay = '12'
+      req.session.data.payPeriodOneTitleMonth = '5'
+      req.session.data.claimPeriodEndDay = '20'
+      req.session.data.claimPeriodEndMonthTitle = '6'
+    }
+
+    //console.log(req.session.data.claimPeriodEndDay)
+
     // periods list - user moment.js
     const start = moment(`2020-${req.session.data.payPeriodOneTitleMonth}-${Math.round(req.session.data.payPeriodOneStartDay)}`)
     const end = moment(`2020-${req.session.data.claimPeriodEndMonthTitle}-${Math.round(req.session.data.claimPeriodEndDay)}`)
@@ -330,11 +352,21 @@ module.exports = function (router) {
     }
     returnDates(start,end)
     req.session.data.periodList = periodList
-    // console.log(periodList)
-    res.redirect('/' + sprint + '/pay-periods-list')
+
+    //  for pay period list
+    // res.redirect('/' + sprint + '/pay-periods-list')
+
+    // old route - remove if pay period list
+    if (req.session.data.varyMoreThan === 'true') {
+      res.redirect('/' + sprint + '/last-year-pay-1')
+    } else if (req.session.data.lessThan12 === 'true') {
+      res.redirect('/' + sprint + '/annual-pay-amount')
+    } else {
+      res.redirect('/' + sprint + '/regular-pay-amount')
+    }
   })
 
-  // route-list-periods
+  // route-list-periods - not used at the moment
   router.post('/' + sprint + '/route-list-periods', function (req, res) {
     var data = req.session.data.listPeriods
     if (data === 'yes') {
@@ -420,7 +452,8 @@ module.exports = function (router) {
       }
     }
     if (req.session.data.furloughStart <= req.session.data.claimStart) {
-      res.redirect('/' + sprint + '/topup-question')
+      // res.redirect('/' + sprint + '/topup-question')
+      res.redirect('/' + sprint + '/part-time-periods')
     } else {
       res.redirect('/' + sprint + '/variable-pay-partial-pay-amount')
     }
