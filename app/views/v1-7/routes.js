@@ -48,6 +48,7 @@ module.exports = function (router) {
     req.session.data.claimPeriodEndMonthTitle = getMonthName(titleMonth)
     req.session.data.payClaimPeriodEndTitle = Math.round(req.session.data.claimPeriodEndDay) + req.session.data.claimPeriodEndMonthTitle
     req.session.data.claimEnd = titleMonth + '' + Math.round(req.session.data.claimPeriodEndDay)
+    //console.log(req.session.data.payClaimPeriodEndTitle)
     res.redirect('/' + sprint + '/furlough-start')
   })
 
@@ -289,7 +290,7 @@ module.exports = function (router) {
     req.session.data.pastTwoMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth))
 
     // dummy data if doesn't exist
-    if (req.session.data.claimPeriodEndDay === 'undefined' ){
+    if (!req.session.data.claimPeriodEndDay){
       req.session.data.payPeriodOneStartDay = '12'
       req.session.data.payPeriodOneTitleMonth = '5'
       req.session.data.claimPeriodEndDay = '20'
