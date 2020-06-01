@@ -48,6 +48,7 @@ module.exports = function (router) {
     req.session.data.claimPeriodEndMonthTitle = getMonthName(titleMonth)
     req.session.data.payClaimPeriodEndTitle = Math.round(req.session.data.claimPeriodEndDay) + req.session.data.claimPeriodEndMonthTitle
     req.session.data.claimEnd = titleMonth + '' + Math.round(req.session.data.claimPeriodEndDay)
+    //console.log(req.session.data.payClaimPeriodEndTitle)
     res.redirect('/' + sprint + '/furlough-start')
   })
 
@@ -205,12 +206,15 @@ module.exports = function (router) {
     //req.session.data.payPeriodOneTitle = moment(`2020-${Math.round(req.session.data.payPeriodOneStartMonth)}-${Math.round(req.session.data.payPeriodOneStartDay)}`).format("D MMMM YYYY")
     req.session.data.payPeriodOne = titleMonth + '' + Math.round(req.session.data.payPeriodOneStartDay)
 
-    if (req.session.data.payFrequency === 'monthly') {
-      res.redirect('/' + sprint + '/pay-dates-2')
-    } else {
-      res.redirect('/' + sprint + '/last-pay-date')
-    }
-    // res.redirect('/' + sprint + '/pay-dates-2')
+    // used when predicting dates
+    // if (req.session.data.payFrequency === 'monthly') {
+    //   res.redirect('/' + sprint + '/pay-dates-2')
+    // } else {
+    //   res.redirect('/' + sprint + '/last-pay-date')
+    // }
+
+    // old method - remove if using pay period list
+     res.redirect('/' + sprint + '/pay-dates-2')
   })
 
   // route - pay dates 2
@@ -285,6 +289,16 @@ module.exports = function (router) {
     req.session.data.pastOneMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth) - 1)
     req.session.data.pastTwoMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth))
 
+    // dummy data if doesn't exist
+    if (!req.session.data.claimPeriodEndDay){
+      req.session.data.payPeriodOneStartDay = '12'
+      req.session.data.payPeriodOneTitleMonth = '5'
+      req.session.data.claimPeriodEndDay = '20'
+      req.session.data.claimPeriodEndMonthTitle = '6'
+    }
+
+    //console.log(req.session.data.claimPeriodEndDay)
+
     // periods list - user moment.js
     const start = moment(`2020-${req.session.data.payPeriodOneTitleMonth}-${Math.round(req.session.data.payPeriodOneStartDay)}`)
     const end = moment(`2020-${req.session.data.claimPeriodEndMonthTitle}-${Math.round(req.session.data.claimPeriodEndDay)}`)
@@ -313,11 +327,20 @@ module.exports = function (router) {
     }
     returnDates(start,end)
     req.session.data.periodList = periodList
-    // console.log(periodList)
-    res.redirect('/' + sprint + '/pay-periods-list')
+    //  for pay period list
+    // res.redirect('/' + sprint + '/pay-periods-list')
+
+    // old route - remove if pay period list
+    if (req.session.data.varyMoreThan === 'true') {
+      res.redirect('/' + sprint + '/last-year-pay-1')
+    } else if (req.session.data.lessThan12 === 'true') {
+      res.redirect('/' + sprint + '/annual-pay-amount')
+    } else {
+      res.redirect('/' + sprint + '/regular-pay-amount')
+    }
   })
 
-  // route-list-periods
+  // route-list-periods - not used at the moment
   router.post('/' + sprint + '/route-list-periods', function (req, res) {
     var data = req.session.data.listPeriods
     if (data === 'yes') {
