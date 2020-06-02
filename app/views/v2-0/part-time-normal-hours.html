@@ -24,10 +24,10 @@ Job Retention Scheme Calculator
               <h1 class="govuk-heading-xl govuk-!-margin-bottom-3">
 
                 How long would this employee normally work in the pay period ending
-                {% if data.periodList.length %}
-                {{ data.periodList[0].periodEnd }} 2020?
-
-                {% else %}30 April 2020?
+                {% if data['periodTitle']%}
+                {{data['periodTitle']}} 2020?
+                {% else %}
+                30 April 2020?
 
                 {% endif %}
 

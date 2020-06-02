@@ -202,16 +202,8 @@ module.exports = function (router) {
 
   // route - route-parttime-period-select
   router.post('/' + sprint + '/route-parttime-period-select', function (req, res) {
-    var data = req.session.data.periodSelect
-    console.log(data)
-    if (data['period-0'].checked) {
-      console.log('first')
-        res.redirect('/' + sprint + '/last-year-pay-1')
-      } else if (data === 'period-1'){
-      console.log('second')
-      }
-
-
+    var boxes = req.session.data.periodSelect
+     req.session.data.periodTitle = req.session.data.periodList[boxes].periodEnd
     res.redirect('/' + sprint + '/part-time-hours')
     // res.redirect('/' + sprint + '/topup-question')
   })
@@ -321,20 +313,25 @@ module.exports = function (router) {
     var titleMonth = Math.round(req.session.data.payDateMonth)
     req.session.data.payDateMonthTitle = getMonthName(titleMonth)
     req.session.data.payTaxDateTitle = Math.round(req.session.data.payDateDay) + req.session.data.payDateMonthTitle
-    req.session.data.pastOneMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth) - 1)
-    req.session.data.pastTwoMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth))
+    //req.session.data.pastOneMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth) - 1)
+    //req.session.data.pastTwoMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth))
 
     // dummy data if doesn't exist
-    if (!req.session.data.claimPeriodEndDay){
-      req.session.data.payPeriodOneStartDay = '12'
-      req.session.data.payPeriodOneTitleMonth = '5'
+    if (req.session.data.claimPeriodEndDay === undefined){
       req.session.data.claimPeriodEndDay = '20'
       req.session.data.claimPeriodEndMonthTitle = '6'
     }
+    if (req.session.data.payPeriodOneStartDay === undefined) {
+      req.session.data.payPeriodOneStartDay = '12'
+      req.session.data.payPeriodOneTitleMonth = '5'
+    }
+    if (req.session.data.payFrequencyTime === undefined) {
+      req.session.data.payFrequencyTime = '7'
+      req.session.data.payFrequencyPeriod = 'days'
+    }
+    console.log(req.session.data.payPeriodOneStartDay)
 
-    //console.log(req.session.data.claimPeriodEndDay)
-
-    // periods list - user moment.js
+    // periods list - use moment.js
     const start = moment(`2020-${req.session.data.payPeriodOneTitleMonth}-${Math.round(req.session.data.payPeriodOneStartDay)}`)
     const end = moment(`2020-${req.session.data.claimPeriodEndMonthTitle}-${Math.round(req.session.data.claimPeriodEndDay)}`)
     const frequency = req.session.data.payFrequencyTime
@@ -396,7 +393,7 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-vary-salary-1', function (req, res) {
     req.session.data.salaryAmount = req.session.data.salary
     req.session.data.salaryFurlough = Math.round(req.session.data.salary * 0.8)
-    if (req.session.data.dateThree){
+    if ( req.session.data.periodList[1]){
       res.redirect('/' + sprint + '/last-year-pay-2')
     } else {
       res.redirect('/' + sprint + '/annual-pay-amount')
@@ -407,7 +404,7 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-vary-salary-2', function (req, res) {
     req.session.data.salaryAmount2 = req.session.data.salary2
     req.session.data.salaryFurlough2 = Math.round(req.session.data.salary2 * 0.8)
-    if (req.session.data.dateFour){
+    if (req.session.data.periodList[2]){
       res.redirect('/' + sprint + '/last-year-pay-3')
     } else {
       res.redirect('/' + sprint + '/annual-pay-amount')
@@ -416,7 +413,7 @@ module.exports = function (router) {
   // route-vary-salary-3
   router.post('/' + sprint + '/route-vary-salary-3', function (req, res) {
     var dataFreq = req.session.data.payFrequency
-    if (req.session.data.dateFive){
+    if (req.session.data.periodList[3]){
       res.redirect('/' + sprint + '/last-year-pay-4')
     } else {
       res.redirect('/' + sprint + '/annual-pay-amount')
@@ -424,7 +421,7 @@ module.exports = function (router) {
   })
   // route-vary-salary-4
   router.post('/' + sprint + '/route-vary-salary-4', function (req, res) {
-    if (req.session.data.dateSix){
+    if (req.session.data.periodList[4]){
       res.redirect('/' + sprint + '/last-year-pay-5')
     } else {
       res.redirect('/' + sprint + '/annual-pay-amount')
@@ -433,7 +430,7 @@ module.exports = function (router) {
 
   // route-vary-salary-5
   router.post('/' + sprint + '/route-vary-salary-5', function (req, res) {
-    if (req.session.data.dateSeven){
+    if (req.session.data.periodList[5]){
       res.redirect('/' + sprint + '/last-year-pay-6')
     } else {
       res.redirect('/' + sprint + '/annual-pay-amount')

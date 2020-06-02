@@ -23,10 +23,11 @@ Job Retention Scheme Calculator
                       <!--Enter the employee’s  salary on 28.02.20-->
 
                       How much did this employee get paid for their part-time work in the pay period ending
-                      {% if data.periodList.length %}
-                      {{ data.periodList[0].periodEnd }} 2020?
+                      {% if data['periodTitle']%}
+                      {{data['periodTitle']}} 2020?
                       {% else %}
                       30 April 2020?
+
                       {% endif %}
                   </h1>
               </legend>
