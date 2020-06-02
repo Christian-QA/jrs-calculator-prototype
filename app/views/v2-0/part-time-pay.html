@@ -22,12 +22,11 @@ Job Retention Scheme Calculator
                   <h1 class="govuk-fieldset__heading">
                       <!--Enter the employee’s  salary on 28.02.20-->
 
-                      How much did this employee get paid for their part-time work in the pay period ending {% if data['payFrequency'] === 'fortnightly' or  data['payFrequency'] === 'weekly'  %}
-                      {% if data['dateOne']%}{{data['dateOne']}}{% else %}30 April{% endif %} 2020
+                      How much did this employee get paid for their part-time work in the pay period ending
+                      {% if data.periodList.length %}
+                      {{ data.periodList[0].periodEnd }} 2020?
                       {% else %}
-                      {% if data['payPeriodTwoTitle']%}
-                      {{data['payPeriodTwoTitle']}}
-                      {% else %}30 April{% endif %} 2020?
+                      30 April 2020?
                       {% endif %}
                   </h1>
               </legend>

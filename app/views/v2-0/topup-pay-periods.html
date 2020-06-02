@@ -35,7 +35,7 @@ Job Retention Scheme Calculator
                     {% for periodDate in data.periodList %}
 <!--                    <li>From {{ periodDate.periodStart }} to {{ periodDate.periodEnd }} 2020</li>-->
                         <div class="govuk-checkboxes__item">
-                            <input class="govuk-checkboxes__input" id="waste" name="periodSelect" type="checkbox" value="periodOne">
+                            <input class="govuk-checkboxes__input" id="waste" name="periodSelect" type="checkbox" value="period-{{loop.index0}}">
                             <label class="govuk-label govuk-checkboxes__label" for="waste">
                                 Pay period end: {{ periodDate.periodEnd }} 2020 <br>
                                 <span class="govuk-hint">Amount before top-up: {% if data['salaryFurlough'] %} £{{data['salaryFurlough']}}.00 {% else %} £851.00 {% endif %}</span>

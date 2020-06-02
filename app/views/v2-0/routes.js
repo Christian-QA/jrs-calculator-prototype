@@ -202,6 +202,16 @@ module.exports = function (router) {
 
   // route - route-parttime-period-select
   router.post('/' + sprint + '/route-parttime-period-select', function (req, res) {
+    var data = req.session.data.periodSelect
+    console.log(data)
+    if (data['period-0'].checked) {
+      console.log('first')
+        res.redirect('/' + sprint + '/last-year-pay-1')
+      } else if (data === 'period-1'){
+      console.log('second')
+      }
+
+
     res.redirect('/' + sprint + '/part-time-hours')
     // res.redirect('/' + sprint + '/topup-question')
   })
