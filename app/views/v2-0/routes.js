@@ -38,7 +38,7 @@ module.exports = function (router) {
     req.session.data.claimPeriodStartMonthTitle = getMonthName(titleMonth)
     req.session.data.payClaimPeriodTitle = Math.round(req.session.data.claimPeriodStartDay) + req.session.data.claimPeriodStartMonthTitle
     req.session.data.claimStart = titleMonth + '' + Math.round(req.session.data.claimPeriodStartDay)
-    // console.log(req.session.data.claimStart)
+    console.log(req.session.data.payClaimPeriodTitle)
     res.redirect('/' + sprint + '/claim-period-end')
   })
 
@@ -64,14 +64,22 @@ module.exports = function (router) {
   // route - furlough end date question
   router.post('/' + sprint + '/route-dates-end-question', function (req, res) {
     var data = req.session.data.furloughEndQuestion
-    if (data === 'yes') {
+    if (data === 'no') {
       res.redirect('/' + sprint + '/furlough-end')
-    } else if (data === 'no') {
+    } else if (data === 'yes') {
       if (req.session.data.usePayPeriodsAgain) {
         res.redirect('/' + sprint + '/pay-method')
       } else  {
         res.redirect('/' + sprint + '/pay-frequency')
       }
+    } else if (data === 'partime') {
+      req.session.data.partTimeWork = true
+      if (req.session.data.usePayPeriodsAgain) {
+        res.redirect('/' + sprint + '/pay-method')
+      } else  {
+        res.redirect('/' + sprint + '/pay-frequency')
+      }
+
     }
   })
 
@@ -154,6 +162,9 @@ module.exports = function (router) {
     } else if (data === 'moreThan12') {
       req.session.data.varyMoreThan = 'true'
       if (req.session.data.usePayPeriodsAgain) {
+        if ( req.session.data.periodList) {
+          req.session.data.periodTitle = req.session.data.periodList[0].periodEnd
+        }
         res.redirect('/' + sprint + '/last-year-pay-1')
       } else  {
         res.redirect('/' + sprint + '/pay-dates-1')
@@ -177,6 +188,9 @@ module.exports = function (router) {
     // console.log(req.session.data.employeeStart)
     if (req.session.data.usePayPeriodsAgain) {
       if (req.session.data.varyMoreThan === 'true') {
+        if ( req.session.data.periodList) {
+          req.session.data.periodTitle = req.session.data.periodList[0].periodEnd
+        }
         res.redirect('/' + sprint + '/last-year-pay-1')
       } else {
         res.redirect('/' + sprint + '/annual-pay-amount')
@@ -189,21 +203,31 @@ module.exports = function (router) {
   // route- route partial pay period
   router.post('/' + sprint + '/route-part-pay-period', function (req, res) {
     // res.redirect('/' + sprint + '/topup-question')
-    res.redirect('/' + sprint + '/part-time-periods')
+    if (req.session.data.furloughEndQuestion === 'partime'){
+      res.redirect('/' + sprint + '/part-time-periods')
+    } else {
+      res.redirect('/' + sprint + '/topup-question')
+    }
+
   })
 
   // route- salary
   router.post('/' + sprint + '/route-reg-salary', function (req, res) {
     req.session.data.salaryAmount = req.session.data.salary
     req.session.data.salaryFurlough = Math.round(req.session.data.salary * 0.8)
-    res.redirect('/' + sprint + '/part-time-periods')
-    // res.redirect('/' + sprint + '/topup-question')
+    if (req.session.data.furloughEndQuestion === 'partime'){
+      res.redirect('/' + sprint + '/part-time-periods')
+    } else {
+      res.redirect('/' + sprint + '/topup-question')
+    }
   })
 
   // route - route-parttime-period-select
   router.post('/' + sprint + '/route-parttime-period-select', function (req, res) {
     var boxes = req.session.data.periodSelect
-     req.session.data.periodTitle = req.session.data.periodList[boxes].periodEnd
+    if(req.session.data.periodList){
+      req.session.data.periodTitle = req.session.data.periodList[boxes].periodEnd
+    }
     res.redirect('/' + sprint + '/part-time-hours')
     // res.redirect('/' + sprint + '/topup-question')
   })
@@ -365,6 +389,9 @@ module.exports = function (router) {
 
     // old route - remove if pay period list
     if (req.session.data.varyMoreThan === 'true') {
+      if ( req.session.data.periodList) {
+        req.session.data.periodTitle = req.session.data.periodList[0].periodEnd
+      }
       res.redirect('/' + sprint + '/last-year-pay-1')
     } else if (req.session.data.lessThan12 === 'true') {
       res.redirect('/' + sprint + '/annual-pay-amount')
@@ -378,6 +405,9 @@ module.exports = function (router) {
     var data = req.session.data.listPeriods
     if (data === 'yes') {
       if (req.session.data.varyMoreThan === 'true') {
+        if ( req.session.data.periodList) {
+          req.session.data.periodTitle = req.session.data.periodList[0].periodEnd
+        }
         res.redirect('/' + sprint + '/last-year-pay-1')
       } else if (req.session.data.lessThan12 === 'true') {
         res.redirect('/' + sprint + '/annual-pay-amount')
@@ -393,7 +423,10 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-vary-salary-1', function (req, res) {
     req.session.data.salaryAmount = req.session.data.salary
     req.session.data.salaryFurlough = Math.round(req.session.data.salary * 0.8)
-    if ( req.session.data.periodList[1]){
+    if ( req.session.data.periodList[1] === undefined) {
+      res.redirect('/' + sprint + '/annual-pay-amount')
+    } else if (req.session.data.periodList[1]) {
+     req.session.data.periodTitle = req.session.data.periodList[1].periodEnd
       res.redirect('/' + sprint + '/last-year-pay-2')
     } else {
       res.redirect('/' + sprint + '/annual-pay-amount')
@@ -404,7 +437,10 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-vary-salary-2', function (req, res) {
     req.session.data.salaryAmount2 = req.session.data.salary2
     req.session.data.salaryFurlough2 = Math.round(req.session.data.salary2 * 0.8)
-    if (req.session.data.periodList[2]){
+    if ( req.session.data.periodList[2] === undefined) {
+      res.redirect('/' + sprint + '/annual-pay-amount')
+    } else if (req.session.data.periodList[2]){
+      req.session.data.periodTitle = req.session.data.periodList[2].periodEnd
       res.redirect('/' + sprint + '/last-year-pay-3')
     } else {
       res.redirect('/' + sprint + '/annual-pay-amount')
@@ -413,7 +449,10 @@ module.exports = function (router) {
   // route-vary-salary-3
   router.post('/' + sprint + '/route-vary-salary-3', function (req, res) {
     var dataFreq = req.session.data.payFrequency
-    if (req.session.data.periodList[3]){
+    if ( req.session.data.periodList[3] === undefined) {
+      res.redirect('/' + sprint + '/annual-pay-amount')
+    } else if (req.session.data.periodList[3]){
+      req.session.data.periodTitle = req.session.data.periodList[3].periodEnd
       res.redirect('/' + sprint + '/last-year-pay-4')
     } else {
       res.redirect('/' + sprint + '/annual-pay-amount')
@@ -421,7 +460,10 @@ module.exports = function (router) {
   })
   // route-vary-salary-4
   router.post('/' + sprint + '/route-vary-salary-4', function (req, res) {
-    if (req.session.data.periodList[4]){
+    if ( req.session.data.periodList[4] === undefined) {
+      res.redirect('/' + sprint + '/annual-pay-amount')
+    } else if (req.session.data.periodList[4]){
+      req.session.data.periodTitle = req.session.data.periodList[4].periodEnd
       res.redirect('/' + sprint + '/last-year-pay-5')
     } else {
       res.redirect('/' + sprint + '/annual-pay-amount')
@@ -430,7 +472,10 @@ module.exports = function (router) {
 
   // route-vary-salary-5
   router.post('/' + sprint + '/route-vary-salary-5', function (req, res) {
-    if (req.session.data.periodList[5]){
+    if ( req.session.data.periodList[5] === undefined) {
+      res.redirect('/' + sprint + '/annual-pay-amount')
+    } else if (req.session.data.periodList[5]){
+      req.session.data.periodTitle = req.session.data.periodList[5].periodEnd
       res.redirect('/' + sprint + '/last-year-pay-6')
     } else {
       res.redirect('/' + sprint + '/annual-pay-amount')
@@ -459,8 +504,11 @@ module.exports = function (router) {
       }
     }
     if (req.session.data.furloughStart <= req.session.data.claimStart) {
-      // res.redirect('/' + sprint + '/topup-question')
-      res.redirect('/' + sprint + '/part-time-periods')
+      if (req.session.data.furloughEndQuestion === 'partime'){
+        res.redirect('/' + sprint + '/part-time-periods')
+      } else {
+        res.redirect('/' + sprint + '/topup-question')
+      }
     } else {
       res.redirect('/' + sprint + '/variable-pay-partial-pay-amount')
     }
@@ -490,6 +538,10 @@ module.exports = function (router) {
 
   // route-discretionary-period-select
   router.post('/' + sprint + '/route-discretionary-period-select', function (req, res) {
+    var boxes = req.session.data.periodSelect
+    if(req.session.data.periodList){
+      req.session.data.periodTitle = req.session.data.periodList[boxes].periodEnd
+    }
     res.redirect('/' + sprint + '/additional-pay-amount')
   })
 
@@ -513,6 +565,11 @@ module.exports = function (router) {
 
   // route - select period
   router.post('/' + sprint + '/route-pay-period-select', function (req, res) {
+    var boxes = req.session.data.periodSelect
+    console.log(boxes)
+    if(req.session.data.periodList){
+      req.session.data.periodTitle = req.session.data.periodList[boxes].periodEnd
+    }
     res.redirect('/' + sprint + '/topup-pay-amount')
   })
 
