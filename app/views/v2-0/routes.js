@@ -203,6 +203,7 @@ module.exports = function (router) {
   // route- route partial pay period
   router.post('/' + sprint + '/route-part-pay-period', function (req, res) {
     // res.redirect('/' + sprint + '/topup-question')
+    console.log(req.session.data.furloughEndQuestion)
     if (req.session.data.furloughEndQuestion === 'partime'){
       res.redirect('/' + sprint + '/part-time-periods')
     } else {
@@ -271,6 +272,37 @@ module.exports = function (router) {
       req.session.data.payFrequencyTime = '7'
       req.session.data.payFrequencyPeriod = 'days'
     }
+
+
+
+    // periods list - use moment.js
+    const start = moment(`2020-${req.session.data.payPeriodOneTitleMonth}-${Math.round(req.session.data.payPeriodOneStartDay)}`)
+    const end = moment(`2020-${req.session.data.claimPeriodEndMonthTitle}-${Math.round(req.session.data.claimPeriodEndDay)}`)
+    const frequency = req.session.data.payFrequencyTime
+    const timeFrame = req.session.data.payFrequencyPeriod
+    const periodList = []
+    function returnDates(start, end) {
+      const f = 'D MMMM'
+      if (start >= end) {
+        return;
+      } else {
+        if (timeFrame === 'month') {
+          var periodStart = moment(start).add(1, 'day').format(f)
+          var periodEnd = moment(start).add(1, timeFrame).format(f)
+        } else {
+          var periodStart = start.format(f)
+          var periodEnd = moment(start).add(frequency - 1, timeFrame).format(f)
+        }
+        let periodDate = {
+          periodStart,
+          periodEnd
+        }
+        periodList.push(periodDate)
+        returnDates(start.add(frequency, timeFrame), end)
+      }
+    }
+    returnDates(start,end)
+    req.session.data.periodList = periodList
 
     // used when predicting dates
     // if (req.session.data.payFrequency === 'monthly') {
@@ -358,35 +390,6 @@ module.exports = function (router) {
     //req.session.data.pastTwoMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth))
 
 
-
-    // periods list - use moment.js
-    const start = moment(`2020-${req.session.data.payPeriodOneTitleMonth}-${Math.round(req.session.data.payPeriodOneStartDay)}`)
-    const end = moment(`2020-${req.session.data.claimPeriodEndMonthTitle}-${Math.round(req.session.data.claimPeriodEndDay)}`)
-    const frequency = req.session.data.payFrequencyTime
-    const timeFrame = req.session.data.payFrequencyPeriod
-    const periodList = []
-    function returnDates(start, end) {
-      const f = 'D MMMM'
-      if (start >= end) {
-        return;
-      } else {
-        if (timeFrame === 'month') {
-            var periodStart = moment(start).add(1, 'day').format(f)
-           var periodEnd = moment(start).add(1, timeFrame).format(f)
-        } else {
-            var periodStart = start.format(f)
-            var periodEnd = moment(start).add(frequency - 1, timeFrame).format(f)
-        }
-        let periodDate = {
-          periodStart,
-          periodEnd
-        }
-        periodList.push(periodDate)
-        returnDates(start.add(frequency, timeFrame), end)
-      }
-    }
-    returnDates(start,end)
-    req.session.data.periodList = periodList
 
     //  for pay period list
     // res.redirect('/' + sprint + '/pay-periods-list')
@@ -486,9 +489,9 @@ module.exports = function (router) {
     }
   })
   // route-vary-salary-6
-  // router.post('/' + sprint + '/route-vary-salary-6', function (req, res) {
-  //   res.redirect('/' + sprint + '/annual-pay-amount')
-  // })
+  router.post('/' + sprint + '/route-vary-salary-6', function (req, res) {
+    res.redirect('/' + sprint + '/annual-pay-amount')
+  })
 
   // route-vary-gross salary
   router.post('/' + sprint + '/route-vary-gross-salary', function (req, res) {
