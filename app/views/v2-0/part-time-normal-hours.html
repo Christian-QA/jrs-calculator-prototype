@@ -23,7 +23,7 @@ Job Retention Scheme Calculator
 
               <h1 class="govuk-heading-xl govuk-!-margin-bottom-3">
 
-                How long would this employee normally work in the pay period ending
+                What would this employee’s usual hours have been for the pay period ending
                 {% if data['periodTitle']%}
                 {{data['periodTitle']}} 2020?
                 {% else %}
@@ -35,10 +35,6 @@ Job Retention Scheme Calculator
 
 
             <p class="govuk-hint">For example, 15 hours 30 minutes</p>
-
-
-
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl govuk-visually-hidden"> What’s the last day this employee was paid for before {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 April{% endif %} 2020?</legend>
 
             <label class="govuk-label" for="payPeriod"></label>
            <!-- <span id="claimPeriodStart-hint" class="govuk-hint">

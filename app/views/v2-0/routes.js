@@ -204,11 +204,9 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-part-pay-period', function (req, res) {
     // res.redirect('/' + sprint + '/topup-question')
     console.log(req.session.data.furloughEndQuestion)
-    if (req.session.data.furloughEndQuestion === 'partime'){
-      res.redirect('/' + sprint + '/part-time-periods')
-    } else {
-      res.redirect('/' + sprint + '/topup-question')
-    }
+
+      res.redirect('/' + sprint + '/part-time-question')
+
 
   })
 
@@ -216,9 +214,17 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-reg-salary', function (req, res) {
     req.session.data.salaryAmount = req.session.data.salary
     req.session.data.salaryFurlough = Math.round(req.session.data.salary * 0.8)
-    if (req.session.data.furloughEndQuestion === 'partime'){
+
+      res.redirect('/' + sprint + '/part-time-question')
+
+  })
+
+  // route-part-time-question
+  router.post('/' + sprint + '/route-part-time-question', function (req, res) {
+    var data = req.session.data.parttime
+    if (data === 'yes') {
       res.redirect('/' + sprint + '/part-time-periods')
-    } else {
+    } else if (data === 'no') {
       res.redirect('/' + sprint + '/topup-question')
     }
   })
@@ -511,11 +517,9 @@ module.exports = function (router) {
       }
     }
     if (req.session.data.furloughStart <= req.session.data.claimStart) {
-      if (req.session.data.furloughEndQuestion === 'partime'){
-        res.redirect('/' + sprint + '/part-time-periods')
-      } else {
-        res.redirect('/' + sprint + '/topup-question')
-      }
+
+        res.redirect('/' + sprint + '/part-time-question')
+
     } else {
       res.redirect('/' + sprint + '/variable-pay-partial-pay-amount')
     }
