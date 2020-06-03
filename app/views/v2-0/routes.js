@@ -64,22 +64,14 @@ module.exports = function (router) {
   // route - furlough end date question
   router.post('/' + sprint + '/route-dates-end-question', function (req, res) {
     var data = req.session.data.furloughEndQuestion
-    if (data === 'no') {
+    if (data === 'yes') {
       res.redirect('/' + sprint + '/furlough-end')
-    } else if (data === 'yes') {
+    } else if (data === 'no') {
       if (req.session.data.usePayPeriodsAgain) {
         res.redirect('/' + sprint + '/pay-method')
       } else  {
         res.redirect('/' + sprint + '/pay-frequency')
       }
-    } else if (data === 'partime') {
-      req.session.data.partTimeWork = true
-      if (req.session.data.usePayPeriodsAgain) {
-        res.redirect('/' + sprint + '/pay-method')
-      } else  {
-        res.redirect('/' + sprint + '/pay-frequency')
-      }
-
     }
   })
 
