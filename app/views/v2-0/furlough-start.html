@@ -23,12 +23,23 @@ Job Retention Scheme Calculator
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
 
               <h1 class="govuk-fieldset__heading">
+                {% if data.phaseTwo %}
                 When was this employee originally furloughed?
+                {% else %}
+                When was this employee furloughed?
+                {% endif %}
+
               </h1>
 
             </legend>
             <p>
+              {% if data.phaseTwo %}
               This is the date this employee originally started furlough. It could be before or after the start date of this claim.
+              {% else %}
+              This is the date this employee started furlough. It could be before or after the start date of this claim.
+              {% endif %}
+
+
             </p>
             <p>We’re asking because your claim could include employees who were furloughed on different dates. </p>
             <div class="govuk-date-input" id="payPeriod">

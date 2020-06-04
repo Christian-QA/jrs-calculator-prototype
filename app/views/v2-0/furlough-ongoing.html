@@ -24,22 +24,32 @@ Job Retention Scheme Calculator
 
                     <h1 class="govuk-fieldset__heading">
                         Has the employee's furlough ended?
+
                     </h1>
 
                 </legend>
-                <p>From 1 July, you can bring employees back to work while their furlough is ongoing. You can claim for their usual hours less the hours they worked. </p>
+                {% if data.phaseTwo %}<p>From 1 July, you can bring employees back to work while their furlough is ongoing. You can claim for their usual hours less the hours they worked. </p>{% endif %}
                 <div class="govuk-radios">
 
                     <div class="govuk-radios__item">
                         <input class="govuk-radios__input" id="furloughQuestion" name="furloughEndQuestion" type="radio" value="yes">
                         <label class="govuk-label govuk-radios__label" for="furloughQuestion">
-                            Yes, furlough has ended
+                            {% if data.phaseTwo %}
+                                Yes, furlough has ended
+                            {% else %}
+                                Yes
+                            {% endif %}
                         </label>
                     </div>
                     <div class="govuk-radios__item">
                         <input class="govuk-radios__input" id="furloughQuestion-2" name="furloughEndQuestion" type="radio" value="no">
                         <label class="govuk-label govuk-radios__label" for="furloughQuestion-2">
+                            {% if data.phaseTwo %}
                             No, furlough is ongoing
+                            {% else %}
+                            No, it is ongoing
+                            {% endif %}
+
                         </label>
                     </div>
                     <br><br>

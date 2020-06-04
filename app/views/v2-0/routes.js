@@ -38,7 +38,9 @@ module.exports = function (router) {
     req.session.data.claimPeriodStartMonthTitle = getMonthName(titleMonth)
     req.session.data.payClaimPeriodTitle = Math.round(req.session.data.claimPeriodStartDay) + req.session.data.claimPeriodStartMonthTitle
     req.session.data.claimStart = titleMonth + '' + Math.round(req.session.data.claimPeriodStartDay)
-    console.log(req.session.data.payClaimPeriodTitle)
+    if (titleMonth >= 7 ) {
+      req.session.data.phaseTwo = true
+    }
     res.redirect('/' + sprint + '/claim-period-end')
   })
 
@@ -197,7 +199,11 @@ module.exports = function (router) {
     // res.redirect('/' + sprint + '/topup-question')
     console.log(req.session.data.furloughEndQuestion)
 
+    if (req.session.data.phaseTwo) {
       res.redirect('/' + sprint + '/part-time-question')
+    } else {
+      res.redirect('/' + sprint + '/topup-question')
+    }
 
 
   })
@@ -206,8 +212,13 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-reg-salary', function (req, res) {
     req.session.data.salaryAmount = req.session.data.salary
     req.session.data.salaryFurlough = Math.round(req.session.data.salary * 0.8)
-
+  console.log()
+    if (req.session.data.phaseTwo) {
       res.redirect('/' + sprint + '/part-time-question')
+    } else {
+      res.redirect('/' + sprint + '/topup-question')
+
+    }
 
   })
 
@@ -217,7 +228,9 @@ module.exports = function (router) {
     if (data === 'yes') {
       res.redirect('/' + sprint + '/part-time-periods')
     } else if (data === 'no') {
-      res.redirect('/' + sprint + '/topup-question')
+
+        res.redirect('/' + sprint + '/ni-category-letter')
+
     }
   })
 
@@ -245,7 +258,8 @@ module.exports = function (router) {
 
   // "route-part-time-pay
   router.post('/' + sprint + '/route-part-time-pay', function (req, res) {
-    res.redirect('/' + sprint + '/topup-question')
+      res.redirect('/' + sprint + '/ni-category-letter')
+
   })
 
   // route - pay dates 1
@@ -509,8 +523,12 @@ module.exports = function (router) {
       }
     }
     if (req.session.data.furloughStart <= req.session.data.claimStart) {
-
+      if (req.session.data.phaseTwo) {
         res.redirect('/' + sprint + '/part-time-question')
+      } else {
+        res.redirect('/' + sprint + '/topup-question')
+      }
+
 
     } else {
       res.redirect('/' + sprint + '/variable-pay-partial-pay-amount')
