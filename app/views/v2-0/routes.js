@@ -550,7 +550,6 @@ module.exports = function (router) {
 
   // route - top up select
   router.post('/' + sprint + '/route-discretionary-amount', function (req, res) {
-    // req.session.data.discretionaryPay = req.session.data.discretionaryPay
     res.redirect('/' + sprint + '/ni-category-letter')
   })
 
