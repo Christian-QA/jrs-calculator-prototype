@@ -15,7 +15,7 @@ Job Retention Scheme Calculator
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form class="form" method="post" action="route-part-time-hours">
+      <form class="form" method="post" action="route-normal-hours">
 
 
         <div class="govuk-form-group ">
@@ -23,13 +23,7 @@ Job Retention Scheme Calculator
 
               <h1 class="govuk-heading-xl govuk-!-margin-bottom-3">
 
-
-                What hours did this employee work in the pay period ending
-                {% if data['periodTitle']%}
-                {{data['periodTitle']}} 2020?
-                {% else %}
-                30 May 2020?
-                {% endif %}
+                What would this employee’s usual hours have been between 27 July and 31 July?
 
               </h1>
 
@@ -40,12 +34,11 @@ Job Retention Scheme Calculator
 
 
             <div class="govuk-form-group">
-              <label class="govuk-label" for="partTimeHours">
+              <label class="govuk-label" for="normalHours">
                 Hours
               </label>
-              <input class="govuk-input govuk-input--width-5" id="partTimeHours" name="partTimeHours" type="text">
+              <input class="govuk-input govuk-input--width-5" id="normalHours" name="normalHours" type="text">
             </div>
-
 
 
 

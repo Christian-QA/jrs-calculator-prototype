@@ -24,12 +24,7 @@ Job Retention Scheme Calculator
               <h1 class="govuk-heading-xl govuk-!-margin-bottom-3">
 
 
-                What hours did this employee work in the pay period ending
-                {% if data['periodTitle']%}
-                {{data['periodTitle']}} 2020?
-                {% else %}
-                30 May 2020?
-                {% endif %}
+                What hours did this employee work between 27 July and 31 July?
 
               </h1>
 
@@ -38,6 +33,11 @@ Job Retention Scheme Calculator
 
 
 
+            <label class="govuk-label" for="payPeriod"></label>
+           <!-- <span id="claimPeriodStart-hint" class="govuk-hint">
+                For example, 28 2 2020
+              </span>-->
+
 
             <div class="govuk-form-group">
               <label class="govuk-label" for="partTimeHours">
@@ -45,6 +45,7 @@ Job Retention Scheme Calculator
               </label>
               <input class="govuk-input govuk-input--width-5" id="partTimeHours" name="partTimeHours" type="text">
             </div>
+
 
 
 
