@@ -20,7 +20,7 @@ Job Retention Scheme Calculator
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
                     <h1 class="govuk-fieldset__heading">
                         {% if data['varyMoreThan'] %}
-                        What did this employee earn from 6 July 2019 to {% if data['furloughStartTitle'] %}{{data['furloughStartTitle']}} 2020{% else %}12 March 2020{% endif %}?
+                        What did this employee earn from 6 April 2019 to {% if data['furloughStartTitle'] %}{{data['furloughStartTitle']}} 2020{% else %}12 March 2020{% endif %}?
                         {% else %}
                         What has this employee earned since they started until {% if data['furloughStartTitle'] %}{{data['furloughStartTitle']}} 2020{% else %}12 March 2020{% endif %}?
                         {% endif %}
@@ -37,7 +37,7 @@ Job Retention Scheme Calculator
                   </span>
                 {% include "includes/include-in-salary.html" %}
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl govuk-visually-hidden">
-                    What is the employee's total pay since 6 July 2019?
+                    What is the employee's total pay since 6 April 2019?
                 </legend>
 
                 <!--<span id="width-10-hint" class="govuk-hint">
