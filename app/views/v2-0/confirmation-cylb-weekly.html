@@ -89,6 +89,13 @@ Job Retention Scheme Calculator
                     <li>Add £157.14 + £428.57 (the totals from both pay periods).</li>
                 </ol>
                 <p>Total pay from same dates last year = £585.71</p>
+                <p>Then:</p>
+                <ol class="govuk-list govuk-list--number">
+                    <li>Start with £585.71 (total pay from same dates last year).</li>
+                    <li>Divide by 30 (usual hours).</li>
+                    <li>Multiply by 20 (usual hours minus hours worked).</li>
+                </ol>
+                <p>Total pay based on hours worked in this pay period = £323.71</p>
                 <p>Method 2: take the total pay from employee start date (or 6 April 2019, if earlier) to day before the employee's furlough start date (or 5 April 2020, if later):</p>
                 <ol class="govuk-list govuk-list--number">
                     <li>Start with £26000 (total pay).</li>
@@ -96,62 +103,69 @@ Job Retention Scheme Calculator
                     <li>Multiply by 5 (furlough days).</li>
                 </ol>
                 <p>Total average pay last year = £546.46</p>
+                <p>Then:</p>
+                <ol class="govuk-list govuk-list--number">
+                    <li>Start with £546.46 (total pay from same dates last year).</li>
+                    <li>Divide by 30 (usual hours).</li>
+                    <li>Multiply by 20 (usual hours minus hours worked).</li>
+                </ol>
+                <p>Total pay based on hours worked in this pay period = £320.46</p>
 
                 <p>Then take the higher figure from methods 1 and 2:</p>
                 <ul class="govuk-list govuk-list--bullet">
-                    <li>£585.71 (method 1: pay from same dates last year).</li>
-                    <li>£546.46 (method 2: average pay last year).</li>
+                    <li>£323.71 (method 1: pay from same dates last year).</li>
+                    <li>£320.46 (method 2: average pay last year).</li>
                 </ul>
-                <p>Total pay based on furlough days = £585.71 </p>
+                <p>Total pay based on furlough days = £323.71 </p>
 
                 <h3 class="govuk-heading-s">Furlough grant</h3>
                 <ol class="govuk-list govuk-list--number">
-                    <li>Take £585.71 (pay based on furlough days).</li>
+                    <li>Take £323.71 (pay based on furlough days and worked hours).</li>
                     <li>Multiply by 80%.</li>
                 </ol>
 
-                <p>Calculated furlough grant = £468.57 </p>
+                <p>Calculated furlough grant = £258.97 </p>
 
                 <p>This exceeds the maximum furlough grant for this pay period, which is:</p>
                  <ul class="govuk-list govuk-list--bullet">
-                <li>16 furlough days in March at £80.65 + 15 furlough days in July at £83.34 = £456.92.</li>
+                <li>16 furlough days in March at £80.65 + 15 furlough days in July at £83.34 ÷ 30 usual hours * 20 hours furloughed = £230.79.</li>
+
                 </ul>
                 <p>Therefore we use the maximum furlough grant amount.</p>
 
-                <div class="govuk-inset-text govuk-!-font-size-24">Total furlough grant for pay period = £456.92</div>
+                <div class="govuk-inset-text govuk-!-font-size-24">Total furlough grant for pay period = £230.79</div>
 
                 <h3 class="govuk-heading-s">Employer National Insurance contributions</h3>
                 <ol class="govuk-list govuk-list--number">
-                    <li>Start with £468.57 (furlough grant).</li>
-                    <li>Add £200 (employer-funded pay).</li>
-                    <li>Add £77.99 (employer top up).</li>
-                    <li>Add £320 (additional pay).</li>
+                    <li>Start with £230.79 (furlough grant).</li>
                     <li>Round down to the nearest pound.</li>
-                    <li>Deduct £166 (NICs threshold for 20/21 tax year).</li>
+                    <li>Deduct £90 (£169 Secondary NICs threshold for 20/21 tax year, divide by 7 days in pay period and multiply by 4 furlough days, divide by 30 usual hours, multiply by 20 hours furloughed).</li>
                     <li>Multiply by 13.8%.</li>
-                    <li>Divide by 7 (days in pay period).</li>
-                    <li>Multiply by 7 (furlough days).</li>
-                    <li>Divide by £546.56 (pay based on furlough pay plus top up).</li>
-                    <li>Multiply by £468.57 (furlough grant).</li>
+
                 </ol>
-                <p>Calculated NIC grant = £44.96 </p>
-                <p>This exceeds the maximum National Insurance contribution grant for this pay period, which is:</p>
-                <ul class="govuk-list govuk-list--bullet">
-                    <li>  £468.57 furlough grant x 13.8% = £43.97.</li>
-                </ul>
-                <p>Therefore we use the maximum National Insurance contribution grant amount.</p>
-                <div class="govuk-inset-text govuk-!-font-size-24">Total NI grant for pay period = £43.97</div>
+
+                <div class="govuk-inset-text govuk-!-font-size-24">Total NI grant for pay period = £24.97</div>
 
                 <h3 class="govuk-heading-s">Employer minimum pension contributions</h3>
+               <!-- Calculate Lower Level of Qualified earnings’
+                <ol class="govuk-list govuk-list&#45;&#45;number">
+                    <li>Start with £120 (Lower Level of Qualified earnings for tax year 20/21).</li>
+                    <li>Divide by 7 (days in pay period). </li>
+                       <li>Multiply by 5 (furlough days in period).</li>
+                    <li>Divide by 30 (usual hours).</li>
+                    <li>Multiply by 20 (hours furloughed).</li>
+                <li>Lower Level of Qualified earnings = £x.xx </li>
+            </ol>-->
+
                 <ol class="govuk-list govuk-list--number">
-                    <li>Start with £468.57 (furlough grant).</li>
+                    <li>Start with £230.79 (furlough grant).</li>
                     <li>Round down to the nearest pound.</li>
 
-                    <li>Deduct £67.43 (£118 Lower Level of Qualifying Earnings for 20/21 tax year, divide by 7 days in pay period and multiply by 4 furlough days).</li>
+                    <li>Deduct £67.43 (£120 Lower Level of Qualifying Earnings for 20/21 tax year, divide by 7 days in pay period and multiply by 4 furlough days, divide by 30 usual hours, multiply by 20 hours furloughed).</li>
                     <li>Multiply by 3%.</li>
 
                 </ol>
-                <div class="govuk-inset-text govuk-!-font-size-24">Total pension grant for pay period = £12.03</div>
+                <div class="govuk-inset-text govuk-!-font-size-24">Total pension grant for pay period = £9.03</div>
                 <hr>
             </div>
         </details>
