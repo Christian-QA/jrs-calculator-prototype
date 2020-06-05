@@ -246,7 +246,7 @@ module.exports = function (router) {
 
   // route - route-parttime-hours
   router.post('/' + sprint + '/route-part-time-hours', function (req, res) {
-    res.redirect('/' + sprint + '/part-time-pay')
+    res.redirect('/' + sprint + '/ni-category-letter')
     // res.redirect('/' + sprint + '/topup-question')
   })
 
@@ -256,11 +256,7 @@ module.exports = function (router) {
     // res.redirect('/' + sprint + '/topup-question')
   })
 
-  // "route-part-time-pay
-  router.post('/' + sprint + '/route-part-time-pay', function (req, res) {
-      res.redirect('/' + sprint + '/ni-category-letter')
 
-  })
 
   // route - pay dates 1
   router.post('/' + sprint + '/route-pay-dates-1', function (req, res) {
