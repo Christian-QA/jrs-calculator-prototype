@@ -241,19 +241,19 @@ module.exports = function (router) {
       req.session.data.periodTitle = 'between ' + req.session.data.periodList[boxes].periodStart + ' and ' + req.session.data.periodList[boxes].periodEnd
     }
     res.redirect('/' + sprint + '/part-time-normal-hours')
-    // res.redirect('/' + sprint + '/topup-question')
+
   })
 
   // route - route-parttime-hours
   router.post('/' + sprint + '/route-part-time-hours', function (req, res) {
     res.redirect('/' + sprint + '/ni-category-letter')
-    // res.redirect('/' + sprint + '/topup-question')
+
   })
 
   // route - route-normal-hours
   router.post('/' + sprint + '/route-normal-hours', function (req, res) {
     res.redirect('/' + sprint + '/part-time-hours')
-    // res.redirect('/' + sprint + '/topup-question')
+
   })
 
 
