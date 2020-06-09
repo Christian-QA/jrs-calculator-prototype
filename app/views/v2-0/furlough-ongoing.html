@@ -23,7 +23,12 @@ Job Retention Scheme Calculator
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
 
                     <h1 class="govuk-fieldset__heading">
+
+                        {% if data.phaseTwo %}
+                        Has the employee's furlough ended permanently?
+                        {% else %}
                         Has the employee's furlough ended?
+                        {% endif %}
 
                     </h1>
 
@@ -45,9 +50,10 @@ Job Retention Scheme Calculator
                         <input class="govuk-radios__input" id="furloughQuestion-2" name="furloughEndQuestion" type="radio" value="no">
                         <label class="govuk-label govuk-radios__label" for="furloughQuestion-2">
                             {% if data.phaseTwo %}
-                            No
+                            No - furlough is ongoing, either full-time or part-time
                             {% else %}
-                            No, it is ongoing
+                            No, it is ongoing<br>
+
                             {% endif %}
 
                         </label>

@@ -68,9 +68,6 @@
   line-height: 1.25;
 }
 
-/*details .govuk-inset-text {
-  font-weight: bold;
-}*/
 
 @media print {
   /* styles go here */
@@ -117,6 +114,10 @@
     line-height: 1em;
     margin:0;
     padding: 0;
+  }
+
+  .govuk-phase-banner{
+    display: none;
   }
 
 }
