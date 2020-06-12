@@ -1,0 +1,77 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <form action="route-dates-end-question" method="post">
+
+
+            <fieldset class="govuk-fieldset" aria-describedby="furloughQuestion-hint">
+
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+
+                    <h1 class="govuk-fieldset__heading">
+
+                        {% if data.phaseTwo %}
+                        Has the employee's furlough ended permanently?
+                        {% else %}
+                        Has the employee's furlough ended?
+                        {% endif %}
+
+                    </h1>
+
+                </legend>
+                {% if data.phaseTwo %}<p>From 1 July, you can bring employees back to work while their furlough is ongoing. You can claim for their usual hours minus the hours they actually worked. </p>{% endif %}
+                <div class="govuk-radios">
+
+                    <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="furloughQuestion" name="furloughEndQuestion" type="radio" value="yes">
+                        <label class="govuk-label govuk-radios__label" for="furloughQuestion">
+                            {% if data.phaseTwo %}
+                                Yes
+                            {% else %}
+                                Yes
+                            {% endif %}
+                        </label>
+                    </div>
+                    <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="furloughQuestion-2" name="furloughEndQuestion" type="radio" value="no">
+                        <label class="govuk-label govuk-radios__label" for="furloughQuestion-2">
+                            {% if data.phaseTwo %}
+                            No
+<!--                            - furlough is ongoing, either full-time or part-time-->
+                            {% else %}
+                            No, it is ongoing<br>
+
+                            {% endif %}
+
+                        </label>
+                    </div>
+                    <br><br>
+
+                </div>
+            </fieldset>
+
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+        {% include "includes/web-chat.html" %}
+
+
+    </div>
+</div>
+
+{% endblock %}

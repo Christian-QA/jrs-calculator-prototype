@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+
+    <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">
+      <!--Does this employee get any additional payments?-->
+      Has this employee worked during this claim period?
+    </h1>
+
+    <p>From 1 July, you can bring employees back to work while their furlough is ongoing. You can claim for their usual hours minus the hours they actually worked.</p>
+
+
+
+
+    <form method="post" action="route-part-time-question">
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset">
+          <div class="govuk-radios">
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="discretionary-yes" name="parttime" type="radio" value="yes"> <label class="govuk-label govuk-radios__label" for="discretionary-yes">Yes </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="discretionary-no" name="parttime" type="radio" value="no"> <label class="govuk-label govuk-radios__label" for="discretionary-no">No </label>
+            </div>
+
+          </div>
+
+        </fieldset>
+      </div>
+
+      <button type="submit" class="govuk-button">
+        continue
+      </button>
+
+    </form>
+    {% include "includes/web-chat.html" %}
+
+
+  </div>
+</div>
+
+{% endblock %}

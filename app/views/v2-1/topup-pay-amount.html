@@ -1,0 +1,63 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="route-topup" method="post">
+
+          <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
+              <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+                  <h1 class="govuk-fieldset__heading">
+                      What’s the top up amount for the pay period ending
+
+                      {% if data['periodTitle']%}
+                      {{data['periodTitle']}} 2020?
+                      {% else %}
+                      30 July 2020?
+
+                      {% endif %}
+                  </h1>
+              </legend>
+
+              <p>Furlough pay for this pay period before top up: {% if data['salaryFurlough'] %} £{{data['salaryFurlough']}}.00 {% else %} £550.00 {% endif %}</span></p>
+
+              <p>Only include the amount of top up. Do not include the employee’s furlough pay or any other additional pay.</p>
+
+              <div class="govuk-form-group">
+                  <fieldset class="govuk-fieldset" aria-describedby="how-contacted-conditional-hint">
+
+                      <div class="govuk-currency-input__inner govuk-form-group">
+
+                          <span class="govuk-currency-input__inner__unit">£</span>
+                          <input type="text" class="govuk-currency-input__inner__input govuk-input govuk-input--width-10" id="discretionaryPay" value=""  name="topupAmount" >
+                      </div>
+
+
+                  </fieldset>
+              </div>
+
+
+        <button class="govuk-button" data-module="govuk-button">
+            Continue
+        </button>
+          </fieldset>
+      </form>
+        {% include "includes/web-chat.html" %}
+
+
+    </div>
+</div>
+
+{% endblock %}
