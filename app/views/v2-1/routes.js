@@ -678,6 +678,7 @@ module.exports = function (router) {
     var data = req.session.data.restartClaim
     if (data === 'yes') {
       // res.redirect('/' + sprint + '/furlough-start')
+      req.session.data.phaseTwo = true
       res.redirect('/' + sprint + '/furlough-period-question')
     } else if (data === 'no') {
       req.session.data = {}
@@ -695,11 +696,12 @@ module.exports = function (router) {
     } else if (data === 'no') {
       req.session.data.usePayPeriodsAgain = false
       req.session.data = {}
-      req.session.destroy()
+      //req.session.destroy()
+      req.session.data.hideBackButton = true
       res.redirect('/' + sprint + '/pay-frequency')
     }
   })
-  // use pay periods
+  // use useFurloughPeriodsAgain
   router.post('/' + sprint + '/route-furlough-periods', function (req, res) {
     var data = req.session.data.useFurloughPeriods
     if (data === 'yes') {
@@ -708,7 +710,8 @@ module.exports = function (router) {
     } else if (data === 'no') {
       req.session.data.useFurloughPeriodsAgain = false
       req.session.data = {}
-      req.session.destroy()
+      //req.session.destroy()
+      req.session.data.hideBackButton = true
       res.redirect('/' + sprint + '/furlough-start')
     }
   })

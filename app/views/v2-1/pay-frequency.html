@@ -7,7 +7,9 @@ Job Retention Scheme Calculator
 
 {% block beforeContent %}
 {% include "includes/phase-banner.html" %}
+{% if not data['hideBackButton'] %}
 <a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endif %}
 {% endblock %}
 
 {% block content %}
