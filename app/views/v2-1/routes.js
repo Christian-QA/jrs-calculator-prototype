@@ -313,14 +313,14 @@ module.exports = function (router) {
     req.session.data.periodList = periodList
 
     // used when predicting dates
-    // if (req.session.data.payFrequency === 'monthly') {
-    //   res.redirect('/' + sprint + '/pay-dates-2')
-    // } else {
-    //   res.redirect('/' + sprint + '/last-pay-date')
-    // }
+    if (req.session.data.payFrequency === 'monthly') {
+      res.redirect('/' + sprint + '/pay-dates-2')
+    } else {
+      res.redirect('/' + sprint + '/last-pay-date')
+    }
 
     // old method - remove if using pay period list
-     res.redirect('/' + sprint + '/pay-dates-2')
+     //res.redirect('/' + sprint + '/pay-dates-2')
   })
 
   // route - pay dates 2
@@ -400,19 +400,19 @@ module.exports = function (router) {
 
 
     //  for pay period list
-    // res.redirect('/' + sprint + '/pay-periods-list')
+     res.redirect('/' + sprint + '/pay-periods-list')
 
-    // old route - remove if pay period list
-    if (req.session.data.varyMoreThan === 'true') {
-      if ( req.session.data.periodList) {
-        req.session.data.periodTitle = req.session.data.periodList[0].periodEnd
-      }
-      res.redirect('/' + sprint + '/last-year-pay-1')
-    } else if (req.session.data.lessThan12 === 'true') {
-      res.redirect('/' + sprint + '/annual-pay-amount')
-    } else {
-      res.redirect('/' + sprint + '/regular-pay-amount')
-    }
+    // // old route - remove if pay period list
+    // if (req.session.data.varyMoreThan === 'true') {
+    //   if ( req.session.data.periodList) {
+    //     req.session.data.periodTitle = req.session.data.periodList[0].periodEnd
+    //   }
+    //   res.redirect('/' + sprint + '/last-year-pay-1')
+    // } else if (req.session.data.lessThan12 === 'true') {
+    //   res.redirect('/' + sprint + '/annual-pay-amount')
+    // } else {
+    //   res.redirect('/' + sprint + '/regular-pay-amount')
+    // }
   })
 
   // route-list-periods - not used at the moment
