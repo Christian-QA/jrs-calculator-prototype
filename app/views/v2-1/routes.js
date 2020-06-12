@@ -41,6 +41,9 @@ module.exports = function (router) {
     if (titleMonth >= 7 ) {
       req.session.data.phaseTwo = true
     }
+    if (titleMonth >= 8 ) {
+      req.session.data.phaseTwoOne = true
+    }
     res.redirect('/' + sprint + '/claim-period-end')
   })
 
@@ -228,8 +231,12 @@ module.exports = function (router) {
     if (data === 'yes') {
       res.redirect('/' + sprint + '/part-time-periods')
     } else if (data === 'no') {
-
+      if (req.session.data.phaseTwoOne){
+        res.redirect('/' + sprint + '/confirmation')
+      } else {
         res.redirect('/' + sprint + '/ni-category-letter')
+      }
+
 
     }
   })
@@ -246,7 +253,11 @@ module.exports = function (router) {
 
   // route - route-parttime-hours
   router.post('/' + sprint + '/route-part-time-hours', function (req, res) {
-    res.redirect('/' + sprint + '/ni-category-letter')
+    if (req.session.data.phaseTwoOne){
+      res.redirect('/' + sprint + '/confirmation')
+    } else {
+      res.redirect('/' + sprint + '/ni-category-letter')
+    }
 
   })
 
