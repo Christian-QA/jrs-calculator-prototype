@@ -15,14 +15,22 @@ Job Retention Scheme Calculator
     <div class="govuk-grid-column-two-thirds">
 
         <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-8">
+            <h1 class="govuk-panel__title">
+                What you can claim for this employee
+            </h1>
+            <div class="govuk-panel__body">
+                <strong>{% if data['totalFurlough'] %} £{{data['totalFurlough']}}.00 {% else %} £1105.81 {% endif %}</strong>
+            </div>
+            {% if not data.phaseTwoNicPension %}
             <div class="govuk-panel__body">
                 <h1 class="">What you can claim for this employee</h1>
                 <div class="furlough-heading">
+
                     <p class="">Amount paid to this furloughed employee</p>
+
                     <p class="govuk-panel__title">{% if data['totalFurlough'] %} £{{data['totalFurlough']}}.00 {% else %} £1105.81 {% endif %}</p>
                 </div>
-
-                <div class="furlough-heading">
+               <div class="furlough-heading">
                     <p class="">Employer National Insurance contributions</p>
                     <p class="govuk-panel__title">{% if data['totalFurlough'] %} £{{data['totalNic']}}.22 {% else %} £91.49 {% endif %}</p>
                 </div>
@@ -32,6 +40,7 @@ Job Retention Scheme Calculator
                     <p class="govuk-panel__title">  {% if data['totalFurlough'] %} £{{data['totalPension']}}.38 {% else %} £33.17 {% endif %}</p>
                 </div>
             </div>
+            {% endif %}
         </div>
 
 
@@ -40,7 +49,11 @@ Job Retention Scheme Calculator
         <p><a href="javascript:window.print();">Print or save a copy of this page</a></p>
 
         <h2 class="govuk-heading-m ">How these figures were calculated </h2>
+        {% if data.phaseTwoNicPension %}
+        <p>You can view detailed calculation showing the furlough amounts for each pay period in your claim.</p>
+        {% else %}
         <p>You can view detailed calculation showing the furlough amounts, employer National Insurance and pension contributions for each pay period in your claim.</p>
+        {% endif %}
 
         <details class="govuk-details">
             <summary class="govuk-details__summary">
@@ -120,6 +133,7 @@ Job Retention Scheme Calculator
 
                 <div class="govuk-inset-text govuk-!-font-size-24">Total furlough grant for pay period = £456.92</div>
 
+                {% if not data.phaseTwoNicPension %}
                 <h3 class="govuk-heading-s">Employer National Insurance contributions</h3>
                 <ol class="govuk-list govuk-list--number">
                     <li>Start with £468.57 (furlough grant).</li>
@@ -152,6 +166,7 @@ Job Retention Scheme Calculator
 
                 </ol>
                 <div class="govuk-inset-text govuk-!-font-size-24">Total pension grant for pay period = £12.03</div>
+                {% endif %}
                 <hr>
             </div>
         </details>
@@ -163,7 +178,11 @@ Job Retention Scheme Calculator
         </h2>
 
         <ul class="govuk-list govuk-list--number">
-
+            {% if data.phaseTwoNicPension %}
+            <li>Make a calculation for any other employee furloughed for all or part of this claim period ({% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 July{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 August{% endif %}). </span>
+            </li>
+            <li>Work out the total amounts to claim for the furlough amount.</li>
+            {% else %}
             <li>Make a calculation for any other employee furloughed for all or part of this claim period ({% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 July{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 August{% endif %}). <span class="govuk-!-font-weight-bold"> Make a note of each set of figures.</span>
             </li>
             <li>Work out the total amounts to claim for:<br>
@@ -177,6 +196,7 @@ Job Retention Scheme Calculator
             <li>Adjust the total amount of employer National Insurance contributions by subtracting any Employment Allowance used in each pay period.<br>
                 <a href="https://www.gov.uk/guidance/work-out-80-of-your-employees-wages-to-claim-through-the-coronavirus-job-retention-scheme#work-out-how-much-you-can-claim-for-employer-national-insurance-contributions-nics" target="_blank">Work out how much you can claim in total for employer National Insurance
                     contributions (opens in a new tab)</a>.</li>
+            {% endif %}
             <li>Make a claim using <a href="https://www.gov.uk/guidance/claim-for-wages-through-the-coronavirus-job-retention-scheme" target="_blank">Job Retention Scheme online claim service (opens in a new tab)</a>.</li>
 
         </ul>
@@ -190,8 +210,9 @@ Job Retention Scheme Calculator
             </button>
         </form>
         <p>
-            <a href="https://www.tax.service.gov.uk/ask-hmrc/webchat/job-retention-scheme" target="_blank">Webchat help (opens in a new tab)</a>
+            <a href="https://www.tax.service.gov.uk/ask-hmrc/webchat/job-retention-scheme" target="_blank" class="govuk-link">Webchat help (opens in a new tab)</a>
         </p>
+        <p><a href="#"  class="govuk-link">What do you think of this service?</a></p>
     </div>
 </div>
 
