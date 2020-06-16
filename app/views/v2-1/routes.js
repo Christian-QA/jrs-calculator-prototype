@@ -326,7 +326,8 @@ module.exports = function (router) {
     if (req.session.data.payFrequency === 'monthly') {
       res.redirect('/' + sprint + '/pay-dates-2')
     } else {
-      res.redirect('/' + sprint + '/last-pay-date')
+      //res.redirect('/' + sprint + '/last-pay-date')
+      res.redirect('/' + sprint + '/pay-periods-list')
     }
 
     // old method - remove if using pay period list
@@ -406,11 +407,18 @@ module.exports = function (router) {
     req.session.data.payTaxDateTitle = Math.round(req.session.data.payDateDay) + req.session.data.payDateMonthTitle
     //req.session.data.pastOneMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth) - 1)
     //req.session.data.pastTwoMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth))
+    if (req.session.data.varyMoreThan === 'true') {
 
+            res.redirect('/' + sprint + '/last-year-pay-1')
+          } else if (req.session.data.lessThan12 === 'true') {
+            res.redirect('/' + sprint + '/annual-pay-amount')
+          } else {
+            res.redirect('/' + sprint + '/regular-pay-amount')
+          }
 
 
     //  for pay period list
-     res.redirect('/' + sprint + '/pay-periods-list')
+     //res.redirect('/' + sprint + '/pay-periods-list')
 
     // // old route - remove if pay period list
     // if (req.session.data.varyMoreThan === 'true') {
@@ -429,16 +437,11 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-list-periods', function (req, res) {
     var data = req.session.data.listPeriods
     if (data === 'yes') {
-      if (req.session.data.varyMoreThan === 'true') {
-        if ( req.session.data.periodList) {
-          req.session.data.periodTitle = req.session.data.periodList[0].periodEnd
-        }
-        res.redirect('/' + sprint + '/last-year-pay-1')
-      } else if (req.session.data.lessThan12 === 'true') {
-        res.redirect('/' + sprint + '/annual-pay-amount')
-      } else {
-        res.redirect('/' + sprint + '/regular-pay-amount')
+      if ( req.session.data.periodList) {
+        req.session.data.periodTitle = req.session.data.periodList[0].periodEnd
       }
+      res.redirect('/' + sprint + '/last-pay-date')
+
     } else  {
       res.redirect('/' + sprint + '/pay-dates-1')
     }
