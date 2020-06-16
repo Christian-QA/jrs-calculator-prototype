@@ -15,12 +15,7 @@ Job Retention Scheme Calculator
     <div class="govuk-grid-column-two-thirds">
 
         <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-8">
-            <h1 class="govuk-panel__title">
-                What you can claim for this employee
-            </h1>
-            <div class="govuk-panel__body">
-                <strong>{% if data['totalFurlough'] %} £{{data['totalFurlough']}}.00 {% else %} £1105.81 {% endif %}</strong>
-            </div>
+
             {% if not data.phaseTwoNicPension %}
             <div class="govuk-panel__body">
                 <h1 class="">What you can claim for this employee</h1>
@@ -40,10 +35,23 @@ Job Retention Scheme Calculator
                     <p class="govuk-panel__title">  {% if data['totalFurlough'] %} £{{data['totalPension']}}.38 {% else %} £33.17 {% endif %}</p>
                 </div>
             </div>
+            {% else %}
+            <div class="govuk-panel__body">
+                <h1 class="">What you can claim for this employee</h1>
+                <div class="furlough-heading">
+
+                    <!--                    <p class="">Amount paid to this furloughed employee</p>-->
+
+                    <p class="govuk-panel__title">{% if data['totalFurlough'] %} £{{data['totalFurlough']}}.00 {% else %} £1105.81 {% endif %}</p>
+                </div>
+            </div>
             {% endif %}
         </div>
-
-
+        {% if data.phaseTwoNicPension %}
+        <div class="govuk-inset-text">
+            From 1 August, you can no longer claim employer National Insurance and pension contributions for the time the employee is on furlough.
+        </div>
+        {% endif %}
         <p><span class="govuk-!-font-weight-bold"> Calculated on:</span> 14 August 2020 (Calculator Version v2.0) </p>
         <p>The results of the calculation rely on the accuracy of the information you entered, for which you are responsible. You cannot claim for more money than you are going to pay out under the scheme.</p>
         <p><a href="javascript:window.print();">Print or save a copy of this page</a></p>
@@ -68,8 +76,11 @@ Job Retention Scheme Calculator
                 <p>Method 1: we’ve taken the amounts they were paid for equivalent pay periods in 2019 and applied this to the number of furlough days in each pay period.</p>
 
                 <p>Method 2: we’ve worked out their average daily earnings in the last tax year, by dividing their total pay by the number of calendar days between 6 April 2019 and the day before furlough (or 5 April 2020 if later). Then we’ve multiplied that by the number of furlough days in each pay period.</p>
-
+                {% if data.phaseTwoNicPension %}
+                <p>There’s a maximum amount you can claim. If this affects your claim, we’ve adjusted the calculations.  </p>
+                {% else %}
                 <p>There’s a maximum amount you can claim for furlough grant and Employer National Insurance contributions. If this affects your claim, we’ve adjusted the calculations. <a href="https://www.gov.uk/guidance/work-out-80-of-your-employees-wages-to-claim-through-the-coronavirus-job-retention-scheme#eighty-percent" target="_blank">Work out the maximum wage amount you can claim (opens in new tab)</a>. </p>
+                {% endif %}
 
                 <p>Calculations are rounded to the nearest penny unless otherwise stated.</p>
 
@@ -179,9 +190,11 @@ Job Retention Scheme Calculator
 
         <ul class="govuk-list govuk-list--number">
             {% if data.phaseTwoNicPension %}
-            <li>Make a calculation for any other employee furloughed for all or part of this claim period ({% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 July{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 August{% endif %}). </span>
+            <li>Make a note of the result above.</li>
+
+            <li>Use the calculator again for any other employees furloughed within this claim period ({% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 July{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 August{% endif %}) and make a note of the results. </span>
             </li>
-            <li>Work out the total amounts to claim for the furlough amount.</li>
+            <li>Add all the results together to get the total amount you can claim. </li>
             {% else %}
             <li>Make a calculation for any other employee furloughed for all or part of this claim period ({% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 July{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 August{% endif %}). <span class="govuk-!-font-weight-bold"> Make a note of each set of figures.</span>
             </li>
