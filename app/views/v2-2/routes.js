@@ -32,18 +32,28 @@ module.exports = function (router) {
     }
   }
 
+  // set phase two
+  router.get('/', function (req, res) {
+    req.session.data.phaseTwo = true
+    res.redirect('/index')
+
+  })
+
+
   // route-claim date
   router.post('/' + sprint + '/route-claim-start', function (req, res) {
     var titleMonth = Math.round(req.session.data.claimPeriodStartMonth)
     req.session.data.claimPeriodStartMonthTitle = getMonthName(titleMonth)
     req.session.data.payClaimPeriodTitle = Math.round(req.session.data.claimPeriodStartDay) + req.session.data.claimPeriodStartMonthTitle
     req.session.data.claimStart = titleMonth + '' + Math.round(req.session.data.claimPeriodStartDay)
-    if (titleMonth >= 7 ) {
-      req.session.data.phaseTwo = true
-    }
+     if (titleMonth > 0 && titleMonth <= 6 ) {
+      req.session.data.phaseTwo = false
+       req.session.data.phaseOne = true
+     }
     if (titleMonth >= 8 ) {
       req.session.data.phaseTwoNicPension = true
     }
+    console.log("titleMonth = " + titleMonth)
     res.redirect('/' + sprint + '/claim-period-end')
   })
 
@@ -53,7 +63,7 @@ module.exports = function (router) {
     req.session.data.claimPeriodEndMonthTitle = getMonthName(titleMonth)
     req.session.data.payClaimPeriodEndTitle = Math.round(req.session.data.claimPeriodEndDay) + req.session.data.claimPeriodEndMonthTitle
     req.session.data.claimEnd = titleMonth + '' + Math.round(req.session.data.claimPeriodEndDay)
-    //console.log(req.session.data.payClaimPeriodEndTitle)
+
     res.redirect('/' + sprint + '/furlough-start')
   })
 
@@ -63,19 +73,34 @@ module.exports = function (router) {
     req.session.data.furloughStartMonthTitle = getMonthName(titleMonth)
     req.session.data.furloughStartTitle = Math.round(req.session.data.furloughStartDay) + req.session.data.furloughStartMonthTitle
     req.session.data.furloughStart = titleMonth + '' + Math.round(req.session.data.furloughStartDay)
+
     res.redirect('/' + sprint + '/furlough-ongoing')
   })
+
+
 
   // route - furlough end date question
   router.post('/' + sprint + '/route-dates-end-question', function (req, res) {
     var data = req.session.data.furloughEndQuestion
-    if (data === 'yes') {
-      res.redirect('/' + sprint + '/furlough-end')
-    } else if (data === 'no') {
-      if (req.session.data.usePayPeriodsAgain) {
-        res.redirect('/' + sprint + '/pay-method')
-      } else  {
-        res.redirect('/' + sprint + '/pay-frequency')
+    if (req.session.data.phaseOne) {
+      if (data === 'yes') {
+        res.redirect('/' + sprint + '/furlough-end')
+      } else if (data === 'no') {
+        if (req.session.data.usePayPeriodsAgain) {
+          res.redirect('/' + sprint + '/pay-method')
+        } else {
+          res.redirect('/' + sprint + '/pay-frequency')
+        }
+      }
+    } else {
+      if (data === 'no') {
+        res.redirect('/' + sprint + '/furlough-end')
+      } else {
+        if (req.session.data.usePayPeriodsAgain) {
+          res.redirect('/' + sprint + '/pay-method')
+        } else {
+          res.redirect('/' + sprint + '/pay-frequency')
+        }
       }
     }
   })
