@@ -1,0 +1,72 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form class="form" method="post" action="route-normal-hours">
+
+
+        <div class="govuk-form-group ">
+          <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
+
+              <h1 class="govuk-heading-xl govuk-!-margin-bottom-3">
+
+                What would this employee’s usual hours have been
+                {% if data['periodTitle']%}
+                {{data['periodTitle']}} 2020?
+                {% else %}
+                between 15 July and 22 July 2020?
+
+
+                {% endif %}
+
+              </h1>
+
+
+            <p>This is the total number of hours they would have been expected to work during this pay period if they had not been furloughed. To calculate this, you need to read the guidance.</p>
+            <p><a href="https://www.gov.uk/guidance/steps-to-take-before-calculating-your-claim-using-the-coronavirus-job-retention-scheme#usual-hours" target="_blank" class="govuk-link">Work out your employee’s usual hours (opens in new tab)</a></p>
+
+
+            <div class="govuk-form-group">
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="normalHours">
+                  Hours
+                </label>
+                <p class="govuk-hint">Enter hours in decimal format</p>
+              <input class="govuk-input govuk-input--width-5" id="normalHours" name="normalHours" type="text">
+            </div>
+
+
+
+
+          </fieldset>
+        </div>
+
+
+        <button class="govuk-button govuk-!-margin-right-2" data-module="govuk-button">
+          Continue
+        </button>
+
+
+      </form>
+
+
+
+
+
+    </div>
+</div>
+
+{% endblock %}

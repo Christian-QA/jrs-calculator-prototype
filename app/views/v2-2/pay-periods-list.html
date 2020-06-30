@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+
+    <h1 class="govuk-heading-xl">
+      <!--Does this employee get any additional payments?-->
+      Are these pay periods correct?
+    </h1>
+
+
+    <p>We’ve worked them out based on your answers.</p>
+
+
+    <ul class="govuk-list govuk-list--bullet">
+
+      {% if data.periodList.length %}
+        {% for periodDate in data.periodList %}
+          <li>From {{ periodDate.periodStart }} to {{ periodDate.periodEnd }} 2020</li>
+        {% endfor %}
+        {% else %}
+          <li>From 20 July to 27 July 2020</li>
+          <li>From 28 July to 5 August 2020</li>
+      {% endif %}
+    </ul>
+
+    <p>Together they should cover your claim ({% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 July{% endif %} 2020 to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}30 July{% endif %} 2020). They may be partly outside it.</p>
+
+    <p>We’ve assumed the pay periods are regular. The calculator cannot be used for irregular pay periods. </p>
+
+
+
+
+    <form method="post" action="route-list-periods">
+
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset">
+
+          <div class="govuk-radios">
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="discretionary-yes" name="listPeriods" type="radio" value="yes"> <label class="govuk-label govuk-radios__label" for="discretionary-yes">Yes </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="discretionary-no" name="listPeriods" type="radio" value="no"> <label class="govuk-label govuk-radios__label" for="discretionary-no">No - change details </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <button type="submit" class="govuk-button">
+        continue
+      </button>
+
+    </form>
+    {% include "includes/web-chat.html" %}
+
+
+  </div>
+</div>
+
+{% endblock %}

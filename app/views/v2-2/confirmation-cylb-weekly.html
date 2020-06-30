@@ -1,0 +1,212 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+{% endblock %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-8">
+            <div class="govuk-panel__body">
+                <h1 class="">What you can claim for this employee</h1>
+                <div class="furlough-heading">
+                    <p class="">Amount paid to this furloughed employee</p>
+                    <p class="govuk-panel__title">{% if data['totalFurlough'] %} £{{data['totalFurlough']}}.00 {% else %} £1105.81 {% endif %}</p>
+                </div>
+
+                <div class="furlough-heading">
+                    <p class="">Employer National Insurance contributions</p>
+                    <p class="govuk-panel__title">{% if data['totalFurlough'] %} £{{data['totalNic']}}.22 {% else %} £91.49 {% endif %}</p>
+                </div>
+
+                <div class="furlough-heading">
+                    <p class="">Employer minimum pension contributions</p>
+                    <p class="govuk-panel__title">  {% if data['totalFurlough'] %} £{{data['totalPension']}}.38 {% else %} £33.17 {% endif %}</p>
+                </div>
+            </div>
+        </div>
+
+
+        <p><span class="govuk-!-font-weight-bold"> Calculated on:</span> 14 August 2020 (Calculator Version v2.0) </p>
+        <p>The results of the calculation rely on the accuracy of the information you entered, for which you are responsible. You cannot claim for more money than you are going to pay out under the scheme.</p>
+        <p><a href="javascript:window.print();">Print or save a copy of this page</a></p>
+
+        <h2 class="govuk-heading-m ">How these figures were calculated </h2>
+        <p>You can view detailed calculation showing the furlough amounts, employer National Insurance and pension contributions for each pay period in your claim.</p>
+
+        <details class="govuk-details">
+            <summary class="govuk-details__summary">
+               <span class="govuk-details__summary-text">
+                    Detailed breakdown of calculations
+                 </span>
+            </summary>
+            <div class="govuk-details__text">
+
+                <p>You told us your employee gets paid a variable amount each time and has worked for you for more than 12 months. They have worked during the claim period. There are 2 methods we can use to work out pay. We’ve used the one that gave the higher figure. The furlough grant is 80% of this.</p>
+
+                <p>Method 1: we’ve taken the amounts they were paid for equivalent pay periods in 2019 and applied this to the number of furlough days and furlough hours in each pay period.</p>
+
+                <p>Method 2: we’ve worked out their average daily earnings in the last tax year, by dividing their total pay by the number of calendar days between 6 April 2019 and the day before furlough (or 5 April 2020 if later). Then we’ve multiplied that by the number of furlough days and furlough hours in each pay period.</p>
+
+                <p>There’s a maximum amount you can claim for furlough grant and Employer National Insurance contributions. If this affects your claim, we’ve adjusted the calculations. <a href="https://www.gov.uk/guidance/work-out-80-of-your-employees-wages-to-claim-through-the-coronavirus-job-retention-scheme#eighty-percent" target="_blank">Work out the maximum wage amount you can claim (opens in new tab)</a>. </p>
+
+                <p>Calculations are rounded to the nearest penny unless otherwise stated.</p>
+
+                <h2 class="govuk-heading-m govuk-!-margin-top-4">For pay period 8 July to 15 July 2020</h2>
+
+                <h3 class="govuk-heading-s">Calculate pay based on furlough days</h3>
+
+                <p>Method 1: take pay from same dates last year.</p>
+
+                <p>Last year’s dates overlap two pay periods so in period one: </p>
+                <ol class="govuk-list govuk-list--number">
+                    <li>Start with £550.77 (from pay day 9 July last year).</li>
+                    <li>Divide by 7 (days in pay period).</li>
+                    <li>Multiply by 2 (furlough days).</li>
+                </ol>
+                <p>Total for period one = £157.14 </p>
+
+                <!--                <p>Total for period = £157.14</p>-->
+
+                <p>Then in period two:</p>
+                <ol class="govuk-list govuk-list--number">
+                    <li>Start with £600 (from pay day 14 July last year).</li>
+                    <li>Divide by 7 (days in pay period).</li>
+                    <li>Multiply by 5 (furlough days).</li>
+                </ol>
+                <p>Total for period two = £428.57</p>
+
+                <p>Then:</p>
+                <ol class="govuk-list govuk-list--number">
+                    <li>Add £157.14 + £428.57 (the totals from both pay periods).</li>
+                </ol>
+                <p>Total pay from same dates last year = £585.71</p>
+                <p>Then:</p>
+                <ol class="govuk-list govuk-list--number">
+                    <li>Start with £585.71 (total pay from same dates last year).</li>
+                    <li>Divide by 30 (usual hours).</li>
+                    <li>Multiply by 20 (furlough hours).</li>
+                </ol>
+                <p>Total pay based on hours worked in this pay period = £323.71</p>
+                <p>Method 2: take the total pay from employee start date (or 6 April 2019, if earlier) to day before the employee's furlough start date (or 5 April 2020, if later):</p>
+                <ol class="govuk-list govuk-list--number">
+                    <li>Start with £26000 (total pay).</li>
+                    <li>Divide by 333 (days employed).</li>
+                    <li>Multiply by 5 (furlough days).</li>
+                </ol>
+                <p>Total average pay last year = £546.46</p>
+                <p>Then:</p>
+                <ol class="govuk-list govuk-list--number">
+                    <li>Start with £546.46 (total pay from same dates last year).</li>
+                    <li>Divide by 30 (usual hours).</li>
+                    <li>Multiply by 20 (furlough hours).</li>
+                </ol>
+                <p>Total pay based on hours worked in this pay period = £320.46</p>
+
+                <p>Then take the higher figure from methods 1 and 2:</p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>£323.71 (method 1: pay from same dates last year).</li>
+                    <li>£320.46 (method 2: average pay last year).</li>
+                </ul>
+                <p>Total pay based on furlough days = £323.71 </p>
+
+                <h3 class="govuk-heading-s">Furlough grant</h3>
+                <ol class="govuk-list govuk-list--number">
+                    <li>Take £323.71 (pay based on furlough days and furlough hours).</li>
+                    <li>Multiply by 80%.</li>
+                </ol>
+
+                <p>Calculated furlough grant = £258.97 </p>
+
+                <p>This exceeds the maximum furlough grant for this pay period, which is:</p>
+                 <ul class="govuk-list govuk-list--bullet">
+                <li>16 furlough days in March at £80.65 + 15 furlough days in July at £83.34 ÷ 30 usual hours x 20 furlough hours = £230.79.</li>
+
+                </ul>
+                <p>Therefore we use the maximum furlough grant amount.</p>
+
+                <div class="govuk-inset-text govuk-!-font-size-24">Total furlough grant for pay period = £230.79</div>
+
+                <h3 class="govuk-heading-s">Employer National Insurance contributions</h3>
+                <ol class="govuk-list govuk-list--number">
+                    <li>Start with £230.79 (furlough grant).</li>
+                    <li>Round down to the nearest pound.</li>
+                    <li>Deduct £90 (£169 Secondary NICs threshold for 20/21 tax year, divide by 7 days in pay period and multiply by 4 furlough days, divide by 30 usual hours, multiply by 20 furlough hours).</li>
+                    <li>Multiply by 13.8%.</li>
+
+                </ol>
+
+                <div class="govuk-inset-text govuk-!-font-size-24">Total NI grant for pay period = £24.97</div>
+
+                <h3 class="govuk-heading-s">Employer minimum pension contributions</h3>
+               <!-- Calculate Lower Level of Qualified earnings’
+                <ol class="govuk-list govuk-list&#45;&#45;number">
+                    <li>Start with £120 (Lower Level of Qualified earnings for tax year 20/21).</li>
+                    <li>Divide by 7 (days in pay period). </li>
+                       <li>Multiply by 5 (furlough days in period).</li>
+                    <li>Divide by 30 (usual hours).</li>
+                    <li>Multiply by 20 (hours furloughed).</li>
+                <li>Lower Level of Qualified earnings = £x.xx </li>
+            </ol>-->
+
+                <ol class="govuk-list govuk-list--number">
+                    <li>Start with £230.79 (furlough grant).</li>
+                    <li>Round down to the nearest pound.</li>
+
+                    <li>Deduct £67.43 (£120 Lower Level of Qualifying Earnings for 20/21 tax year, divide by 7 days in pay period and multiply by 4 furlough days, divide by 30 usual hours, multiply by 20 furlough hours).</li>
+                    <li>Multiply by 3%.</li>
+
+                </ol>
+                <div class="govuk-inset-text govuk-!-font-size-24">Total pension grant for pay period = £9.03</div>
+                <hr>
+            </div>
+        </details>
+
+
+
+        <h2 class="govuk-heading-m">
+            Next steps
+        </h2>
+
+        <ul class="govuk-list govuk-list--number">
+
+            <li>Make a calculation for any other employee furloughed for all or part of this claim period ({% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}9 July{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 August{% endif %}). <span class="govuk-!-font-weight-bold"> Make a note of each set of figures.</span>
+            </li>
+            <li>Work out the total amounts to claim for:<br>
+                <ul class="govuk-list--list">
+                    <li>furlough amount.</li>
+                    <li>employer National Insurance.</li>
+                    <li>employer minimum pension contributions.</li>
+
+                </ul></li>
+
+            <li>Adjust the total amount of employer National Insurance contributions by subtracting any Employment Allowance used in each pay period.<br>
+                <a href="https://www.gov.uk/guidance/work-out-80-of-your-employees-wages-to-claim-through-the-coronavirus-job-retention-scheme#work-out-how-much-you-can-claim-for-employer-national-insurance-contributions-nics" target="_blank">Work out how much you can claim in total for employer National Insurance
+                    contributions (opens in a new tab)</a>.</li>
+            <li>Make a claim using <a href="https://www.gov.uk/guidance/claim-for-wages-through-the-coronavirus-job-retention-scheme" target="_blank">Job Retention Scheme online claim service (opens in a new tab)</a>.</li>
+
+        </ul>
+
+        <br>
+
+
+        <form class="form" method="post" action="another-calculation">
+            <button class="govuk-button" data-module="govuk-button">
+                Start another calculation
+            </button>
+        </form>
+        <p>
+            <a href="https://www.tax.service.gov.uk/ask-hmrc/webchat/job-retention-scheme" target="_blank">Webchat help (opens in a new tab)</a>
+        </p>
+    </div>
+</div>
+
+{% endblock %}
