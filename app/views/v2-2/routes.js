@@ -9,6 +9,8 @@ module.exports = function (router) {
   const getMonthName = (titleMonth) => {
     if (titleMonth === 2) {
       return ' February'
+    } else if (titleMonth === 1) {
+      return ' January'
     } else if (titleMonth === 3) {
       return ' March'
     } else if (titleMonth === 4) {
@@ -36,7 +38,6 @@ module.exports = function (router) {
   router.get('/', function (req, res) {
     req.session.data.phaseTwo = true
     res.redirect('/index')
-
   })
 
 
@@ -52,6 +53,9 @@ module.exports = function (router) {
      }
     if (titleMonth >= 8 ) {
       req.session.data.phaseTwoNicPension = true
+    }
+    if (titleMonth >= 9 ) {
+      req.session.data.phaseTwoSeventy = true
     }
     console.log("titleMonth = " + titleMonth)
     res.redirect('/' + sprint + '/claim-period-end')
