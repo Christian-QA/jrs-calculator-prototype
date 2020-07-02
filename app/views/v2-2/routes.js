@@ -52,9 +52,11 @@ module.exports = function (router) {
        req.session.data.phaseOne = true
      }
     if (titleMonth >= 8 ) {
+      req.session.data.phaseTwo = true
       req.session.data.phaseTwoNicPension = true
     }
     if (titleMonth >= 9 ) {
+      req.session.data.phaseTwo = true
       req.session.data.phaseTwoSeventy = true
     }
     console.log("titleMonth = " + titleMonth)
