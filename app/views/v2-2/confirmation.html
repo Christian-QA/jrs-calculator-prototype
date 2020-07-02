@@ -40,16 +40,27 @@ Job Retention Scheme Calculator
                 <h1 class="">What you can claim for this employee</h1>
                 <div class="furlough-heading">
 
-                    <p class="">Furlough grant</p>
+                    <p class="">Furlough grant
+                        {% if data.phaseTwoGenerosityVal %}
+                        <br>
+                        ({{data['phaseTwoGenerosityMonth']}} rate: {{data['phaseTwoGenerosityVal']}} of wages)
+                        {% endif %}</p>
 
                     <p class="govuk-panel__title">{% if data['totalFurlough'] %} £{{data['totalFurlough']}}.00 {% else %} £1105.81 {% endif %}</p>
+
                 </div>
             </div>
             {% endif %}
         </div>
-        {% if data.phaseTwoNicPension %}
+        {% if data.phaseTwoNicInfo %}
         <div class="govuk-inset-text">
             From 1 August, you can no longer claim employer National Insurance and pension contributions for the time the employee is on furlough.
+        </div>
+        {% endif %}
+        {% if data.phaseTwoGenerosityVal %}
+        <div class="govuk-inset-text">
+            <p>To be eligible for the grant you must pay employees 80% of their wages for the time they are furloughed.</p>
+            <p>The amount you must pay this employee is <strong class="govuk-!-font-weight-bold">£110.58</strong>.</p>
         </div>
         {% endif %}
         <p><span class="govuk-!-font-weight-bold"> Calculated on:</span> 14 August 2020 (Calculator Version v2.0) </p>
@@ -215,6 +226,11 @@ Job Retention Scheme Calculator
                 <hr>
 
 <br>
+        {% if data.phaseTwoGenerosityVal %}
+
+            <p>To be eligible for the grant you must pay furloughed employees 80% of their wages for the time they are furloughed (up to a cap of £2,500 per month). The amount you must pay this employee in addition to the grant is <strong class="govuk-!-font-weight-bold">£110.58</strong>.</p>
+
+        {% endif %}
         <p>The results of the calculation rely on the accuracy of the information you entered, for which you are responsible. You cannot claim for more money than you are going to pay out under the scheme.</p>
 
         <p><a href="javascript:window.print();">Print or save a copy of this page</a></p>

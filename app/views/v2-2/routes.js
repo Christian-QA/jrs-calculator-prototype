@@ -47,19 +47,24 @@ module.exports = function (router) {
     req.session.data.claimPeriodStartMonthTitle = getMonthName(titleMonth)
     req.session.data.payClaimPeriodTitle = Math.round(req.session.data.claimPeriodStartDay) + req.session.data.claimPeriodStartMonthTitle
     req.session.data.claimStart = titleMonth + '' + Math.round(req.session.data.claimPeriodStartDay)
+    req.session.data.phaseTwo = true
      if (titleMonth > 0 && titleMonth <= 6 ) {
       req.session.data.phaseTwo = false
        req.session.data.phaseOne = true
      }
     if (titleMonth >= 8 ) {
-      req.session.data.phaseTwo = true
       req.session.data.phaseTwoNicPension = true
+      req.session.data.phaseTwoNicInfo = true
     }
     if (titleMonth >= 9 ) {
-      req.session.data.phaseTwo = true
-      req.session.data.phaseTwoSeventy = true
+      req.session.data.phaseTwoNicInfo = false
+      req.session.data.phaseTwoGenerosityMonth = "September"
+      req.session.data.phaseTwoGenerosityVal = "70%"
     }
-    console.log("titleMonth = " + titleMonth)
+    if (titleMonth >= 10 ) {
+      req.session.data.phaseTwoGenerosityMonth = "October"
+      req.session.data.phaseTwoGenerosityVal = "60%"
+    }
     res.redirect('/' + sprint + '/claim-period-end')
   })
 
