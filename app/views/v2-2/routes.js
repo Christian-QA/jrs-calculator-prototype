@@ -196,7 +196,7 @@ module.exports = function (router) {
       req.session.data.varyMoreThan = 'true'
       if (req.session.data.usePayPeriodsAgain) {
         if ( req.session.data.periodList) {
-          req.session.data.periodTitle = req.session.data.periodList[0].periodEnd
+          req.session.data.periodTitle =  req.session.data.periodList[0].periodStart + ' to ' + req.session.data.periodList[0].periodEnd
         }
         res.redirect('/' + sprint + '/last-year-pay-1')
       } else  {
@@ -222,7 +222,7 @@ module.exports = function (router) {
     if (req.session.data.usePayPeriodsAgain) {
       if (req.session.data.varyMoreThan === 'true') {
         if ( req.session.data.periodList) {
-          req.session.data.periodTitle = req.session.data.periodList[0].periodEnd
+          req.session.data.periodTitle =  req.session.data.periodList[0].periodStart + ' to ' + req.session.data.periodList[0].periodEnd
         }
         res.redirect('/' + sprint + '/last-year-pay-1')
       } else {
@@ -444,7 +444,9 @@ module.exports = function (router) {
     //req.session.data.pastOneMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth) - 1)
     //req.session.data.pastTwoMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth))
     if (req.session.data.varyMoreThan === 'true') {
-
+          if ( req.session.data.periodList) {
+            req.session.data.periodTitle =  req.session.data.periodList[0].periodStart + ' to ' + req.session.data.periodList[0].periodEnd
+          }
             res.redirect('/' + sprint + '/last-year-pay-1')
           } else if (req.session.data.lessThan12 === 'true') {
             res.redirect('/' + sprint + '/annual-pay-amount')
@@ -490,7 +492,8 @@ module.exports = function (router) {
     if ( req.session.data.periodList[1] === undefined) {
       res.redirect('/' + sprint + '/annual-pay-amount')
     } else if (req.session.data.periodList[1]) {
-     req.session.data.periodTitle = req.session.data.periodList[1].periodEnd
+        req.session.data.periodTitle =  req.session.data.periodList[1].periodStart + ' to ' + req.session.data.periodList[1].periodEnd
+
       res.redirect('/' + sprint + '/last-year-pay-2')
     } else {
       res.redirect('/' + sprint + '/annual-pay-amount')
@@ -504,7 +507,7 @@ module.exports = function (router) {
     if ( req.session.data.periodList[2] === undefined) {
       res.redirect('/' + sprint + '/annual-pay-amount')
     } else if (req.session.data.periodList[2]){
-      req.session.data.periodTitle = req.session.data.periodList[2].periodEnd
+      req.session.data.periodTitle =  req.session.data.periodList[2].periodStart + ' to ' + req.session.data.periodList[2].periodEnd
       res.redirect('/' + sprint + '/last-year-pay-3')
     } else {
       res.redirect('/' + sprint + '/annual-pay-amount')
@@ -516,7 +519,7 @@ module.exports = function (router) {
     if ( req.session.data.periodList[3] === undefined) {
       res.redirect('/' + sprint + '/annual-pay-amount')
     } else if (req.session.data.periodList[3]){
-      req.session.data.periodTitle = req.session.data.periodList[3].periodEnd
+      req.session.data.periodTitle =  req.session.data.periodList[3].periodStart + ' to ' + req.session.data.periodList[3].periodEnd
       res.redirect('/' + sprint + '/last-year-pay-4')
     } else {
       res.redirect('/' + sprint + '/annual-pay-amount')
@@ -527,7 +530,7 @@ module.exports = function (router) {
     if ( req.session.data.periodList[4] === undefined) {
       res.redirect('/' + sprint + '/annual-pay-amount')
     } else if (req.session.data.periodList[4]){
-      req.session.data.periodTitle = req.session.data.periodList[4].periodEnd
+      req.session.data.periodTitle =  req.session.data.periodList[4].periodStart + ' to ' + req.session.data.periodList[4].periodEnd
       res.redirect('/' + sprint + '/last-year-pay-5')
     } else {
       res.redirect('/' + sprint + '/annual-pay-amount')
@@ -539,7 +542,7 @@ module.exports = function (router) {
     if ( req.session.data.periodList[5] === undefined) {
       res.redirect('/' + sprint + '/annual-pay-amount')
     } else if (req.session.data.periodList[5]){
-      req.session.data.periodTitle = req.session.data.periodList[5].periodEnd
+      req.session.data.periodTitle =  req.session.data.periodList[5].periodStart + ' to ' + req.session.data.periodList[5].periodEnd
       res.redirect('/' + sprint + '/last-year-pay-6')
     } else {
       res.redirect('/' + sprint + '/annual-pay-amount')
