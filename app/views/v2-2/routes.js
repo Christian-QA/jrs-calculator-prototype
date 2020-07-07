@@ -489,7 +489,7 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-vary-salary-1', function (req, res) {
     req.session.data.salaryAmount = req.session.data.salary
     req.session.data.salaryFurlough = Math.round(req.session.data.salary * 0.8)
-    if ( req.session.data.periodList[1] === undefined) {
+    if ( req.session.data.periodList === undefined) {
       res.redirect('/' + sprint + '/annual-pay-amount')
     } else if (req.session.data.periodList[1]) {
         req.session.data.periodTitle =  req.session.data.periodList[1].periodStart + ' to ' + req.session.data.periodList[1].periodEnd
