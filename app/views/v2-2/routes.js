@@ -57,12 +57,13 @@ module.exports = function (router) {
 
     //  pay period one breakdown
     req.session.data.payPeriodOneFurloughSalary = req.session.data.periodsalaryAmount
-    if (req.session.data.payPeriodOneFurloughSalary > 2500) {
-      req.session.data.payPeriodOneFurloughSalary = 2500
-    }
+    // if (req.session.data.payPeriodOneFurloughSalary > 2500) {
+    //   req.session.data.payPeriodOneFurloughSalary = 2500
+    // }
     req.session.data.payPeriodOneNic = Math.round(req.session.data.payPeriodOneFurloughSalary * 0.138)
     req.session.data.payPeriodOnePension = Math.round(req.session.data.payPeriodOneNic * 0.43)
-    console.log('payPeriodOneFurloughSalary = ' + req.session.data.payPeriodOneFurloughSalary)
+
+
     //  pay period two // Days in pay period
     // if (req.session.data.payTwo < 1) {
     //   req.session.data.payTwo = 2365
@@ -74,22 +75,24 @@ module.exports = function (router) {
     req.session.data.payPeriodTwoNic = Math.round(req.session.data.payPeriodTwoFurloughSalary * 0.138)
     req.session.data.payPeriodTwoPension = Math.round(req.session.data.payPeriodTwoNic * 0.43)
 
+    console.log('payPeriodOneFurloughSalary = ' + req.session.data.payPeriodOneFurloughSalary)
+    console.log('payPeriodTwoFurloughSalary = ' + req.session.data.payPeriodTwoFurloughSalary)
     // set the totals
     req.session.data.totalFurlough = req.session.data.payPeriodOneFurloughSalary + req.session.data.payPeriodTwoFurloughSalary
 
     req.session.data.totalNic = req.session.data.payPeriodOneNic + req.session.data.payPeriodTwoNic
     req.session.data.totalPension = req.session.data.payPeriodOnePension + req.session.data.payPeriodTwoPension
 
-    var dataFreq = req.session.data.payFrequency
-    if (dataFreq === 'fortnightly') {
-      req.session.data.totalFurlough = Math.round(req.session.data.totalFurlough + (req.session.data.totalFurlough * 0.333333333))
-    } else if (dataFreq === 'weekly') {
-      // console.log('total here')
-      req.session.data.totalFurlough = req.session.data.totalFurlough * 2
-      if (req.session.data.totalFurlough > 2500) {
-        req.session.data.totalFurlough = 2500
-      }
-    }
+    // var dataFreq = req.session.data.payFrequency
+    // if (dataFreq === 'fortnightly') {
+    //   req.session.data.totalFurlough = Math.round(req.session.data.totalFurlough + (req.session.data.totalFurlough * 0.333333333))
+    // } else if (dataFreq === 'weekly') {
+    //   // console.log('total here')
+    //   req.session.data.totalFurlough = req.session.data.totalFurlough * 2
+    //   if (req.session.data.totalFurlough > 2500) {
+    //     req.session.data.totalFurlough = 2500
+    //   }
+    // }
     console.log('total = ' + req.session.data.totalFurlough)
 
   }
