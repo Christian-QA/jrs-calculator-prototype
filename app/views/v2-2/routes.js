@@ -281,7 +281,7 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-parttime-period-select', function (req, res) {
     var boxes = req.session.data.periodSelect
     if(req.session.data.periodList){
-      req.session.data.periodTitle = req.session.data.periodList[boxes].periodStart + ' and ' + req.session.data.periodList[boxes].periodEnd
+      req.session.data.periodTitle = req.session.data.periodList[boxes].periodStart + ' to ' + req.session.data.periodList[boxes].periodEnd
     }
     res.redirect('/' + sprint + '/part-time-normal-hours')
 
