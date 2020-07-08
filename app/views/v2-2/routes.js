@@ -454,21 +454,6 @@ module.exports = function (router) {
             res.redirect('/' + sprint + '/regular-pay-amount')
           }
 
-
-    //  for pay period list
-     //res.redirect('/' + sprint + '/pay-periods-list')
-
-    // // old route - remove if pay period list
-    // if (req.session.data.varyMoreThan === 'true') {
-    //   if ( req.session.data.periodList) {
-    //     req.session.data.periodTitle = req.session.data.periodList[0].periodEnd
-    //   }
-    //   res.redirect('/' + sprint + '/last-year-pay-1')
-    // } else if (req.session.data.lessThan12 === 'true') {
-    //   res.redirect('/' + sprint + '/annual-pay-amount')
-    // } else {
-    //   res.redirect('/' + sprint + '/regular-pay-amount')
-    // }
   })
 
   // route-list-periods - not used at the moment

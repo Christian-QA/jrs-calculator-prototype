@@ -60,10 +60,10 @@ Job Retention Scheme Calculator
         {% if data.phaseTwoGenerosityVal %}
         <div class="govuk-inset-text">
             <p>To be eligible for the grant you must pay employees 80% of their wages for the time they are furloughed.</p>
-            <p>The amount you must pay this employee is <strong class="govuk-!-font-weight-bold">£110.58</strong>.</p>
+            <p>The amount you must pay this employee in addition to the grant is <strong class="govuk-!-font-weight-bold">£110.58</strong>.</p>
         </div>
         {% endif %}
-        <p><span class="govuk-!-font-weight-bold"> Calculated on:</span> 14 August 2020 (Calculator Version v2.0) </p>
+        <p><span class="govuk-!-font-weight-bold"> Calculated on:</span> {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 August{% endif %} 2020 (Calculator Version v2.0) </p>
         <p>The results of the calculation rely on the accuracy of the information you entered, for which you are responsible. You cannot claim for more money than you are going to pay out under the scheme.</p>
 
 
@@ -176,7 +176,7 @@ Job Retention Scheme Calculator
                 <h3 class="govuk-heading-s">Furlough grant</h3>
                 <ol class="govuk-list govuk-list--number">
                     <li>Take £585.71 (pay based on furlough days).</li>
-                    <li>Multiply by 80%.</li>
+                    <li>Multiply by {% if data.phaseTwoGenerosityVal %}{{data['phaseTwoGenerosityVal']}}{% else %}80% {% endif %}.</li>
                 </ol>
 
                 <p>Calculated furlough grant = £468.57 </p>
