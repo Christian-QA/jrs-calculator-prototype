@@ -36,27 +36,35 @@ module.exports = function (router) {
 
   // final calulation
   function finalCalc(req) {
-
+    if (req.session.data.phaseTwoGenerosityVal === '70%') {
+      var rate = 0.7
+    } else if (req.session.data.phaseTwoGenerosityVal === '60%') {
+      var rate = 0.6
+    } else {
+      var rate = 0.8
+    }
     if (req.session.data.salaryAmount) {
       // reg and var pay calc
-      req.session.data.totalPeriodFurlough = Math.round(req.session.data.salaryAmount * 0.8)
+      req.session.data.totalPeriodFurlough = (req.session.data.salaryAmount * rate).toFixed(2)
+      req.session.data.totalPeriodNic = (req.session.data.totalPeriodFurlough * 0.138).toFixed(2)
+      req.session.data.totalPeriodPension = (req.session.data.totalPeriodNic * 0.3).toFixed(2)
+      req.session.data.totalToPay =  (((req.session.data.salaryAmount * 0.8) - req.session.data.totalPeriodFurlough) * req.session.data.periodNumber).toFixed(2)
+
     } else if (req.session.data.variableGrossSalary) {
       // Average Daily pay calc
       var grossSalary = req.session.data.variableGrossSalary
       var monthStart = Math.round(req.session.data.employeeStartMonthCalc)
       req.session.data.daysCalc = Math.round((16 - monthStart) * 30)
-      req.session.data.totalPeriod = Math.round((grossSalary  / req.session.data.daysCalc) * req.session.data.payFrequencyTime)
-      req.session.data.totalPeriodFurlough = Math.round(req.session.data.totalPeriod * 0.8)
+      req.session.data.totalPeriod = (grossSalary / req.session.data.daysCalc) * req.session.data.payFrequencyTime
+      req.session.data.totalPeriodFurlough = (req.session.data.totalPeriod * rate).toFixed(2)
+      req.session.data.totalPeriodNic = (req.session.data.totalPeriodFurlough * 0.138).toFixed(2)
+      req.session.data.totalPeriodPension = (req.session.data.totalPeriodNic * 0.3).toFixed(2)
+      req.session.data.totalToPay = (((req.session.data.totalPeriod * 0.8) - req.session.data.totalPeriodFurlough) * req.session.data.periodNumber).toFixed(2)
     }
-    // console.log('vary gross salary = ' + req.session.data.variableGrossSalary)
-    // console.log(' salary = ' + req.session.data.salaryAmount)
-    // console.log(' period amount = ' + req.session.data.totalPeriodFurlough)
 
-    req.session.data.totalFurlough = req.session.data.totalPeriodFurlough * req.session.data.periodNumber
-    req.session.data.totalNic = Math.round(req.session.data.totalFurlough * 0.138)
-    req.session.data.totalPension = Math.round(req.session.data.totalNic * 0.3)
-
-    console.log('total = ' + req.session.data.totalFurlough)
+    req.session.data.totalFurlough = (req.session.data.totalPeriodFurlough * req.session.data.periodNumber).toFixed(2)
+    req.session.data.totalNic =  (req.session.data.totalPeriodNic * req.session.data.periodNumber).toFixed(2)
+    req.session.data.totalPension =  (req.session.data.totalPeriodPension * req.session.data.periodNumber).toFixed(2)
 
   }
 
