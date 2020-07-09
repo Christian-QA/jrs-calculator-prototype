@@ -44,16 +44,17 @@ module.exports = function (router) {
       // Average Daily pay calc
       var grossSalary = req.session.data.variableGrossSalary
       var monthStart = Math.round(req.session.data.employeeStartMonthCalc)
-      req.session.data.totalPeriod = Math.round((((grossSalary  / ((16 - monthStart) * 30))) * req.session.data.payFrequencyTime))
+      req.session.data.daysCalc = Math.round((16 - monthStart) * 30)
+      req.session.data.totalPeriod = Math.round((grossSalary  / req.session.data.daysCalc) * req.session.data.payFrequencyTime)
       req.session.data.totalPeriodFurlough = Math.round(req.session.data.totalPeriod * 0.8)
     }
-    console.log('vary gross salary = ' + req.session.data.variableGrossSalary)
-    console.log(' salary = ' + req.session.data.salaryAmount)
-    console.log(' period amount = ' + req.session.data.totalPeriodFurlough)
+    // console.log('vary gross salary = ' + req.session.data.variableGrossSalary)
+    // console.log(' salary = ' + req.session.data.salaryAmount)
+    // console.log(' period amount = ' + req.session.data.totalPeriodFurlough)
 
     req.session.data.totalFurlough = req.session.data.totalPeriodFurlough * req.session.data.periodNumber
     req.session.data.totalNic = Math.round(req.session.data.totalFurlough * 0.138)
-    req.session.data.totalPension = Math.round(req.session.data.totalNic * 0.43)
+    req.session.data.totalPension = Math.round(req.session.data.totalNic * 0.3)
 
     console.log('total = ' + req.session.data.totalFurlough)
 
@@ -598,11 +599,7 @@ module.exports = function (router) {
   // route - nic category
   router.post('/' + sprint + '/route-nic', function (req, res) {
     var data = req.session.data.nicCategory
-    if (data === 'a') {
-      req.session.data.nicCategoryVal = 'A, B, C or J'
-    } else if (data === 'hmz') {
-      req.session.data.nicCategoryVal = 'H, M or Z'
-    }
+
     res.redirect('/' + sprint + '/pension')
   })
 
