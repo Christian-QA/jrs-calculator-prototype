@@ -44,7 +44,8 @@ module.exports = function (router) {
       // Average Daily pay calc
       var grossSalary = req.session.data.variableGrossSalary
       var monthStart = Math.round(req.session.data.employeeStartMonthCalc)
-      req.session.data.totalPeriodFurlough = ((Math.round((grossSalary ) / ((16 - monthStart) * 30))) * req.session.data.payFrequencyTime) * 0.8
+      req.session.data.totalPeriod = Math.round((((grossSalary  / ((16 - monthStart) * 30))) * req.session.data.payFrequencyTime))
+      req.session.data.totalPeriodFurlough = Math.round(req.session.data.totalPeriod * 0.8)
     }
     console.log('vary gross salary = ' + req.session.data.variableGrossSalary)
     console.log(' salary = ' + req.session.data.salaryAmount)
@@ -384,9 +385,6 @@ module.exports = function (router) {
     returnDates(start,end)
     req.session.data.periodList = periodList
     req.session.data.periodNumber = periodList.length
-
-
-
     // used when predicting dates
     if (req.session.data.payFrequency === 'monthly') {
       res.redirect('/' + sprint + '/pay-dates-2')
