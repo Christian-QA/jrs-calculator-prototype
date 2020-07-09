@@ -36,64 +36,24 @@ module.exports = function (router) {
 
   // final calulation
   function finalCalc(req) {
-    // Average Daily pay calc
+
     if (req.session.data.salaryAmount) {
-      req.session.data.totalFurlough = Math.round(req.session.data.salaryAmount * 0.8)
-      // if (req.session.data.salaryAmount2) {
-      //   req.session.data.periodsalaryAmountTwo = Math.round(req.session.data.salaryAmount2 * 0.8)
-      // } else {
-      //   req.session.data.periodsalaryAmountTwo = req.session.data.periodsalaryAmount
-      // }
+      // reg and var pay calc
+      req.session.data.totalPeriodFurlough = Math.round(req.session.data.salaryAmount * 0.8)
     } else if (req.session.data.variableGrossSalary) {
+      // Average Daily pay calc
       var grossSalary = req.session.data.variableGrossSalary
-      //var claimMonthTotal =  16 //Math.round(req.session.data.claimPeriodStartMonth) + 12
       var monthStart = Math.round(req.session.data.employeeStartMonthCalc)
-      req.session.data.totalFurlough = ((Math.round((grossSalary ) / ((16 - monthStart) * 30))) * req.session.data.payFrequencyTime) * 0.8
+      req.session.data.totalPeriodFurlough = ((Math.round((grossSalary ) / ((16 - monthStart) * 30))) * req.session.data.payFrequencyTime) * 0.8
     }
     console.log('vary gross salary = ' + req.session.data.variableGrossSalary)
     console.log(' salary = ' + req.session.data.salaryAmount)
+    console.log(' period amount = ' + req.session.data.totalPeriodFurlough)
 
-    // console.log('claimMonthTotal = ' + claimMonthTotal)
-    // console.log('period ave = ' + req.session.data.periodsalaryAmount)
-
-    //  pay period one breakdown
-    // req.session.data.payPeriodOneFurloughSalary = req.session.data.periodsalaryAmount
-    // if (req.session.data.payPeriodOneFurloughSalary > 2500) {
-    //   req.session.data.payPeriodOneFurloughSalary = 2500
-    // }
+    req.session.data.totalFurlough = req.session.data.totalPeriodFurlough * req.session.data.periodNumber
     req.session.data.totalNic = Math.round(req.session.data.totalFurlough * 0.138)
     req.session.data.totalPension = Math.round(req.session.data.totalNic * 0.43)
 
-
-    //  pay period two // Days in pay period
-    // if (req.session.data.payTwo < 1) {
-    //   req.session.data.payTwo = 2365
-    // }
-    // req.session.data.payPeriodTwoFurloughSalary = req.session.data.periodsalaryAmountTwo
-    // if (req.session.data.payPeriodTwoFurloughSalary > 2500) {
-    //   req.session.data.payPeriodTwoFurloughSalary = 2500
-    // }
-    //req.session.data.payPeriodTwoNic = Math.round(req.session.data.payPeriodTwoFurloughSalary * 0.138)
-    // req.session.data.payPeriodTwoPension = Math.round(req.session.data.payPeriodTwoNic * 0.43)
-
-   // console.log('payPeriodOneFurloughSalary = ' + req.session.data.payPeriodOneFurloughSalary)
-    //console.log('payPeriodTwoFurloughSalary = ' + req.session.data.payPeriodTwoFurloughSalary)
-    // set the totals + req.session.data.payPeriodTwoFurloughSalary
-    // req.session.data.totalFurlough = req.session.data.payPeriodOneFurloughSalary
-
-    //req.session.data.totalNic = req.session.data.payPeriodOneNic + req.session.data.payPeriodTwoNic
-    // req.session.data.totalPension = req.session.data.payPeriodOnePension + req.session.data.payPeriodTwoPension
-
-    // var dataFreq = req.session.data.payFrequency
-    // if (dataFreq === 'fortnightly') {
-    //   req.session.data.totalFurlough = Math.round(req.session.data.totalFurlough + (req.session.data.totalFurlough * 0.333333333))
-    // } else if (dataFreq === 'weekly') {
-    //   // console.log('total here')
-    //   req.session.data.totalFurlough = req.session.data.totalFurlough * 2
-    //   if (req.session.data.totalFurlough > 2500) {
-    //     req.session.data.totalFurlough = 2500
-    //   }
-    // }
     console.log('total = ' + req.session.data.totalFurlough)
 
   }
@@ -423,6 +383,9 @@ module.exports = function (router) {
     }
     returnDates(start,end)
     req.session.data.periodList = periodList
+    req.session.data.periodNumber = periodList.length
+
+
 
     // used when predicting dates
     if (req.session.data.payFrequency === 'monthly') {
