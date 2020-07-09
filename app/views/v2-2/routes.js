@@ -347,23 +347,22 @@ module.exports = function (router) {
     req.session.data.payPeriodOneTitle = Math.round(req.session.data.payPeriodOneStartDay) + req.session.data.payPeriodOneTitleMonth
     //req.session.data.payPeriodOneTitle = moment(`2020-${Math.round(req.session.data.payPeriodOneStartMonth)}-${Math.round(req.session.data.payPeriodOneStartDay)}`).format("D MMMM YYYY")
     req.session.data.payPeriodOne = titleMonth + '' + Math.round(req.session.data.payPeriodOneStartDay)
+    req.session.data.payPeriodStart = Math.round(req.session.data.payPeriodOneStartDay) + 1
 
     // dummy data if doesn't exist
     if (!req.session.data.claimPeriodEndDay){
-      req.session.data.claimPeriodEndDay = '30'
-      req.session.data.claimPeriodEndMonthTitle = '6'
-      req.session.data.claimPeriodEndMonth = '6'
+      req.session.data.claimPeriodEndDay = '31'
+      req.session.data.claimPeriodEndMonthTitle = '7'
+      req.session.data.claimPeriodEndMonth = '7'
     }
     if (!req.session.data.payPeriodOneStartDay) {
-      req.session.data.payPeriodOneStartDay = '31'
-      req.session.data.payPeriodOneTitleMonth = '5'
+      req.session.data.payPeriodOneStartDay = '1'
+      req.session.data.payPeriodOneTitleMonth = '7'
     }
     if (!req.session.data.payFrequencyTime) {
       req.session.data.payFrequencyTime = '7'
       req.session.data.payFrequencyPeriod = 'days'
     }
-
-
 
     // periods list - use moment.js
     const start = moment(`2020-${req.session.data.payPeriodOneTitleMonth}-${Math.round(req.session.data.payPeriodOneStartDay)}`)
