@@ -55,7 +55,7 @@ Job Retention Scheme Calculator
         {% endif %} {% if data.phaseTwoGenerosityVal %}
         <div class="govuk-inset-text">
             <p>To be eligible for the grant you must pay employees 80% of their wages for the time they are furloughed.</p>
-            <p>The amount you must pay this employee in addition to the grant is <strong class="govuk-!-font-weight-bold">£{{data['totalToPay']}}</strong>.</p>
+            <p>The amount you must pay this employee in addition to the grant is <strong class="govuk-!-font-weight-bold">{% if data['totalToPay']%}£{{data['totalToPay']}}{% else %}£78.92{% endif %}</strong>.</p>
         </div>
         {% endif %}
         <p><span class="govuk-!-font-weight-bold"> Calculated on:</span> {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 August{% endif %} 2020 (Calculator Version v2.0) </p>
