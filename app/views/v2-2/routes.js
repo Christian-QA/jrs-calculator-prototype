@@ -61,7 +61,8 @@ module.exports = function (router) {
       req.session.data.totalPeriodFurlough = (req.session.data.totalMethod * rate).toFixed(2)
       req.session.data.totalPeriodNic = (req.session.data.totalPeriodFurlough * 0.138).toFixed(2)
       req.session.data.totalPeriodPension = (req.session.data.totalPeriodNic * 0.3).toFixed(2)
-      req.session.data.totalToPay =  (((req.session.data.totalMethod * rate) - req.session.data.totalPeriodFurlough) * req.session.data.periodNumber).toFixed(2)
+
+      req.session.data.totalToPay =  ((req.session.data.totalMethod * 0.1) * req.session.data.payFrequencyTime).toFixed(2)
 
     } else if (req.session.data.variableGrossSalary) {
       // Average Daily pay calc
@@ -72,10 +73,11 @@ module.exports = function (router) {
       req.session.data.totalPeriodFurlough = (req.session.data.totalPeriod * rate).toFixed(2)
       req.session.data.totalPeriodNic = (req.session.data.totalPeriodFurlough * 0.138).toFixed(2)
       req.session.data.totalPeriodPension = (req.session.data.totalPeriodNic * 0.3).toFixed(2)
-      req.session.data.totalToPay = (((req.session.data.totalPeriod * rate) - req.session.data.totalPeriodFurlough) * req.session.data.periodNumber).toFixed(2)
+      req.session.data.totalToPay =  ((req.session.data.totalPeriod * 0.1) * req.session.data.payFrequencyTime).toFixed(2)
     }
 
     req.session.data.totalFurlough = (req.session.data.totalPeriodFurlough * req.session.data.periodNumber).toFixed(2)
+
     req.session.data.totalNic =  (req.session.data.totalPeriodNic * req.session.data.periodNumber).toFixed(2)
     req.session.data.totalPension =  (req.session.data.totalPeriodPension * req.session.data.periodNumber).toFixed(2)
 
@@ -377,7 +379,12 @@ module.exports = function (router) {
       req.session.data.payFrequencyPeriod = 'days'
     }
 
-    var startDate = moment(`2020-${req.session.data.payPeriodOneTitleMonth}-${Math.round(req.session.data.payPeriodOneStartDay)}`).add(1, 'day')
+   if (req.session.data.payFrequencyTime !=1) {
+     var startDate = moment(`2020-${req.session.data.payPeriodOneTitleMonth}-${Math.round(req.session.data.payPeriodOneStartDay)}`).add(1, 'day')
+   } else {
+     var startDate = moment(`2020-${req.session.data.payPeriodOneTitleMonth}-${Math.round(req.session.data.payPeriodOneStartDay)}`)
+   }
+
 
     // periods list - use moment.js
     const start = startDate
