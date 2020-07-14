@@ -153,7 +153,7 @@ Job Retention Scheme Calculator
         {% if data['parttime' == 'yes'] %}
         <p>Then:</p>
         <ol class="govuk-list govuk-list--number">
-            <li>Start with £546.46 (total pay from same dates last year).</li>
+            <li>Start with {% if data['salaryAmount'] %} £{{data['salaryAmount']}} {% else %} £325.80 {% endif %} (total pay from same dates last year).</li>
             <li>Divide by {{data['normalHours']}} (usual hours).</li>
             <li>Multiply by {{data['partTimeHours']}} (furlough hours).</li>
         </ol>
@@ -176,38 +176,38 @@ Job Retention Scheme Calculator
             <li>Divide by {% if data['payFrequencyTime'] === 1 %}30{% else %}{{data['payFrequencyTime']}}{% endif %} (days in pay period).</li>
             <li>Multiply by 2 (furlough days).</li>
         </ol>
-        <p>Total for period one = £157.14 </p>
+        <p>Total for period one = {% if data['totalPeriodOne'] %} £{{data['totalPeriodOne']}} {% else %} £257.81 {% endif %} </p>
         <p>Then in period two:</p>
         <ol class="govuk-list govuk-list--number">
-            <li>Start with {% if data['salaryAmount'] %} £{{data['salaryAmount']}} {% else %} £345.81 {% endif %} (from pay period {{ periodDate.periodStart }} to {{ periodDate.periodEnd }} last year).</li>
-            <li>Divide by {{data['payFrequencyTime']}} (days in pay period).</li>
+            <li>Start with {% if data['salaryAmount2'] %} £{{data['salaryAmount2']}} {% else %} £345.81 {% endif %} (from pay period {{ periodDate.periodStart }} to {{ periodDate.periodEnd }} last year).</li>
+            <li>Divide by {% if data['payFrequencyTime'] === 1 %}30{% else %}{{data['payFrequencyTime']}}{% endif %} (days in pay period).</li>
             <li>Multiply by 5 (furlough days).</li>
         </ol>
-        <p>Total for period two = £428.57</p>
+        <p>Total for period two = {% if data['totalPeriodTwo'] %} £{{data['totalPeriodTwo']}} {% else %} £257.81 {% endif %}</p>
 
         <p>Then:</p>
         <ol class="govuk-list govuk-list--number">
-            <li>Add £157.14 + £428.57 (the totals from both pay periods).</li>
+            <li>Add {% if data['totalPeriodOne'] %} £{{data['totalPeriodOne']}} {% else %} £157.81 {% endif %} + {% if data['totalPeriodTwo'] %} £{{data['totalPeriodTwo']}} {% else %} £257.81 {% endif %} (the totals from both pay periods).</li>
         </ol>
-        <p>Total pay from same dates last year = £585.71</p>
+        <p>Total pay from same dates last year = {% if data['totalMethodOne'] %} £{{data['totalMethodOne']}} {% else %} £585.71 {% endif %}</p>
         <p>Method 2: take the total pay from employee start date (or 6 April 2019, if earlier) to day before the employee's furlough start date (or 5 April 2020, if later):</p>
         <ol class="govuk-list govuk-list--number">
             <li>Start with £{{data['varySalary']}} (total pay).</li>
             <li>Divide by 333 (days employed).</li>
             <li>Multiply by 5 (furlough days).</li>
         </ol>
-        <p>Total average pay last year = £546.46</p>
+        <p>Total average pay last year = {% if data['totalPeriod'] %} £{{data['totalPeriod']}} {% else %} £585.71 {% endif %}</p>
 
         <p>Then take the higher figure from methods 1 and 2:</p>
         <ul class="govuk-list govuk-list--bullet">
-            <li>£{{data['salaryAmount']}} (method 1: pay from same dates last year).</li>
-            <li>£245.46 (method 2: average pay last year).</li>
+            <li>{% if data['totalMethodOne'] %}£{{data['totalMethodOne']}} {% else %} £385.71 {% endif %} (method 1: pay from same dates last year).</li>
+            <li>{% if data['totalPeriod'] %} £{{data['totalPeriod']}} {% else %} £285.71 {% endif %} (method 2: average pay last year).</li>
         </ul>
-        <p>Total pay based on furlough days = £{{data['salaryAmount']}} </p>
+        <p>Total pay based on furlough days = {% if data['totalMethod'] %}£{{data['totalMethod']}} {% else %} £585.71 {% endif %} </p>
 
         <h3 class="govuk-heading-s">Furlough grant</h3>
         <ol class="govuk-list govuk-list--number">
-            <li>Take £{{data['salaryAmount']}} (pay based on furlough days).</li>
+            <li>Take {% if data['totalMethod'] %}£{{data['totalMethod']}} {% else %} £585.71 {% endif %} (pay based on furlough days).</li>
             <li>Multiply by {% if data.phaseTwoGenerosityVal %}{{data['phaseTwoGenerosityVal']}}{% else %}80% {% endif %}.</li>
         </ol>
         {% endif %}
@@ -233,7 +233,7 @@ Job Retention Scheme Calculator
 
         <h3 class="govuk-heading-s">Furlough grant</h3>
         <ol class="govuk-list govuk-list--number">
-            <li>Take £{{data['totalPeriod']}} (pay based on furlough days {% if data['parttime' === 'yes'] %}and furlough hours{% endif %}).</li>
+            <li>Take £{{data['totalMethod']}} (pay based on furlough days {% if data['parttime' === 'yes'] %}and furlough hours{% endif %}).</li>
             <li>Multiply by {% if data.phaseTwoGenerosityVal %}{{data['phaseTwoGenerosityVal']}}{% else %}80% {% endif %}.</li>
         </ol>
         {% endif %}

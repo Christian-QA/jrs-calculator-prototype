@@ -45,10 +45,23 @@ module.exports = function (router) {
     }
     if (req.session.data.salaryAmount) {
       // reg and var pay calc
-      req.session.data.totalPeriodFurlough = (req.session.data.salaryAmount * rate).toFixed(2)
+      var grossSalary = req.session.data.varySalary
+
+      req.session.data.totalPeriod = ((grossSalary / 333) * req.session.data.payFrequencyTime).toFixed(2)
+      req.session.data.totalPeriodOne = (req.session.data.salaryAmount * (2/7)).toFixed(2)
+      req.session.data.totalPeriodTwo = (req.session.data.salaryAmount2 * (5/7)).toFixed(2)
+      req.session.data.totalMethodOne =  (eval(req.session.data.totalPeriodOne) + eval(req.session.data.totalPeriodTwo)).toFixed(2)
+      if (req.session.data.totalMethodOne > req.session.data.totalPeriod){
+        req.session.data.totalMethod =  req.session.data.totalMethodOne
+      } else if (req.session.data.totalPeriod > req.session.data.totalMethodOne){
+        req.session.data.totalMethod = req.session.data.totalPeriod
+      } else {
+        req.session.data.totalMethod = req.session.data.salaryAmount
+      }
+      req.session.data.totalPeriodFurlough = (req.session.data.totalMethod * rate).toFixed(2)
       req.session.data.totalPeriodNic = (req.session.data.totalPeriodFurlough * 0.138).toFixed(2)
       req.session.data.totalPeriodPension = (req.session.data.totalPeriodNic * 0.3).toFixed(2)
-      req.session.data.totalToPay =  (((req.session.data.salaryAmount * 0.8) - req.session.data.totalPeriodFurlough) * req.session.data.periodNumber).toFixed(2)
+      req.session.data.totalToPay =  (((req.session.data.totalMethod * rate) - req.session.data.totalPeriodFurlough) * req.session.data.periodNumber).toFixed(2)
 
     } else if (req.session.data.variableGrossSalary) {
       // Average Daily pay calc
@@ -59,7 +72,7 @@ module.exports = function (router) {
       req.session.data.totalPeriodFurlough = (req.session.data.totalPeriod * rate).toFixed(2)
       req.session.data.totalPeriodNic = (req.session.data.totalPeriodFurlough * 0.138).toFixed(2)
       req.session.data.totalPeriodPension = (req.session.data.totalPeriodNic * 0.3).toFixed(2)
-      req.session.data.totalToPay = (((req.session.data.totalPeriod * 0.8) - req.session.data.totalPeriodFurlough) * req.session.data.periodNumber).toFixed(2)
+      req.session.data.totalToPay = (((req.session.data.totalPeriod * rate) - req.session.data.totalPeriodFurlough) * req.session.data.periodNumber).toFixed(2)
     }
 
     req.session.data.totalFurlough = (req.session.data.totalPeriodFurlough * req.session.data.periodNumber).toFixed(2)
@@ -364,8 +377,10 @@ module.exports = function (router) {
       req.session.data.payFrequencyPeriod = 'days'
     }
 
+    var startDate = moment(`2020-${req.session.data.payPeriodOneTitleMonth}-${Math.round(req.session.data.payPeriodOneStartDay)}`).add(1, 'day')
+
     // periods list - use moment.js
-    const start = moment(`2020-${req.session.data.payPeriodOneTitleMonth}-${Math.round(req.session.data.payPeriodOneStartDay)}`)
+    const start = startDate
     const end = moment(`2020-${req.session.data.claimPeriodEndMonthTitle}-${Math.round(req.session.data.claimPeriodEndDay)}`)
     const frequency = req.session.data.payFrequencyTime
     const timeFrame = req.session.data.payFrequencyPeriod
@@ -413,7 +428,7 @@ module.exports = function (router) {
     req.session.data.payPeriodTwo = titleMonth + '' + Math.round(req.session.data.payPeriodTwoStartDay)
 
     if (titleMonth > Math.round(req.session.data.claimPeriodEndMonth) || titleMonth === Math.round(req.session.data.claimPeriodEndMonth) && Math.round(req.session.data.payPeriodTwoStartDay) >= Math.round(req.session.data.claimPeriodEndDay)) {
-      res.redirect('/' + sprint + '/last-pay-date')
+      res.redirect('/' + sprint + '/pay-periods-list')
     } else {
       res.redirect('/' + sprint + '/pay-dates-3')
     }
@@ -427,7 +442,7 @@ module.exports = function (router) {
     req.session.data.payPeriodThree = titleMonth + '' + Math.round(req.session.data.payPeriodThreeStartDay)
 
     if (titleMonth > Math.round(req.session.data.claimPeriodEndMonth) || titleMonth === Math.round(req.session.data.claimPeriodEndMonth) && Math.round(req.session.data.payPeriodThreeStartDay) >= Math.round(req.session.data.claimPeriodEndDay)) {
-      res.redirect('/' + sprint + '/last-pay-date')
+      res.redirect('/' + sprint + '/pay-periods-list')
     } else {
       res.redirect('/' + sprint + '/pay-dates-4')
     }
@@ -441,7 +456,7 @@ module.exports = function (router) {
     req.session.data.payPeriodFour = titleMonth + '' + Math.round(req.session.data.payPeriodFourStartDay)
 
     if (titleMonth > Math.round(req.session.data.claimPeriodEndMonth) || titleMonth === Math.round(req.session.data.claimPeriodEndMonth) && Math.round(req.session.data.payPeriodFourStartDay) >= Math.round(req.session.data.claimPeriodEndDay)) {
-      res.redirect('/' + sprint + '/last-pay-date')
+      res.redirect('/' + sprint + '/pay-periods-list')
     } else {
       res.redirect('/' + sprint + '/pay-dates-5')
     }
@@ -456,7 +471,7 @@ module.exports = function (router) {
     req.session.data.payPeriodFive = titleMonth + '' + Math.round(req.session.data.payPeriodFiveStartDay)
 
     if (titleMonth > Math.round(req.session.data.claimPeriodEndMonth) || titleMonth === Math.round(req.session.data.claimPeriodEndMonth) && Math.round(req.session.data.payPeriodFiveStartDay) >= Math.round(req.session.data.claimPeriodEndDay)) {
-      res.redirect('/' + sprint + '/last-pay-date')
+      res.redirect('/' + sprint + '/pay-periods-list')
     } else {
       res.redirect('/' + sprint + '/pay-dates-6')
     }
@@ -467,7 +482,7 @@ module.exports = function (router) {
     req.session.data.payPeriodSixStartMonth = getMonthName(titleMonth)
     req.session.data.payPeriodSixTitle = Math.round(req.session.data.payPeriodSixStartDay) + req.session.data.payPeriodSixStartMonth
     req.session.data.payPeriodSix = titleMonth + '' + Math.round(req.session.data.payPeriodSixStartDay)
-    res.redirect('/' + sprint + '/last-pay-date')
+    res.redirect('/' + sprint + '/pay-periods-list')
   })
 
   // route - pay date
