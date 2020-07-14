@@ -395,7 +395,7 @@ Job Retention Scheme Calculator
 
         <br> {% if data.phaseTwoGenerosityVal %}
 
-        <p>To be eligible for the grant you must pay furloughed employees 80% of their wages for the time they are furloughed (up to a cap of £2,500 per month). The amount you must pay this employee in addition to the grant is <strong class="govuk-!-font-weight-bold">£110.58</strong>.</p>
+        <p>To be eligible for the grant you must pay furloughed employees 80% of their wages for the time they are furloughed (up to a cap of £2,500 per month). The amount you must pay this employee in addition to the grant is <strong class="govuk-!-font-weight-bold">{% if data['totalToPay']%}£{{data['totalToPay']}}{% else %}£78.92{% endif %}</strong>.</p>
 
         {% endif %}
         <p>The results of the calculation rely on the accuracy of the information you entered, for which you are responsible. You cannot claim for more money than you are going to pay out under the scheme.</p>
