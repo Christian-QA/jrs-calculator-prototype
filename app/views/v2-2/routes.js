@@ -49,7 +49,11 @@ module.exports = function (router) {
 
       req.session.data.totalPeriod = ((grossSalary / 333) * req.session.data.payFrequencyTime).toFixed(2)
       req.session.data.totalPeriodOne = (req.session.data.salaryAmount * (2/7)).toFixed(2)
-      req.session.data.totalPeriodTwo = (req.session.data.salaryAmount2 * (5/7)).toFixed(2)
+      if (req.session.data.salaryAmount2) {
+        req.session.data.totalPeriodTwo = (req.session.data.salaryAmount2 * (5/7)).toFixed(2)
+      } else {
+        req.session.data.totalPeriodTwo = 0
+      }
       req.session.data.totalMethodOne =  (eval(req.session.data.totalPeriodOne) + eval(req.session.data.totalPeriodTwo)).toFixed(2)
       if (req.session.data.totalMethodOne > req.session.data.totalPeriod){
         req.session.data.totalMethod =  req.session.data.totalMethodOne
@@ -58,6 +62,10 @@ module.exports = function (router) {
       } else {
         req.session.data.totalMethod = req.session.data.salaryAmount
       }
+      if (req.session.data.parttime === 'yes'){
+        req.session.data.totalMethod = ((req.session.data.totalMethod / req.session.data.normalHours) * req.session.data.furloughHours).toFixed(2)
+      }
+
       req.session.data.totalPeriodFurlough = (req.session.data.totalMethod * rate).toFixed(2)
       req.session.data.totalPeriodNic = (req.session.data.totalPeriodFurlough * 0.138).toFixed(2)
       req.session.data.totalPeriodPension = (req.session.data.totalPeriodNic * 0.3).toFixed(2)
@@ -69,13 +77,20 @@ module.exports = function (router) {
       var grossSalary = req.session.data.variableGrossSalary
       var monthStart = Math.round(req.session.data.employeeStartMonthCalc)
       req.session.data.daysCalc = Math.round((16 - monthStart) * 30)
-      req.session.data.totalPeriod = ((grossSalary / req.session.data.daysCalc) * req.session.data.payFrequencyTime).toFixed(2)
+      req.session.data.totalPeriodDays = ((grossSalary / req.session.data.daysCalc) * req.session.data.payFrequencyTime).toFixed(2)
+      if (req.session.data.parttime === 'yes') {
+        req.session.data.totalPeriod = ((req.session.data.totalPeriodDays / req.session.data.normalHours) * req.session.data.furloughHours).toFixed(2)
+      } else {
+        req.session.data.totalPeriod = req.session.data.totalPeriodDays
+      }
       req.session.data.totalPeriodFurlough = (req.session.data.totalPeriod * rate).toFixed(2)
       req.session.data.totalPeriodNic = (req.session.data.totalPeriodFurlough * 0.138).toFixed(2)
       req.session.data.totalPeriodPension = (req.session.data.totalPeriodNic * 0.3).toFixed(2)
       req.session.data.totalToPay =  ((req.session.data.totalPeriod * 0.1) * req.session.data.payFrequencyTime).toFixed(2)
     }
 
+
+    console.log('part time = ' + req.session.data.parttime)
     req.session.data.totalFurlough = (req.session.data.totalPeriodFurlough * req.session.data.periodNumber).toFixed(2)
 
     req.session.data.totalNic =  (req.session.data.totalPeriodNic * req.session.data.periodNumber).toFixed(2)
@@ -339,6 +354,7 @@ module.exports = function (router) {
 
   // route - route-parttime-hours
   router.post('/' + sprint + '/route-part-time-hours', function (req, res) {
+    req.session.data.furloughHours = req.session.data.normalHours - req.session.data.partTimeHours
     if (req.session.data.phaseTwoNicPension){
       finalCalc(req)
       res.redirect('/' + sprint + '/confirmation')
