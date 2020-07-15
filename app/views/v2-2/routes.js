@@ -360,7 +360,7 @@ module.exports = function (router) {
     var titleMonth = Math.round(req.session.data.payPeriodOneStartMonth)
     req.session.data.payPeriodOneTitleMonth = getMonthName(titleMonth)
     req.session.data.payPeriodOneTitle = Math.round(req.session.data.payPeriodOneStartDay) + req.session.data.payPeriodOneTitleMonth
-    //req.session.data.payPeriodOneTitle = moment(`2020-${Math.round(req.session.data.payPeriodOneStartMonth)}-${Math.round(req.session.data.payPeriodOneStartDay)}`).format("D MMMM YYYY")
+
     req.session.data.payPeriodOne = titleMonth + '' + Math.round(req.session.data.payPeriodOneStartDay)
     req.session.data.payPeriodStart = Math.round(req.session.data.payPeriodOneStartDay) + 1
 
@@ -423,8 +423,7 @@ module.exports = function (router) {
       res.redirect('/' + sprint + '/pay-periods-list')
     }
 
-    // old method - remove if using pay period list
-     //res.redirect('/' + sprint + '/pay-dates-2')
+
   })
 
   // route - pay dates 2
@@ -498,8 +497,7 @@ module.exports = function (router) {
     var titleMonth = Math.round(req.session.data.payDateMonth)
     req.session.data.payDateMonthTitle = getMonthName(titleMonth)
     req.session.data.payTaxDateTitle = Math.round(req.session.data.payDateDay) + req.session.data.payDateMonthTitle
-    //req.session.data.pastOneMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth) - 1)
-    //req.session.data.pastTwoMonthTitle = getMonthName(Math.round(req.session.data.payDateMonth))
+
     if (req.session.data.varyMoreThan === 'true') {
           if ( req.session.data.periodList) {
             req.session.data.periodTitle =  req.session.data.periodList[0].periodStart + ' to ' + req.session.data.periodList[0].periodEnd
