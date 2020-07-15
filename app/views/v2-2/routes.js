@@ -47,11 +47,17 @@ module.exports = function (router) {
       // reg and var pay calc
       var grossSalary = req.session.data.varySalary
 
-      req.session.data.totalPeriod = ((grossSalary / 333) * req.session.data.payFrequencyTime).toFixed(2)
-      req.session.data.totalPeriodOne = (req.session.data.salaryAmount * (2/7)).toFixed(2)
+      if (req.session.data.payFrequencyTime === 1) {
+        req.session.data.totalPeriod = ((grossSalary / 333) * 30).toFixed(2)
+      } else {
+        req.session.data.totalPeriod = ((grossSalary / 333) * req.session.data.payFrequencyTime).toFixed(2)
+      }
+
       if (req.session.data.salaryAmount2) {
+        req.session.data.totalPeriodOne = (req.session.data.salaryAmount * (2/7)).toFixed(2)
         req.session.data.totalPeriodTwo = (req.session.data.salaryAmount2 * (5/7)).toFixed(2)
       } else {
+        req.session.data.totalPeriodOne = req.session.data.salaryAmount
         req.session.data.totalPeriodTwo = 0
       }
       req.session.data.totalMethodOne =  (eval(req.session.data.totalPeriodOne) + eval(req.session.data.totalPeriodTwo)).toFixed(2)

@@ -169,19 +169,27 @@ Job Retention Scheme Calculator
 
         <!-- CYLB pay-->{% if data['varyMoreThan'] %}
         <p>Method 1: take pay from same dates last year.</p>
-
+        {% if data['totalPeriodTwo'] > 0 %}
         <p>Last year’s dates overlap two pay periods so in period one: </p>
+        {% endif %}
         <ol class="govuk-list govuk-list--number">
             <li>Start with {% if data['salaryAmount'] %} £{{data['salaryAmount']}} {% else %} £345.81 {% endif %} (from pay period {{ periodDate.periodStart }} to {{ periodDate.periodEnd }} last year).</li>
             <li>Divide by {% if data['payFrequencyTime'] === 1 %}30{% else %}{{data['payFrequencyTime']}}{% endif %} (days in pay period).</li>
-            <li>Multiply by 2 (furlough days).</li>
+            {% if data['salaryAmount2'] %}
+            <li>Multiply by 5 (furlough days).</li>
+            {% else %}
+            <li>Multiply by {% if data['payFrequencyTime'] === 1 %}30{% else %}{{data['payFrequencyTime']}}{% endif %} (furlough days).</li>
+            {% endif %}
         </ol>
+        {% if data['totalPeriodTwo'] > 0 %}
         <p>Total for period one = {% if data['totalPeriodOne'] %} £{{data['totalPeriodOne']}} {% else %} £257.81 {% endif %} </p>
+        {% endif %}
+        {% if data['totalPeriodTwo'] > 0 %}
         <p>Then in period two:</p>
         <ol class="govuk-list govuk-list--number">
             <li>Start with {% if data['salaryAmount2'] %} £{{data['salaryAmount2']}} {% else %} £345.81 {% endif %} (from pay period {{ periodDate.periodStart }} to {{ periodDate.periodEnd }} last year).</li>
             <li>Divide by {% if data['payFrequencyTime'] === 1 %}30{% else %}{{data['payFrequencyTime']}}{% endif %} (days in pay period).</li>
-            <li>Multiply by 5 (furlough days).</li>
+            <li>Multiply by 2 (furlough days).</li>
         </ol>
         <p>Total for period two = {% if data['totalPeriodTwo'] %} £{{data['totalPeriodTwo']}} {% else %} £257.81 {% endif %}</p>
 
@@ -189,12 +197,17 @@ Job Retention Scheme Calculator
         <ol class="govuk-list govuk-list--number">
             <li>Add {% if data['totalPeriodOne'] %} £{{data['totalPeriodOne']}} {% else %} £157.81 {% endif %} + {% if data['totalPeriodTwo'] %} £{{data['totalPeriodTwo']}} {% else %} £257.81 {% endif %} (the totals from both pay periods).</li>
         </ol>
+        {% endif %}
         <p>Total pay from same dates last year = {% if data['totalMethodOne'] %} £{{data['totalMethodOne']}} {% else %} £585.71 {% endif %}</p>
         <p>Method 2: take the total pay from employee start date (or 6 April 2019, if earlier) to day before the employee's furlough start date (or 5 April 2020, if later):</p>
         <ol class="govuk-list govuk-list--number">
             <li>Start with £{{data['varySalary']}} (total pay).</li>
             <li>Divide by 333 (days employed).</li>
+            {% if data['salaryAmount2'] %}
             <li>Multiply by 5 (furlough days).</li>
+            {% else %}
+            <li>Multiply by {% if data['payFrequencyTime'] === 1 %}30{% else %}{{data['payFrequencyTime']}}{% endif %} (furlough days).</li>
+            {% endif %}
         </ol>
         <p>Total average pay last year = {% if data['totalPeriod'] %} £{{data['totalPeriod']}} {% else %} £585.71 {% endif %}</p>
 
@@ -218,7 +231,7 @@ Job Retention Scheme Calculator
         <ol class="govuk-list govuk-list--number">
             <li>Start with {% if data['variableGrossSalary'] %} £{{data['variableGrossSalary']}} {% else %} £13567.81 {% endif %} (total pay).</li>
             <li>Divide by {{data['daysCalc']}} (days employed).</li>
-            <li>Multiply by 7 (furlough days).</li>
+            <li>Multiply by {% if data['payFrequencyTime'] === 1 %}30{% else %}{{data['payFrequencyTime']}}{% endif %} (furlough days).</li>
         </ol>
         <p>Total pay based on furlough days = £{{data['totalPeriodDays']}}</p>
         {% if data['parttime'] === 'yes' %}
