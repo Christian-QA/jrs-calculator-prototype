@@ -726,6 +726,7 @@ module.exports = function (router) {
     res.redirect('/' + sprint + '/confirmation')
   })
 
+
   // another calculation
   router.post('/' + sprint + '/another-calculation', function (req, res) {
       // For persisting pay periods
@@ -775,4 +776,5 @@ module.exports = function (router) {
       res.redirect('/' + sprint + '/furlough-start')
     }
   })
+
 }
