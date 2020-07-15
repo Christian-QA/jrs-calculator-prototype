@@ -1,0 +1,28 @@
+<p>Take the total pay from employee start date (or 6 April 2019, if earlier) to day before the employee's furlough start date (or 5 April 2020, if later):</p>
+<ol class="govuk-list govuk-list--number">
+    <li>Start
+        with {% if data['variableGrossSalary'] %} £{{ data['variableGrossSalary'] }} {% else %} £13567.81 {% endif %} (total pay).
+    </li>
+    <li>Divide by {{ data['daysCalc'] }} (days employed).</li>
+    <li>Multiply by {% if data['payFrequencyTime'] === 1 %}30{% else %}{{ data['payFrequencyTime'] }}{% endif %} (furlough days).
+    </li>
+</ol>
+<p>Total pay based on furlough days = £{{ data['totalPeriodDays'] }}</p>
+
+{% if data['parttime'] === 'yes' %}
+    <p>Then:</p>
+    <ol class="govuk-list govuk-list--number">
+        <li>Start with £{{ data['totalPeriodDays'] }} (average pay from last year).</li>
+        <li>Divide by {% if data['normalHours'] %}{{data['normalHours']}}{% else %} 37{% endif %} (usual hours).</li>
+        <li>Multiply by {% if data['furloughHours'] %}{{data['furloughHours']}} 20{% endif %}(furlough hours).</li>
+    </ol>
+    <p>Total pay based on hours worked in this pay period = {% if data['totalPeriod'] %} £{{ data['totalPeriod'] }} {% else %} £321.44 {% endif %}</p>
+{% endif %}
+
+<h3 class="govuk-heading-s">Furlough grant</h3>
+<ol class="govuk-list govuk-list--number">
+    <li>Take £{{ data['totalPeriod'] }} (pay based on furlough days {% if data['parttime'] === 'yes' %}and furlough hours{% endif %}).
+    </li>
+    <li>Multiply by {% if data.phaseTwoGenerosityVal %}{{ data['phaseTwoGenerosityVal'] }}{% else %}80%{% endif %}{% if data.phaseTwoGenerosityMonth %} ({{ data['phaseTwoGenerosityMonth'] }} rate){% endif %}.
+    </li>
+</ol>
