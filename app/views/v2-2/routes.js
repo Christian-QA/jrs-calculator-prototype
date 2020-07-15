@@ -61,11 +61,16 @@ module.exports = function (router) {
         req.session.data.totalPeriodTwo = 0
       }
       req.session.data.totalMethodOne =  (eval(req.session.data.totalPeriodOne) + eval(req.session.data.totalPeriodTwo)).toFixed(2)
-      if (req.session.data.totalMethodOne > req.session.data.totalPeriod){
-        req.session.data.totalMethod =  req.session.data.totalMethodOne
-      } else if (req.session.data.totalPeriod > req.session.data.totalMethodOne){
-        req.session.data.totalMethod = req.session.data.totalPeriod
+      if (grossSalary) {
+        if (req.session.data.totalMethodOne > req.session.data.totalPeriod){
+          console.log('one')
+          req.session.data.totalMethod =  req.session.data.totalMethodOne
+        } else if (req.session.data.totalPeriod > req.session.data.totalMethodOne) {
+          console.log('two')
+          req.session.data.totalMethod = req.session.data.totalPeriod
+        }
       } else {
+        console.log('three')
         req.session.data.totalMethod = req.session.data.salaryAmount
       }
       if (req.session.data.parttime === 'yes'){
@@ -320,8 +325,8 @@ module.exports = function (router) {
   // route- salary
   router.post('/' + sprint + '/route-reg-salary', function (req, res) {
     req.session.data.salaryAmount = req.session.data.salary
-    req.session.data.salaryFurlough = Math.round(req.session.data.salary * 0.8)
-  console.log()
+    //req.session.data.salaryFurlough = Math.round(req.session.data.salary * 0.8)
+
     if (req.session.data.phaseTwo) {
       res.redirect('/' + sprint + '/part-time-question')
     } else {
