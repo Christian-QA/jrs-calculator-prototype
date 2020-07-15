@@ -54,8 +54,8 @@ module.exports = function (router) {
       }
 
       if (req.session.data.salaryAmount2) {
-        req.session.data.totalPeriodOne = (req.session.data.salaryAmount * (2/7)).toFixed(2)
-        req.session.data.totalPeriodTwo = (req.session.data.salaryAmount2 * (5/7)).toFixed(2)
+        req.session.data.totalPeriodOne = (req.session.data.salaryAmount * (5/7)).toFixed(2)
+        req.session.data.totalPeriodTwo = (req.session.data.salaryAmount2 * (2/7)).toFixed(2)
       } else {
         req.session.data.totalPeriodOne = req.session.data.salaryAmount
         req.session.data.totalPeriodTwo = 0
@@ -63,18 +63,19 @@ module.exports = function (router) {
       req.session.data.totalMethodOne =  (eval(req.session.data.totalPeriodOne) + eval(req.session.data.totalPeriodTwo)).toFixed(2)
       if (grossSalary) {
         if (req.session.data.totalMethodOne > req.session.data.totalPeriod){
-          console.log('one')
-          req.session.data.totalMethod =  req.session.data.totalMethodOne
+
+          req.session.data.totalPeriodDays =  req.session.data.totalMethodOne
         } else if (req.session.data.totalPeriod > req.session.data.totalMethodOne) {
-          console.log('two')
-          req.session.data.totalMethod = req.session.data.totalPeriod
+
+          req.session.data.totalPeriodDays = req.session.data.totalPeriod
         }
       } else {
-        console.log('three')
-        req.session.data.totalMethod = req.session.data.salaryAmount
+        req.session.data.totalPeriodDays = req.session.data.salaryAmount
       }
       if (req.session.data.parttime === 'yes'){
-        req.session.data.totalMethod = ((req.session.data.totalMethod / req.session.data.normalHours) * req.session.data.furloughHours).toFixed(2)
+        req.session.data.totalMethod = ((req.session.data.totalPeriodDays / req.session.data.normalHours) * req.session.data.furloughHours).toFixed(2)
+      } else {
+        req.session.data.totalMethod = req.session.data.totalPeriodDays
       }
 
       req.session.data.totalPeriodFurlough = (req.session.data.totalMethod * rate).toFixed(2)
