@@ -27,7 +27,9 @@ Job Retention Scheme Calculator
                         Has the employee's furlough ended?
                         {% else %}
 
-                        On {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}31 July{% endif %}, is this employee still furloughed?
+<!--                        On {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}31 July{% endif %}, is this employee still furloughed?-->
+                        On {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}31 July{% endif %}, is this employee still fully furloughed?
+
                         {% endif %}
                     </h1>
 
@@ -41,7 +43,7 @@ Job Retention Scheme Calculator
                             {% if data.phaseOne %}
                                 Yes
                             {% else %}
-                                Yes - full furlough
+                            Yes  <!--    - full furlough-->
                             {% endif %}
                         </label>
                     </div>
@@ -49,7 +51,8 @@ Job Retention Scheme Calculator
                     <div class="govuk-radios__item">
                         <input class="govuk-radios__input" id="furloughQuestion-2" name="furloughEndQuestion" type="radio" value="yesFlex">
                         <label class="govuk-label govuk-radios__label" for="furloughQuestion-2">
-                            Yes - flexible furlough
+                            No - Worked during the claim period (flexible furlough)
+                            <!-- No - flexible furlough-->
                         </label>
                     </div>
                     {% endif %}
@@ -59,7 +62,7 @@ Job Retention Scheme Calculator
                             {% if data.phaseOne %}
                             No, it is ongoing
                             {% else %}
-                            No - furlough has ended
+                          No - employee is no longer working for the company<!--  furlough has ended-->
                             {% endif %}
                         </label>
                     </div>
