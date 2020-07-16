@@ -25,7 +25,10 @@ Job Retention Scheme Calculator
                When did their furlough end<!--before {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 August{% endif %}-->?
               </h1>
             </legend>
-            {% if data.phaseTwo %}<p>From 1 July, you can bring employees back to work while their furlough is ongoing. You can claim for their usual hours minus the hours they actually worked. </p>{% endif %}
+<!--            {% if not data.phaseOne %}<p>From 1 July, you can bring employees back to work while their furlough is ongoing. You can claim for their usual hours minus the hours they actually worked. </p>{% endif %}-->
+
+
+            {% if not data.phaseOne %}<p>From 1 July, you can bring employees back to work while their furlough is ongoing. If the employee's furlough has ended and they either left the company or have not done any more work during the claim then please enter the date you are claiming a furlough grant up to. </p>{% endif %}
 
 <!--            <p>To claim under the scheme an employee must be furloughed for at least 3 weeks. </p>-->
 
