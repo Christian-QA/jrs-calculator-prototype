@@ -17,7 +17,14 @@ Job Retention Scheme Calculator
 
     <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">
       <!--Does this employee get any additional payments?-->
-      Has this employee been flexibly furloughed during this claim period?
+<!--      Has this employee been flexibly furloughed during this claim period?-->
+      Was this employee flexibly furloughed before {% if data['furloughEndDate']%}
+      {{data['furloughEndDate']}}?
+      {% else %}
+      15 July?
+      {% endif %}
+
+
     </h1>
 
     <p>‘Flexible furlough’ means bringing an employee back to work part time while their furlough is ongoing. </p>
