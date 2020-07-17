@@ -79,9 +79,8 @@ module.exports = function (router) {
       }
 
       req.session.data.totalPeriodFurlough = (req.session.data.totalMethod * rate).toFixed(2)
-      req.session.data.totalPeriodNic = (req.session.data.totalPeriodFurlough * 0.138).toFixed(2)
-      req.session.data.totalPeriodPension = (req.session.data.totalPeriodNic * 0.3).toFixed(2)
-
+      req.session.data.totalPeriodNic = ((req.session.data.totalPeriodFurlough - 166) * 0.138).toFixed(2)
+      req.session.data.totalPeriodPension = ((req.session.data.totalPeriodFurlough - 118) * 0.03).toFixed(2)
       req.session.data.totalToPay =  ((req.session.data.totalMethod * 0.1) * req.session.data.payFrequencyTime).toFixed(2)
 
     } else if (req.session.data.variableGrossSalary) {
@@ -96,8 +95,8 @@ module.exports = function (router) {
         req.session.data.totalPeriod = req.session.data.totalPeriodDays
       }
       req.session.data.totalPeriodFurlough = (req.session.data.totalPeriod * rate).toFixed(2)
-      req.session.data.totalPeriodNic = (req.session.data.totalPeriodFurlough * 0.138).toFixed(2)
-      req.session.data.totalPeriodPension = (req.session.data.totalPeriodNic * 0.3).toFixed(2)
+      req.session.data.totalPeriodNic = ((req.session.data.totalPeriodFurlough - 166) * 0.138).toFixed(2)
+      req.session.data.totalPeriodPension = ((req.session.data.totalPeriodFurlough - 118) * 0.03).toFixed(2)
       req.session.data.totalToPay =  ((req.session.data.totalPeriod * 0.1) * req.session.data.payFrequencyTime).toFixed(2)
     }
 
