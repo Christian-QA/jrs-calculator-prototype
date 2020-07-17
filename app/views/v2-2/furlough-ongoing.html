@@ -24,50 +24,59 @@ Job Retention Scheme Calculator
 
                     <h1 class="govuk-fieldset__heading">
                        {% if data.phaseOne %}
-                        Has the employee's furlough ended?
+                            Has the employee's furlough ended?
                         {% else %}
-
 <!--                        On {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}31 July{% endif %}, is this employee still furloughed?-->
                         On {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}31 July{% endif %}, is this employee still fully furloughed?
-
                         {% endif %}
                     </h1>
 
                 </legend>
                 {% if not data.phaseOne %}<p>Employees can now be flexibly furloughed. You can claim for their usual working hours minus the hours they actually worked. </p>{% endif %}
-                <div class="govuk-radios">
 
+
+                <div class="govuk-radios">
+                    {% if data.phaseOne %}
                     <div class="govuk-radios__item">
                         <input class="govuk-radios__input" id="furloughQuestion" name="furloughEndQuestion" type="radio" value="yes">
                         <label class="govuk-label govuk-radios__label" for="furloughQuestion">
-                            {% if data.phaseOne %}
-                                Yes
-                            {% else %}
-                            Yes  <!--    - full furlough-->
-                            {% endif %}
+                            Yes
                         </label>
                     </div>
-                    {% if not data.phaseOne %}
-                    <div class="govuk-radios__item">
-                        <input class="govuk-radios__input" id="furloughQuestion-2" name="furloughEndQuestion" type="radio" value="yesFlex">
-                        <label class="govuk-label govuk-radios__label" for="furloughQuestion-2">
-                            No - worked during the claim period (flexible furlough)
-                            <!-- No - flexible furlough-->
-                        </label>
-                    </div>
-                    {% endif %}
+
                     <div class="govuk-radios__item">
                         <input class="govuk-radios__input" id="furloughQuestion-3" name="furloughEndQuestion" type="radio" value="no">
                         <label class="govuk-label govuk-radios__label" for="furloughQuestion-3">
-                            {% if data.phaseOne %}
                             No, it is ongoing
-                            {% else %}
-                          No - employee is no longer working for the company<!--  furlough has ended-->
-                            {% endif %}
                         </label>
                     </div>
-                    <br><br>
+                    {% else %}
+                    <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="furloughQuestion" name="furloughEndQuestion" type="radio" value="yes">
+                        <label class="govuk-label govuk-radios__label" for="furloughQuestion">
+                            Yes  <!--    - full furlough-->
+                        </label>
+                    </div>
 
+                    <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="furloughQuestion-2" name="furloughEndQuestion" type="radio" value="yesFlex">
+                        <label class="govuk-label govuk-radios__label" for="furloughQuestion-2">
+                            No, they worked during the claim period (flexibly furloughed)
+                            <!-- No - flexible furlough-->
+                        </label>
+                    </div>
+
+                    <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="furloughQuestion-3" name="furloughEndQuestion" type="radio" value="no">
+                        <label class="govuk-label govuk-radios__label" for="furloughQuestion-3">
+                            No, they are no longer an employee <!--  furlough has ended-->
+                        </label>
+                    </div>
+
+
+                    {% endif %}
+
+                    <br><br>
                 </div>
             </fieldset>
 

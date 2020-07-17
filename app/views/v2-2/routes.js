@@ -180,6 +180,7 @@ module.exports = function (router) {
         }
       }
     } else {
+      console.log(req.session.data.furloughEndQuestion)
       if (data === 'no') {
         res.redirect('/' + sprint + '/furlough-end')
       } else {
@@ -207,6 +208,7 @@ module.exports = function (router) {
     req.session.data.furloughEndMonthTitle = getMonthName(titleMonth)
     req.session.data.furloughEndTitle = Math.round(req.session.data.furloughEndDay) + req.session.data.furloughEndMonthTitle
     req.session.data.furloughEnd = titleMonth + '' + Math.round(req.session.data.furloughEndDay)
+    req.session.data.furloughEndDate = Math.round(req.session.data.furloughEndDay) + '' +  getMonthName(titleMonth)
     res.redirect('/' + sprint + '/pay-frequency')
   })
 
@@ -314,10 +316,33 @@ module.exports = function (router) {
     // res.redirect('/' + sprint + '/topup-question')
     console.log(req.session.data.furloughEndQuestion)
 
-    if (req.session.data.phaseTwo) {
-      res.redirect('/' + sprint + '/part-time-question')
-    } else {
+    if (req.session.data.phaseOne) {
       res.redirect('/' + sprint + '/topup-question')
+    } else {
+      if (req.session.data.phaseOne) {
+        res.redirect('/' + sprint + '/topup-question')
+      } else {
+        if (req.session.data.furloughEndQuestion === 'no' ){
+          res.redirect('/' + sprint + '/part-time-question')
+        } else if (req.session.data.furloughEndQuestion === 'yes' ){
+          if(req.session.data.phaseOne) {
+            res.redirect('/' + sprint + '/ni-category-letter')
+          } else {
+            finalCalc(req)
+            res.redirect('/' + sprint + '/confirmation')
+          }
+        } else {
+          req.session.data.parttime = 'yes'
+          if (!req.session.data.periodList[1]) {
+            req.session.data.periodTitle = req.session.data.periodList[0].periodStart + ' to ' + req.session.data.periodList[0].periodEnd
+            res.redirect('/' + sprint + '/part-time-normal-hours')
+          } else {
+            res.redirect('/' + sprint + '/part-time-periods')
+          }
+        }
+
+      }
+
     }
 
 
@@ -328,10 +353,27 @@ module.exports = function (router) {
     req.session.data.salaryAmount = req.session.data.salary
     //req.session.data.salaryFurlough = Math.round(req.session.data.salary * 0.8)
 
-    if (req.session.data.phaseTwo) {
-      res.redirect('/' + sprint + '/part-time-question')
-    } else {
+    if (req.session.data.phaseOne) {
       res.redirect('/' + sprint + '/topup-question')
+    } else {
+      if (req.session.data.furloughEndQuestion === 'no' ){
+        res.redirect('/' + sprint + '/part-time-question')
+      } else if (req.session.data.furloughEndQuestion === 'yes' ){
+        if(req.session.data.phaseOne) {
+          res.redirect('/' + sprint + '/ni-category-letter')
+        } else {
+          finalCalc(req)
+          res.redirect('/' + sprint + '/confirmation')
+        }
+      } else {
+        req.session.data.parttime = 'yes'
+        if (!req.session.data.periodList[1]) {
+          req.session.data.periodTitle = req.session.data.periodList[0].periodStart + ' to ' + req.session.data.periodList[0].periodEnd
+          res.redirect('/' + sprint + '/part-time-normal-hours')
+        } else {
+          res.redirect('/' + sprint + '/part-time-periods')
+        }
+      }
 
     }
 
@@ -341,7 +383,17 @@ module.exports = function (router) {
   router.post('/' + sprint + '/route-part-time-question', function (req, res) {
     var data = req.session.data.parttime
     if (data === 'yes') {
-      res.redirect('/' + sprint + '/part-time-periods')
+      if (!req.session.data.periodList[1]) {
+        if (req.session.data.furloughEndDate) {
+          req.session.data.periodTitle = req.session.data.periodList[0].periodStart + ' to ' + req.session.data.furloughEndDate
+        } else {
+          req.session.data.periodTitle = req.session.data.periodList[0].periodStart + ' to ' + req.session.data.periodList[0].periodEnd
+        }
+
+        res.redirect('/' + sprint + '/part-time-normal-hours')
+      } else {
+        res.redirect('/' + sprint + '/part-time-periods')
+      }
     } else if (data === 'no') {
       if (req.session.data.phaseTwoNicPension){
         finalCalc(req)
@@ -639,10 +691,28 @@ module.exports = function (router) {
       }
     }
     if (req.session.data.furloughStart <= req.session.data.claimStart) {
-      if (req.session.data.phaseTwo) {
-        res.redirect('/' + sprint + '/part-time-question')
-      } else {
+      if (req.session.data.phaseOne) {
         res.redirect('/' + sprint + '/topup-question')
+      } else {
+        if (req.session.data.furloughEndQuestion === 'no' ){
+          res.redirect('/' + sprint + '/part-time-question')
+        } else if (req.session.data.furloughEndQuestion === 'yes' ){
+          if(req.session.data.phaseOne) {
+            res.redirect('/' + sprint + '/ni-category-letter')
+          } else {
+            finalCalc(req)
+            res.redirect('/' + sprint + '/confirmation')
+          }
+        } else {
+          req.session.data.parttime = 'yes'
+          if (!req.session.data.periodList[1]) {
+            req.session.data.periodTitle = req.session.data.periodList[0].periodStart + ' to ' + req.session.data.periodList[0].periodEnd
+            res.redirect('/' + sprint + '/part-time-normal-hours')
+          } else {
+            res.redirect('/' + sprint + '/part-time-periods')
+          }
+        }
+
       }
 
 
