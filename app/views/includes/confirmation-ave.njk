@@ -21,7 +21,7 @@
 
 <h3 class="govuk-heading-s">Furlough grant</h3>
 <ol class="govuk-list govuk-list--number">
-    <li>Take £{{ data['totalPeriod'] }} (pay based on furlough days {% if data['parttime'] === 'yes' %}and furlough hours{% endif %}).
+    <li>Take £{{ data['totalMethod'] }} (pay based on furlough days {% if data['parttime'] === 'yes' %}and furlough hours{% endif %}).
     </li>
     <li>Multiply by {% if data.phaseTwoGenerosityVal %}{{ data['phaseTwoGenerosityVal'] }}{% else %}80%{% endif %}{% if data.phaseTwoGenerosityMonth %} ({{ data['phaseTwoGenerosityMonth'] }} rate){% endif %}.
     </li>
