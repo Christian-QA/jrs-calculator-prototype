@@ -105,6 +105,7 @@ module.exports = function (router) {
     res.redirect('/index')
   })
 
+
   // route-claim date
   router.post('/' + sprint + '/route-claim-start', function (req, res) {
     var titleMonth = Math.round(req.session.data.claimPeriodStartMonth)
@@ -118,6 +119,7 @@ module.exports = function (router) {
      }
     if (titleMonth >= 8 ) {
       req.session.data.phaseTwoNicPension = true
+      req.session.data.phaseTwoNicInfo = true
     }
     if (titleMonth >= 9 ) {
       req.session.data.phaseTwoNicInfo = false
