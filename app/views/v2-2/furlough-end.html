@@ -22,19 +22,15 @@ Job Retention Scheme Calculator
           <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
               <h1 class="govuk-fieldset__heading">
-
-
                 {% if not data.phaseOne %}
                 What’s the last date this employee worked for you?
-
                 {% else %}
                 When did their furlough end?
                 {% endif %}
 
-                <!--before {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}17 August{% endif %}-->
               </h1>
             </legend>
-<!--            {% if not data.phaseOne %}<p>From 1 July, you can bring employees back to work while their furlough is ongoing. You can claim for their usual hours minus the hours they actually worked. </p>{% endif %}-->
+
 
 
             {% if not data.phaseOne %}<p>This is the last date you can claim the furlough grant for. </p>{% endif %}
