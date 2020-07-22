@@ -18,7 +18,9 @@ Job Retention Scheme Calculator
     <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">
       <!--Does this employee get any additional payments?-->
 <!--      Has this employee been flexibly furloughed during this claim period?-->
-      Did this employee do any work before {% if data['furloughEndDate']%}
+      Did this employee do any work between  {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}  {% else %}
+      1 July
+      {% endif %} and {% if data['furloughEndDate']%}
       {{data['furloughEndDate']}}?
       {% else %}
       15 July?
