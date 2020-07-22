@@ -93,10 +93,13 @@ module.exports = function (router) {
     req.session.data.totalPeriodPension = ((req.session.data.totalPeriodFurlough - 118) * 0.03).toFixed(2)
     req.session.data.totalToPay =  ((req.session.data.totalMethod * 0.1) * req.session.data.payFrequencyTime).toFixed(2)
 
+
     // each totals calcs
     req.session.data.totalFurlough = (req.session.data.totalPeriodFurlough * req.session.data.periodNumber).toFixed(2)
     req.session.data.totalNic =  (req.session.data.totalPeriodNic * req.session.data.periodNumber).toFixed(2)
     req.session.data.totalPension =  (req.session.data.totalPeriodPension * req.session.data.periodNumber).toFixed(2)
+
+    req.session.data.totalToPayAll = eval(req.session.data.totalToPay) + eval(req.session.data.totalFurlough).toFixed(2)
   }
 
   // set phase two
