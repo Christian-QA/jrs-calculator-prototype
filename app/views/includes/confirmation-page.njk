@@ -104,9 +104,7 @@
                 <p>You told us this employee gets paid a regular amount each time. We’ve worked out their daily earnings and multiplied by the number of furlough days and furlough hours in each pay period. The furlough grant is {% if data.phaseTwoGenerosityVal %}{{ data['phaseTwoGenerosityVal'] }}{% else %}80% {% endif %} of this.</p>
                 <p>There’s a maximum amount you can claim for furlough grant and Employer National Insurance contributions. If this affects your claim, we’ve adjusted the calculations. <a href="https://www.gov.uk/guidance/work-out-80-of-your-employees-wages-to-claim-through-the-coronavirus-job-retention-scheme#eighty-percent" target="_blank">Work out the maximum wage amount you can claim (opens in new tab)</a>. </p>
                 <p>Calculations are rounded to the nearest penny unless otherwise stated.</p>
-            {% endif %}
-
-            {% if data['varyMoreThan'] %}
+            {% elseif data['varyMoreThan'] %}
                 <p>You told us your employee gets paid a variable amount each time and has worked for you for more than 12 months. There are 2 methods we can use to work out pay. We’ve used the one that gave the higher figure. The furlough grant is {% if data.phaseTwoGenerosityVal %}{{ data['phaseTwoGenerosityVal'] }}{% else %}80% {% endif %} of this.</p>
                 <p>Method 1: we’ve taken the amounts they were paid for equivalent pay periods in 2019 and applied this to the number of furlough days in each pay period.</p>
                 <p>Method 2: we’ve worked out their average daily earnings in the last tax year, by dividing their total pay by the number of calendar days between 6 April 2019 and the day before furlough (or 5 April 2020 if later). Then we’ve multiplied that by the number of furlough days in each pay period.</p>
@@ -117,10 +115,7 @@
                     <p>There’s a maximum amount you can claim for furlough grant and Employer National Insurance contributions. If this affects your claim, we’ve adjusted the calculations. <a href=" https://www.gov.uk/guidance/calculate-how-much-you-can-claim-using-the-coronavirus-job-retention-scheme#eighty-percent" target="_blank">Work out the maximum wage amount you can claim (opens in new tab)</a>. </p>
                 {% endif %}
                 <p>Calculations are rounded to the nearest penny unless otherwise stated.</p>
-            {% endif %}
-
-            <!-- Average pay-->
-            {% if data['lessThan12'] %}
+            {% else %}
             <p>You told us this employee gets paid a variable amount each time and has worked for you for less than 12 months. We’ve worked out their average daily earnings in the last tax year, by dividing their total pay by the number of calendar days between 6 April 2019 and the day before furlough (or 5 April 2020 if later). Then we’ve multiplied that by the number of furlough days and furlough hours in each pay period. The furlough grant is {% if data.phaseTwoGenerosityVal %}{{ data['phaseTwoGenerosityVal'] }}{% else %}80% {% endif %} of this. </p>
             <p>There’s a maximum amount you can claim for furlough grant and Employer National Insurance contributions. If this affects your claim, we’ve adjusted the calculations. <a href="https://www.gov.uk/guidance/work-out-80-of-your-employees-wages-to-claim-through-the-coronavirus-job-retention-scheme#eighty-percent" target="_blank">Work out the maximum wage amount you can claim (opens in new tab)</a>. </p>
             <p>Calculations are rounded to the nearest penny unless otherwise stated.</p>
