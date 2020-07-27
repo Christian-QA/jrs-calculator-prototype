@@ -52,8 +52,9 @@
 
             {% if data.phaseTwoGenerosityVal %}
                 <div class="govuk-inset-text">
+                    <p>You must pay this employee <strong class="govuk-!-font-weight-bold">{% if data['totalToPay'] %}£{{ data['totalToPay'] }}{% else %}£78.92{% endif %}</strong> in addition to the furlough grant of {% if data['totalFurlough'] %}£{{ data['totalFurlough'] }}{% else %}£1105.81{% endif %}. This adds up to 80% of their usual wage ({% if data['totalToPayAll'] %}£{{ data['totalToPayAll'] }}{% else %}£1184.73{% endif %}). </p>
+
                     <p>To be eligible for the grant you must pay employees at least 80% of their wages for the time they are furloughed. You can choose to pay more than this but do not have to.</p>
-                    <p>The amount you must pay this employee is <strong class="govuk-!-font-weight-bold">{% if data['totalToPayAll'] %}£{{ data['totalToPayAll'] }}{% else %}£1184.73{% endif %}</strong>.  This is made up of the furlough grant, <strong class="govuk-!-font-weight-bold">{% if data['totalFurlough'] %}£{{ data['totalFurlough'] }}{% else %}£1105.81{% endif %}</strong> plus <strong class="govuk-!-font-weight-bold">{% if data['totalToPay'] %}£{{ data['totalToPay'] }}{% else %}£78.92{% endif %}</strong> to make a total of 80% of their wages.</p>
                 </div>
             {% endif %}
 
