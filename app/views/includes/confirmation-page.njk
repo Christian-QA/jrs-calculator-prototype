@@ -74,7 +74,8 @@
                     </li>
                     <li>Add all the results together to get the total amount you can claim.</li>
                 {% else %}
-                    <li>Make a calculation for any other employee furloughed for all or part of this claim period ({% if data['payClaimPeriodTitle'] %}{{ data['payClaimPeriodTitle'] }}{% else %}9 July{% endif %} to {% if data['payClaimPeriodEndTitle'] %}{{ data['payClaimPeriodEndTitle'] }}{% else %}17 August{% endif %}). <span class="govuk-!-font-weight-bold"> Make a note of each set of figures.</span>
+                    <li>Make a calculation for any other employee furloughed for all or part of this claim period ({% if data['payClaimPeriodTitle'] %}{{ data['payClaimPeriodTitle'] }}{% else %}9 July{% endif %} to {% if data['payClaimPeriodEndTitle'] %}{{ data['payClaimPeriodEndTitle'] }}{% else %}17 August{% endif %}).
+                        <span class="govuk-!-font-weight-bold"> Make a note of each set of figures.</span>
                     </li>
                     <li>Work out the total amounts to claim for:<br>
                         <ul class="govuk-list--list">
@@ -85,7 +86,8 @@
                         </ul>
                     </li>
 
-                    <li>Adjust the total amount of employer National Insurance contributions by subtracting any Employment Allowance used in each pay period.<br> <a href="https://www.gov.uk/guidance/calculate-how-much-you-can-claim-using-the-coronavirus-job-retention-scheme#work-out-how-much-you-can-claim-for-employer-national-insurance-contributions-nics" target="_blank">Work out how much you can claim in total for employer National Insurance contributions (opens in a new tab)</a>.
+                    <li>Adjust the total amount of employer National Insurance contributions by subtracting any Employment Allowance used in each pay period.<br> <a href="https://www.gov.uk/guidance/calculate-how-much-you-can-claim-using-the-coronavirus-job-retention-scheme#work-out-how-much-you-can-claim-for-employer-national-insurance-contributions-nics" target="_blank">Work out how much you can
+                            claim in total for employer National Insurance contributions (opens in a new tab)</a>.
                     </li>
                 {% endif %}
 
@@ -103,11 +105,14 @@
 
             {% if data['payRegular'] %}
                 <p>You told us this employee gets paid a regular amount each time. We’ve worked out their daily earnings and multiplied by the number of furlough days and furlough hours in each pay period. The furlough grant is {% if data.phaseTwoGenerosityVal %}{{ data['phaseTwoGenerosityVal'] }}{% else %}80% {% endif %} of this.</p>
-                <p>There’s a maximum amount you can claim for furlough grant and Employer National Insurance contributions. If this affects your claim, we’ve adjusted the calculations. <a href="https://www.gov.uk/guidance/work-out-80-of-your-employees-wages-to-claim-through-the-coronavirus-job-retention-scheme#eighty-percent" target="_blank">Work out the maximum wage amount you can claim (opens in new tab)</a>. </p>
+                <p>There’s a maximum amount you can claim for furlough grant and Employer National Insurance contributions. If this affects your claim, we’ve adjusted the calculations. <a href="https://www.gov.uk/guidance/work-out-80-of-your-employees-wages-to-claim-through-the-coronavirus-job-retention-scheme#eighty-percent" target="_blank">Work out the maximum wage amount you can claim (opens in
+                        new tab)</a>. </p>
                 <p>Calculations are rounded to the nearest penny unless otherwise stated.</p>
             {% elseif data['lessThan12'] %}
-                <p>You told us this employee gets paid a variable amount each time and has worked for you for less than 12 months. We’ve worked out their average daily earnings in the last tax year, by dividing their total pay by the number of calendar days between 6 April 2019 and the day before furlough (or 5 April 2020 if later). Then we’ve multiplied that by the number of furlough days and furlough hours in each pay period. The furlough grant is {% if data.phaseTwoGenerosityVal %}{{ data['phaseTwoGenerosityVal'] }}{% else %}80% {% endif %} of this. </p>
-                <p>There’s a maximum amount you can claim for furlough grant and Employer National Insurance contributions. If this affects your claim, we’ve adjusted the calculations. <a href="https://www.gov.uk/guidance/work-out-80-of-your-employees-wages-to-claim-through-the-coronavirus-job-retention-scheme#eighty-percent" target="_blank">Work out the maximum wage amount you can claim (opens in new tab)</a>. </p>
+                <p>You told us this employee gets paid a variable amount each time and has worked for you for less than 12 months. We’ve worked out their average daily earnings in the last tax year, by dividing their total pay by the number of calendar days between 6 April 2019 and the day before furlough (or 5 April 2020 if later). Then we’ve multiplied that by the number of furlough days and
+                    furlough hours in each pay period. The furlough grant is {% if data.phaseTwoGenerosityVal %}{{ data['phaseTwoGenerosityVal'] }}{% else %}80% {% endif %} of this. </p>
+                <p>There’s a maximum amount you can claim for furlough grant and Employer National Insurance contributions. If this affects your claim, we’ve adjusted the calculations. <a href="https://www.gov.uk/guidance/work-out-80-of-your-employees-wages-to-claim-through-the-coronavirus-job-retention-scheme#eighty-percent" target="_blank">Work out the maximum wage amount you can claim (opens in
+                        new tab)</a>. </p>
                 <p>Calculations are rounded to the nearest penny unless otherwise stated.</p>
             {% else %}
                 <p>You told us your employee gets paid a variable amount each time and has worked for you for more than 12 months. There are 2 methods we can use to work out pay. We’ve used the one that gave the higher figure. The furlough grant is {% if data.phaseTwoGenerosityVal %}{{ data['phaseTwoGenerosityVal'] }}{% else %}80% {% endif %} of this.</p>
@@ -117,12 +122,11 @@
                 {% if data.phaseTwoNicPension %}
                     <p>There’s a maximum amount you can claim. If this affects your claim, we’ve adjusted the calculations. </p>
                 {% else %}
-                    <p>There’s a maximum amount you can claim for furlough grant and Employer National Insurance contributions. If this affects your claim, we’ve adjusted the calculations. <a href=" https://www.gov.uk/guidance/calculate-how-much-you-can-claim-using-the-coronavirus-job-retention-scheme#eighty-percent" target="_blank">Work out the maximum wage amount you can claim (opens in new tab)</a>. </p>
+                    <p>There’s a maximum amount you can claim for furlough grant and Employer National Insurance contributions. If this affects your claim, we’ve adjusted the calculations. <a href=" https://www.gov.uk/guidance/calculate-how-much-you-can-claim-using-the-coronavirus-job-retention-scheme#eighty-percent" target="_blank">Work out the maximum wage amount you can claim (opens in new
+                            tab)</a>. </p>
                 {% endif %}
                 <p>Calculations are rounded to the nearest penny unless otherwise stated.</p>
             {% endif %}
-
-
 
 
             <!-- breakdown loop-->
@@ -300,11 +304,11 @@
                     <div class="govuk-inset-text govuk-!-font-size-24">Total pension grant for pay period = £12.03</div>
                 {% endif %}
                 <hr>
-                {% endif %}
+            {% endif %}
 
-                <br> {% if data.phaseTwoGenerosityVal %}
+            <br> {% if data.phaseTwoGenerosityVal %}
 
-                    <p>To be eligible for the grant you must pay furloughed employees 80% of their wages for the time they are furloughed (up to a cap of £2,500 per month). The amount you must pay this employee in addition to the grant is <strong class="govuk-!-font-weight-bold">{% if data['totalToPay'] %}£{{ data['totalToPay'] }}{% else %}£78.92{% endif %}</strong>.</p>
+                <p>To be eligible for the grant you must pay furloughed employees 80% of their wages for the time they are furloughed (up to a cap of £2,500 per month). The amount you must pay this employee in addition to the grant is <strong class="govuk-!-font-weight-bold">{% if data['totalToPay'] %}£{{ data['totalToPay'] }}{% else %}£78.92{% endif %}</strong>.</p>
 
             {% endif %}
             <p>The results of the calculation rely on the accuracy of the information you entered, for which you are responsible. You cannot claim for more money than you are going to pay out under the scheme.</p>
