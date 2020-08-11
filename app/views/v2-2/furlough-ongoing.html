@@ -32,7 +32,12 @@ Job Retention Scheme Calculator
                     </h1>
 
                 </legend>
-                {% if not data.phaseOne %}<p>Employees can now be flexibly furloughed. You can claim for their usual working hours minus the hours they actually worked. </p>{% endif %}
+                {% if not data.phaseOne %}
+<!--                <p>Employees can now be flexibly furloughed. You can claim for their usual working hours minus the hours they actually worked. </p>-->
+                <p>Employees can now be flexibly furloughed. You can claim for their usual working hours minus the hours they actually worked. </p>
+                <p>If an employee has returned to work full time during the claim period you must also tell us how many hours they worked.</p>
+
+                {% endif %}
 
 
                 <div class="govuk-radios">
@@ -61,7 +66,7 @@ Job Retention Scheme Calculator
                     <div class="govuk-radios__item">
                         <input class="govuk-radios__input" id="furloughQuestion-2" name="furloughEndQuestion" type="radio" value="yesFlex">
                         <label class="govuk-label govuk-radios__label" for="furloughQuestion-2">
-                            No, they worked during the claim period (flexibly furloughed)
+                            No, they worked during the claim period
                             <!-- No - flexible furlough-->
                         </label>
                     </div>
