@@ -22,11 +22,13 @@ Job Retention Scheme Calculator
           <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
               <h1 class="govuk-fieldset__heading">
-                {% if not data.phaseOne %}
+
+                {% if data['furloughEndQuestion'] === 'no' %}
                 What’s the last date this employee worked for you?
                 {% else %}
                 When did their furlough end?
                 {% endif %}
+
 
               </h1>
             </legend>
@@ -39,9 +41,9 @@ Job Retention Scheme Calculator
 
 
               <label class="govuk-label" for="payPeriod"></label>
-            <span id="claimPeriodStart-hint" class="govuk-hint">
+           <!-- <span id="claimPeriodStart-hint" class="govuk-hint">
                 For example, 30 4 2020
-              </span>
+              </span>-->
               <div class="govuk-date-input" id="payPeriod">
                 <div class="govuk-date-input__item">
                   <div class="govuk-form-group">

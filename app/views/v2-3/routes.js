@@ -169,8 +169,9 @@ module.exports = function (router) {
       }
     } else {
       console.log(req.session.data.furloughEndQuestion)
-      if (data === 'no') {
+      if (data === 'yes' || data === 'no') {
         res.redirect('/' + sprint + '/furlough-end')
+
       } else {
         if (req.session.data.usePayPeriodsAgain) {
           res.redirect('/' + sprint + '/pay-method')
@@ -307,29 +308,25 @@ module.exports = function (router) {
     if (req.session.data.phaseOne) {
       res.redirect('/' + sprint + '/topup-question')
     } else {
-      if (req.session.data.phaseOne) {
-        res.redirect('/' + sprint + '/topup-question')
-      } else {
-        if (req.session.data.furloughEndQuestion === 'no') {
-          res.redirect('/' + sprint + '/part-time-question')
-        } else if (req.session.data.furloughEndQuestion === 'yes') {
-          if (req.session.data.phaseTwoNicPension) {
-            finalCalc(req)
-            res.redirect('/' + sprint + '/confirmation')
-          } else {
-            res.redirect('/' + sprint + '/ni-category-letter')
-          }
-        } else {
-          req.session.data.parttime = 'yes'
-          if (!req.session.data.periodList[1]) {
-            req.session.data.periodTitle = req.session.data.periodList[0].periodStart + ' to ' + req.session.data.periodList[0].periodEnd
-            res.redirect('/' + sprint + '/part-time-normal-hours')
-          } else {
-            res.redirect('/' + sprint + '/part-time-periods')
-          }
-        }
-
-      }
+      res.redirect('/' + sprint + '/part-time-question')
+      // if (req.session.data.furloughEndQuestion === 'yesFlex') {
+      //   res.redirect('/' + sprint + '/part-time-question')
+      // } else if (req.session.data.furloughEndQuestion === 'yes' || req.session.data.furloughEndQuestion === 'no') {
+      //   if (req.session.data.phaseTwoNicPension) {
+      //     finalCalc(req)
+      //     res.redirect('/' + sprint + '/confirmation')
+      //   } else {
+      //     res.redirect('/' + sprint + '/ni-category-letter')
+      //   }
+      // } else {
+      //   req.session.data.parttime = 'yes'
+      //   if (!req.session.data.periodList[1]) {
+      //     req.session.data.periodTitle = req.session.data.periodList[0].periodStart + ' to ' + req.session.data.periodList[0].periodEnd
+      //     res.redirect('/' + sprint + '/part-time-normal-hours')
+      //   } else {
+      //     res.redirect('/' + sprint + '/part-time-periods')
+      //   }
+      // }
 
     }
 
@@ -343,26 +340,26 @@ module.exports = function (router) {
     if (req.session.data.phaseOne) {
       res.redirect('/' + sprint + '/topup-question')
     } else {
-      if (req.session.data.furloughEndQuestion === 'no') {
-        res.redirect('/' + sprint + '/part-time-question')
-      } else if (req.session.data.furloughEndQuestion === 'yes') {
-        if (req.session.data.phaseTwoNicPension) {
-          finalCalc(req)
-          res.redirect('/' + sprint + '/confirmation')
-        } else {
-          res.redirect('/' + sprint + '/ni-category-letter')
-        }
-      } else {
-        req.session.data.parttime = 'yes'
-        if (!req.session.data.periodList[1]) {
-          req.session.data.periodTitle = req.session.data.periodList[0].periodStart + ' to ' + req.session.data.periodList[0].periodEnd
-          res.redirect('/' + sprint + '/part-time-normal-hours')
-        } else {
-          res.redirect('/' + sprint + '/part-time-periods')
-        }
-      }
 
-    }
+        res.redirect('/' + sprint + '/part-time-question')
+      }
+      //   if (req.session.data.phaseTwoNicPension) {
+      //     finalCalc(req)
+      //     res.redirect('/' + sprint + '/confirmation')
+      //   } else {
+      //     res.redirect('/' + sprint + '/ni-category-letter')
+      //   }
+      // } else {
+      //   req.session.data.parttime = 'yes'
+      //   if (!req.session.data.periodList[1]) {
+      //     req.session.data.periodTitle = req.session.data.periodList[0].periodStart + ' to ' + req.session.data.periodList[0].periodEnd
+      //     res.redirect('/' + sprint + '/part-time-normal-hours')
+      //   } else {
+      //     res.redirect('/' + sprint + '/part-time-periods')
+      //   }
+      // }
+
+
 
   })
 
@@ -602,8 +599,6 @@ module.exports = function (router) {
         }
       }
 
-
-
     } else {
       res.redirect('/' + sprint + '/pay-dates-1')
     }
@@ -691,24 +686,25 @@ module.exports = function (router) {
       if (req.session.data.phaseOne) {
         res.redirect('/' + sprint + '/topup-question')
       } else {
-        if (req.session.data.furloughEndQuestion === 'no') {
-          res.redirect('/' + sprint + '/part-time-question')
-        } else if (req.session.data.furloughEndQuestion === 'yes') {
-          if (req.session.data.phaseTwoNicPension) {
-            finalCalc(req)
-            res.redirect('/' + sprint + '/confirmation')
-          } else {
-            res.redirect('/' + sprint + '/ni-category-letter')
-          }
-        } else {
-          req.session.data.parttime = 'yes'
-          if (!req.session.data.periodList[1]) {
-            req.session.data.periodTitle = req.session.data.periodList[0].periodStart + ' to ' + req.session.data.periodList[0].periodEnd
-            res.redirect('/' + sprint + '/part-time-normal-hours')
-          } else {
-            res.redirect('/' + sprint + '/part-time-periods')
-          }
-        }
+        res.redirect('/' + sprint + '/part-time-question')
+        // if (req.session.data.furloughEndQuestion === 'yesFlex') {
+        //   res.redirect('/' + sprint + '/part-time-question')
+        // } else if (req.session.data.furloughEndQuestion === 'yes') {
+        //   if (req.session.data.phaseTwoNicPension) {
+        //     finalCalc(req)
+        //     res.redirect('/' + sprint + '/confirmation')
+        //   } else {
+        //     res.redirect('/' + sprint + '/ni-category-letter')
+        //   }
+        // } else {
+        //   req.session.data.parttime = 'yes'
+        //   if (!req.session.data.periodList[1]) {
+        //     req.session.data.periodTitle = req.session.data.periodList[0].periodStart + ' to ' + req.session.data.periodList[0].periodEnd
+        //     res.redirect('/' + sprint + '/part-time-normal-hours')
+        //   } else {
+        //     res.redirect('/' + sprint + '/part-time-periods')
+        //   }
+        // }
 
       }
     } else {
