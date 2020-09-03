@@ -1,0 +1,98 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <form action="route-dates-end-question" method="post">
+
+
+            <fieldset class="govuk-fieldset" aria-describedby="furloughQuestion-hint">
+
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+
+                    <h1 class="govuk-fieldset__heading">
+                       {% if data.phaseOne %}
+                            Has the employee's furlough ended?
+                        {% else %}
+<!--                        On {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}31 July{% endif %}, is this employee still furloughed?-->
+                        On {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}31 July{% endif %}, is this employee still fully furloughed?
+                        {% endif %}
+                    </h1>
+
+                </legend>
+                {% if not data.phaseOne %}
+<!--                <p>Employees can now be flexibly furloughed. You can claim for their usual working hours minus the hours they actually worked. </p>-->
+                <p>Employees can now be flexibly furloughed. You can claim for their usual working hours minus the hours they actually worked. </p>
+                <p>If an employee has returned to work full time during the claim period you must also tell us how many hours they worked.</p>
+
+                {% endif %}
+
+
+                <div class="govuk-radios">
+                    {% if data.phaseOne %}
+                    <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="furloughQuestion" name="furloughEndQuestion" type="radio" value="yes">
+                        <label class="govuk-label govuk-radios__label" for="furloughQuestion">
+                            Yes
+                        </label>
+                    </div>
+
+                    <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="furloughQuestion-3" name="furloughEndQuestion" type="radio" value="no">
+                        <label class="govuk-label govuk-radios__label" for="furloughQuestion-3">
+                            No, it is ongoing
+                        </label>
+                    </div>
+                    {% else %}
+                    <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="furloughQuestion" name="furloughEndQuestion" type="radio" value="yes">
+                        <label class="govuk-label govuk-radios__label" for="furloughQuestion">
+                            Yes  <!--    - full furlough-->
+                        </label>
+                    </div>
+
+                    <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="furloughQuestion-2" name="furloughEndQuestion" type="radio" value="yesFlex">
+                        <label class="govuk-label govuk-radios__label" for="furloughQuestion-2">
+                            No, they worked during the claim period
+                            <!-- No - flexible furlough-->
+                        </label>
+                    </div>
+
+                    <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="furloughQuestion-3" name="furloughEndQuestion" type="radio" value="no">
+                        <label class="govuk-label govuk-radios__label" for="furloughQuestion-3">
+                            No, they are no longer an employee <!--  furlough has ended-->
+                        </label>
+                    </div>
+
+
+                    {% endif %}
+
+                    <br><br>
+                </div>
+            </fieldset>
+
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+        {% include "includes/web-chat.html" %}
+
+
+    </div>
+</div>
+
+{% endblock %}

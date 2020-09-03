@@ -1,0 +1,96 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form class="form" method="post" action="route-claim-end">
+
+
+        <div class="govuk-form-group ">
+          <fieldset class="govuk-fieldset" role="group" aria-describedby="accountingPeriod-hint">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+              <h1 class="govuk-fieldset__heading">
+                  What’s the end date of this claim?
+
+
+              </h1>
+            </legend>
+
+              <span id="nicCategory-hint" class="govuk-hint">
+
+<!--                <p>This should be a date that aligns with a payroll run. </p>  It can be any date up to 14 days from today’s date.-->
+                  <p>Note that it’s not the same as the furlough end date - furlough may be ongoing at the end of the claim period.</p>
+
+<p>If furlough is ongoing when the claim period ends, make another claim later to cover this time.</p>
+
+  </span>
+
+              {% include "includes/claim-period.html" %}
+
+
+              <legend class="govuk-label govuk-visually-hidden" for="claimPeriodStart">
+                  End date
+              </legend>
+            <span id="claimPeriodStart-hint" class="govuk-hint">
+                For example, 31 3 2020
+              </span>
+
+
+            <div class="govuk-date-input" id="claimPeriodEnd">
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="claimPeriodEndDay">
+                    Day
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="claimPeriodEndDay" name="claimPeriodEndDay" type="text" pattern="[0-9]*" inputmode="numeric">
+                </div>
+              </div>
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="claimPeriodEndMonth">
+                    Month
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="claimPeriodEndMonth" name="claimPeriodEndMonth" type="text" pattern="[0-9]*" inputmode="numeric">
+                </div>
+              </div>
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="claimPeriodEndYear">
+                    Year
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="claimPeriodEndYear" name="claimPeriodEndYear" type="text" pattern="[0-9]*" inputmode="numeric">
+                </div>
+              </div>
+            </div>
+
+
+          </fieldset>
+        </div>
+
+
+        <button class="govuk-button govuk-!-margin-right-2" data-module="govuk-button">
+          Continue
+        </button>
+
+
+      </form>
+        {% include "includes/web-chat.html" %}
+
+
+    </div>
+</div>
+
+{% endblock %}

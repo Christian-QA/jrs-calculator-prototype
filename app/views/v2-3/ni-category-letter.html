@@ -1,0 +1,57 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/phase-banner.html" %}
+<a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+
+      <form action="route-nic" method="post">
+
+
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+            Do you pay Employers Class 1 National Insurance contributions for this employee?
+          </legend>
+
+
+
+
+
+<div class="govuk-form-group">
+          <div class="govuk-radios">
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="nicCategory-yes" name="nicCategory" type="radio" value="yes"> <label class="govuk-label govuk-radios__label" for="nicCategory-yes"> Yes </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="nicCategory-no" name="nicCategory" type="radio" value="no"> <label class="govuk-label govuk-radios__label" for="nicCategory-no"> No </label>
+            </div>
+
+          </div>
+</div>
+        </fieldset>
+
+
+        <button class="govuk-button" data-module="govuk-button">
+          Continue
+        </button>
+      </form>
+        {% include "includes/web-chat.html" %}
+
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,78 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Job Retention Scheme Calculator
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">Coronavirus Job Retention Scheme calculator</h1>
+
+    <p>Use this calculator to work out the figures you’ll need when you complete a claim through the scheme. It also gives a detailed breakdown of calculations for each pay period for your records.</p>
+
+    <p>The figures are for one employee, for the claim period you specify. Run the calculator again for any other employees you’re claiming for and add up the results.</p>
+
+    <p> From 1 July, employees can be brought back to work for some of their normal hours. The calculator can take this into account.</p>
+    <p>The calculator works for most employees paid weekly, 2 weekly, 4 weekly or monthly. From 1 August, this includes employees who have returned from statutory leave such as maternity leave.</p>
+
+    <p>It doesn’t work for employees who:</p>
+    <ul class="govuk-list govuk-list--bullet">
+
+      <li>get directors’ payments outside PAYE</li>
+      <li>have been transferred under TUPE</li>
+      <li>were not employed continuously before their furlough started</li>
+      <li>returned from statutory leave such as maternity leave in the last 3 months (if the claim period is in July or earlier)</li>
+      <li>receive employer pension contributions outside of an auto-enrolment pension scheme </li>
+    </ul>
+
+
+    <p>In these cases, work out what you can claim manually using the <a href="https://www.gov.uk/guidance/work-out-80-of-your-employees-wages-to-claim-through-the-coronavirus-job-retention-scheme">calculation guidance</a> or seek professional advice.</p>
+    <p>It’s your responsibility to check that the amount you’re claiming for is correct.</p>
+
+
+
+    <a href="claim-period-start" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button">
+      Start now
+      <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+        <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+      </svg>
+    </a>
+
+    <h2 class="govuk-heading-m">Before you start</h2>
+    <p>You will need:</p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>claim start date (for your first claim, it’s when the first employee started furlough)</li>
+      <li>claim end date </li>
+      <li>pay dates (when the employee gets their pay)</li>
+      <li>dates of pay periods (the time periods their pay covers)</li>
+      <li>regular payment amounts</li>
+
+      <li>additional payments (such as tips, discretionary bonuses, non-cash payments)</li>
+      <li>date furlough ended, if not ongoing</li>
+    </ul>
+
+    <p>From 1 July, if the employee is flexibly furloughed, you’ll also need:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li><a href="https://www.gov.uk/guidance/steps-to-take-before-calculating-your-claim-using-the-coronavirus-job-retention-scheme#usual-hours" target="_blank" class="govuk-link">employee’s usual hours (opens in new tab)</a></li>
+      <li> actual hours worked</li>
+      <li> hours furloughed</li>
+    </ul>
+    <p><a href="https://www.gov.uk/guidance/steps-to-take-before-calculating-your-claim-using-the-coronavirus-job-retention-scheme" target="_blank" class="govuk-link">Steps to take before calculating your claim (opens in new tab)</a> </p>
+  </div>
+
+  <div class="govuk-grid-column-one-third">
+
+    <!-- The Related items component is not part of GOV.UK Frontend but will be styled if used in the Prototype Kit -->
+
+
+
+  </div>
+</div>
+
+{% endblock %}
