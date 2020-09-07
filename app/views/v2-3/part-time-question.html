@@ -29,7 +29,7 @@ Job Retention Scheme Calculator
 
     </h1>
 
-<!--    <p>‘Flexible furlough’ means the employee back to work part time while their furlough is ongoing. </p>-->
+ <p>For the claim period {% if data['payClaimPeriodTitle']%}{{data['payClaimPeriodTitle']}}{% else %}1 September{% endif %} to {% if data['payClaimPeriodEndTitle']%}{{data['payClaimPeriodEndTitle']}}{% else %}30 September{% endif %} 2020. </p>
 
     <form method="post" action="route-part-time-question">
 

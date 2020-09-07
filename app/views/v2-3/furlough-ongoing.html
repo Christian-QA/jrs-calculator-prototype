@@ -23,7 +23,7 @@ Job Retention Scheme Calculator
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
 
                     <h1 class="govuk-fieldset__heading">
-                        Has the employee's furlough ended during the claim period?
+                        Has the employee's furlough ended during this claim period?
                       <!-- {% if data.phaseOne %}
                             Has the employee's furlough ended?
                         {% else %}
@@ -33,7 +33,7 @@ Job Retention Scheme Calculator
                     </h1>
 
                 </legend>
-                {% if not data.phaseOne %}<p>Employees can now be flexibly furloughed. They can be brought back to work for any amount of time during the claim period. </p> {% endif %}
+                {% if not data.phaseOne %}<p>Employees can now be flexibly furloughed. They can be brought back to work for any amount of time during this or future claim periods. </p> {% endif %}
                 <!--
 
                 <p>Employees can now be flexibly furloughed. You can claim for their usual working hours minus the hours they actually worked. </p>
@@ -72,14 +72,7 @@ Job Retention Scheme Calculator
                             <!-- No - flexible furlough-->
                         </label>
                     </div>
-                    <p>or</p>
 
-                    <div class="govuk-radios__item">
-                        <input class="govuk-radios__input" id="furloughQuestion-3" name="furloughEndQuestion" type="radio" value="no">
-                        <label class="govuk-label govuk-radios__label" for="furloughQuestion-3">
-                            They are no longer an employee <!--  furlough has ended-->
-                        </label>
-                    </div>
 
 
                     {% endif %}
