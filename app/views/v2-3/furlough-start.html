@@ -33,11 +33,13 @@ Job Retention Scheme Calculator
 
             </legend>
             <p>
-              {% if data.phaseTwo %}
-            <p>If this employee has been furloughed more than once it is the date they were most recently furloughed.</p>
-              {% else %}
+              {% if data.phaseOne %}
             <p>This is the date this employee started furlough. It could be before or after the start date of this claim.</p>
             <p>We’re asking because your claim could include employees who were furloughed on different dates. </p>
+
+            {% else %}
+
+            <p>If this employee has been furloughed more than once it is the date they were most recently furloughed.</p>
               {% endif %}
 
 
